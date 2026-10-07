@@ -1,0 +1,46 @@
+name: walkquest_3d
+description: "WalkQuest 3D - a real-world walking & running RPG on a 3D map."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.10.0
+  flutter: ">=3.38.1"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # 3D map, terrain, buildings, model layers
+  mapbox_maps_flutter: ^3.0.0
+
+  # Sensors & device
+  geolocator: ^14.1.1
+  pedometer: ^4.2.0
+  permission_handler: ^13.0.2
+  flutter_tts: ^4.2.5
+  health: ^13.3.2
+
+  # Backend
+  firebase_core: ^4.15.0
+  firebase_auth: ^6.7.0
+  cloud_firestore: ^6.10.0
+
+  # App plumbing
+  provider: ^6.1.5+1
+  shared_preferences: ^2.5.6
+  http: ^1.6.0
+  intl: ^0.20.3
+  fl_chart: ^1.2.0
+  share_plus: ^13.3.1
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/models/
