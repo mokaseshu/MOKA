@@ -141,7 +141,10 @@ class GamificationService {
       }
     }
     final week = isoWeekId(t);
-    final weekly = (profile.weekId == week ? profile.weeklySteps : 0) + session.steps;
+    // Only sessions from the current ISO week count toward the leaderboard
+    // (e.g. a synced or late-recorded walk from last week must not).
+    final sameWeek = isoWeekId(session.startedAt) == week;
+    final weekly = (profile.weekId == week ? profile.weeklySteps : 0) + (sameWeek ? session.steps : 0);
 
     var updated = profile.copyWith(
       coins: profile.coins + stepCoins + questCoins,

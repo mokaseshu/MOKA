@@ -11,6 +11,11 @@ by walking loops, and climb your friends' weekly leaderboard.
 - 📐 Design: [`docs/GAME_DESIGN.md`](docs/GAME_DESIGN.md) — game design document with wireframes and user stories
 - 🔥 Backend: [`docs/FIREBASE_SETUP.md`](docs/FIREBASE_SETUP.md)
 
+![WalkQuest 3D screens](docs/screenshots/walkquest_preview.png)
+
+*Screens rendered from this codebase. The map area shows the no-token
+placeholder; with a Mapbox token it renders the live 3D map.*
+
 ---
 
 ## Features
@@ -98,6 +103,16 @@ Turn on **Profile → ⚙️ Settings → Demo mode**. Starting a quest then sim
 a walk along the route at 4× speed, which works in simulators and at your
 desk. **Free Roam** (the orange flag button on the map) simulates a square
 loop, so you can watch a territory get captured.
+
+### Design preview (sample data)
+
+`preview/main_preview.dart` seeds a player with two weeks of history and opens
+a chosen screen. It runs anywhere, including Chrome:
+
+```bash
+flutter run -d chrome -t preview/main_preview.dart
+# then add ?screen=home|route|quest|reward|login&theme=light|dark to the URL
+```
 
 ### Tests & lint
 

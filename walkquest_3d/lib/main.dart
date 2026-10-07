@@ -25,7 +25,9 @@ Future<void> main() async {
   // the app runs fully offline with LocalRepository.
   var firebaseReady = false;
   try {
-    await Firebase.initializeApp();
+    // Time-boxed: on platforms where the native config or SDK is missing,
+    // initialization can stall instead of throwing.
+    await Firebase.initializeApp().timeout(const Duration(seconds: 6));
     firebaseReady = true;
   } catch (e) {
     debugPrint('Firebase not configured, running offline: $e');

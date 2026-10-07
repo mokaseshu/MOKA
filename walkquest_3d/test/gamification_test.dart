@@ -99,6 +99,28 @@ void main() {
     expect(out.session.coinsEarned, r.totalCoins);
   });
 
+  test('only current-week sessions count toward weekly steps', () {
+    final old = WalkSession(
+      id: 'old',
+      mode: ActivityMode.walking,
+      startedAt: now.subtract(const Duration(days: 10)),
+      endedAt: now.subtract(const Duration(days: 10)),
+      activeDuration: const Duration(minutes: 20),
+      distanceM: 1500,
+      steps: 2000,
+      kcal: 60,
+    );
+    final out = GamificationService.applySession(
+      profile: profile,
+      session: old,
+      history: const [],
+      quests: const [],
+      now: now,
+    );
+    expect(out.profile.weeklySteps, 0);
+    expect(out.profile.lifetimeSteps, 2000);
+  });
+
   test('power-ups are consumed once', () {
     final p = profile.copyWith(powerUps: {'pu_double_coins': 1, 'pu_xp_boost': 1});
     final out = GamificationService.applySession(
