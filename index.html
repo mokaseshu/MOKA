@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pavani – graphic designer at PN Digital Marketing Services. Posters, logos, visiting cards, YouTube thumbnails, AI videos and video editing.">
+<title>PN Digital Marketing</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Outfit:wght@300;400;500;600&display=swap">
+<style>
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: plum-black studio wall, gold-foil type like the PN visiting card; hero split, services ledger, filterable poster wall, proof, contact card */
+:root{
+  --ink:#120c16;
+  --panel:#1c1422;
+  --panel-2:#261b2e;
+  --line:#3a2c44;
+  --text:#f3ece4;
+  --muted:#b9aab8;
+  --gold:#d9b25f;
+  --gold-2:#f1d68f;
+  --lilac:#c9a7f0;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Outfit","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;font-weight:300}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;line-height:1.08}
+.eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.foil{background:linear-gradient(100deg,var(--gold) 0%,var(--gold-2) 45%,#b8893a 70%,var(--gold-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:500;letter-spacing:.04em}
+.brand img{width:38px;height:38px;border-radius:8px}
+.nav ul{display:flex;gap:clamp(12px,2.5vw,28px);list-style:none;margin:0;padding:0;font-size:.92rem}
+.nav ul a{text-decoration:none;color:var(--muted)}
+.nav ul a:hover{color:var(--gold-2)}
+@media (max-width:640px){.nav ul li:not(:last-child){display:none}}
+
+/* hero */
+.hero{padding-block:clamp(48px,8vw,96px) clamp(40px,6vw,72px)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(2.5rem,6vw,4.6rem);margin-block:14px 18px}
+.hero h1 em{font-style:italic}
+.hero p.lead{color:var(--muted);font-size:1.12rem;max-width:34ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font:500 .95rem var(--body);text-decoration:none;border:1px solid var(--gold);cursor:pointer}
+.btn.solid{background:var(--gold);color:var(--ink)}
+.btn.solid:hover{background:var(--gold-2)}
+.btn.ghost{background:transparent;color:var(--gold-2)}
+.btn.ghost:hover{background:var(--panel-2)}
+.motto{display:flex;gap:14px;margin-top:34px;font-size:.78rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;flex-wrap:wrap}
+.motto span+span::before{content:"•";margin-right:14px;color:var(--gold)}
+.card-stage{position:relative}
+.card-stage img{width:100%;border-radius:14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7),0 0 0 1px var(--line);transform:rotate(-2.5deg);transition:transform .5s ease}
+.card-stage:hover img{transform:rotate(0)}
+.card-stage figcaption{position:absolute;right:8px;bottom:-34px;font-family:var(--display);font-style:italic;color:var(--gold-2);font-size:1.05rem}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.card-stage{margin-bottom:28px}}
+
+section{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:36px}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.1rem);margin-top:10px}
+.sec-head p{color:var(--muted);max-width:42ch;margin:0}
+
+/* services */
+#services{background:var(--panel);border-block:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.svc article{padding:28px 24px 30px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);min-width:0}
+.svc article:nth-child(3n){border-right:0}
+.svc .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold-2);margin-bottom:16px}
+.svc h3{font-size:1.45rem;margin-bottom:6px}
+.svc .tags{color:var(--muted);font-size:.92rem}
+@media (max-width:860px){.svc{grid-template-columns:repeat(2,1fr)}.svc article:nth-child(3n){border-right:1px solid var(--line)}.svc article:nth-child(2n){border-right:0}}
+@media (max-width:520px){.svc{grid-template-columns:1fr}.svc article{border-right:0!important}}
+
+/* work */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{background:transparent;border:1px solid var(--line);color:var(--muted);padding:8px 16px;border-radius:999px;font:400 .9rem var(--body);cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--ink);background:var(--gold)}
+.chip:hover{border-color:var(--gold)}
+.wall{columns:3 280px;column-gap:18px}
+.tile{break-inside:avoid;margin:0 0 18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:zoom-in;display:block;width:100%;padding:0;text-align:left;color:inherit;font:inherit}
+.tile img{display:block;width:100%;height:auto;transition:transform .4s ease}
+.tile:hover img{transform:scale(1.03)}
+.tile .meta{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;font-size:.9rem}
+.tile .meta b{font-weight:500}
+.tile .meta span{color:var(--gold);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.tile.logo img{background:#fff;padding:28px;aspect-ratio:1;object-fit:contain}
+
+/* ai + proof */
+#ai{background:var(--panel);border-block:1px solid var(--line)}
+.ai-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:start}
+.ai-grid figure{margin:0;position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.ai-grid img{display:block;width:100%}
+.ai-grid figcaption{padding:12px 14px;font-size:.9rem;color:var(--muted);background:var(--panel-2)}
+.badge{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--gold-2);border:1px solid var(--gold);font-size:.72rem;letter-spacing:.16em;padding:4px 10px;border-radius:999px}
+@media (max-width:700px){.ai-grid{grid-template-columns:1fr}}
+.proof{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,64px);align-items:center}
+.phone{width:min(280px,70vw);border-radius:28px;border:8px solid #2b2130;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);overflow:hidden}
+.phone img{display:block;width:100%}
+.proof blockquote{margin:0;font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.2}
+.proof p{color:var(--muted);max-width:46ch}
+@media (max-width:700px){.proof{grid-template-columns:1fr;justify-items:center;text-align:center}.proof p{margin-inline:auto}}
+
+/* contact */
+.contact{background:linear-gradient(180deg,var(--panel) 0%,var(--ink) 100%);border-top:1px solid var(--line)}
+.c-card{display:grid;grid-template-columns:1fr 1fr;gap:28px;border:1px solid var(--gold);border-radius:18px;padding:clamp(24px,4vw,44px);background:var(--panel)}
+.c-card h2{font-size:clamp(2rem,4vw,3rem);margin-block:10px 12px}
+.c-card p{color:var(--muted);margin:0}
+.c-list{display:grid;gap:12px;align-content:center}
+.c-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);min-width:0}
+.c-row small{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.c-row strong{font-weight:500;font-size:1.08rem;user-select:all;word-break:break-word}
+.copy{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 12px;font:400 .82rem var(--body);cursor:pointer;flex-shrink:0}
+.copy:hover{border-color:var(--gold);color:var(--gold-2)}
+@media (max-width:760px){.c-card{grid-template-columns:1fr}}
+footer{padding-block:28px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(10,6,12,.92);display:grid;place-items:center;padding:24px;z-index:50}
+.lb img{max-width:min(92vw,900px);max-height:82vh;border-radius:10px}
+.lb p{color:var(--text);text-align:center;margin:12px 0 0}
+.lb button{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;background:var(--panel-2);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;font:400 .9rem var(--body)}
+
+.rise{animation:rise .8s ease both}
+.rise.d2{animation-delay:.12s}.rise.d3{animation-delay:.24s}
+@keyframes rise{from{transform:translateY(14px);opacity:.001}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="img/pn-logo.jpg" alt="PN logo">PN Digital Marketing</a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#ai">AI videos</a></li>
+      <li><a class="btn solid" style="padding:7px 16px" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow rise">Graphic designer · Pavani</div>
+      <h1 class="rise d2">Designs that make <em class="foil">local brands</em> look premium.</h1>
+      <p class="lead rise d3">Posters, logos, visiting cards and AI videos for boutiques, beauty parlours, mehandi artists and growing businesses across Andhra Pradesh and Telangana.</p>
+      <div class="cta rise d3">
+        <a class="btn solid" href="#work">See my work</a>
+        <a class="btn ghost" href="#contact">Get a design</a>
+      </div>
+      <div class="motto"><span>Design</span><span>Create</span><span>Edit</span><span>Grow</span></div>
+    </div>
+    <figure class="card-stage rise d2" style="margin:0">
+      <img src="img/visiting-card.jpg" alt="PN Digital Marketing Services visiting card listing logo, poster, visiting card, YouTube thumbnail, AI video and video editing services">
+      <figcaption>My visiting card</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">What I do</div><h2>Creative designs, <span class="foil">better results</span></h2></div>
+      <p>Everything a small business needs to look professional online and on print, from one designer.</p>
+    </div>
+    <div class="svc">
+      <article><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg></div><h3>Logo Designing</h3><div class="tags">Unique · Creative · Professional</div></article>
+      <article><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 15l3-3 2 2 3-4"/></svg></div><h3>Poster Designing</h3><div class="tags">Attractive · Eye-catching · Brand focused</div></article>
+      <article><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h4"/></svg></div><h3>Visiting Cards</h3><div class="tags">Stylish · Elegant · Business ready</div></article>
+      <article><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></div><h3>YouTube Thumbnails</h3><div class="tags">Scroll stopping · High CTR · More views</div></article>
+      <article><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 15l1.5-6h1L13 15M9.6 13h2.8M15.5 9v6"/></svg></div><h3>AI Videos</h3><div class="tags">Creative · Engaging · Next gen</div></article>
+      <article><div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M3 8l3-4h3l-3 4M9 8l3-4h3l-3 4M15 8l3-4h3"/></svg></div><h3>Video Editing</h3><div class="tags">Professional · Smooth · High quality</div></article>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Client work</div><h2>Posters, logos &amp; <span class="foil">brand designs</span></h2></div>
+      <p>Real designs delivered to real clients. Tap any design to see it larger.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter designs">
+      <button class="chip" type="button" data-f="all" aria-pressed="true">All work</button>
+      <button class="chip" type="button" data-f="poster" aria-pressed="false">Business posters</button>
+      <button class="chip" type="button" data-f="beauty" aria-pressed="false">Beauty &amp; mehandi</button>
+      <button class="chip" type="button" data-f="logo" aria-pressed="false">Logos</button>
+    </div>
+    <div class="wall" id="wall"></div>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">AI videos</div><h2>Fun AI videos that <span class="foil">get noticed</span></h2></div>
+      <p>Animated AI videos made for salon and mehandi clients to share on Instagram and WhatsApp.</p>
+    </div>
+    <div class="ai-grid">
+      <figure><span class="badge">AI VIDEO</span><img src="img/ai-video-salon.jpg" alt="Still from an AI cartoon video set in a salon"><figcaption>Salon promo video</figcaption></figure>
+      <figure><span class="badge">CLIENT AI VIDEO</span><img src="img/ai-video-mehandi.jpg" alt="Still from an AI cartoon video for a mehandi artist"><figcaption>Video for a mehandi artist's Instagram</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="feedback">
+  <div class="wrap proof">
+    <div class="phone"><img src="img/client-feedback.jpg" alt="WhatsApp chat where a client thanks Pavani for the poster design"></div>
+    <div>
+      <div class="eyebrow">Client feedback</div>
+      <blockquote style="margin-top:12px">Happy clients come back and <span class="foil">send their friends.</span></blockquote>
+      <p>This is a real WhatsApp conversation with a client after their poster was delivered: thanks for the design, and a promise to refer friends who need one.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="c-card">
+      <div>
+        <div class="eyebrow">Let's grow your brand together</div>
+        <h2>Need a design for your business?</h2>
+        <p>Send a message with what you need: a logo, a poster, a visiting card or a video. I'll reply with ideas and a price.</p>
+      </div>
+      <div class="c-list">
+        <div class="c-row"><div><small>Phone / WhatsApp</small><strong id="c-phone">9010568477</strong></div><button class="copy" type="button" data-copy="c-phone">Copy</button></div>
+        <div class="c-row"><div><small>Email</small><strong id="c-mail">pavaninanaji19</strong></div><button class="copy" type="button" data-copy="c-mail">Copy</button></div>
+        <div class="c-row"><div><small>Instagram</small><strong id="c-ig">@ganisetty pavani</strong></div><button class="copy" type="button" data-copy="c-ig">Copy</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>PN Digital Marketing Services · Pavani</span><span>Design · Create · Edit · Grow</span></div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Design preview">
+  <button type="button" id="lb-close">Close</button>
+  <div><img id="lb-img" alt=""><p id="lb-cap"></p></div>
+</div>
+
+<script>
+const works=[
+ ["dakshitha-boutique","Dakshitha Boutique","poster","Business poster"],
+ ["rajitha-makeup","Rajitha Make-up Artist","beauty","Make-up"],
+ ["chukka-anu-mehandi","Chukka Anu Mehandi","beauty","Mehandi"],
+ ["logo-mindplus","Mind Plus","logo","Logo"],
+ ["varshitha-makeover","Varshitha Makeover","beauty","Beauty parlour"],
+ ["sushma-fashions","Sushma Fashions","poster","Business poster"],
+ ["bhavitha-beauty","Bhavitha Beauty Parlour","beauty","Beauty parlour"],
+ ["logo-varshitha","Varshitha Make Over","logo","Logo"],
+ ["arhaan-mehandi","Arhaan Mehandi Artist","beauty","Mehandi"],
+ ["khushi-makeover","Khushi Make Over","beauty","Make-up"],
+ ["dehradun-beauty","Dehradun Luxury Beauty","beauty","Beauty parlour"],
+ ["ram-ratan-matching","Ram Ratan Matching Centre","poster","Business poster"],
+ ["logo-n","N Bridal Makeups","logo","Logo"],
+ ["sameeha-mehandi","Sameeha Mehandi Artist","beauty","Mehandi"],
+ ["grow-with-pn","Grow Your Brand with PN","poster","Own brand"]
+];
+const wall=document.getElementById('wall');
+wall.innerHTML=works.map(([f,n,c,t])=>`<button type="button" class="tile ${c==='logo'?'logo':''}" data-c="${c}" data-src="img/${f}.jpg" data-name="${n}"><img src="img/${f}.jpg" alt="${n} ${t.toLowerCase()} design" loading="lazy"><div class="meta"><b>${n}</b><span>${t}</span></div></button>`).join('');
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x===ch)));
+  const f=ch.dataset.f;
+  wall.querySelectorAll('.tile').forEach(t=>{t.hidden=!(f==='all'||t.dataset.c===f)});
+}));
+const lb=document.getElementById('lb'),li=document.getElementById('lb-img'),lc=document.getElementById('lb-cap');
+const open=(src,cap)=>{li.src=src;li.alt=cap;lc.textContent=cap;lb.hidden=false;document.getElementById('lb-close').focus()};
+const close=()=>{lb.hidden=true};
+wall.addEventListener('click',e=>{const t=e.target.closest('.tile');if(t)open(t.dataset.src,t.dataset.name)});
+document.querySelector('.card-stage img').addEventListener('click',e=>open(e.target.src,'PN Digital Marketing Services visiting card'));
+document.getElementById('lb-close').addEventListener('click',close);
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copy),txt=el.textContent;
+  const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500)};
+  try{navigator.clipboard.writeText(txt).then(done,()=>sel(el))}catch(_){sel(el)}
+}));
+function sel(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+</script>
+
+</body>
+</html>
