@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Pet2Door delivers dog food, cat food and treats in Guntur. Order on WhatsApp: 9573799492.">
+<title>Pet2Door Guntur</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hind+Guntur:wght@400;500;600&display=swap">
+<style>
+html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}
+:root{
+  color-scheme:dark;
+  --bg:#110e19;--surface:#1a1626;--raise:#241e34;--ink:#f7f0e5;--muted:#a9a1b8;--line:#332b46;
+  --gold:#f4b544;--on-gold:#1a1205;--coral:#ff7a59;--teal:#5fd3c4;--field:#130f1d;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Hind Guntur","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:clip;padding-bottom:84px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(2.6rem,7.4vw,5rem);font-weight:800}
+h2{font-size:clamp(1.8rem,4.2vw,2.8rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:700;letter-spacing:-.01em}
+p{margin:0}a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-block:12px}
+.logo{font-family:var(--display);font-weight:800;font-size:1.5rem;text-decoration:none;letter-spacing:-.03em}
+.logo b{color:var(--gold)}
+.logo small{font-family:var(--body);font-size:.6rem;letter-spacing:.4em;color:var(--muted);font-weight:600;margin-left:8px}
+.tabs{display:flex;gap:4px;margin-left:auto;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.tabs a{font-weight:600;font-size:.92rem;text-decoration:none;padding:5px 14px;border-radius:999px;color:var(--muted)}
+.tabs a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:20px;align-items:center;padding-block:34px 10px}
+.hero>*{min-width:0}
+.kicker{font-size:.82rem;font-weight:600;color:var(--gold);letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:1.14rem;color:var(--muted);max-width:36ch;margin-top:16px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:center}
+.btn{font-family:var(--display);font-weight:700;font-size:1.02rem;border:0;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--gold);color:var(--on-gold);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px var(--gold)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--muted)}
+.btn.small{font-size:.9rem;padding:8px 16px}
+#scene{position:relative;height:clamp(260px,36vw,360px);max-width:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 60% 20% at 50% 88%,color-mix(in srgb,var(--gold) 30%,transparent),transparent 70%)}
+#scene .pack{width:clamp(96px,13vw,136px);height:clamp(130px,17.5vw,184px);--rx:0deg;--ry:0deg;margin-inline:-10px}
+#scene .pack:nth-child(1){rotate:-9deg;translate:0 12px}
+#scene .pack:nth-child(2){z-index:1;scale:1.12}
+#scene .pack:nth-child(3){rotate:9deg;translate:0 12px;text-align:right}
+#scene .pack b{font-size:1.1rem}
+.facts{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line)}
+.facts li{padding:18px 16px;min-width:0;border-left:1px solid var(--line)}
+.facts li:first-child{border-left:0;padding-left:0}
+.facts strong{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,2.8vw,1.8rem);display:block;line-height:1.1;color:var(--gold)}
+.facts span{font-size:.92rem;color:var(--muted)}
+.marq{overflow:hidden;padding-block:22px;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marq div{display:flex;gap:44px;width:max-content;animation:slide 26s linear infinite;font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--muted);white-space:nowrap}
+.marq span::after{content:"✦";margin-left:44px;color:var(--gold);font-size:.9rem;vertical-align:middle}
+@keyframes slide{to{transform:translateX(-50%)}}
+section{padding-block:30px}
+.sub{color:var(--muted);margin-top:8px;max-width:60ch}
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.cat{font:inherit;font-weight:600;font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:7px 18px;cursor:pointer;transition:all .2s}
+.cat[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:20px}
+.card{background:linear-gradient(180deg,var(--raise),var(--surface));border:1px solid var(--line);border-radius:22px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:border-color .25s,transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.card:hover{border-color:color-mix(in srgb,var(--gold) 60%,var(--line))}
+.card.pre{opacity:.25;transform:translateY(26px)}
+.stage{height:170px;display:grid;place-items:center;perspective:600px;position:relative}
+.stage::after{content:"";position:absolute;bottom:6px;left:50%;width:110px;height:14px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%)}
+.pack{--h:40;--rx:6deg;--ry:-18deg;width:104px;height:140px;position:relative;border-radius:10px 10px 14px 14px;background:linear-gradient(120deg,hsl(var(--h) 78% 60%),hsl(var(--h) 72% 34%) 70%);transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .18s ease-out;animation:bob 4s ease-in-out infinite;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;overflow:hidden;box-shadow:14px 18px 30px -12px rgba(0,0,0,.7),inset -10px 0 18px rgba(0,0,0,.22),inset 6px 0 10px rgba(255,255,255,.18)}
+.pack::before{content:"";position:absolute;inset:0 0 auto 0;height:14px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.28) 0 3px,transparent 3px 6px);border-bottom:1px solid rgba(0,0,0,.25)}
+.pack::after{content:"";position:absolute;top:-20%;left:-80%;width:50%;height:140%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);transition:left .7s}
+.card:hover .pack::after{left:140%}
+.pack b{font-family:var(--display);font-weight:800;font-size:.95rem;line-height:1;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);overflow-wrap:anywhere}
+.pack i{font-style:normal;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.pack.bowl{width:130px;height:60px;border-radius:10px 10px 60px 60px/10px 10px 50px 50px;margin-top:50px}
+.pack.bowl::before{height:8px;background:rgba(255,255,255,.3)}
+.pack.ball{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 34% 30%,hsl(var(--h) 85% 72%),hsl(var(--h) 72% 34%) 72%)}
+.pack.ball::before{display:none}
+@keyframes bob{50%{translate:0 -7px}}
+.tag{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.card p.d{color:var(--muted);font-size:.92rem}
+.sizes{display:flex;gap:6px;flex-wrap:wrap}
+.sizes input{position:absolute;opacity:0}
+.sizes label{font-size:.85rem;font-weight:600;border:1px solid var(--line);border-radius:8px;padding:3px 10px;cursor:pointer;color:var(--muted)}
+.sizes input:checked+label{border-color:var(--gold);color:var(--gold)}
+.sizes input:focus-visible+label{outline:2px solid var(--gold);outline-offset:2px}
+.add{margin-top:auto;display:flex;gap:8px;align-items:center}
+.step{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+.step button{font:inherit;font-size:1.1rem;width:34px;height:36px;border:0;background:none;color:var(--ink);cursor:pointer}
+.step output{min-width:20px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.add .btn{flex:1;padding:9px 12px;font-size:.95rem}
+.order{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:20px}
+.order>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row>*{min-width:0}
+label.f{font-weight:600;font-size:.88rem;display:block;margin-bottom:4px;color:var(--muted)}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+textarea{resize:vertical;min-height:120px}
+.cart{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.cart li{display:flex;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px dashed var(--line);padding:9px 0}
+.cart li span{min-width:0;overflow-wrap:anywhere}
+.x{border:0;background:none;color:var(--coral);font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;padding:2px 6px}
+.empty{color:var(--muted)}
+.bubble{background:#143d33;border-radius:4px 16px 16px 16px;padding:12px 14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.97rem}
+.hint{font-size:.86rem;color:var(--muted)}
+.give{border:1px solid var(--line);background:radial-gradient(circle at 0 0,color-mix(in srgb,var(--coral) 28%,transparent),transparent 55%),var(--surface);border-radius:26px;padding:30px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px;align-items:center}
+.give>*{min-width:0}.give p{margin-top:10px;color:var(--muted)}
+.prize{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px;color:var(--muted)}
+.prize b{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--gold);display:block;line-height:1.1;margin-bottom:4px}
+.pill{display:inline-block;border:1px solid var(--coral);color:var(--coral);font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 12px;border-radius:999px;margin-bottom:12px}
+footer{border-top:1px solid var(--line);margin-top:30px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;padding-block:24px;color:var(--muted)}
+footer .num{font-family:var(--display);font-weight:800;font-size:1.7rem;user-select:all;color:var(--ink);font-variant-numeric:tabular-nums}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none}
+.bar div{pointer-events:auto;max-width:560px;margin:0 auto;background:var(--raise);border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 18px 40px -12px #000}
+.bar span{font-weight:600;min-width:0}
+.bar .bump{animation:bump .4s}
+@keyframes bump{40%{transform:scale(1.12)}}
+.contacts{list-style:none;margin:0;padding:0}
+.contacts li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+.contacts li>div{min-width:0;overflow-wrap:anywhere}
+.contacts small{display:block;color:var(--muted);font-variant-numeric:tabular-nums}
+.contacts li.done .btn{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+.contacts li.bad small{color:var(--coral)}
+.meter{height:6px;border-radius:999px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+.between{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+@media (max-width:820px){
+  .hero,.order,.give{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}.facts li:nth-child(3){border-left:0;padding-left:0}.facts li:nth-child(n+3){border-top:1px solid var(--line)}
+  .logo small{display:none}
+}
+@media (max-width:420px){.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.marq div,.pack{animation:none}.card,.btn,.pack{transition:none}.card.pre{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="logo" href="#shop">Pet<b>2</b>Door<small>GUNTUR</small></a>
+  <nav class="tabs" aria-label="Sections"><a href="#shop" id="tab-shop">Shop</a><a href="#sender" id="tab-sender">Message sender</a></nav>
+</div></header>
+
+<main id="view-shop">
+  <div class="wrap hero">
+    <div>
+      <p class="kicker">Pet food delivery · Guntur</p>
+      <h1>Good food, <em>at your door</em> before the bowl is empty.</h1>
+      <p class="lede">Dog food, cat food, treats and supplies from trusted brands. Pick what you need and order on WhatsApp.</p>
+      <div class="cta"><a class="btn" href="#catalogue">Shop the range</a><a class="btn ghost" href="https://www.instagram.com/pet2door.in/" target="_blank" rel="noopener">@pet2door.in</a></div>
+    </div>
+    <div id="scene" role="img" aria-label="Pet food packs from different brands side by side"></div>
+  </div>
+  <div class="wrap"><ul class="facts">
+    <li><strong>₹499</strong><span>minimum order</span></li>
+    <li><strong>Free delivery</strong><span>up to 5 km from Chuttugunta</span></li>
+    <li><strong>9 AM – 10 PM</strong><span>every day</span></li>
+    <li><strong>100% original</strong><span>sealed packs only</span></li>
+  </ul></div>
+  <div class="marq" aria-label="Brands we deliver: Pedigree, Me-O, Whiskas, M&amp;N, Kittums, Royal Canin, Canine Creek, Drools"><div id="marq" aria-hidden="true"></div></div>
+
+  <section class="wrap" id="catalogue">
+    <h2>Choose by category</h2>
+    <p class="sub">Add items to your order. We confirm the price and stock on WhatsApp before we deliver.</p>
+    <div class="cats" id="cats"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap" id="order">
+    <h2>Your order</h2>
+    <div class="order">
+      <div class="panel">
+        <ul class="cart" id="cart"></ul>
+        <div class="row">
+          <div><label class="f" for="cname">Your name</label><input type="text" id="cname" autocomplete="name"></div>
+          <div><label class="f" for="carea">Area or landmark</label><input type="text" id="carea" placeholder="Brodipet, near..."></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>This goes to our WhatsApp</h3>
+        <div class="bubble" id="orderPreview"></div>
+        <div class="cta" style="margin-top:0">
+          <a class="btn" id="orderLink" target="_blank" rel="noopener" href="https://wa.me/919573799492">Order on WhatsApp</a>
+          <button class="btn ghost small" type="button" id="orderCopy">Copy message</button>
+        </div>
+        <p class="hint">Opens a chat with 9573799492. Minimum order ₹499.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap"><div class="give">
+    <div><span class="pill">First 500 followers</span><h2>Follow, comment your location, win a food pack.</h2><p>Follow @pet2door.in on Instagram and comment your area in Guntur.</p>
+      <div class="cta"><a class="btn" href="https://www.instagram.com/pet2door.in/" target="_blank" rel="noopener">Follow on Instagram</a></div></div>
+    <div class="prize"><b>1.2 kg Pedigree</b>One lucky follower with a dog gets a free pack.</div>
+    <div class="prize"><b>Me-O food pack</b>One cat owner gets a free pack.</div>
+  </div></section>
+</main>
+
+<main id="view-sender" hidden>
+  <section class="wrap">
+    <p class="kicker">For the shop</p>
+    <h2>Message many customers, one tap each</h2>
+    <p class="sub">Paste customer numbers, write one message, and open each chat with the text already typed. WhatsApp needs you to press send in every chat. Message only people who gave you their number.</p>
+    <div class="order">
+      <div class="panel">
+        <div><label class="f" for="nums">Customers, one per line</label><textarea id="nums" placeholder="Name, 10-digit number&#10;or just the number"></textarea><p class="hint">Indian numbers get +91 added. Put the name first to use it in the message.</p></div>
+        <div><label class="f" for="tpl">Message</label>
+          <div class="cats" style="margin:0 0 8px"><button type="button" class="cat" data-t="launch">Launch offer</button><button type="button" class="cat" data-t="give">Giveaway</button><button type="button" class="cat" data-t="refill">Refill reminder</button></div>
+          <textarea id="tpl" style="min-height:190px"></textarea><p class="hint">Write {name} where the customer's name should go.</p></div>
+      </div>
+      <div class="panel">
+        <div class="between"><h3 id="count">No customers yet</h3><button type="button" class="btn ghost small" id="resetSent">Reset ticks</button></div>
+        <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+        <ul class="contacts" id="contacts"></ul>
+        <p class="empty" id="noContacts">Paste numbers on the left. Each one appears here with its own Open chat button, and gets ticked once you open it.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <div><div class="hint">Call or WhatsApp</div><div class="num">9573799492</div></div>
+  <div>9 AM – 10 PM · Guntur and nearby areas</div>
+  <div style="font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--gold)">Because they deserve the best</div>
+</div></footer>
+
+<div class="bar" id="bar"><div><span id="barText">Your order is empty</span><a class="btn small" id="barBtn" href="#order">View order</a></div></div>
+
+<script>
+(function(){
+  var SHOP="919573799492";
+  var $=function(id){return document.getElementById(id)};
+  var el=function(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+  var store={get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+  var calm=false;try{calm=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
+
+  function route(){
+    var s=location.hash==="#sender";
+    $("view-shop").hidden=s;$("view-sender").hidden=!s;$("bar").hidden=s;
+    $("tab-shop").removeAttribute("aria-current");$("tab-sender").removeAttribute("aria-current");
+    $(s?"tab-sender":"tab-shop").setAttribute("aria-current","page");
+    var t=location.hash==="#order"?$("order"):location.hash==="#catalogue"?$("catalogue"):null;
+    if(t)t.scrollIntoView({behavior:calm?"auto":"smooth"});else if(s)window.scrollTo(0,0);
+  }
+  window.addEventListener("hashchange",route);route();
+
+  var BR=["Pedigree","Me-O","Whiskas","M&N","Kittums","Royal Canin","Canine Creek","Drools"];
+  var mq=$("marq");BR.concat(BR).forEach(function(b){mq.appendChild(el("span","",b))});
+
+  var KG=["1.2 kg","3 kg","Other size"];
+  var P=[
+    {c:"Dog food",b:"Pedigree",n:"Adult Chicken & Vegetables",d:"Everyday dry food for adult dogs.",h:42,s:KG},
+    {c:"Dog food",b:"Drools",n:"Chicken & Egg Adult",d:"Dry food with chicken and egg.",h:215,s:KG},
+    {c:"Dog food",b:"Royal Canin",n:"Adult dog food",d:"Tell us your dog's breed size.",h:355,s:KG},
+    {c:"Dog food",b:"M&N",n:"Adult Chicken & Rice",d:"Chicken and rice dry food.",h:232,s:KG},
+    {c:"Dog food",b:"Canine Creek",n:"Chicken & Rice Adult",d:"Dry food for adult dogs.",h:130,s:KG},
+    {c:"Cat food",b:"Me-O",n:"Tuna Adult",d:"Tuna dry food for adult cats.",h:50,s:KG},
+    {c:"Cat food",b:"Whiskas",n:"Adult dry food",d:"Crunchy pockets for adult cats.",h:285,s:KG},
+    {c:"Cat food",b:"Kittums",n:"Tuna",d:"Tuna flavour cat food.",h:330,s:KG},
+    {c:"Cat food",b:"Royal Canin",n:"Adult cat food",d:"Tell us indoor or outdoor cat.",h:8,s:KG},
+    {c:"Treats",b:"Dog treats",n:"Biscuits",d:"Crunchy training rewards.",h:28,s:["1 pack","2 packs"]},
+    {c:"Treats",b:"Dog treats",n:"Chew bones",d:"Long-lasting chews.",h:18,s:["Small","Large"]},
+    {c:"Treats",b:"Cat treats",n:"Creamy treats",d:"Lickable sticks cats love.",h:310,s:["1 pack","2 packs"]},
+    {c:"Supplies",b:"Bowl",n:"Food bowl",d:"For dogs and cats.",h:218,s:["Small","Large"],k:"bowl"},
+    {c:"Supplies",b:"Toy",n:"Chew ball",d:"Tough ball for fetch.",h:200,s:["One size"],k:"ball"}
+  ];
+  var cart=[],cat="All";
+  function count(){return cart.reduce(function(a,c){return a+c.q},0)}
+  function orderText(){
+    var L=["Hi Pet2Door!"];
+    if(cart.length){L.push("I'd like to order:");cart.forEach(function(c,i){L.push((i+1)+". "+c.b+" "+c.n+" ("+c.s+") x "+c.q)})}
+    else L.push("I'd like to order pet food. Please share what you have in stock.");
+    var n=$("cname").value.trim(),a=$("carea").value.trim();
+    if(n)L.push("Name: "+n);if(a)L.push("Location: "+a);
+    L.push("Please confirm the price and delivery time.");return L.join("\n");
+  }
+  function drawOrder(){
+    var ul=$("cart");ul.textContent="";
+    if(!cart.length)ul.appendChild(el("li","empty","Nothing added yet. Pick items from the categories above."));
+    cart.forEach(function(c,i){
+      var li=el("li"),x=el("button","x","Remove");x.type="button";x.onclick=function(){cart.splice(i,1);drawOrder()};
+      li.appendChild(el("span","",c.q+" x "+c.b+" "+c.n+", "+c.s));li.appendChild(x);ul.appendChild(li);
+    });
+    var t=orderText(),k=count();$("orderPreview").textContent=t;
+    $("orderLink").href="https://wa.me/"+SHOP+"?text="+encodeURIComponent(t);
+    $("barText").textContent=k?k+(k===1?" item":" items")+" in your order":"Your order is empty";
+  }
+  function fly(src){
+    if(calm||!src.animate)return;
+    var r=src.getBoundingClientRect(),t=$("barBtn").getBoundingClientRect(),c=src.cloneNode(true);
+    c.style.cssText="position:fixed;left:"+r.left+"px;top:"+r.top+"px;margin:0;z-index:50;pointer-events:none;animation:none";
+    document.body.appendChild(c);
+    c.animate([{transform:"none",opacity:1},{transform:"translate("+(t.left+t.width/2-r.left-r.width/2)+"px,"+(t.top-r.top-r.height/2)+"px) scale(.12) rotate(30deg)",opacity:.3}],{duration:700,easing:"cubic-bezier(.5,-.3,.7,1)"}).onfinish=function(){
+      c.remove();var b=$("barBtn");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");
+    };
+  }
+  var io=window.IntersectionObserver&&!calm?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove("pre");io.unobserve(e.target)}})},{rootMargin:"0px 0px -40px"}):null;
+  function drawGrid(){
+    var g=$("grid");g.textContent="";
+    P.forEach(function(p,i){
+      if(cat!=="All"&&p.c!==cat)return;
+      var card=el("article","card"),st=el("div","stage"),pk=el("div","pack"+(p.k?" "+p.k:""));
+      pk.style.setProperty("--h",p.h);pk.style.animationDelay=(-i*.37)+"s";
+      if(!p.k){pk.appendChild(el("i","",p.c));pk.appendChild(el("b","",p.b))}
+      st.appendChild(pk);card.appendChild(st);
+      card.appendChild(el("span","tag",p.c));card.appendChild(el("h3","",p.b+" "+p.n));card.appendChild(el("p","d",p.d));
+      var sz=el("div","sizes"),sel=p.s[0];
+      p.s.forEach(function(s,j){var id="s"+i+"_"+j,inp=el("input"),lb=el("label","",s);inp.type="radio";inp.name="s"+i;inp.id=id;inp.checked=!j;inp.onchange=function(){sel=s};lb.htmlFor=id;sz.appendChild(inp);sz.appendChild(lb)});
+      card.appendChild(sz);
+      var add=el("div","add"),stp=el("div","step"),m=el("button","","−"),o=el("output","","1"),pl=el("button","","+"),q=1,b=el("button","btn","Add to order");
+      m.type=pl.type=b.type="button";m.setAttribute("aria-label","Less");pl.setAttribute("aria-label","More");
+      m.onclick=function(){q=Math.max(1,q-1);o.textContent=q};pl.onclick=function(){q=Math.min(20,q+1);o.textContent=q};
+      b.onclick=function(){
+        var f=cart.filter(function(c){return c.b===p.b&&c.n===p.n&&c.s===sel})[0];
+        if(f)f.q+=q;else cart.push({b:p.b,n:p.n,s:sel,q:q});
+        fly(pk);drawOrder();b.textContent="Added ✓";setTimeout(function(){b.textContent="Add to order"},1200);
+      };
+      stp.appendChild(m);stp.appendChild(o);stp.appendChild(pl);add.appendChild(stp);add.appendChild(b);card.appendChild(add);
+      card.addEventListener("pointermove",function(e){var r=card.getBoundingClientRect();pk.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*50+"deg");pk.style.setProperty("--rx",(.5-(e.clientY-r.top)/r.height)*30+"deg")});
+      card.addEventListener("pointerleave",function(){pk.style.removeProperty("--ry");pk.style.removeProperty("--rx")});
+      if(io&&card){g.appendChild(card);if(card.getBoundingClientRect().top>innerHeight){card.classList.add("pre");card.style.transitionDelay=(i%4)*70+"ms";io.observe(card)}}else g.appendChild(card);
+    });
+  }
+  ["All","Dog food","Cat food","Treats","Supplies"].forEach(function(c){
+    var b=el("button","cat",c);b.type="button";b.setAttribute("aria-pressed",c===cat);
+    b.onclick=function(){cat=c;document.querySelectorAll("#cats .cat").forEach(function(x){x.setAttribute("aria-pressed",x===b)});drawGrid()};
+    $("cats").appendChild(b);
+  });
+  $("cname").oninput=$("carea").oninput=drawOrder;
+  $("orderCopy").onclick=function(){
+    var btn=this,ok=function(){btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy message"},1400)};
+    var fb=function(){var r=document.createRange();r.selectNodeContents($("orderPreview"));var s=getSelection();s.removeAllRanges();s.addRange(r)};
+    try{navigator.clipboard.writeText(orderText()).then(ok,fb)}catch(e){fb()}
+  };
+  drawGrid();drawOrder();
+
+  var TPL={
+    launch:"Hi {name}! Pet2Door now delivers pet food in Guntur.\nPedigree, Drools, Royal Canin, Me-O, Whiskas and more.\nMinimum order ₹499. Free delivery up to 5 km from Chuttugunta.\n9 AM to 10 PM. Reply here to order.",
+    give:"Hi {name}! Pet2Door is giving free food packs to our first 500 Instagram followers.\nOne dog owner wins a 1.2 kg Pedigree pack and one cat owner wins a Me-O pack.\nFollow @pet2door.in and comment your location to enter.",
+    refill:"Hi {name}! This is Pet2Door. Is your pet's food running low?\nReply with the brand and pack size and we will deliver it today.\nFree delivery up to 5 km from Chuttugunta on orders above ₹499."
+  };
+  var sent=store.get("p2d-sent",{});
+  $("nums").value=store.get("p2d-nums","");$("tpl").value=store.get("p2d-tpl",TPL.launch);
+  function parse(){
+    return $("nums").value.split(/\n/).map(function(l){return l.trim()}).filter(Boolean).map(function(l){
+      var d=(l.match(/[\d\s+()-]{8,}/g)||[]).pop()||"",num=d.replace(/\D/g,"").replace(/^0+/,"");
+      var name=l.replace(d,"").replace(/[,;:\t-]+/g," ").trim();
+      if(num.length===10)num="91"+num;
+      return {name:name,num:num,ok:num.length>=11&&num.length<=13,raw:l};
+    });
+  }
+  function drawSender(){
+    var list=parse(),ul=$("contacts"),tpl=$("tpl").value,ok=0,done=0;ul.textContent="";
+    list.forEach(function(c){
+      var li=el("li"),d=el("div","",c.name||"Customer"),s=el("small");d.appendChild(s);li.appendChild(d);
+      if(!c.ok){li.className="bad";s.textContent="Could not read a number in: "+c.raw;ul.appendChild(li);return}
+      ok++;s.textContent="+"+c.num;
+      var a=el("a","btn small");a.target="_blank";a.rel="noopener";
+      a.href="https://wa.me/"+c.num+"?text="+encodeURIComponent(tpl.replace(/\{name\}/gi,c.name||"there"));
+      if(sent[c.num]){done++;li.className="done";a.textContent="Opened ✓"}else a.textContent="Open chat";
+      a.addEventListener("click",function(){sent[c.num]=1;store.set("p2d-sent",sent);setTimeout(drawSender,50)});
+      li.appendChild(a);ul.appendChild(li);
+    });
+    $("noContacts").hidden=list.length>0;
+    $("count").textContent=ok?done+" of "+ok+" chats opened":"No customers yet";
+    $("meter").style.width=ok?(100*done/ok)+"%":"0";
+  }
+  $("nums").oninput=function(){store.set("p2d-nums",this.value);drawSender()};
+  $("tpl").oninput=function(){store.set("p2d-tpl",this.value);drawSender()};
+  document.querySelectorAll("[data-t]").forEach(function(b){b.onclick=function(){$("tpl").value=TPL[b.dataset.t];store.set("p2d-tpl",$("tpl").value);drawSender()}});
+  $("resetSent").onclick=function(){sent={};store.set("p2d-sent",sent);drawSender()};
+  drawSender();
+
+  [5,0,1].forEach(function(i){
+    var p=P[i],pk=el("div","pack");pk.style.setProperty("--h",p.h);pk.style.animation="none";
+    pk.appendChild(el("i","",p.c));pk.appendChild(el("b","",p.b));$("scene").appendChild(pk);
+  });
+})();
+</script>
+</body>
+</html>
