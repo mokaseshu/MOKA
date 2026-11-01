@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Moka Seshu — premium websites, Shopify stores, web apps and AI tools for businesses in India and worldwide.">
+<meta property="og:title" content="Moka Seshu Studio">
+<meta property="og:description" content="Moka Seshu — premium websites, Shopify stores, web apps and AI tools for businesses in India and worldwide.">
+<meta property="og:image" content="media/slns-ivory.jpg">
+<meta name="theme-color" content="#0B0E17">
+<title>Moka Seshu Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}
+/* Layout: a dark gallery wall — client work hangs as large alternating case rows, own products sit in a tighter 3-up grid, champagne used only for the thread that ties them */
+:root{
+  --ink:#0B0E17;
+  --stage:#11151F;
+  --panel:#171C28;
+  --line:#262D3D;
+  --text:#EEEAE2;
+  --dim:#9AA1B2;
+  --gold:#D9B872;
+  --gold-deep:#B8934A;
+  --gold-ink:#1A1408;
+  --green:#3FB27F;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Outfit",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0;line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.dim{color:var(--dim)}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ink) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
+.mark{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark b{width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-weight:500;font-size:19px;color:var(--gold)}
+.mark span{display:grid;line-height:1.15}
+.mark strong{font-weight:500;font-size:16px;letter-spacing:.02em}
+.mark small{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+nav.links{display:flex;gap:4px;align-items:center}
+nav.links a{text-decoration:none;color:var(--dim);font-size:15px;padding:8px 14px;border-radius:99px;transition:color .2s}
+nav.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font:500 15px/1 var(--body);border-radius:99px;padding:15px 24px;border:1px solid transparent;cursor:pointer;transition:transform .2s,background .2s,border-color .2s,color .2s;white-space:nowrap}
+.btn svg{width:16px;height:16px;flex:none}
+.btn.gold{background:var(--gold);color:var(--gold-ink)}
+.btn.gold:hover{background:#E6C88A;transform:translateY(-2px)}
+.btn.line{border-color:var(--line);color:var(--text)}
+.btn.line:hover{border-color:var(--gold);color:var(--gold)}
+.btn.sm{padding:11px 18px;font-size:14px}
+
+.hero{padding-block:88px 72px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;width:780px;height:780px;right:-220px;top:-260px;border-radius:50%;background:radial-gradient(closest-side,rgba(217,184,114,.14),transparent);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:56px;align-items:center;position:relative;z-index:1}
+.hero-copy{display:grid;gap:28px;min-width:0}
+.hero h1{font-size:clamp(44px,6vw,84px)}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lede{font-size:clamp(17px,1.6vw,20px);color:var(--dim);max-width:46ch}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:12px 36px;padding-top:8px;border-top:1px solid var(--line);margin-top:4px}
+.facts div{display:grid;gap:2px;padding-top:18px}
+.facts b{font-family:var(--display);font-size:36px;font-weight:500;line-height:1;color:var(--text);font-variant-numeric:lining-nums}
+.facts span{font-size:13.5px;color:var(--dim)}
+
+.stack{position:relative;aspect-ratio:1.05/1;max-width:100%}
+.frame{position:absolute;border-radius:14px;overflow:hidden;background:var(--panel);border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.frame .chrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#0E121B;border-bottom:1px solid var(--line)}
+.frame .chrome i{width:8px;height:8px;border-radius:50%;background:#2E3546}
+.frame .chrome span{margin-left:10px;font-family:var(--mono);font-size:10.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frame video,.frame img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#0E121B}
+.f1{width:84%;left:0;top:4%;z-index:1}
+.f2{width:58%;right:0;bottom:2%;z-index:2;transform:rotate(1.5deg)}
+.f3{width:34%;left:6%;bottom:0;z-index:3;transform:rotate(-3deg)}
+@media (prefers-reduced-motion:no-preference){
+  .f1{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+  .f2{animation:rise .9s .15s cubic-bezier(.2,.8,.2,1) both}
+  .f3{animation:rise .9s .3s cubic-bezier(.2,.8,.2,1) both}
+}
+@keyframes rise{from{transform:translateY(24px)}}
+
+.clients{border-block:1px solid var(--line);background:var(--stage)}
+.clients .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 40px;padding-block:22px}
+.clients .label{color:var(--dim)}
+.clients ul{display:flex;flex-wrap:wrap;gap:10px 36px;list-style:none;margin:0;padding:0}
+.clients li{font-family:var(--display);font-size:21px;font-style:italic;color:var(--text);opacity:.85}
+
+section.block{padding-block:110px}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:28px 60px;align-items:end;margin-bottom:64px}
+.sec-head h2{font-size:clamp(38px,5vw,66px)}
+.sec-head h2 em{font-style:italic;color:var(--gold)}
+.sec-head p{color:var(--dim);max-width:44ch}
+.sec-head .label{display:block;margin-bottom:18px}
+
+.cases{display:grid;gap:96px}
+.case{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px;align-items:center}
+.case:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}
+.case:nth-child(even) .media{order:2}
+.media{position:relative;min-width:0}
+.media .frame{position:relative}
+.media .badge{position:absolute;left:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:8px;background:rgba(11,14,23,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
+.media .badge i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(63,178,127,.25)}
+.media .badge.concept i{background:var(--gold);box-shadow:0 0 0 3px rgba(217,184,114,.25)}
+.thumbs{display:flex;gap:10px;margin-top:12px}
+.thumbs button{flex:1;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:none;cursor:pointer;opacity:.6;transition:opacity .2s,border-color .2s}
+.thumbs button[aria-pressed="true"]{opacity:1;border-color:var(--gold)}
+.thumbs img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.thumbs span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:7px 10px;text-align:left}
+.case-copy{display:grid;gap:20px;min-width:0}
+.case-copy .where{display:flex;flex-wrap:wrap;gap:8px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.case-copy .where b{color:var(--gold);font-weight:500}
+.case-copy h3{font-size:clamp(34px,3.8vw,52px)}
+.case-copy p{color:var(--dim);max-width:48ch}
+.did{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.did li{display:grid;grid-template-columns:18px 1fr;gap:12px;font-size:15.5px;color:var(--text)}
+.did li::before{content:"";width:18px;height:1px;background:var(--gold);margin-top:13px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:13px;color:var(--dim)}
+.links-row{display:flex;flex-wrap:wrap;gap:10px;padding-top:6px}
+
+.products{background:var(--stage);border-block:1px solid var(--line)}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .25s,transform .25s}
+.pcard:hover{border-color:color-mix(in srgb,var(--gold) 55%,var(--line));transform:translateY(-4px)}
+.pmedia{position:relative;aspect-ratio:16/10;background:#0E121B;overflow:hidden}
+.pmedia img,.pmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.pmedia video{opacity:0;transition:opacity .35s}
+.pcard.playing .pmedia video{opacity:1}
+.pbody{padding:24px;display:grid;gap:12px;flex:1;align-content:start}
+.pbody .kind{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.pbody h3{font-size:30px}
+.pbody p{color:var(--dim);font-size:15.5px}
+.pfoot{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 24px}
+.plink{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;padding:9px 14px;border-radius:99px;border:1px solid var(--line);color:var(--text);transition:border-color .2s,color .2s}
+.plink:hover{border-color:var(--gold);color:var(--gold)}
+.plink svg{width:15px;height:15px}
+
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.svc article{padding:36px 32px 40px 0;border-bottom:1px solid var(--line);display:grid;gap:14px;align-content:start}
+.svc article:not(:nth-child(3n+1)){padding-left:32px;border-left:1px solid var(--line)}
+.svc h3{font-size:28px}
+.svc p{color:var(--dim);font-size:15.5px}
+.svc .from{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+
+.process{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;counter-reset:step}
+.process div{display:grid;gap:12px;align-content:start;counter-increment:step;padding-top:26px;border-top:1px solid var(--gold-deep)}
+.process div::before{content:"Step " counter(step);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.process h3{font-size:26px}
+.process p{color:var(--dim);font-size:15.5px}
+
+.contact{padding-block:110px 90px}
+.cbox{border:1px solid var(--line);border-radius:28px;background:radial-gradient(120% 140% at 100% 0%,rgba(217,184,114,.12),transparent 55%),var(--panel);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:48px;align-items:start}
+.cbox h2{font-size:clamp(40px,5.4vw,72px)}
+.cbox h2 em{font-style:italic;color:var(--gold)}
+.cbox .intro{display:grid;gap:22px;min-width:0}
+.cbox .intro p{color:var(--dim);max-width:42ch}
+.reach{display:grid;gap:12px}
+.reach a,.reach div{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+.reach span{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+form{display:grid;gap:14px;min-width:0}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;color:var(--dim)}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:16px;font-weight:400;color:var(--text);background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.field textarea{resize:vertical;min-height:110px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.formbtns{display:flex;flex-wrap:wrap;gap:10px}
+.formbtns .btn{flex:1 1 200px}
+.formnote{font-size:13.5px;color:var(--dim);min-height:1.4em}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:28px;color:var(--dim);font-size:14px}
+
+.wa-float{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:25;width:56px;height:56px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.7);text-decoration:none}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+
+@media (max-width:1000px){
+  .hero .wrap,.case,.case:nth-child(even),.cbox,.sec-head{grid-template-columns:minmax(0,1fr)}
+  .case:nth-child(even) .media{order:0}
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc article,.svc article:not(:nth-child(3n+1)){padding:30px 24px 32px 0;border-left:0}
+  .svc article:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}
+  .process{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
+  nav.links a:not(.btn){display:none}
+  section.block{padding-block:84px}
+  .cases{gap:80px}
+}
+@media (max-width:620px){
+  .hero{padding-block:56px 48px}
+  .pgrid,.svc,.process,.row2{grid-template-columns:minmax(0,1fr)}
+  .svc article,.svc article:nth-child(even){padding:26px 0;border-left:0}
+  .stack{aspect-ratio:1/1}
+  .mark small{display:none}
+  .facts b{font-size:30px}
+  .thumbs span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Moka Seshu Studio home"><b>S</b><span><strong>Moka Seshu</strong><small>Websites · Apps · AI</small></span></a>
+    <nav class="links" aria-label="Main">
+      <a href="#work">Client work</a>
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a class="btn gold sm" href="#contact">Start a project</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="label">Web designer &amp; developer · Andhra Pradesh, India</span>
+        <h1>Websites that make local businesses look like <em>brands.</em></h1>
+        <p class="lede">I design and build premium websites, Shopify stores, web apps and AI tools for businesses in India and abroad. Designed in Figma, built fast, and set up to bring in enquiries on WhatsApp and Google.</p>
+        <div class="cta">
+          <a class="btn gold" href="#work">See client work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+          <a class="btn line" href="#contact">Get a quote</a>
+        </div>
+        <div class="facts">
+          <div><b>5</b><span>client websites</span></div>
+          <div><b>6</b><span>apps &amp; products shipped</span></div>
+          <div><b>3D</b><span>flyovers &amp; animation</span></div>
+        </div>
+      </div>
+      <div class="stack" aria-hidden="true">
+        <div class="frame f1"><div class="chrome"><i></i><i></i><i></i><span>slns-properties · Ivory theme</span></div>
+          <video src="media/slns-ivory.mp4" poster="media/slns-ivory.jpg" muted loop playsinline autoplay preload="metadata"></video></div>
+        <div class="frame f2"><div class="chrome"><i></i><i></i><i></i><span>revanthautozone.in</span></div>
+          <img src="media/revanth.jpg" alt=""></div>
+        <div class="frame f3"><div class="chrome"><i></i><i></i><i></i><span>Levelora</span></div>
+          <img src="media/levelora-app.jpg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="clients">
+    <div class="wrap">
+      <span class="label">Built for</span>
+      <ul>
+        <li>Revanth Autozone</li><li>SLNS Properties</li><li>Palm Grove Enclave</li><li>Pet2Door</li><li>Summit Peak Roofing</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Selected client work</span><h2>Real businesses, <em>real enquiries.</em></h2></div>
+        <p>Each site is built around one job: get the customer to call, WhatsApp or book a visit. Tap play on any project or open the live site.</p>
+      </div>
+
+      <div class="cases">
+        <article class="case">
+          <div class="media">
+            <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>revanthautozone.in</span></div>
+              <video src="media/revanth.mp4" poster="media/revanth.jpg" muted loop playsinline preload="none" data-auto></video></div>
+            <span class="badge"><i></i>Live on Shopify</span>
+          </div>
+          <div class="case-copy">
+            <div class="where"><b>Shopify</b><span>Bhimavaram, AP</span><span>Gates &amp; shutters</span></div>
+            <h3>Revanth Autozone</h3>
+            <p>A dark, premium service site for an automatic gates, shutters and glass work company. Every page leads to a WhatsApp quote instead of a cart.</p>
+            <ul class="did">
+              <li>Custom Shopify theme with a 3D gate hero and Canva AI renders</li>
+              <li>Local SEO for Bhimavaram and 120 km around it</li>
+              <li>Google Ads and Meta ads set up to drive calls and WhatsApp</li>
+              <li>Customer reviews with photos through Judge.me</li>
+            </ul>
+            <div class="links-row">
+              <a class="btn gold sm" href="https://revanthautozone.in" target="_blank" rel="noopener">View live site
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="media" data-switch>
+            <div class="frame"><div class="chrome"><i></i><i></i><i></i><span data-chrome>SLNS Properties · Ivory theme</span></div>
+              <video src="media/slns-ivory.mp4" poster="media/slns-ivory.jpg" muted loop playsinline preload="none" data-auto></video></div>
+            <div class="thumbs" role="group" aria-label="Choose a theme">
+              <button type="button" aria-pressed="true" data-src="media/slns-ivory.mp4" data-poster="media/slns-ivory.jpg" data-name="SLNS Properties · Ivory theme"><img src="media/slns-ivory.jpg" alt="SLNS Ivory theme"><span>Ivory</span></button>
+              <button type="button" aria-pressed="false" data-src="media/slns-noir.mp4" data-poster="media/slns-noir.jpg" data-name="SLNS Properties · Noir theme"><img src="media/slns-noir.jpg" alt="SLNS Noir theme"><span>Noir</span></button>
+            </div>
+          </div>
+          <div class="case-copy">
+            <div class="where"><b>Real estate</b><span>Gachibowli, Hyderabad</span></div>
+            <h3>SLNS Properties</h3>
+            <p>Sri Lakshmi Narasimha Swamy Properties sells gated plotted ventures. The site opens with a 3D aerial flyover of the layout, then walks buyers from plot sizes to a site visit.</p>
+            <ul class="did">
+              <li>Two premium themes: warm Ivory and black-and-white Noir</li>
+              <li>3D venture flyover with an "Explore plots in 3D" mode</li>
+              <li>Google Business Profile set up for the firm</li>
+            </ul>
+            <div class="links-row">
+              <a class="btn gold sm" href="https://claude.ai/artifact/YRPg6qnUf5zqLEJqgDcLHp" target="_blank" rel="noopener">View Ivory</a>
+              <a class="btn line sm" href="https://claude.ai/artifact/Vu3qyJpYCySJx3QpSnkjUM" target="_blank" rel="noopener">View Noir</a>
+              <a class="btn line sm" href="https://github.com/mokaseshu/MOKA/tree/main/slns" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="media">
+            <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>Palm Grove Enclave · West Hyderabad</span></div>
+              <video src="media/palmgrove.mp4" poster="media/palmgrove.jpg" muted loop playsinline preload="none" data-auto></video></div>
+            <span class="badge"><i></i>3D flyover</span>
+          </div>
+          <div class="case-copy">
+            <div class="where"><b>Venture microsite</b><span>West Hyderabad</span></div>
+            <h3>Palm Grove Enclave</h3>
+            <p>A single-venture page for a gated layout. Buyers fly over the plots in 3D, check which plots are still open, and book a visit in one tap.</p>
+            <ul class="did">
+              <li>Real-time 3D aerial flyover of the layout</li>
+              <li>Live plot availability grid, 100 plots</li>
+              <li>Plot sizes, road widths and amenities up front</li>
+            </ul>
+            <div class="links-row">
+              <a class="btn gold sm" href="https://claude.ai/artifact/XrV1s6mEX9pUgo2PYMkgZY" target="_blank" rel="noopener">View site
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="media">
+            <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>mokaseshu.github.io/MOKA/pet2door</span></div>
+              <video src="media/pet2door.mp4" poster="media/pet2door.jpg" muted loop playsinline preload="none" data-auto></video></div>
+            <span class="badge"><i></i>Live on GitHub Pages</span>
+          </div>
+          <div class="case-copy">
+            <div class="where"><b>Delivery brand</b><span>Guntur, AP</span><span>Pet food</span></div>
+            <h3>Pet2Door</h3>
+            <p>A friendly, fast-loading site for a pet food delivery brand in Guntur, pitched with a full website and marketing plan. Colours swap easily to match the brand.</p>
+            <ul class="did">
+              <li>Designed in Figma, built as a light static site</li>
+              <li>WhatsApp ordering flow and ad creatives</li>
+              <li>Hosted free on GitHub Pages</li>
+            </ul>
+            <div class="links-row">
+              <a class="btn gold sm" href="https://mokaseshu.github.io/MOKA/pet2door/" target="_blank" rel="noopener">View live site
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a class="btn line sm" href="https://github.com/mokaseshu/MOKA/tree/main/pet2door" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.370-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.770 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="media">
+            <div class="frame"><div class="chrome"><i></i><i></i><i></i><span>Summit Peak Roofing</span></div>
+              <img src="media/summit.jpg" alt="Summit Peak Roofing home page preview"></div>
+            <span class="badge concept"><i></i>Home page preview</span>
+          </div>
+          <div class="case-copy">
+            <div class="where"><b>Roofing contractor</b><span>Residential &amp; commercial</span><span>International client</span></div>
+            <h3>Summit Peak Roofing</h3>
+            <p>A trust-first site for a family-owned roofing company. Clear services, featured projects and reviews lead homeowners to book a free inspection.</p>
+            <ul class="did">
+              <li>Seven service pages from roof replacement to emergency repairs</li>
+              <li>Featured projects, customer reviews and FAQ</li>
+              <li>Estimate form with business hours and contact details</li>
+            </ul>
+            <div class="links-row">
+              <a class="btn gold sm" href="https://summit-peak-sparkle.lovable.app/" target="_blank" rel="noopener">View live site
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block products" id="products">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">Products I've built</span><h2>Apps and tools, <em>shipped.</em></h2></div>
+        <p>My own web apps and a Flutter mobile app. Hover a card to watch it in action, then open it live or read the code on GitHub.</p>
+      </div>
+      <div class="pgrid">
+        <article class="pcard">
+          <div class="pmedia"><img src="media/levelora-app.jpg" alt="Levelora members app" loading="lazy"><video data-src="media/levelora-app.mp4" muted loop playsinline preload="none"></video></div>
+          <div class="pbody"><span class="kind">Web app · Subscription</span><h3>Levelora Members</h3><p>A gamified life-upgrade planner: 500 ready trackers, daily quests, XP, levels, ebooks and a friends leaderboard. Users can create a tracker from a one-line prompt.</p></div>
+          <div class="pfoot"><a class="plink" href="https://claude.ai/artifact/DZERkUkcCmg1gLBgH4o3AM" target="_blank" rel="noopener">Open app <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </article>
+        <article class="pcard">
+          <div class="pmedia"><img src="media/levelora-pass.jpg" alt="Levelora All-Access Pass sales page" loading="lazy"><video data-src="media/levelora-pass.mp4" muted loop playsinline preload="none"></video></div>
+          <div class="pbody"><span class="kind">Sales page · levelora.in</span><h3>Levelora All-Access Pass</h3><p>The landing page that sells the yearly pass: what's included, a comparison table, bonuses, FAQ and a sticky ₹2,999 buy bar.</p></div>
+          <div class="pfoot"><a class="plink" href="https://claude.ai/artifact/TTyp8BA15MLmsKLVT58ECw" target="_blank" rel="noopener">Open page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </article>
+        <article class="pcard">
+          <div class="pmedia"><img src="media/offerpath.jpg" alt="OfferPath India offers directory" loading="lazy"><video data-src="media/offerpath.mp4" muted loop playsinline preload="none"></video></div>
+          <div class="pbody"><span class="kind">Directory · English &amp; Telugu</span><h3>OfferPath India</h3><p>1,895 affiliate, refer-and-earn and student offers in one searchable directory, with a student eligibility checker, saved offers and a refer-and-earn wallet.</p></div>
+          <div class="pfoot"><a class="plink" href="https://claude.ai/artifact/Y7tSAzuLDA6rQUyHr4x6P3" target="_blank" rel="noopener">Open site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </article>
+        <article class="pcard">
+          <div class="pmedia"><img src="media/sharestack.jpg" alt="ShareStack storefront" loading="lazy"><video data-src="media/sharestack.mp4" muted loop playsinline preload="none"></video></div>
+          <div class="pbody"><span class="kind">Storefront · WhatsApp orders</span><h3>ShareStack</h3><p>A stack builder for AI, design and SEO tool seats. Discounts level up as you add tools, and the order goes straight to WhatsApp.</p></div>
+          <div class="pfoot"><a class="plink" href="https://claude.ai/artifact/7UeLKWhWC3MVFy5RMSMdWG" target="_blank" rel="noopener">Open site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </article>
+        <article class="pcard">
+          <div class="pmedia"><img src="media/toolstack.jpg" alt="Toolstack tools directory" loading="lazy"><video data-src="media/toolstack.mp4" muted loop playsinline preload="none"></video></div>
+          <div class="pbody"><span class="kind">Directory · 43 tools</span><h3>Toolstack</h3><p>AI, video, design and SEO tools in one place. Filter by category and price, search by job, and save the ones you want to try.</p></div>
+          <div class="pfoot"><a class="plink" href="https://claude.ai/artifact/4nzbgCNvLHm31w8ScAkq8z" target="_blank" rel="noopener">Open site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </article>
+        <article class="pcard">
+          <div class="pmedia"><img src="media/walkquest.jpg" alt="WalkQuest 3D app screens" loading="lazy"></div>
+          <div class="pbody"><span class="kind">Mobile app · Flutter · iOS &amp; Android</span><h3>WalkQuest 3D</h3><p>A real-world walking and running RPG on a Mapbox 3D map. Quests, XP, territory capture and a friends leaderboard, backed by Firebase.</p></div>
+          <div class="pfoot"><a class="plink" href="https://github.com/mokaseshu/MOKA/tree/main/walkquest_3d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.170-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>View code on GitHub</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">What I can build for you</span><h2>One person, <em>full service.</em></h2></div>
+        <p>From the first Figma design to the ads that bring traffic. You deal with one person who builds everything, with AI tools doing the heavy lifting.</p>
+      </div>
+      <div class="svc">
+        <article><span class="from">Websites</span><h3>Business websites</h3><p>Premium multi-page sites with light and dark themes, animation and 3D, built to turn visitors into WhatsApp enquiries.</p></article>
+        <article><span class="from">Shopify</span><h3>Online stores</h3><p>Shopify stores and service sites with custom themes, reviews, custom domain and DNS set up for you.</p></article>
+        <article><span class="from">Web apps</span><h3>Apps &amp; tools</h3><p>Booking tools, directories, calculators and subscription apps that run in the browser on any phone.</p></article>
+        <article><span class="from">Google</span><h3>Local SEO</h3><p>Google Business Profile, local keywords and page speed fixes so nearby customers find you first.</p></article>
+        <article><span class="from">Ads</span><h3>Meta &amp; Google ads</h3><p>Ad creatives, posters and short videos, with campaigns aimed at calls and WhatsApp messages.</p></article>
+        <article><span class="from">Automation</span><h3>WhatsApp AI bots</h3><p>AI assistants that answer customer questions on WhatsApp day and night, trained on your business.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="process" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="label">How we'll work</span><h2>From call to <em>live site.</em></h2></div>
+        <p>Clear steps, quick updates on WhatsApp, and you see the design before any code is written.</p>
+      </div>
+      <div class="process">
+        <div><h3>Talk</h3><p>A short call or WhatsApp chat about your business, customers and the pages you need.</p></div>
+        <div><h3>Design in Figma</h3><p>You get the home page design in Figma to review. We adjust colours and layout until it feels right.</p></div>
+        <div><h3>Build &amp; launch</h3><p>I build the full site, connect your domain and hosting, and test it on phones and laptops.</p></div>
+        <div><h3>Grow</h3><p>Google Business, local SEO and ads to bring steady enquiries after launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="cbox">
+        <div class="intro">
+          <span class="label">Start a project</span>
+          <h2>Let's build your <em>next website.</em></h2>
+          <p>Tell me about your business and what you need. I usually reply the same day with ideas and a quote.</p>
+          <div class="reach">
+            <a href="https://wa.me/916301521358?text=Hi%20Seshu%2C%20I%20saw%20your%20portfolio%20and%20want%20a%20website." target="_blank" rel="noopener"><span>WhatsApp</span>+91 63015 21358</a>
+            <a href="https://github.com/mokaseshu" target="_blank" rel="noopener"><span>GitHub</span>github.com/mokaseshu</a>
+            <div><span>Based in</span>Andhra Pradesh, India · working worldwide</div>
+          </div>
+        </div>
+        <form id="brief" novalidate>
+          <div class="row2">
+            <div class="field"><label for="bName">Your name</label><input id="bName" autocomplete="name" placeholder="Ravi Kumar"></div>
+            <div class="field"><label for="bPhone">Phone / WhatsApp</label><input id="bPhone" type="tel" autocomplete="tel" placeholder="+91 98765 43210"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="bBiz">Business</label><input id="bBiz" autocomplete="organization" placeholder="Sri Sai Interiors"></div>
+            <div class="field"><label for="bCity">City</label><input id="bCity" autocomplete="address-level2" placeholder="Vijayawada"></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="bNeed">What do you need?</label>
+              <select id="bNeed"><option>Business website</option><option>Shopify store</option><option>Web app or tool</option><option>Local SEO &amp; Google Business</option><option>Meta or Google ads</option><option>WhatsApp AI bot</option></select></div>
+            <div class="field"><label for="bBudget">Budget</label>
+              <select id="bBudget"><option>Not sure yet</option><option>Under ₹10,000</option><option>₹10,000 – ₹25,000</option><option>₹25,000 – ₹50,000</option><option>Above ₹50,000</option><option>USD project</option></select></div>
+          </div>
+          <div class="field"><label for="bMsg">Tell me a little more</label><textarea id="bMsg" placeholder="We make automatic gates in Vijayawada and want a site that brings WhatsApp enquiries."></textarea></div>
+          <div class="formbtns">
+            <button class="btn gold" type="submit" id="bSend"></button>
+            <button class="btn line" type="button" id="bCopy">Copy my project brief</button>
+          </div>
+          <p class="formnote" id="bNote" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Moka Seshu · Websites, apps &amp; AI automation</span>
+    <span>Designed in Figma · Built by hand with AI</span>
+  </div>
+</footer>
+
+<a class="wa-float" id="waFloat" href="#contact" aria-label="Message on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<script>
+const WHATSAPP = "916301521358";
+
+const send = document.getElementById("bSend");
+const note = document.getElementById("bNote");
+send.textContent = WHATSAPP ? "Send on WhatsApp" : "Copy my project brief";
+if (WHATSAPP) {
+  const f = document.getElementById("waFloat");
+  f.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Hi Seshu, I saw your portfolio and want a website.");
+  f.target = "_blank"; f.rel = "noopener";
+}
+
+function briefText() {
+  const v = id => document.getElementById(id).value.trim();
+  return "Hi Seshu, I saw your portfolio and want to start a project.\n\nName: " + (v("bName") || "-") + "\nPhone: " + (v("bPhone") || "-") + "\nBusiness: " + (v("bBiz") || "-") + "\nCity: " + (v("bCity") || "-") + "\nNeed: " + v("bNeed") + "\nBudget: " + v("bBudget") + "\nDetails: " + (v("bMsg") || "-");
+}
+
+document.getElementById("brief").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!document.getElementById("bName").value.trim() || !document.getElementById("bPhone").value.trim()) {
+    note.textContent = "Please add your name and phone number so Seshu can reach you.";
+    return;
+  }
+  const text = briefText();
+  const a = document.createElement("a");
+  a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text);
+  a.target = "_blank"; a.rel = "noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+  let copied = false;
+  try { await navigator.clipboard.writeText(text); copied = true; } catch (err) {}
+  note.textContent = copied
+    ? "WhatsApp opens with your brief filled in. Press send there. Your brief is also copied, in case you need to paste it."
+    : "WhatsApp opens with your brief filled in. Press send there. If it doesn't open, message +91 63015 21358.";
+});
+
+document.getElementById("bCopy").addEventListener("click", async () => {
+  const text = briefText();
+  try {
+    await navigator.clipboard.writeText(text);
+    note.textContent = "Brief copied. Paste it in a WhatsApp message to +91 63015 21358.";
+  } catch (err) {
+    const t = document.getElementById("bMsg");
+    t.value = text; t.focus(); t.select();
+    note.textContent = "Your brief is selected in the box. Copy it and send it to +91 63015 21358.";
+  }
+});
+
+document.querySelectorAll("[data-switch]").forEach(box => {
+  const vid = box.querySelector("video");
+  const chrome = box.querySelector("[data-chrome]");
+  box.querySelectorAll(".thumbs button").forEach(b => b.addEventListener("click", () => {
+    box.querySelectorAll(".thumbs button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    vid.poster = b.dataset.poster; vid.src = b.dataset.src; chrome.textContent = b.dataset.name;
+    vid.play().catch(() => {});
+  }));
+});
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if ("IntersectionObserver" in window && !reduce) {
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    const v = en.target;
+    if (en.isIntersecting) { v.preload = "auto"; v.play().catch(() => {}); } else v.pause();
+  }), { threshold: .35 });
+  document.querySelectorAll("video[data-auto]").forEach(v => io.observe(v));
+}
+if (reduce) document.querySelectorAll("video[autoplay]").forEach(v => { v.removeAttribute("autoplay"); v.pause(); });
+
+document.querySelectorAll(".pcard").forEach(card => {
+  const v = card.querySelector("video[data-src]");
+  if (!v) return;
+  const start = () => { if (!v.src) v.src = v.dataset.src; v.play().then(() => card.classList.add("playing")).catch(() => {}); };
+  const stop = () => { v.pause(); card.classList.remove("playing"); };
+  if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window && !reduce) {
+    new IntersectionObserver(es => es.forEach(en => en.isIntersecting ? start() : stop()), { threshold: .6 }).observe(card);
+  }
+  card.addEventListener("mouseenter", start);
+  card.addEventListener("mouseleave", stop);
+  card.addEventListener("focusin", start);
+  card.addEventListener("focusout", stop);
+});
+</script>
+</body>
+</html>
