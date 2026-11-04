@@ -96,6 +96,10 @@ details summary{cursor:pointer;font-family:var(--display);font-size:16px;list-st
 details summary::-webkit-details-marker{display:none}
 details summary::after{content:" +";color:var(--orange)}
 details[open] summary::after{content:" −"}
+.keybox{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.keybox .hint{margin:6px 0 0;font-size:13px}
+.keyrow{display:flex;gap:8px}
+.keyrow button{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:0 16px;font:700 15px var(--body);cursor:pointer}
 #pdfhost{position:fixed;left:-12000px;top:0;width:794px;background:#fff}
 
 /* ---------- The quotation sheet (fixed print colours, same as AT/Q/26-27/008–010) ---------- */
@@ -178,6 +182,11 @@ details[open] summary::after{content:" −"}
       <input type="file" id="photoIn" accept="image/*"></label>
     <div class="photo" id="photoRow" hidden><img id="thumb" alt="Bill photo"><div class="status" id="status"></div></div>
     <div class="warn" id="unclear" hidden></div>
+    <div class="keybox" id="keyBox" hidden>
+      <label class="f">Your Claude API key (for reading photos)
+        <div class="keyrow"><input type="password" id="apiKey" autocomplete="off" spellcheck="false" placeholder="sk-ant-…"><button type="button" id="keySave">Save</button></div></label>
+      <p class="hint" id="keyNote">Saved only on this phone, in this browser. It is never put on the website or on GitHub.</p>
+    </div>
   </section>
 
   <section class="card">
@@ -467,21 +476,58 @@ Reply with ONLY this JSON object:
 async function readPhoto(file){
   $("photoRow").hidden = false; $("unclear").hidden = true; $("thumb").src = URL.createObjectURL(file);
   const st = $("status");
-  if (!sample) { st.className = "status"; st.textContent = "Photo reading isn't available here. Type the items below."; return; }
+  if (!sample && !getKey()) { st.className = "status"; st.textContent = "Add your Claude API key below to read photos, or type the items."; $("keyBox").hidden = false; $("apiKey").focus(); return; }
   st.className = "status busy"; st.textContent = "Reading the bill…"; $("dropText").textContent = "Use a different photo";
   try {
     const blob = await shrink(file);
-    const lim = await sample.limits().catch(() => null);
-    const tier = lim?.modelTiers?.includes("complex") ? "complex" : undefined;
-    const r = await sample.json(PROMPT, {images: [blob], ...(tier ? {modelTier: tier} : {})});
+    let r;
+    if (sample) {
+      const lim = await sample.limits().catch(() => null);
+      const tier = lim?.modelTiers?.includes("complex") ? "complex" : undefined;
+      r = await sample.json(PROMPT, {images: [blob], ...(tier ? {modelTier: tier} : {})});
+    } else r = await readWithKey(blob);
     applyRead(r || {});
     st.className = "status"; st.innerHTML = `<b style="color:var(--ok)">Read ${S.items.length} item${S.items.length === 1 ? "" : "s"}.</b> Check them below.`;
   } catch (e) {
     st.className = "status";
-    const why = {not_granted: "Allow this page to use Claude to read photos, or type the items below.", rate_limited: "Too many reads just now. Wait a minute and try again.", images_unavailable: "Photo reading isn't available in this view. Type the items below.", invalid_json: "Claude couldn't read this photo clearly. Try a sharper, straight photo, or type the items below."}[e?.code];
+    const why = {bad_key: "Claude didn't accept the API key. Check it and save it again.", no_credit: "Your Claude API account has no credit left. Add credit at platform.claude.com.", api_error: "Claude couldn't read it just now. Try again in a minute.", not_granted: "Allow this page to use Claude to read photos, or type the items below.", rate_limited: "Too many reads just now. Wait a minute and try again.", images_unavailable: "Photo reading isn't available in this view. Type the items below.", invalid_json: "Claude couldn't read this photo clearly. Try a sharper, straight photo, or type the items below."}[e?.code];
     st.textContent = why || "Couldn't read the photo. Try again, or type the items below.";
   }
 }
+// ---------- photo reading with the owner's own API key (GitHub version) ----------
+function getKey(){ try { return localStorage.getItem("atq-key") || ""; } catch(e){ return ""; } }
+function blobToB64(blob){ return new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(",")[1]); fr.onerror = rej; fr.readAsDataURL(blob); }); }
+async function readWithKey(blob){
+  const data = await blobToB64(blob);
+  let res;
+  try {
+    res = await fetch("https://api.anthropic.com/v1/messages", {method: "POST", headers: {
+      "content-type": "application/json", "x-api-key": getKey(), "anthropic-version": "2026-10-21",
+      "anthropic-beta": "server-side-fallback-2026-07-01", "anthropic-dangerous-direct-browser-access": "true"},
+      body: JSON.stringify({model: "claude-opus-5-5", max_tokens: 16000, fallbacks: "default", output_config: {effort: "medium"},
+        messages: [{role: "user", content: [{type: "image", source: {type: "base64", media_type: "image/jpeg", data}}, {type: "text", text: PROMPT}]}]})});
+  } catch (e) { throw {code: "api_error"}; }
+  if (res.status === 401 || res.status === 403) throw {code: "bad_key"};
+  if (res.status === 429) throw {code: "rate_limited"};
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) throw {code: /credit|billing/i.test(j?.error?.message || "") ? "no_credit" : "api_error"};
+  if (j.stop_reason === "refusal") throw {code: "invalid_json"};
+  const text = (j.content || []).filter(b => b.type === "text").map(b => b.text).join("");
+  const a = text.indexOf("{"), b = text.lastIndexOf("}");
+  try { return JSON.parse(text.slice(a, b + 1)); } catch (e) { throw {code: "invalid_json"}; }
+}
+$("keySave").onclick = () => {
+  const k = $("apiKey").value.trim(); $("apiKey").value = "";
+  try { if (k) localStorage.setItem("atq-key", k); else localStorage.removeItem("atq-key"); } catch(e){}
+  showKeyState(); toast(k ? "Key saved on this phone" : "Key removed");
+};
+function showKeyState(){
+  const has = !!getKey();
+  $("apiKey").placeholder = has ? "Key saved ✓ (empty + Save removes it)" : "sk-ant-…";
+  $("photoHint").textContent = has ? "Take or choose a photo of the handwritten quote. Claude reads the items and fills the form for you to check."
+    : "Add your Claude API key below once, then take or choose a photo of the bill. Or type the items yourself.";
+}
+
 function applyRead(r){
   const s = blank(S.n); s.date = S.date;
   s.cName = r.customer_name || ""; s.cPlace = r.customer_place || ""; s.cPhone = r.customer_phone || "";
@@ -569,7 +615,7 @@ function openSaved(id){
   try { const h = Object.values(JSON.parse(localStorage.getItem("atq-hist") || "{}")); h.forEach(q => bumpNext(q.fy, q.n)); } catch(e){}
   S = load() || blank(nextN); fillForm();
   const C = window.claude;
-  if (!C?.use) { $("photoHint").textContent = "Photo reading works when this page is opened in Claude. You can still type the items below."; return; }
+  if (!C?.use) { $("keyBox").hidden = false; showKeyState(); return; }
   const [smp, dl, d] = await Promise.all([C.use("sample").catch(() => null), C.use("downloads").catch(() => null), C.use("db").catch(() => null)]);
   sample = smp; downloads = dl; db = d;
   if (!sample) $("photoHint").textContent = "Photo reading isn't available here. Type the items below and download the PDF.";
