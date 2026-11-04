@@ -8,4 +8,6 @@ A phone-friendly page that makes Anjaneya Traders quotation PDFs (AT/Q/YY-YY/NNN
 
 Quotation numbers go up automatically. Saved quotations are kept in this browser.
 
+Photo reading: tap the key box once and paste your own Claude API key. It is stored only in that browser (localStorage) and is never part of this repository.
+
 Everything runs in the browser (`index.html`); there is no server.
