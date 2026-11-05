@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitZone Gym Guntur — November Joining Offer</title>
+<meta name="description" content="FitZone Gym, Guntur. Join in November: 3 months + 1 month free. Certified trainers, modern equipment, personal diet plans.">
+<link rel="preload" as="image" href="img/hero.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg2:#121212;
+  --card:#161616;
+  --line:rgba(255,255,255,.08);
+  --text:#f5f5f4;
+  --muted:#a1a1aa;
+  --acc:#d4ff3a;
+  --acc2:#ff5a1f;
+  --radius:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+.display{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.92;font-weight:400}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc)}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--acc)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 30px;border-radius:999px;font-weight:800;font-size:16px;border:0;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.btn-acc{background:var(--acc);color:#0a0a0a;box-shadow:0 10px 40px -10px rgba(212,255,58,.55)}
+.btn-acc:hover{transform:translateY(-3px);box-shadow:0 18px 50px -10px rgba(212,255,58,.75)}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid rgba(255,255,255,.25)}
+.btn-ghost:hover{border-color:var(--acc);color:var(--acc)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+#loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--bg)}
+#loader .l-word{font-family:Anton,sans-serif;font-size:clamp(48px,10vw,120px);color:var(--acc);letter-spacing:.02em;overflow:hidden}
+#loader .l-word span{display:inline-block;transform:translateY(110%)}
+#loader .bar{position:absolute;bottom:0;left:0;height:4px;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(0)}
+
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:transform .4s ease,background .3s ease}
+header.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header.hide{transform:translateY(-100%)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{display:flex;align-items:center;gap:10px;font-family:Anton,sans-serif;font-size:26px;letter-spacing:.04em}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:var(--acc);display:grid;place-items:center;color:#0a0a0a;font-size:20px}
+.nav-links{display:flex;gap:34px;font-size:15px;font-weight:600;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.nav .btn{padding:12px 22px;font-size:14px}
+
+.hero{position:relative;min-height:100dvh;display:flex;align-items:flex-end;padding:130px 0 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:-8% 0 0;transform:scaleX(-1);background:#111 url("img/hero.webp") center/cover no-repeat;will-change:transform}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.55) 50%,rgba(10,10,10,.15) 100%),linear-gradient(180deg,transparent 55%,var(--bg) 100%)}
+.hero .wrap{position:relative}
+.offer-pill{display:inline-flex;align-items:center;gap:10px;padding:9px 16px 9px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);font-size:14px;font-weight:600;margin-bottom:26px}
+.offer-pill b{background:var(--acc2);color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;letter-spacing:.08em}
+.hero h1{font-size:clamp(58px,8.6vw,132px);max-width:14ch}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em}
+.hero h1 .w>span{display:inline-block}
+.hero h1 .acc{color:var(--acc)}
+.hero-row{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-top:34px}
+.hero-sub{font-size:clamp(17px,1.5vw,20px);color:#d4d4d8;max-width:46ch}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.countdown{justify-self:end;background:rgba(18,18,18,.7);border:1px solid var(--line);backdrop-filter:blur(16px);border-radius:var(--radius);padding:22px 24px;min-width:340px}
+.countdown p{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cd div{background:#0d0d0d;border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center}
+.cd strong{display:block;font-family:Anton,sans-serif;font-size:38px;line-height:1;color:var(--acc)}
+.cd span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+.marquee{border-block:1px solid var(--line);background:var(--acc);color:#0a0a0a;overflow:hidden;padding:16px 0}
+.marquee-track{display:flex;gap:48px;width:max-content;animation:marq 26s linear infinite}
+.marquee-track span{font-family:Anton,sans-serif;font-size:28px;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:48px}
+.marquee-track span::after{content:"✦";font-size:20px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+section{padding:120px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:56px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(46px,6.5vw,96px);max-width:14ch;margin-top:14px}
+.sec-head p{color:var(--muted);max-width:42ch}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.stat{background:var(--bg);padding:34px 28px}
+.stat strong{font-family:Anton,sans-serif;font-size:clamp(44px,5vw,68px);line-height:1;display:block}
+.stat strong em{font-style:normal;color:var(--acc)}
+.stat span{color:var(--muted);font-size:15px}
+
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.b-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:36px 30px 32px;overflow:hidden;transition:transform .35s ease,border-color .35s ease}
+.b-card:hover{transform:translateY(-6px);border-color:rgba(212,255,58,.4)}
+.b-num{font-family:Anton,sans-serif;font-size:90px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.14);position:absolute;top:14px;right:22px}
+.b-icon{width:56px;height:56px;border-radius:16px;background:rgba(212,255,58,.1);display:grid;place-items:center;margin-bottom:26px}
+.b-icon svg{width:28px;height:28px;stroke:var(--acc)}
+.b-card h3{font-size:24px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
+.b-card p{color:var(--muted)}
+
+.transform{background:var(--bg2)}
+.ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ba{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.ba-view{position:relative;aspect-ratio:4/5;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:pan-y}
+.ba-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-before{filter:saturate(.6) brightness(.9)}
+.ba-tag{position:absolute;top:14px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;z-index:2}
+.ba-tag.l{left:14px;background:rgba(0,0,0,.6)}
+.ba-tag.r{right:14px;background:var(--acc);color:#0a0a0a}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--acc);z-index:3;transform:translateX(-50%)}
+.ba-handle::after{content:"⇆";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--acc);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:18px}
+.ba-info{padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ba-info h4{font-size:18px;font-weight:800}
+.ba-info p{color:var(--muted);font-size:14px}
+.ba-info strong{font-family:Anton,sans-serif;font-size:30px;color:var(--acc);white-space:nowrap}
+
+.trainers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.t-card{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;background:#151515}
+.t-card .ph{position:absolute;inset:0;background-size:cover;background-position:center top;transition:transform .7s ease}
+.t-card:hover .ph{transform:scale(1.06)}
+.t-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.92))}
+.t-info{position:absolute;left:24px;right:24px;bottom:22px;z-index:2}
+.t-info h4{font-family:Anton,sans-serif;font-size:34px;text-transform:uppercase;line-height:1}
+.t-info p{color:#d4d4d8;font-size:14px;margin-top:6px}
+.t-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.t-tags span{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(6px)}
+
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.p-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:36px 30px;display:flex;flex-direction:column}
+.p-card.hot{background:linear-gradient(160deg,#1c2108,#121212 55%);border:1.5px solid var(--acc);position:relative;transform:translateY(-12px)}
+.p-badge{position:absolute;top:-14px;left:30px;background:var(--acc);color:#0a0a0a;font-size:12px;font-weight:800;letter-spacing:.1em;padding:6px 14px;border-radius:999px;text-transform:uppercase}
+.p-card h3{font-size:16px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.p-price{display:flex;align-items:baseline;gap:10px;margin:18px 0 6px}
+.p-price strong{font-family:Anton,sans-serif;font-size:62px;line-height:1}
+.p-price s{color:var(--muted);font-size:18px}
+.p-note{color:var(--acc);font-size:14px;font-weight:700;min-height:22px}
+.p-card ul{list-style:none;margin:26px 0 30px;display:grid;gap:12px;flex:1}
+.p-card li{display:flex;gap:12px;color:#d4d4d8;font-size:15px}
+.p-card li::before{content:"";flex:none;width:20px;height:20px;margin-top:2px;border-radius:50%;background:rgba(212,255,58,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4ff3a' stroke-width='3'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+.p-card .btn{width:100%}
+
+.join{position:relative;overflow:hidden}
+.join-box{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:32px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.join-left{position:relative;padding:56px 50px;background-position:center 30%!important;background:#111 url("img/trial.webp") center/cover}
+.join-left::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,10,10,.6),rgba(10,10,10,.92))}
+.join-left>*{position:relative}
+.join-left h2{font-size:clamp(44px,5.2vw,80px);margin:16px 0 18px}
+.join-left ul{list-style:none;display:grid;gap:12px;margin-top:26px}
+.join-left li{display:flex;gap:12px;align-items:center;font-weight:600}
+.join-left li span{width:30px;height:30px;border-radius:50%;background:var(--acc);color:#0a0a0a;display:grid;place-items:center;font-size:14px;font-weight:900;flex:none}
+.join-form{padding:56px 50px}
+#leadForm h3{font-size:28px;font-weight:800;letter-spacing:-.01em}
+#leadForm>p{color:var(--muted);margin:6px 0 28px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.field input,.field select{width:100%;padding:17px 18px;border-radius:14px;background:#0d0d0d;border:1.5px solid var(--line);color:var(--text);font-size:16px;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--acc)}
+.goals{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.goals label{display:block;margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-size:15px;color:var(--text)}
+.goals input{position:absolute;opacity:0;width:1px;height:1px}
+.goals span{display:block;padding:14px 12px;border-radius:14px;border:1.5px solid var(--line);background:#0d0d0d;text-align:center;font-weight:600;transition:all .2s}
+.goals input:checked+span{border-color:var(--acc);background:rgba(212,255,58,.1);color:var(--acc)}
+.err{color:#f87171;font-size:13px;margin-top:6px;display:none}
+.field.bad .err{display:block}
+.field.bad input{border-color:#f87171}
+.join-form .btn{width:100%;margin-top:8px;font-size:17px}
+.secure{display:flex;align-items:center;gap:8px;justify-content:center;color:var(--muted);font-size:13px;margin-top:14px}
+.success{display:none;text-align:center;padding:40px 0}
+.success .tick{width:80px;height:80px;border-radius:50%;background:var(--acc);color:#0a0a0a;display:grid;place-items:center;margin:0 auto 22px;font-size:40px;font-weight:900}
+.success h3{font-size:30px}
+.success p{color:var(--muted);margin:10px 0 24px}
+
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.r-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px}
+.stars{color:var(--acc);letter-spacing:3px;font-size:18px}
+.r-card blockquote{margin:16px 0 22px;font-size:17px;color:#e4e4e7}
+.r-who{display:flex;align-items:center;gap:12px}
+.r-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-weight:800;color:#0a0a0a}
+.r-who b{display:block;font-size:15px}
+.r-who span{color:var(--muted);font-size:13px}
+
+.faq{max-width:860px;margin:0 auto}
+.q{border-bottom:1px solid var(--line)}
+.q button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 0;background:none;border:0;color:var(--text);font-size:clamp(18px,2vw,22px);font-weight:700;text-align:left;cursor:pointer}
+.q button i{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:20px;transition:transform .3s,background .3s,color .3s}
+.q.open button i{transform:rotate(45deg);background:var(--acc);color:#0a0a0a;border-color:var(--acc)}
+.q .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.q.open .a{grid-template-rows:1fr}
+.q .a>div{overflow:hidden}
+.q .a p{color:var(--muted);padding-bottom:26px;max-width:70ch}
+
+.final{text-align:center;padding:140px 0}
+.final h2{font-size:clamp(60px,10vw,160px)}
+.final h2 span{color:var(--acc)}
+.final p{color:var(--muted);margin:22px auto 34px;max-width:50ch}
+
+footer{border-top:1px solid var(--line);padding:50px 0 110px;color:var(--muted);font-size:15px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.foot h5{color:var(--text);font-size:14px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.foot a:hover{color:var(--acc)}
+.foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px}
+
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:60;width:62px;height:62px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 30px -6px rgba(37,211,102,.6);transition:transform .25s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25d366;animation:ping 2s ease-out infinite}
+@keyframes ping{from{transform:scale(1);opacity:.8}to{transform:scale(1.6);opacity:0}}
+.m-bar{display:none}
+
+.reveal{opacity:0;transform:translateY(40px)}
+
+@media (max-width:980px){
+  .nav-links{display:none}
+  .hero-row{grid-template-columns:1fr}
+  .countdown{justify-self:start;min-width:0;width:100%}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .benefits,.ba-grid,.trainers,.pricing,.reviews{grid-template-columns:1fr}
+  .p-card.hot{transform:none}
+  .join-box{grid-template-columns:1fr}
+  .join-left,.join-form{padding:40px 26px}
+  .foot{grid-template-columns:1fr}
+  section{padding:84px 0}
+  .ba-grid,.trainers{grid-auto-flow:column;grid-auto-columns:82%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .ba,.t-card{scroll-snap-align:start}
+}
+@media (max-width:640px){
+  .nav .btn{display:none}
+  .hero{padding-top:120px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+  .wa-float{display:none}
+  .offer-pill{font-size:13px}
+  .m-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;padding:12px 16px calc(12px + env(safe-area-inset-bottom));gap:10px;background:rgba(10,10,10,.9);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+  .m-bar .btn{flex:1;padding:15px 10px;font-size:15px}
+  footer{padding-bottom:120px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div id="loader" aria-hidden="true">
+  <div class="l-word"><span>FIT</span><span style="color:#fff">ZONE</span></div>
+  <div class="bar"></div>
+</div>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="logo-mark">⚡</span>FITZONE</a>
+    <nav class="nav-links">
+      <a href="#results">Results</a>
+      <a href="#trainers">Trainers</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#join" class="btn btn-acc">Claim Offer</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="wrap">
+      <div class="offer-pill"><b>NOV OFFER</b>3 months + 1 month free</div>
+      <h1 class="display" id="heroTitle"><span class="w"><span>Your</span></span> <span class="w"><span>strongest</span></span> <span class="w"><span class="acc">year</span></span> <span class="w"><span>starts</span></span> <span class="w"><span class="acc">now.</span></span></h1>
+      <div class="hero-row">
+        <div>
+          <p class="hero-sub">Guntur's most complete gym — certified trainers, a diet plan made for you, and 4,000 sq ft of modern equipment. Walk in for a free trial session this week.</p>
+          <div class="hero-cta">
+            <a href="#join" class="btn btn-acc">Claim 1 Month Free →</a>
+            <a href="#results" class="btn btn-ghost">See Real Results</a>
+          </div>
+        </div>
+        <div class="countdown">
+          <p>Offer ends 30 November · Hurry</p>
+          <div class="cd">
+            <div><strong id="cdD">00</strong><span>Days</span></div>
+            <div><strong id="cdH">00</strong><span>Hours</span></div>
+            <div><strong id="cdM">00</strong><span>Mins</span></div>
+            <div><strong id="cdS">00</strong><span>Secs</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Strength</span><span>Fat loss</span><span>Cardio</span><span>CrossFit</span><span>Personal training</span><span>Diet plans</span><span>Zumba</span>
+      <span>Strength</span><span>Fat loss</span><span>Cardio</span><span>CrossFit</span><span>Personal training</span><span>Diet plans</span><span>Zumba</span>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="stats reveal">
+        <div class="stat"><strong data-count="1200"><em>0</em>+</strong><span>Active members</span></div>
+        <div class="stat"><strong data-count="8"><em>0</em></strong><span>Certified trainers</span></div>
+        <div class="stat"><strong data-count="4000"><em>0</em></strong><span>Sq ft training floor</span></div>
+        <div class="stat"><strong data-count="6"><em>0</em> yrs</strong><span>Serving Guntur</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Why FitZone</span><h2 class="display">Not just a gym. A plan that works.</h2></div>
+        <p>Most people quit in 6 weeks because they train without a plan. At FitZone you get a coach, a programme and a diet from day one.</p>
+      </div>
+      <div class="benefits">
+        <div class="b-card reveal">
+          <span class="b-num">01</span>
+          <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/><path d="M4 22a8 8 0 0 1 16 0"/></svg></div>
+          <h3>A coach on every shift</h3>
+          <p>Certified trainers on the floor 5 am to 10 pm. Free form-checks and a new workout plan every 4 weeks.</p>
+        </div>
+        <div class="b-card reveal">
+          <span class="b-num">02</span>
+          <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 11V7a7 7 0 0 1 14 0v4M6 11l1 10h10l1-10"/></svg></div>
+          <h3>Diet plan for Indian food</h3>
+          <p>Built around rice, dal and what you already eat at home — veg or non-veg. No expensive supplements needed.</p>
+        </div>
+        <div class="b-card reveal">
+          <span class="b-num">03</span>
+          <div class="b-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+          <h3>Progress you can see</h3>
+          <p>Monthly body-composition scans and photo check-ins, so you know exactly what's changing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="transform" id="results">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Real members</span><h2 class="display">Drag to see the change.</h2></div>
+        <p>Every transformation here followed the same FitZone plan you'll get on day one.</p>
+      </div>
+      <div class="ba-grid">
+        <div class="ba reveal">
+          <div class="ba-view">
+            <div class="ba-img ba-before" style="background-image:url('img/ravi-before.webp')"></div>
+            <div class="ba-img ba-after" style="background-image:url('img/ravi-after.webp')"></div>
+            <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+            <div class="ba-handle"></div>
+          </div>
+          <div class="ba-info"><div><h4>Ravi K.</h4><p>Software engineer · 16 weeks</p></div><strong>−14 kg</strong></div>
+        </div>
+        <div class="ba reveal">
+          <div class="ba-view">
+            <div class="ba-img ba-before" style="background-image:url('img/divya-before.webp')"></div>
+            <div class="ba-img ba-after" style="background-image:url('img/divya-after.webp')"></div>
+            <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+            <div class="ba-handle"></div>
+          </div>
+          <div class="ba-info"><div><h4>Divya S.</h4><p>Teacher · 12 weeks</p></div><strong>−9 kg</strong></div>
+        </div>
+        <div class="ba reveal">
+          <div class="ba-view">
+            <div class="ba-img ba-before" style="background-image:url('img/arjun-before.webp')"></div>
+            <div class="ba-img ba-after" style="background-image:url('img/arjun-after.webp')"></div>
+            <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+            <div class="ba-handle"></div>
+          </div>
+          <div class="ba-info"><div><h4>Arjun M.</h4><p>Student · 20 weeks</p></div><strong>+7 kg</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trainers">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Your coaches</span><h2 class="display">Trained to train you.</h2></div>
+        <p>Every FitZone coach is certified and has at least 4 years of floor experience.</p>
+      </div>
+      <div class="trainers">
+        <div class="t-card reveal"><div class="ph" style="background-image:url('img/coach-kiran.webp')"></div><div class="t-info"><h4>Kiran Rao</h4><p>Head coach · 9 yrs experience</p><div class="t-tags"><span>Strength</span><span>Powerlifting</span></div></div></div>
+        <div class="t-card reveal"><div class="ph" style="background-image:url('img/coach-sneha.webp')"></div><div class="t-info"><h4>Sneha Reddy</h4><p>Women's coach · 6 yrs experience</p><div class="t-tags"><span>Fat loss</span><span>Zumba</span></div></div></div>
+        <div class="t-card reveal"><div class="ph" style="background-image:url('img/coach-prasad.webp')"></div><div class="t-info"><h4>Prasad Varma</h4><p>Conditioning coach · 5 yrs experience</p><div class="t-tags"><span>CrossFit</span><span>Cardio</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Simple pricing</span><h2 class="display">Pick your plan.</h2></div>
+        <p>No joining fee in November. Pay by UPI, card or cash at the desk.</p>
+      </div>
+      <div class="pricing">
+        <div class="p-card reveal">
+          <h3>Monthly</h3>
+          <div class="p-price"><strong>₹1,499</strong><span>/month</span></div>
+          <div class="p-note">No joining fee this month</div>
+          <ul><li>Full gym access, 5 am – 10 pm</li><li>Free trainer form-check</li><li>Locker & shower</li></ul>
+          <a href="#join" class="btn btn-ghost" data-plan="Monthly">Choose Monthly</a>
+        </div>
+        <div class="p-card hot reveal">
+          <span class="p-badge">Best value · Offer</span>
+          <h3>Quarterly</h3>
+          <div class="p-price"><strong>₹3,999</strong><s>₹5,996</s></div>
+          <div class="p-note">3 months + 1 month FREE</div>
+          <ul><li>Everything in Monthly</li><li>Personal diet plan</li><li>Monthly body-composition scan</li><li>2 personal-training sessions</li></ul>
+          <a href="#join" class="btn btn-acc" data-plan="Quarterly (3+1 free)">Claim This Offer</a>
+        </div>
+        <div class="p-card reveal">
+          <h3>Yearly</h3>
+          <div class="p-price"><strong>₹12,999</strong><s>₹17,988</s></div>
+          <div class="p-note">Save ₹4,989 · 2 months free</div>
+          <ul><li>Everything in Quarterly</li><li>Free FitZone T-shirt & shaker</li><li>Pause membership up to 30 days</li></ul>
+          <a href="#join" class="btn btn-ghost" data-plan="Yearly">Choose Yearly</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="join" id="join">
+    <div class="wrap">
+      <div class="join-box reveal">
+        <div class="join-left">
+          <span class="eyebrow">Free trial session</span>
+          <h2 class="display">Book your free trial.</h2>
+          <p style="color:#d4d4d8">Leave your number. A FitZone coach calls you within 30 minutes to fix your trial time.</p>
+          <ul>
+            <li><span>✓</span>Free trial workout with a coach</li>
+            <li><span>✓</span>Free body-composition scan</li>
+            <li><span>✓</span>Offer price locked for you</li>
+          </ul>
+        </div>
+        <div class="join-form">
+          <form id="leadForm" novalidate>
+            <h3>Claim 1 month free</h3>
+            <p>Takes 20 seconds. No payment now.</p>
+            <div class="field" id="fName">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="e.g. Ravi Kumar" autocomplete="name">
+              <div class="err">Please enter your name</div>
+            </div>
+            <div class="field" id="fPhone">
+              <label for="phone">WhatsApp number</label>
+              <input id="phone" name="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" autocomplete="tel">
+              <div class="err">Enter a valid 10-digit mobile number</div>
+            </div>
+            <div class="field">
+              <label>Your goal</label>
+              <div class="goals">
+                <label><input type="radio" name="goal" value="Lose weight" checked><span>Lose weight</span></label>
+                <label><input type="radio" name="goal" value="Build muscle"><span>Build muscle</span></label>
+                <label><input type="radio" name="goal" value="Get fit"><span>Get fit</span></label>
+                <label><input type="radio" name="goal" value="Women's training"><span>Women's training</span></label>
+              </div>
+            </div>
+            <input type="hidden" id="plan" value="Quarterly (3+1 free)">
+            <button type="submit" class="btn btn-acc">Book Free Trial →</button>
+            <div class="secure">🔒 Your number is only used to book your trial</div>
+          </form>
+          <div class="success" id="success">
+            <div class="tick">✓</div>
+            <h3>You're in, <span id="sName"></span>!</h3>
+            <p>Your offer is locked. Confirm on WhatsApp and a coach will message you with your trial time.</p>
+            <a href="#" id="waConfirm" target="_blank" rel="noopener" class="btn btn-acc">Confirm on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Member reviews</span><h2 class="display">4.9 on Google.</h2></div>
+        <p>From 380+ reviews by members across Guntur.</p>
+      </div>
+      <div class="reviews">
+        <div class="r-card reveal"><div class="stars">★★★★★</div><blockquote>"The diet plan worked with my mother's cooking. Lost 14 kg without starving. Trainers actually check on you."</blockquote><div class="r-who"><div class="r-av">RK</div><div><b>Ravi Kumar</b><span>Member since 2025</span></div></div></div>
+        <div class="r-card reveal"><div class="stars">★★★★★</div><blockquote>"Separate women's batch timings and Sneha ma'am is amazing. I finally feel comfortable working out."</blockquote><div class="r-who"><div class="r-av">DS</div><div><b>Divya S.</b><span>Member since 2025</span></div></div></div>
+        <div class="r-card reveal"><div class="stars">★★★★★</div><blockquote>"Clean, never crowded at 6 am, equipment is new. Best value in Guntur for the price."</blockquote><div class="r-who"><div class="r-av">AM</div><div><b>Arjun M.</b><span>Member since 2024</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="sec-head reveal" style="justify-content:center;text-align:center">
+        <div><span class="eyebrow">Questions</span><h2 class="display" style="margin-inline:auto">Before you join.</h2></div>
+      </div>
+      <div class="faq">
+        <div class="q open"><button>I've never been to a gym. Is it okay to start?<i>+</i></button><div class="a"><div><p>Yes — most of our members started as beginners. Your coach starts you on a 2-week beginner plan and checks your form on every exercise.</p></div></div></div>
+        <div class="q"><button>Are there timings for women?<i>+</i></button><div class="a"><div><p>Yes. Women-only batches run 10 am – 12 pm and 4 – 6 pm daily, with a female coach on the floor.</p></div></div></div>
+        <div class="q"><button>How does the 1 month free offer work?<i>+</i></button><div class="a"><div><p>Join the Quarterly plan before 30 November and you get 4 months for the price of 3. No joining fee either.</p></div></div></div>
+        <div class="q"><button>Is parking available?<i>+</i></button><div class="a"><div><p>Free bike and car parking right in front of the gym.</p></div></div></div>
+        <div class="q"><button>Can I pause my membership?<i>+</i></button><div class="a"><div><p>Yearly members can pause for up to 30 days — for travel, exams or illness.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap reveal">
+      <span class="eyebrow">Last chance</span>
+      <h2 class="display" style="margin-top:18px">One month. <span>Free.</span></h2>
+      <p>The November offer closes on 30 November. Your free trial takes 45 minutes — book it today.</p>
+      <a href="#join" class="btn btn-acc">Book Free Trial →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="logo" style="margin-bottom:14px"><span class="logo-mark">⚡</span>FITZONE</a>
+        <p style="max-width:34ch">Strength, fat loss and fitness training in Guntur since 2020.</p>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <p>Brodipet 4th Line, Guntur<br>Andhra Pradesh 522002</p>
+        <p style="margin-top:8px">Open 5 am – 10 pm · All days</p>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <p><a href="#" class="wa-link">WhatsApp us</a></p>
+        <p><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></p>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 FitZone Gym · Concept project</span><span>Designed by PN Digital</span></div>
+  </div>
+</footer>
+
+<a href="#" class="wa-float wa-link" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3 29l6.5-2c2 1.1 4.2 1.6 6.5 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.3c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5.1 10 10 5.2 16 5.2s10.9 4.8 10.9 10.6S22 26.3 16 26.3zm6-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></a>
+
+<div class="m-bar">
+  <a href="#" class="btn btn-ghost wa-link" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="#join" class="btn btn-acc">Claim Offer</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const WA_NUMBER = "916301521358";
+const OFFER_END = new Date("2026-11-30T23:59:59+05:30");
+const waUrl = t => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t)}`;
+
+document.querySelectorAll(".wa-link").forEach(a => {
+  a.href = waUrl("Hi FitZone! I saw the November offer (3 months + 1 free). Please share details.");
+  a.target = "_blank";
+});
+
+const pad = n => String(n).padStart(2, "0");
+function tick() {
+  const d = Math.max(0, OFFER_END - new Date());
+  cdD.textContent = pad(Math.floor(d / 864e5));
+  cdH.textContent = pad(Math.floor(d / 36e5) % 24);
+  cdM.textContent = pad(Math.floor(d / 6e4) % 60);
+  cdS.textContent = pad(Math.floor(d / 1e3) % 60);
+}
+tick();
+setInterval(tick, 1000);
+
+let lastY = 0;
+const hdr = document.getElementById("hdr");
+addEventListener("scroll", () => {
+  const y = scrollY;
+  hdr.classList.toggle("scrolled", y > 40);
+  hdr.classList.toggle("hide", y > lastY && y > 300);
+  lastY = y;
+}, { passive: true });
+
+document.querySelectorAll(".ba-view").forEach(v => {
+  const after = v.querySelector(".ba-after");
+  const handle = v.querySelector(".ba-handle");
+  let drag = false;
+  const set = x => {
+    const r = v.getBoundingClientRect();
+    const p = Math.min(100, Math.max(0, ((x - r.left) / r.width) * 100));
+    after.style.clipPath = `inset(0 0 0 ${p}%)`;
+    handle.style.left = p + "%";
+  };
+  v.addEventListener("pointerdown", e => { drag = true; v.setPointerCapture(e.pointerId); set(e.clientX); });
+  v.addEventListener("pointermove", e => drag && set(e.clientX));
+  v.addEventListener("pointerup", () => drag = false);
+  v.addEventListener("pointercancel", () => drag = false);
+});
+
+document.querySelectorAll(".q button").forEach(b => b.addEventListener("click", () => {
+  const q = b.parentElement;
+  const open = q.classList.contains("open");
+  document.querySelectorAll(".q").forEach(x => x.classList.remove("open"));
+  if (!open) q.classList.add("open");
+}));
+
+document.querySelectorAll("[data-plan]").forEach(b => b.addEventListener("click", () => {
+  document.getElementById("plan").value = b.dataset.plan;
+}));
+
+const phone = document.getElementById("phone");
+phone.addEventListener("input", () => phone.value = phone.value.replace(/\D/g, "").slice(0, 10));
+
+document.getElementById("leadForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const ph = phone.value.trim();
+  const goal = document.querySelector("input[name=goal]:checked").value;
+  const plan = document.getElementById("plan").value;
+  const okName = name.length >= 2;
+  const okPhone = /^[6-9]\d{9}$/.test(ph);
+  fName.classList.toggle("bad", !okName);
+  fPhone.classList.toggle("bad", !okPhone);
+  if (!okName || !okPhone) return;
+  const msg = `New FitZone trial booking\n\nName: ${name}\nWhatsApp: ${ph}\nGoal: ${goal}\nPlan: ${plan}\nOffer: November 3+1 free`;
+  document.getElementById("sName").textContent = name.split(" ")[0];
+  document.getElementById("waConfirm").href = waUrl(msg);
+  e.target.style.display = "none";
+  document.getElementById("success").style.display = "block";
+  window.open(waUrl(msg), "_blank");
+});
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const loader = document.getElementById("loader");
+
+function countUp() {
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const end = +el.dataset.count;
+    const em = el.querySelector("em");
+    const o = { v: 0 };
+    gsap.to(o, { v: end, duration: 1.8, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 85%", once: true }, onUpdate: () => em.textContent = Math.round(o.v).toLocaleString("en-IN") });
+  });
+}
+
+function intro() {
+  if (!window.gsap || reduce) {
+    loader.remove();
+    document.querySelectorAll(".reveal").forEach(el => { el.style.opacity = 1; el.style.transform = "none"; });
+    document.querySelectorAll("[data-count]").forEach(el => el.querySelector("em").textContent = (+el.dataset.count).toLocaleString("en-IN"));
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  const tl = gsap.timeline();
+  tl.to("#loader .l-word span", { y: 0, duration: .7, stagger: .12, ease: "power4.out" })
+    .to("#loader .bar", { scaleX: 1, duration: .7, ease: "power2.inOut" }, "-=.3")
+    .to("#loader", { yPercent: -100, duration: .8, ease: "power4.inOut" })
+    .set("#loader", { display: "none" })
+    .from("#heroTitle .w>span", { yPercent: 110, duration: 1, stagger: .08, ease: "power4.out" }, "-=.35")
+    .from(".offer-pill, .hero-sub, .hero-cta, .countdown", { y: 30, opacity: 0, duration: .8, stagger: .08, ease: "power3.out" }, "-=.7");
+
+  gsap.to("#heroBg", { yPercent: 14, scaleX: -1, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  gsap.utils.toArray(".reveal").forEach(el => {
+    gsap.to(el, { opacity: 1, y: 0, duration: .9, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+  });
+  countUp();
+}
+
+if (document.readyState === "complete") intro(); else addEventListener("load", intro);
+setTimeout(() => { if (document.getElementById("loader") && getComputedStyle(loader).display !== "none" && !window.gsap) intro(); }, 3000);
+</script>
+</body>
+</html>
