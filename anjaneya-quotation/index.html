@@ -67,6 +67,18 @@ input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid v
 .del:hover{color:#c0392b}
 .mis{grid-column:1/-1;font-size:13px;color:var(--warn-fg);background:var(--warn-bg);border-radius:6px;padding:7px 10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .mis button{background:var(--panel);border:1px solid var(--line);border-radius:6px;font:600 13px var(--body);color:var(--fg);padding:4px 8px;cursor:pointer}
+.quick{background:var(--field);border:1px solid var(--line);border-radius:10px;padding:14px}
+.qlbl{font-size:13px;font-weight:700;color:var(--mute);letter-spacing:.4px;text-transform:uppercase;margin-bottom:8px}
+.sz{display:grid;grid-template-columns:1fr .7fr auto 1fr .7fr 1fr;gap:8px;align-items:end}
+.sz input{background:var(--panel)}
+.xx{font-family:var(--display);color:var(--orange);font-size:20px;padding-bottom:10px}
+@media (max-width:520px){.sz{grid-template-columns:1fr .7fr auto 1fr .7fr}.sz label:last-child{grid-column:1/-1}}
+.sqout{margin-top:10px;font-weight:600;font-variant-numeric:tabular-nums}
+.addsh{margin-top:10px;width:100%;background:var(--navy);color:#fff;border:0;border-radius:10px;padding:12px;font:700 15px var(--body);cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:600 14px var(--body);color:var(--fg);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--orange)}
+.chip small{color:var(--mute);font-weight:600;margin-left:6px}
 .add{margin-top:12px;width:100%;background:transparent;border:2px dashed var(--line);border-radius:10px;padding:12px;font:700 15px var(--body);color:var(--fg);cursor:pointer}
 .add:hover{border-color:var(--orange)}
 .checks{display:flex;gap:18px;flex-wrap:wrap;margin-top:4px}
@@ -209,7 +221,22 @@ details[open] summary::after{content:" −"}
 
   <section class="card">
     <div class="step"><b>3</b><h2>Items</h2></div>
-    <p class="hint">Amount fills in from rate × quantity. You can type a different amount.</p>
+    <div class="quick">
+      <div class="qlbl">Shutter size</div>
+      <div class="sz">
+        <label class="f">Width ft<input id="wFt" inputmode="decimal" placeholder="21"></label>
+        <label class="f">in<input id="wIn" inputmode="decimal" placeholder="3"></label>
+        <span class="xx">×</span>
+        <label class="f">Height ft<input id="hFt" inputmode="decimal" placeholder="16"></label>
+        <label class="f">in<input id="hIn" inputmode="decimal" placeholder="6"></label>
+        <label class="f">₹ / sq ft<input id="sqRate" inputmode="decimal"></label>
+      </div>
+      <div class="sqout" id="sqOut">Type the size to work out the sq ft.</div>
+      <button class="addsh" type="button" id="addShutter">Add rolling shutter</button>
+      <div class="qlbl" style="margin-top:14px">Tap to add</div>
+      <div class="chips" id="chips"></div>
+    </div>
+    <p class="hint" style="margin-top:14px">Amount fills in from rate × quantity. You can type a different amount.</p>
     <div id="items"></div>
     <button class="add" type="button" id="addItem">+ Add item</button>
   </section>
@@ -258,6 +285,7 @@ details[open] summary::after{content:" −"}
 
 <script>
 const QR = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQAAAABRBrPYAAABWklEQVR42u2aMXKFQAxDnzO/N/e/XW6wnEApdlnMnxQp4z/yUIDXlTRCtgF2pDQAJJGSdB/xxZ/CZf+jLDVjPmsQB/qOOChHxq1R2QsIIAcQqciLXChHxq0Zp3ecIQhQKnIYt08oS3EGEAcaBqSxTvXUqYAz5ttYxq1f2VOkb5dx66lTvfnplOoW7Mobt05lcRAzpoemIpal7rxx6/Xu1UADqUypuXYOKz/QMG7NON0GujZI47LXXWDcWvlpXL65PTRSATpj9b2pMG69dCpRdrz1sajVuHWbZap7Sg8/XZdxa8XpNtDdHY1itfbTvpzmu07vvL/LNOT0V3KfyjVuzXqkOpyu0Yat0DmiGrduPVLtlMraoWx9jVs3P602inX6KX56EbpHGPvph3Ba7m9jNW6ty87YvzqsBngxa9y6+um9z687B8+nzcpeS5XA/EvwWuZzHnEnjVujsh/igj8GEs94PwAAAABJRU5ErkJggg==";
+const HELPER_URL = ""; // Cloudflare photo-reader helper (holds the API key privately)
 const BASE_LAST = {"26-27": 10}; // last number issued before this app (008–010 were made by hand)
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -369,6 +397,69 @@ function fit(sheet){ // keep everything above the bottom band
 }
 function makeSheet(st){ const el = document.createElement("div"); el.className = "sheet"; el.innerHTML = sheetHTML(st); return el; }
 
+// ---------- quick fill (no AI): size calculator, item buttons, remembered prices ----------
+const PRESETS = [
+  {name:"Rolling Shutter", details:"Patty 1 mm, 19 gauge", rate:250, rateUnit:"sq ft", qtyUnit:"sq ft"},
+  {name:"Jielong Motor", details:"1,000 kg lifting capacity · 1 year warranty", rate:32000},
+  {name:"TATA Pipe", details:"6-inch pipe, 5.4 mm thickness", rate:13000},
+  {name:"6-inch Guide", details:"", rate:200, rateUnit:"ft", qtyUnit:"ft", guide:true},
+  {name:"Bottom Angle", details:"", rate:0},
+  {name:"Lock", details:"", rate:0},
+];
+function prices(){ try { return JSON.parse(localStorage.getItem("atq-prices") || "{}"); } catch(e){ return {}; } }
+function preset(name){ const p = PRESETS.find(x => x.name === name) || {name, details:""}; const saved = prices()[name.toLowerCase()]; return saved ? {...p, ...saved, name: p.name || name} : p; }
+function learnPrices(){
+  const pr = prices();
+  S.items.forEach(it => { const n = it.name.trim(); if (!n || !num(it.rate)) return;
+    const k = n.toLowerCase(); const keepDetails = !/\d+′/.test(it.details) ? it.details : (pr[k]?.details ?? preset(n).details);
+    pr[k] = {rate: num(it.rate), rateUnit: it.rateUnit, details: keepDetails}; });
+  try { localStorage.setItem("atq-prices", JSON.stringify(pr)); } catch(e){}
+  renderChips();
+}
+function sizeVals(){ const w = num($("wFt").value) + num($("wIn").value)/12, h = num($("hFt").value) + num($("hIn").value)/12; return {w, h, sq: Math.round(w*h)}; }
+function sizeText(short){ const f = (a,b) => short ? `${num(a)}′${num(b) ? num(b) + "″" : ""}` : `${num(a)} ft${num(b) ? " " + num(b) + " in" : ""}`; return `${f($("wFt").value,$("wIn").value)} × ${f($("hFt").value,$("hIn").value)}`; }
+function updateSq(){
+  const {w, h, sq} = sizeVals(), r = num($("sqRate").value);
+  $("sqOut").textContent = w && h ? `${sizeText(true)} = ${sq} sq ft${r ? ` × ₹${inr(r)} = ₹${inr(sq*r)}` : ""}` : "Type the size to work out the sq ft.";
+}
+function pushItem(it){
+  const first = S.items[0];
+  if (S.items.length === 1 && !first.name.trim() && !num(first.amount)) S.items = [it]; else S.items.push(it);
+  autoText(); renderItems(); fillTop(); refresh(); toast(`Added ${it.name}`);
+}
+function autoText(){ // fill subject / letter line from the items when still empty
+  const names = S.items.map(i => i.name.trim()).filter(Boolean);
+  const hasMotor = names.some(n => /motor/i.test(n));
+  if (!names.length) return false;
+  const auto = S._auto || {}; let changed = false;
+  const subj = `Supply${S.inst ? " & Installation" : ""} of ${hasMotor ? "Motorised " : ""}Rolling Shutter`, qty = hasMotor ? "1 complete set" : "1 shutter";
+  if ((!S.subject.trim() || S.subject === auto.subject) && S.subject !== subj) { S.subject = subj; changed = true; }
+  if ((!S.qtyText.trim() || S.qtyText === auto.qtyText) && S.qtyText !== qty) { S.qtyText = qty; changed = true; }
+  S._auto = {subject: subj, qtyText: qty};
+  return changed;
+}
+function fillTop(){ ["subject","qtyText","sizeText"].forEach(f => $(f).value = S[f] ?? ""); }
+$("addShutter").onclick = () => {
+  const {w, h, sq} = sizeVals(), r = num($("sqRate").value) || preset("Rolling Shutter").rate;
+  if (!w || !h) { toast("Type the width and height first."); $("wFt").focus(); return; }
+  const p = preset("Rolling Shutter");
+  pushItem({name:"Rolling Shutter", details:`${sizeText(true)} = ${sq} sq ft @ ₹${inr(r)} per sq ft${p.details ? " · " + p.details : ""}`, rate:String(r), rateUnit:"sq ft", qty:String(sq), qtyUnit:"sq ft", amount:String(Math.round(sq*r))});
+  if (!S.sizeText.trim()) { S.sizeText = sizeText(false); fillTop(); refresh(); }
+};
+function renderChips(){
+  $("chips").innerHTML = PRESETS.filter(p => p.name !== "Rolling Shutter").map(p => { const q = preset(p.name);
+    return `<button class="chip" type="button" data-chip="${esc(p.name)}">+ ${esc(p.name)}<small>${q.rate ? "₹" + inr(q.rate) + (q.rateUnit ? "/" + esc(q.rateUnit) : "") : "set price"}</small></button>`; }).join("");
+  if (!$("sqRate").value) $("sqRate").value = preset("Rolling Shutter").rate;
+}
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-chip]"); if (!c) return;
+  const p = preset(c.dataset.chip); let qty = 1, details = p.details || "";
+  if (p.guide) { const {h} = sizeVals(); qty = h ? Math.ceil(h*2) : 1; details = `${qty} ft @ ₹${inr(p.rate)} per ft`; }
+  pushItem({name:p.name, details, rate: p.rate ? String(p.rate) : "", rateUnit:p.rateUnit || "", qty:String(qty), qtyUnit:p.qtyUnit || "", amount: p.rate ? String(Math.round(p.rate*qty)) : ""});
+  if (!p.rate) { const i = S.items.length - 1; $(`it${i}-rate`)?.focus(); }
+});
+["wFt","wIn","hFt","hIn","sqRate"].forEach(id => $(id).addEventListener("input", updateSq));
+
 // ---------- form ----------
 const FIELDS = ["cName","cPlace","cPhone","subject","qtyText","sizeText","introText","gst","finalTotal","terms"];
 function fillForm(){
@@ -402,6 +493,7 @@ function checkMis(i){
 }
 let pvTimer = 0;
 function refresh(){
+  if (typeof autoText === "function" && autoText()) fillTop();
   const c = calc(S);
   const t = [`<div><span>Sub-total</span><span>₹ ${inr(c.sub)}</span></div>`];
   if (S.gst === "add18") t.push(`<div><span>CGST 9% + SGST 9%</span><span>₹ ${inr(2*c.cg)}</span></div>`);
@@ -478,7 +570,7 @@ Reply with ONLY this JSON object:
 async function readPhoto(file){
   $("photoRow").hidden = false; $("unclear").hidden = true; $("thumb").src = URL.createObjectURL(file);
   const st = $("status");
-  if (!sample && !getKey()) { st.className = "status"; st.textContent = "Add your Claude API key below to read photos, or type the items."; $("keyBox").hidden = false; $("apiKey").focus(); return; }
+  if (!sample && !HELPER_URL && !getKey()) { st.className = "status"; st.textContent = "Add your Claude API key below to read photos, or type the items."; $("keyBox").hidden = false; $("apiKey").focus(); return; }
   st.className = "status busy"; st.textContent = "Reading the bill…"; $("dropText").textContent = "Use a different photo";
   try {
     const blob = await shrink(file);
@@ -487,18 +579,36 @@ async function readPhoto(file){
       const lim = await sample.limits().catch(() => null);
       const tier = lim?.modelTiers?.includes("complex") ? "complex" : undefined;
       r = await sample.json(PROMPT, {images: [blob], ...(tier ? {modelTier: tier} : {})});
-    } else r = await readWithKey(blob);
+    } else if (HELPER_URL) r = await readWithHelper(blob);
+    else r = await readWithKey(blob);
     applyRead(r || {});
     st.className = "status"; st.innerHTML = `<b style="color:var(--ok)">Read ${S.items.length} item${S.items.length === 1 ? "" : "s"}.</b> Check them below.`;
   } catch (e) {
     st.className = "status";
-    const why = {bad_key: "Claude didn't accept the API key. Check it and save it again.", no_credit: "Your Claude API account has no credit left. Add credit at platform.claude.com.", api_error: "Claude couldn't read it just now. Try again in a minute.", not_granted: "Allow this page to use Claude to read photos, or type the items below.", rate_limited: "Too many reads just now. Wait a minute and try again.", images_unavailable: "Photo reading isn't available in this view. Type the items below.", invalid_json: "Claude couldn't read this photo clearly. Try a sharper, straight photo, or type the items below."}[e?.code];
+    const why = {bad_key: "Claude didn't accept the API key. Check the key and save it again.", no_credit: "Your Claude API account has no credit left. Add credit at platform.claude.com.", api_error: "Claude couldn't read it just now. Try again in a minute.", not_granted: "Allow this page to use Claude to read photos, or type the items below.", rate_limited: "Too many reads just now. Wait a minute and try again.", images_unavailable: "Photo reading isn't available in this view. Type the items below.", invalid_json: "Claude couldn't read this photo clearly. Try a sharper, straight photo, or type the items below."}[e?.code];
     st.textContent = why || "Couldn't read the photo. Try again, or type the items below.";
   }
 }
 // ---------- photo reading with the owner's own API key (GitHub version) ----------
 function getKey(){ try { return localStorage.getItem("atq-key") || ""; } catch(e){ return ""; } }
 function blobToB64(blob){ return new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(",")[1]); fr.onerror = rej; fr.readAsDataURL(blob); }); }
+async function readWithHelper(blob){
+  const image = await blobToB64(blob);
+  let res;
+  try { res = await fetch(HELPER_URL, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({image})}); }
+  catch (e) { throw {code: "api_error"}; }
+  return parseClaude(res);
+}
+async function parseClaude(res){
+  if (res.status === 401 || res.status === 403) throw {code: "bad_key"};
+  if (res.status === 429) throw {code: "rate_limited"};
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) throw {code: /credit|billing/i.test(j?.error?.message || "") ? "no_credit" : "api_error"};
+  if (j.stop_reason === "refusal") throw {code: "invalid_json"};
+  const text = (j.content || []).filter(b => b.type === "text").map(b => b.text).join("");
+  const a = text.indexOf("{"), b = text.lastIndexOf("}");
+  try { return JSON.parse(text.slice(a, b + 1)); } catch (e) { throw {code: "invalid_json"}; }
+}
 async function readWithKey(blob){
   const data = await blobToB64(blob);
   let res;
@@ -509,14 +619,7 @@ async function readWithKey(blob){
       body: JSON.stringify({model: "claude-opus-5-5", max_tokens: 16000, fallbacks: "default", output_config: {effort: "medium"},
         messages: [{role: "user", content: [{type: "image", source: {type: "base64", media_type: "image/jpeg", data}}, {type: "text", text: PROMPT}]}]})});
   } catch (e) { throw {code: "api_error"}; }
-  if (res.status === 401 || res.status === 403) throw {code: "bad_key"};
-  if (res.status === 429) throw {code: "rate_limited"};
-  const j = await res.json().catch(() => ({}));
-  if (!res.ok) throw {code: /credit|billing/i.test(j?.error?.message || "") ? "no_credit" : "api_error"};
-  if (j.stop_reason === "refusal") throw {code: "invalid_json"};
-  const text = (j.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-  const a = text.indexOf("{"), b = text.lastIndexOf("}");
-  try { return JSON.parse(text.slice(a, b + 1)); } catch (e) { throw {code: "invalid_json"}; }
+  return parseClaude(res);
 }
 $("keySave").onclick = () => {
   const k = $("apiKey").value.trim(); $("apiKey").value = "";
@@ -584,6 +687,7 @@ $("dlBtn").onclick = async () => {
 // ---------- saved quotations (db) ----------
 const docId = st => qNumber(st).replace(/\//g, "-");
 async function record(){
+  learnPrices();
   const fy = fyOf(S.date), c = calc(S);
   const entry = {no: qNumber(S), fy, n: S.n, date: S.date, customer: S.cName.trim(), total: c.final, state: JSON.stringify(S), savedAt: Date.now()};
   try { const h = JSON.parse(localStorage.getItem("atq-hist") || "{}"); h[docId(S)] = entry; localStorage.setItem("atq-hist", JSON.stringify(h)); } catch(e){}
@@ -615,9 +719,9 @@ function openSaved(id){
 (async function start(){
   const fy0 = fyOf(todayISO()); nextN = (BASE_LAST[fy0] || 0) + 1;
   try { const h = Object.values(JSON.parse(localStorage.getItem("atq-hist") || "{}")); h.forEach(q => bumpNext(q.fy, q.n)); } catch(e){}
-  S = load() || blank(nextN); fillForm();
+  S = load() || blank(nextN); fillForm(); renderChips(); updateSq();
   const C = window.claude;
-  if (!C?.use) { $("keyBox").hidden = false; showKeyState(); return; }
+  if (!C?.use) { if (!HELPER_URL) { $("keyBox").hidden = false; showKeyState(); } return; }
   const [smp, dl, d] = await Promise.all([C.use("sample").catch(() => null), C.use("downloads").catch(() => null), C.use("db").catch(() => null)]);
   sample = smp; downloads = dl; db = d;
   if (!sample) $("photoHint").textContent = "Photo reading isn't available here. Type the items below and download the PDF.";
