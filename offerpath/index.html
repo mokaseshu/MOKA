@@ -1,0 +1,717 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>OfferPath India</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: sticky top bar + one content column; directory views use a filter rail beside a card grid that collapses to one column on phones */
+:root{
+  --bg:#F5F7F6;--surface:#FFFFFF;--surface-2:#EAF0EE;--line:#D5DFDB;
+  --ink:#10201C;--ink-2:#4A5C57;--ink-3:#77887F;
+  --teal:#0E6B5C;--teal-ink:#FFFFFF;--teal-soft:#DCEFEA;
+  --marigold:#E89A16;--marigold-soft:#FCEFD6;--marigold-ink:#5A3A00;
+  --good:#1F8A4C;--good-soft:#DDF3E5;--warn:#9A6200;--warn-soft:#FFF1D1;--bad:#B3261E;--bad-soft:#FBE3E1;
+  --shadow:0 1px 2px rgba(16,32,28,.06),0 6px 20px rgba(16,32,28,.06);
+  --f-display:"Sora","Noto Sans Telugu",system-ui,sans-serif;
+  --f-body:"Noto Sans","Noto Sans Telugu",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D1614;--surface:#14201D;--surface-2:#1B2A26;--line:#2A3B36;
+  --ink:#E6F0EC;--ink-2:#A9BBB5;--ink-3:#7D8F89;
+  --teal:#3FBFA6;--teal-ink:#05201A;--teal-soft:#183A33;
+  --marigold:#F2B24A;--marigold-soft:#3A2C12;--marigold-ink:#FBE3B5;
+  --good:#5BCB8A;--good-soft:#17321F;--warn:#F0C060;--warn-soft:#352A12;--bad:#F08A82;--bad-soft:#3A1C1A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1614;--surface:#14201D;--surface-2:#1B2A26;--line:#2A3B36;
+  --ink:#E6F0EC;--ink-2:#A9BBB5;--ink-3:#7D8F89;
+  --teal:#3FBFA6;--teal-ink:#05201A;--teal-soft:#183A33;
+  --marigold:#F2B24A;--marigold-soft:#3A2C12;--marigold-ink:#FBE3B5;
+  --good:#5BCB8A;--good-soft:#17321F;--warn:#F0C060;--warn-soft:#352A12;--bad:#F08A82;--bad-soft:#3A1C1A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+a{color:var(--teal)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--marigold);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:14px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-weight:800;font-size:19px;white-space:nowrap}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:var(--teal);display:grid;place-items:center}
+.brand .mark svg{width:18px;height:18px}
+.brand small{font-family:var(--f-body);font-weight:600;font-size:11px;color:var(--marigold);letter-spacing:.06em;text-transform:uppercase}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--ink-3)}
+.tools{display:flex;gap:8px;align-items:center}
+.chipbtn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 11px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.chipbtn[aria-pressed="true"]{background:var(--teal);color:var(--teal-ink);border-color:var(--teal)}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{border:0;background:none;padding:9px 12px;font-weight:600;font-size:14px;color:var(--ink-2);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-current="page"]{color:var(--teal);border-color:var(--teal)}
+nav.tabs .badge{font-size:11px;background:var(--marigold);color:var(--marigold-ink);border-radius:999px;padding:0 6px;margin-left:4px}
+main{padding-block:22px 60px;min-height:70vh}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:stretch;margin-bottom:26px}
+.hero-main{background:var(--teal);color:var(--teal-ink);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.hero-main h1{font-size:clamp(26px,4vw,40px);line-height:1.1}
+.hero-main p{margin:0;max-width:52ch;opacity:.92}
+.hero-main .rupee{position:absolute;right:-10px;bottom:-40px;font-family:var(--f-display);font-weight:800;font-size:220px;line-height:1;opacity:.09;pointer-events:none}
+.hero-stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:auto}
+.hero-stats b{display:block;font-family:var(--f-display);font-size:24px;font-variant-numeric:tabular-nums}
+.hero-stats span{font-size:12.5px;opacity:.85}
+.hero-side{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:10px;border:1px solid transparent;padding:9px 14px;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--marigold);color:#2A1B00}
+.btn-teal{background:var(--teal);color:var(--teal-ink)}
+.btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn-small{padding:6px 10px;font-size:13px}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.section-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:26px 0 12px}
+.section-h h2{font-size:20px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+.cat:hover{border-color:var(--teal)}
+.cat b{font-size:14px}
+.cat span{font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.card-top{display:flex;gap:11px;align-items:flex-start}
+.logo{flex:none;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:15px;color:#fff}
+.card h3{font-size:15.5px;line-height:1.25;cursor:pointer}
+.card h3:hover{color:var(--teal)}
+.card .cat-name{font-size:12px;color:var(--ink-3)}
+.card p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.pill.verified{background:var(--good-soft);color:var(--good)}
+.pill.unverified{background:var(--warn-soft);color:var(--warn)}
+.pill.student{background:var(--marigold-soft);color:var(--marigold-ink)}
+.pill.featured{background:var(--teal-soft);color:var(--teal)}
+.card-actions{display:flex;gap:8px;margin-top:auto;align-items:center}
+.card-actions .btn-primary{flex:1}
+.savebtn{border:1px solid var(--line);background:var(--surface);border-radius:10px;width:38px;height:36px;display:grid;place-items:center;cursor:pointer}
+.savebtn svg{width:17px;height:17px}
+.savebtn[aria-pressed="true"]{background:var(--marigold-soft);border-color:var(--marigold);color:var(--marigold-ink)}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px;align-items:start}
+.rail{position:sticky;top:120px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 140px);overflow:auto}
+.rail label{font-size:12.5px;font-weight:700;color:var(--ink-2);display:flex;flex-direction:column;gap:5px}
+.rail select,.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:var(--surface-2);width:100%}
+.count{color:var(--ink-3);font-size:13px;font-variant-numeric:tabular-nums}
+.more{display:flex;justify-content:center;margin-top:16px}
+.detail{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.kv{display:grid;grid-template-columns:140px minmax(0,1fr);gap:8px 14px;font-size:14px}
+.kv dt{color:var(--ink-3);font-weight:600}
+.kv dd{margin:0;overflow-wrap:anywhere}
+.disclose{font-size:12.5px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:10px}
+.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.field{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700;color:var(--ink-2)}
+.checker{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.note{background:var(--marigold-soft);color:var(--marigold-ink);border-radius:10px;padding:10px 12px;font-size:13.5px}
+.notice{background:var(--surface-2);border-radius:10px;padding:10px 12px;font-size:13.5px;color:var(--ink-2)}
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center;color:var(--ink-2);display:flex;flex-direction:column;gap:10px;align-items:center}
+.wallet-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.stat b{display:block;font-family:var(--f-display);font-size:24px;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--ink-3)}
+.code{font-family:var(--f-mono);font-size:18px;letter-spacing:.08em;background:var(--surface-2);border-radius:9px;padding:8px 12px;user-select:all}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+.admin-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;z-index:50;box-shadow:var(--shadow)}
+.modal-bg{position:fixed;inset:0;background:rgba(10,20,18,.5);z-index:40;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);border-radius:14px;max-width:440px;width:100%;padding:18px;display:flex;flex-direction:column;gap:12px}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+footer .wrap{padding-block:22px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:13px;color:var(--ink-3)}
+footer button{background:none;border:0;color:var(--ink-2);cursor:pointer;padding:0;font-size:13px}
+.prose{max-width:68ch;display:flex;flex-direction:column;gap:12px}
+.prose h2{font-size:22px}
+.prose h3{font-size:16px;margin-top:6px}
+.prose p{margin:0}
+.skeleton{color:var(--ink-3)}
+@media (max-width:860px){
+  .hero,.detail,.admin-grid{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr}
+  .rail{position:static;max-height:none}
+}
+@media (max-width:560px){
+  .bar{flex-wrap:wrap}
+  .search{order:3;flex-basis:100%}
+  .kv{grid-template-columns:1fr}
+  .brand small{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="bar">
+      <a class="brand" href="#home" data-go="home" aria-label="OfferPath home">
+        <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal-ink)"><path d="M4 17l5-5 4 4 7-8"/><path d="M15 8h5v5"/></svg></span>
+        OfferPath <small>India</small>
+      </a>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="q" type="search" autocomplete="off" placeholder="Search 1,895 offers — hosting, Spotify student, demat…" aria-label="Search offers">
+      </div>
+      <div class="tools">
+        <button class="chipbtn" id="langbtn" aria-pressed="false" title="Switch language">తెలుగు</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Main"></nav>
+  </div>
+</header>
+
+<main class="wrap" id="app"><p class="skeleton">Loading offers…</p></main>
+
+<footer>
+  <div class="wrap">
+    <div>OfferPath India · demo · Offers are provided by third parties and change often — always check the brand's site.</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <button data-go="earn" data-i18n="howWeEarn">How we earn</button>
+      <button data-go="about" data-i18n="about">About &amp; privacy</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+const T = {
+  en:{home:"Home",browse:"All offers",students:"Student checker",saved:"Saved",wallet:"Refer & earn",admin:"Admin",howWeEarn:"How we earn",about:"About & privacy",
+    heroT:"Every useful offer in India, checked by a person.",heroP:"Affiliate deals, refer-and-earn bonuses and student discounts — sorted by what you actually need, with the date we last checked each one.",
+    browseAll:"Browse all offers",checkStudent:"Check my student offers",offers:"offers",categories:"categories",verified:"verified",
+    featured:"Featured this week",byCategory:"Browse by category",latestStudent:"Popular student offers",getOffer:"Get offer",details:"Details",
+    unverified:"Unverified",verifiedOn:"Verified",student:"Student",save:"Save",saved_:"Saved",
+    category:"Category",type:"Type",sort:"Sort",all:"All",showMore:"Show more",results:"results",
+    report:"Report a problem",noSaved:"You haven't saved any offers yet.",noSavedHint:"Tap the bookmark on any offer to keep it here.",
+    signIn:"Sign in to claude.ai to use this feature.",
+  },
+  te:{home:"హోమ్",browse:"అన్ని ఆఫర్లు",students:"విద్యార్థి చెకర్",saved:"సేవ్ చేసినవి",wallet:"రిఫర్ చేసి సంపాదించండి",admin:"అడ్మిన్",howWeEarn:"మేము ఎలా సంపాదిస్తాము",about:"మా గురించి & గోప్యత",
+    heroT:"భారతదేశంలోని ప్రతి ఉపయోగకరమైన ఆఫర్ — ఒక వ్యక్తి తనిఖీ చేసినది.",heroP:"అఫిలియేట్ డీల్స్, రిఫర్ & ఎర్న్ బోనస్‌లు, విద్యార్థి డిస్కౌంట్లు — మీకు నిజంగా కావలసిన వాటి ప్రకారం, చివరిగా తనిఖీ చేసిన తేదీతో.",
+    browseAll:"అన్ని ఆఫర్లు చూడండి",checkStudent:"నా విద్యార్థి ఆఫర్లు చూడండి",offers:"ఆఫర్లు",categories:"విభాగాలు",verified:"తనిఖీ చేసినవి",
+    featured:"ఈ వారం ప్రత్యేకం",byCategory:"విభాగాల వారీగా చూడండి",latestStudent:"ప్రసిద్ధ విద్యార్థి ఆఫర్లు",getOffer:"ఆఫర్ పొందండి",details:"వివరాలు",
+    unverified:"తనిఖీ కాలేదు",verifiedOn:"తనిఖీ చేశాం",student:"విద్యార్థి",save:"సేవ్",saved_:"సేవ్ అయింది",
+    category:"విభాగం",type:"రకం",sort:"క్రమం",all:"అన్నీ",showMore:"మరిన్ని చూపించు",results:"ఫలితాలు",
+    report:"సమస్యను తెలియజేయండి",noSaved:"మీరు ఇంకా ఏ ఆఫర్‌నూ సేవ్ చేయలేదు.",noSavedHint:"ఏ ఆఫర్‌పైనైనా బుక్‌మార్క్‌ను నొక్కి ఇక్కడ ఉంచుకోండి.",
+    signIn:"ఈ ఫీచర్ కోసం claude.ai లో సైన్ ఇన్ చేయండి.",
+  }
+};
+const MERGE = {"More AI & Automation Tools":"AI Tools","More Courses, Certifications & Exam Prep":"Education & Online Courses","More Travel, Stays & Experiences":"Travel & Hotels"};
+const FEATURED_DEFAULT = ["Hostinger","GitHub Copilot Pro (students)","Spotify Premium Student","Zerodha","Canva for Education","Notion Education Plus","Apple Education Store India","Cuelinks"];
+const PALETTE = ["#0E6B5C","#C46A0A","#3B5BA9","#8A3B78","#2F7D32","#A63D2F","#4E6A85","#6D5BAA","#9C6B12","#1F7A8C"];
+
+const S = {offers:[],byId:new Map(),cats:[],ov:{},view:"home",param:null,lang:"en",q:"",fCat:"",fType:"",fVer:"",sort:"az",limit:48,
+  saved:new Set(),db:null,user:null,uid:null,isAdmin:false,canWrite:null,myRef:null,friends:[],clicks:{},reports:[],checker:{level:"ug",email:"yes",course:"cs",age:"18"},
+  adminTab:"verify",adminQ:"",adminAll:{clicks:[],reports:[]}};
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const t = k => (T[S.lang][k] ?? T.en[k] ?? k);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function store(k, v){try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null}}
+function toast(msg){const d=document.createElement("div");d.className="toast";d.textContent=msg;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
+
+function kind(o){
+  const ty=o.type.toLowerCase();
+  if(ty.includes("student")) return "Student offer";
+  if(ty.includes("network")) return "Affiliate network";
+  if(ty.startsWith("referral")) return "Referral";
+  return "Affiliate";
+}
+function catOf(o){return MERGE[o.category]||o.category}
+function initials(n){const w=n.replace(/[()]/g,"").split(/\s+/).filter(Boolean);return ((w[0]||"?")[0]+((w[1]||"")[0]||"")).toUpperCase()}
+function color(n){let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))>>>0;return PALETTE[h%PALETTE.length]}
+function ov(o){return S.ov[o.id]||{}}
+function isVerified(o){return !!ov(o).verified}
+function fmtDate(s){try{return new Date(s).toLocaleDateString(S.lang==="te"?"te-IN":"en-IN",{day:"numeric",month:"short"})}catch(e){return s}}
+function linkFor(o){const v=ov(o);return v.link||o.website}
+
+const TABS = ["home","browse","students","saved","wallet"];
+function renderTabs(){
+  const tabs=[...TABS]; if(S.isAdmin) tabs.push("admin");
+  $("#tabs").innerHTML = tabs.map(k=>`<button data-go="${k}" ${S.view===k||(k==="browse"&&["cat","offer"].includes(S.view))?'aria-current="page"':""}>${esc(t(k))}${k==="saved"&&S.saved.size?`<span class="badge">${S.saved.size}</span>`:""}</button>`).join("");
+  document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
+  $("#langbtn").textContent = S.lang==="en"?"తెలుగు":"English";
+  $("#langbtn").setAttribute("aria-pressed", S.lang==="te");
+  document.documentElement.lang = S.lang==="te"?"te":"en";
+}
+
+function card(o){
+  const v=ov(o), k=kind(o), sv=S.saved.has(o.id);
+  return `<article class="card">
+    <div class="card-top">
+      <div class="logo" style="background:${color(o.name)}">${esc(initials(o.name))}</div>
+      <div style="min-width:0;flex:1">
+        <h3 data-open="${o.id}">${esc(o.name)}</h3>
+        <div class="cat-name">${esc(catOf(o))}</div>
+      </div>
+    </div>
+    <p>${esc(v.headline||o.description)}</p>
+    <div class="pills">
+      ${isVerified(o)?`<span class="pill verified">✓ ${esc(t("verifiedOn"))} ${esc(fmtDate(v.lastChecked))}</span>`:`<span class="pill unverified">${esc(t("unverified"))}</span>`}
+      ${k==="Student offer"?`<span class="pill student">${esc(t("student"))}</span>`:`<span class="pill">${esc(k)}</span>`}
+      ${v.featured?`<span class="pill featured">★ Featured</span>`:""}
+    </div>
+    <div class="card-actions">
+      <a class="btn btn-primary btn-small" href="${esc(linkFor(o))}" target="_blank" rel="sponsored nofollow noopener" data-click="${o.id}">${esc(t("getOffer"))} ↗</a>
+      <button class="btn btn-ghost btn-small" data-open="${o.id}">${esc(t("details"))}</button>
+      <button class="savebtn" data-save="${o.id}" aria-pressed="${sv}" aria-label="${sv?t("saved_"):t("save")}"><svg viewBox="0 0 24 24" fill="${sv?"currentColor":"none"}" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button>
+    </div>
+  </article>`;
+}
+
+function featuredList(){
+  const f=S.offers.filter(o=>ov(o).featured);
+  if(f.length) return f.slice(0,8);
+  return FEATURED_DEFAULT.map(n=>S.offers.find(o=>o.name===n)).filter(Boolean);
+}
+
+function viewHome(){
+  const nVer=Object.values(S.ov).filter(v=>v.verified).length;
+  const studs=S.offers.filter(o=>kind(o)==="Student offer").slice(0,6);
+  return `
+  <section class="hero">
+    <div class="hero-main">
+      <span class="rupee" aria-hidden="true">₹</span>
+      <span class="eyebrow" style="color:inherit;opacity:.8">Affiliate · Refer &amp; earn · Student offers</span>
+      <h1>${esc(t("heroT"))}</h1>
+      <p>${esc(t("heroP"))}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary" data-go="browse">${esc(t("browseAll"))}</button>
+        <button class="btn btn-ghost" data-go="students" style="background:transparent;color:inherit;border-color:rgba(255,255,255,.45)">${esc(t("checkStudent"))}</button>
+      </div>
+      <div class="hero-stats">
+        <div><b>${S.offers.length.toLocaleString("en-IN")}</b><span>${esc(t("offers"))}</span></div>
+        <div><b>${S.cats.length}</b><span>${esc(t("categories"))}</span></div>
+        <div><b>${nVer}</b><span>${esc(t("verified"))}</span></div>
+      </div>
+    </div>
+    <aside class="hero-side">
+      <span class="eyebrow">Refer &amp; earn</span>
+      <h2 style="font-size:19px">Invite friends, earn 10% of what their purchases earn us</h2>
+      <p style="margin:0;color:var(--ink-2);font-size:14px">One level only, paid from confirmed commissions — never for just signing up.</p>
+      <button class="btn btn-teal" data-go="wallet" style="align-self:flex-start">Get my invite code</button>
+      <div class="notice" style="margin-top:auto">Every offer shows when a person last checked it. Grey “Unverified” means we haven't confirmed the current terms yet.</div>
+    </aside>
+  </section>
+  <div class="section-h"><h2>${esc(t("featured"))}</h2><button class="btn btn-ghost btn-small" data-go="browse">${esc(t("browseAll"))} →</button></div>
+  <div class="grid">${featuredList().map(card).join("")}</div>
+  <div class="section-h"><h2>${esc(t("byCategory"))}</h2></div>
+  <div class="cat-grid">${S.cats.map((c,i)=>`<button class="cat" data-cat="${i}"><b>${esc(c.name)}</b><span>${c.n} ${esc(t("offers"))}</span></button>`).join("")}</div>
+  <div class="section-h"><h2>${esc(t("latestStudent"))}</h2><button class="btn btn-ghost btn-small" data-go="students">${esc(t("checkStudent"))} →</button></div>
+  <div class="grid">${studs.map(card).join("")}</div>`;
+}
+
+function filtered(){
+  const q=S.q.trim().toLowerCase();
+  let r=S.offers.filter(o=>{
+    if(S.fCat && catOf(o)!==S.fCat) return false;
+    if(S.fType && kind(o)!==S.fType) return false;
+    if(S.fVer==="v" && !isVerified(o)) return false;
+    if(q){const h=(o.name+" "+o.description+" "+o.category+" "+o.notes+" "+(ov(o).headline||"")).toLowerCase(); if(!q.split(/\s+/).every(w=>h.includes(w))) return false;}
+    return !ov(o).hidden;
+  });
+  if(S.sort==="az") r.sort((a,b)=>a.name.localeCompare(b.name));
+  if(S.sort==="ver") r.sort((a,b)=>(isVerified(b)-isVerified(a))||a.name.localeCompare(b.name));
+  if(S.sort==="pop") r.sort((a,b)=>(totalClicks(b.id)-totalClicks(a.id))||a.name.localeCompare(b.name));
+  return r;
+}
+function totalClicks(id){return S.clicks[id]||0}
+
+function viewBrowse(){
+  const r=filtered(), shown=r.slice(0,S.limit);
+  const types=["Affiliate","Referral","Student offer","Affiliate network"];
+  return `<div class="layout">
+    <aside class="rail" aria-label="Filters">
+      <label>${esc(t("category"))}<select id="fCat"><option value="">${esc(t("all"))}</option>${S.cats.map(c=>`<option ${c.name===S.fCat?"selected":""}>${esc(c.name)}</option>`).join("")}</select></label>
+      <label>${esc(t("type"))}<select id="fType"><option value="">${esc(t("all"))}</option>${types.map(x=>`<option ${x===S.fType?"selected":""}>${x}</option>`).join("")}</select></label>
+      <label>Status<select id="fVer"><option value="">${esc(t("all"))}</option><option value="v" ${S.fVer==="v"?"selected":""}>Verified only</option></select></label>
+      <label>${esc(t("sort"))}<select id="sort"><option value="az" ${S.sort==="az"?"selected":""}>A–Z</option><option value="ver" ${S.sort==="ver"?"selected":""}>Verified first</option><option value="pop" ${S.sort==="pop"?"selected":""}>My most clicked</option></select></label>
+      ${(S.fCat||S.fType||S.fVer||S.q)?`<button class="btn btn-ghost btn-small" id="clear">Clear filters</button>`:""}
+    </aside>
+    <section style="min-width:0">
+      <div class="section-h" style="margin-top:0"><h2>${esc(S.fCat||t("browse"))}</h2><span class="count">${r.length.toLocaleString("en-IN")} ${esc(t("results"))}</span></div>
+      ${r.length?`<div class="grid">${shown.map(card).join("")}</div>`:`<div class="empty"><b>No offers match.</b><span>Try a shorter search or clear the filters.</span></div>`}
+      ${r.length>S.limit?`<div class="more"><button class="btn btn-ghost" id="more">${esc(t("showMore"))} (${(r.length-S.limit).toLocaleString("en-IN")})</button></div>`:""}
+    </section>
+  </div>`;
+}
+
+function claimSteps(o){
+  const k=kind(o);
+  if(k==="Student offer") return ["Open the offer page with the button on this page.","Sign in or create an account with your college email (.ac.in / .edu) if you have one.","Verify you're a student — college email, student ID upload, or UNiDAYS / SheerID / GitHub Education.","Wait for approval (instant to a few days), then activate the discount before it expires."];
+  if(k==="Referral") return ["Tap Get offer to open the app or sign-up page through our link.","Complete sign-up and any KYC the app asks for.","Do the qualifying action (first trade, first payment, account funding) within the time the app states.","The bonus is credited by the brand — check the app's own terms for amounts."];
+  if(k==="Affiliate network") return ["Open the network's publisher sign-up page.","Add your website or social channel, PAN and bank details.","Wait for approval, then apply to the brands you want inside the network.","Generate tracking links and use them on your site or channel."];
+  return ["Tap Get offer to open the brand's site through our link.","Check the current price and offer on the brand's own page.","Buy or sign up in the same browser session so the purchase is tracked.","Keep your order confirmation in case the brand asks."];
+}
+
+function viewOffer(id){
+  const o=S.byId.get(Number(id)); if(!o) return `<div class="empty">Offer not found. <button class="btn btn-ghost" data-go="browse">${esc(t("browse"))}</button></div>`;
+  const v=ov(o), sv=S.saved.has(o.id);
+  const related=S.offers.filter(x=>catOf(x)===catOf(o)&&x.id!==o.id).slice(0,6);
+  return `<p style="margin:0 0 12px"><button class="btn btn-ghost btn-small" data-go="browse">← ${esc(t("browse"))}</button></p>
+  <div class="detail">
+    <section class="panel">
+      <div class="card-top">
+        <div class="logo" style="background:${color(o.name)};width:54px;height:54px;font-size:19px">${esc(initials(o.name))}</div>
+        <div style="min-width:0">
+          <h1 style="font-size:26px">${esc(o.name)}</h1>
+          <div class="cat-name" style="font-size:13.5px;color:var(--ink-3)">${esc(catOf(o))} · ${esc(kind(o))}</div>
+        </div>
+      </div>
+      <p style="margin:0;font-size:16px">${esc(v.headline||o.description)}</p>
+      <div class="pills">
+        ${isVerified(o)?`<span class="pill verified">✓ ${esc(t("verifiedOn"))} ${esc(fmtDate(v.lastChecked))}</span>`:`<span class="pill unverified">${esc(t("unverified"))} — check the brand's current terms</span>`}
+        ${v.featured?`<span class="pill featured">★ Featured</span>`:""}
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="${esc(linkFor(o))}" target="_blank" rel="sponsored nofollow noopener" data-click="${o.id}">${esc(t("getOffer"))} ↗</a>
+        <button class="btn btn-ghost" data-save="${o.id}" aria-pressed="${sv}">${sv?"★ "+esc(t("saved_")):"☆ "+esc(t("save"))}</button>
+        <button class="btn btn-ghost" data-share="${o.id}">Share on WhatsApp</button>
+        <button class="btn btn-ghost" data-report="${o.id}">${esc(t("report"))}</button>
+      </div>
+      <h3 style="font-size:16px">How to claim</h3>
+      <ol class="steps">${claimSteps(o).map(s=>`<li>${esc(s)}</li>`).join("")}</ol>
+      <p class="disclose">If you use our link we may earn a commission, at no extra cost to you. Offers and rewards are set by ${esc(o.name)} and can change at any time.</p>
+    </section>
+    <aside class="panel">
+      <span class="eyebrow">Programme details</span>
+      <dl class="kv">
+        <dt>Website</dt><dd><a href="${esc(o.website)}" target="_blank" rel="noopener">${esc(o.website.replace(/^https?:\/\//,""))}</a></dd>
+        <dt>Type</dt><dd>${esc(o.type)}</dd>
+        <dt>How to join</dt><dd>${esc(o.how_to_join)}</dd>
+        <dt>Reward model</dt><dd>${esc(o.reward_model)}</dd>
+        <dt>Availability</dt><dd>${esc(o.availability)}</dd>
+        ${o.notes?`<dt>Notes</dt><dd>${esc(o.notes)}</dd>`:""}
+        <dt>Last checked</dt><dd>${v.lastChecked?esc(new Date(v.lastChecked).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"})):"Not yet"}</dd>
+      </dl>
+    </aside>
+  </div>
+  <div class="section-h"><h2>More in ${esc(catOf(o))}</h2></div>
+  <div class="grid">${related.map(card).join("")}</div>`;
+}
+
+const COURSE_TAGS = {
+  cs:["github","jetbrains","azure","digitalocean","heroku","mongodb","datadog","sentry","browserstack","lambdatest","namecheap","name.com",".tech","termius","educative","datacamp","frontend masters","interview cake","gitkraken","1password","deepnote","polypane","doppler","codecov","bootstrap studio","font awesome","icons8","iconscout","travis","localazy","visual studio","microsoft learn","aws educate","cloud skills","oracle","appwrite","new relic","unity","github campus","google developer","aws cloud clubs","microsoft learn student","coding ninjas","geeksforgeeks"],
+  design:["figma","canva","adobe","autodesk","unity","icons8","iconscout","font awesome","bootstrap studio","miro","lucidchart"],
+  engg:["autodesk","ansys","solidworks","matlab","mathematica","wolfram","github","jetbrains","azure","miro","lucidchart"],
+  commerce:["notion","microsoft 365","google workspace","grammarly","linkedin learning","the hindu","economic times","times prime","coursera","edx","udemy","chegg","quizlet"],
+  arts:["canva","adobe","notion","grammarly","the hindu","coursera","edx","linkedin learning","headspace"],
+  medical:["notion","microsoft 365","grammarly","coursera","edx","chegg","quizlet","headspace","the hindu"],
+};
+const EVERYONE = ["spotify","youtube premium","apple music","apple education","samsung","lenovo","dell","hp ","asus","acer","microsoft surface","unidays","student beans","isic","buddy4study","indian railways","indigo","air india","spicejet","akasa","nike","adidas","h&m","levi","bewakoof","souled","rapido","myntra","flipkart","amazon back","croma","reliance digital","lenskart","decathlon","bose","notion","canva","microsoft 365"];
+
+function studentMatches(){
+  const c=S.checker, out=[];
+  const studs=S.offers.filter(o=>kind(o)==="Student offer"&&!ov(o).hidden);
+  for(const o of studs){
+    const n=(o.name+" "+o.description).toLowerCase();
+    let score=0, why=[];
+    if((COURSE_TAGS[c.course]||[]).some(k=>n.includes(k))){score+=3;why.push("fits your course")}
+    if(EVERYONE.some(k=>n.includes(k))){score+=1;why.push("open to most students")}
+    const needsEmail=/github|notion|microsoft 365|figma|canva|jetbrains|azure|autodesk|unity|google workspace/.test(n);
+    const needs18=/spotify|amazon prime youth|indigo|air india|spicejet|akasa/.test(n);
+    if(c.level==="school" && !/railways|scholarship|khan|byju|vedantu|unacademy|physics wallah|canva/.test(n)) score-=3;
+    if(needsEmail && c.email==="no"){why.push("usually needs a college email or student ID upload");score-=0.5}
+    if(needs18 && c.age==="u18"){continue}
+    if(/campus ambassador|student partner|student ambassadors|campus experts|developer student clubs|cloud clubs/.test(n)) {if(c.level==="school") continue; why.push("earn while you study")}
+    if(score>0) out.push({o,score,why});
+  }
+  out.sort((a,b)=>b.score-a.score||a.o.name.localeCompare(b.o.name));
+  return out;
+}
+function seg(key,opts){return `<div class="seg">${opts.map(([v,l])=>`<button class="chipbtn" data-ck="${key}" data-cv="${v}" aria-pressed="${S.checker[key]===v}">${esc(l)}</button>`).join("")}</div>`}
+function viewStudents(){
+  const m=studentMatches();
+  return `<section class="panel" style="margin-bottom:18px">
+    <span class="eyebrow">Student eligibility checker</span>
+    <h1 style="font-size:24px">Which student offers can you claim?</h1>
+    <div class="checker">
+      <div class="field">You are in${seg("level",[["school","School"],["ug","UG / Diploma"],["pg","PG / PhD"]])}</div>
+      <div class="field">College email (.ac.in / .edu)?${seg("email",[["yes","Yes"],["no","No"]])}</div>
+      <div class="field">Age${seg("age",[["18","18 or older"],["u18","Under 18"]])}</div>
+      <div class="field">Your course${seg("course",[["cs","CS / IT"],["engg","Other engineering"],["design","Design / media"],["commerce","Commerce / MBA"],["arts","Arts / humanities"],["medical","Medical / life sciences"]])}</div>
+    </div>
+    <div class="note">Showing ${m.length} offers that match. Each brand checks eligibility itself — usually with a college email, student ID, UNiDAYS, SheerID or GitHub Education.</div>
+  </section>
+  <div class="grid">${m.slice(0,60).map(({o,why})=>card(o).replace('<div class="pills">',`<div class="pills">${why.slice(0,2).map(w=>`<span class="pill">${esc(w)}</span>`).join("")}`)).join("")}</div>`;
+}
+
+function viewSaved(){
+  if(!S.uid && S.db===null) return `<div class="empty"><b>${esc(t("signIn"))}</b></div>`;
+  const list=[...S.saved].map(id=>S.byId.get(id)).filter(Boolean);
+  if(!list.length) return `<div class="empty"><b>${esc(t("noSaved"))}</b><span>${esc(t("noSavedHint"))}</span><button class="btn btn-teal" data-go="browse">${esc(t("browseAll"))}</button></div>`;
+  return `<div class="section-h" style="margin-top:0"><h2>${esc(t("saved"))}</h2><span class="count">${list.length}</span></div><div class="grid">${list.map(card).join("")}</div>`;
+}
+
+function viewWallet(){
+  if(!S.uid) return `<div class="empty"><b>${esc(t("signIn"))}</b><span>Your invite code and earnings are tied to your account.</span></div>`;
+  const code=S.myRef?.code;
+  const link=code?`${location.origin}${location.pathname}#ref-${code}`:"";
+  const n=S.friends.length;
+  return `<div class="wallet-top">
+    <div class="stat"><span>Friends who joined</span><b>${n}</b></div>
+    <div class="stat"><span>Pending bonus</span><b>₹0</b></div>
+    <div class="stat"><span>Confirmed bonus</span><b>₹0</b></div>
+    <div class="stat"><span>Minimum payout</span><b>₹250</b></div>
+  </div>
+  <div class="detail" style="margin-top:16px">
+    <section class="panel">
+      <span class="eyebrow">Your invite code</span>
+      ${code?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="code" id="mycode">${esc(code)}</span><button class="btn btn-teal btn-small" data-copy="${esc(link)}">Copy invite link</button><button class="btn btn-ghost btn-small" data-sharelink="${esc(link)}">Share on WhatsApp</button></div><p style="margin:0;font-size:13px;color:var(--ink-3);overflow-wrap:anywhere">${esc(link)}</p>`:`<p class="skeleton" style="margin:0">Creating your code…</p>`}
+      <h3 style="font-size:16px">How it works</h3>
+      <ol class="steps">
+        <li>Share your link. When a friend opens it and signs in, they're linked to you.</li>
+        <li>When your friend's purchase or sign-up earns us a commission <b>and the network confirms it</b>, you get 10% of it.</li>
+        <li>One level only — you earn from friends you invite, not from their invites. Nobody is paid just for joining.</li>
+        <li>Withdraw to UPI once your confirmed bonus reaches ₹250.</li>
+      </ol>
+      <p class="disclose">Demo: earnings stay at ₹0 until affiliate networks are connected. Referral terms, TDS and GST must be reviewed by a lawyer and CA before launch.</p>
+    </section>
+    <aside class="panel">
+      <span class="eyebrow">Friends you invited</span>
+      <div id="friends">${n?`<div class="tablewrap"><table><thead><tr><th>Friend</th><th>Joined</th></tr></thead><tbody>${S.friends.map(f=>`<tr><td data-uname="${esc(f.uid)}">Friend</td><td>${esc(fmtDate(f.joinedAt))}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty" style="padding:18px"><span>No friends yet. Your first invite shows up here.</span></div>`}</div>
+      ${S.myRef?.invitedBy?`<div class="notice">You were invited with code <b>${esc(S.myRef.invitedBy)}</b>.</div>`:""}
+    </aside>
+  </div>`;
+}
+
+function viewEarn(){return `<article class="prose">
+  <h2>How we earn</h2>
+  <p>OfferPath is free to use. Many links on this site are affiliate or referral links: if you sign up or buy through them, the brand or network may pay us a commission. You never pay more because you used our link.</p>
+  <p>Commissions never decide whether an offer is listed or how it's described. Sponsored placements are always labelled “Sponsored”.</p>
+  <h3>What “Verified” means</h3>
+  <p>A person opened the brand's site and confirmed the offer on the date shown. “Unverified” offers are listed from our research but their current terms haven't been confirmed yet — always check before you buy.</p>
+  <h3>Regulated products</h3>
+  <p>Credit cards, loans, insurance and investing products are offered by the regulated companies themselves. We don't give financial advice. Real-money gaming and crypto are restricted in parts of India; check the rules where you live.</p>
+  <p class="disclose">We follow ASCI guidelines on disclosing affiliate and paid content.</p></article>`}
+function viewAbout(){return `<article class="prose">
+  <h2>About &amp; privacy</h2>
+  <p>OfferPath India lists affiliate programmes, refer-and-earn bonuses and student discounts available in India, with the date each was last checked. This is a demo build.</p>
+  <h3>What we store</h3>
+  <p>If you're signed in: the offers you save, your invite code, who invited you, offers you click (to show you popular offers and pay referral bonuses), and any problem reports you send. Saved offers are private to you. We don't sell your data.</p>
+  <p>India's Digital Personal Data Protection Act, 2023 applies to the personal data we process. To ask for a copy or deletion of your data, contact the site owner.</p></article>`}
+
+function viewAdmin(){
+  if(!S.isAdmin) return `<div class="empty">Admin is only for the site owner and editors.</div>`;
+  const q=S.adminQ.trim().toLowerCase();
+  const rows=(q?S.offers.filter(o=>o.name.toLowerCase().includes(q)):S.offers.filter(o=>ov(o).verified||ov(o).featured||ov(o).hidden)).slice(0,30);
+  const agg={}; for(const c of S.adminAll.clicks) for(const [id,n] of Object.entries(c.counts||{})) agg[id]=(agg[id]||0)+n;
+  const top=Object.entries(agg).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const reps=S.adminAll.reports;
+  const nVer=Object.values(S.ov).filter(v=>v.verified).length;
+  return `<div class="wallet-top">
+    <div class="stat"><span>Listed offers</span><b>${S.offers.length.toLocaleString("en-IN")}</b></div>
+    <div class="stat"><span>Verified</span><b>${nVer}</b></div>
+    <div class="stat"><span>Visitors who clicked</span><b>${S.adminAll.clicks.length}</b></div>
+    <div class="stat"><span>Open problem reports</span><b>${reps.length}</b></div>
+  </div>
+  <div class="seg" style="margin:16px 0">
+    ${[["verify","Verify & edit offers"],["stats","Clicks"],["reports","Problem reports"]].map(([k,l])=>`<button class="chipbtn" data-atab="${k}" aria-pressed="${S.adminTab===k}">${l}</button>`).join("")}
+    <button class="btn btn-ghost btn-small" id="refreshAdmin">Refresh</button>
+  </div>
+  ${S.adminTab==="verify"?`<section class="panel">
+    <div class="field">Find an offer<input id="adminQ" type="search" value="${esc(S.adminQ)}" placeholder="Type a name, e.g. Hostinger"></div>
+    <p class="count" style="margin:0">${q?"Matching offers":"Offers you've already edited"} — mark verified after checking the brand's site today.</p>
+    <div class="tablewrap"><table><thead><tr><th>Offer</th><th>Headline shown to visitors</th><th>Your affiliate link</th><th>Status</th><th></th></tr></thead><tbody>
+    ${rows.map(o=>{const v=ov(o);return `<tr data-row="${o.id}">
+      <td style="min-width:150px"><b>${esc(o.name)}</b><div class="count">${esc(catOf(o))}</div></td>
+      <td style="min-width:200px"><input class="ai" data-f="headline" value="${esc(v.headline||"")}" placeholder="${esc(o.description)}" style="width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--surface-2)"></td>
+      <td style="min-width:200px"><input class="ai" data-f="link" value="${esc(v.link||"")}" placeholder="https://…" style="width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--surface-2)"></td>
+      <td style="min-width:150px;font-size:13px"><label><input type="checkbox" data-f="verified" ${v.verified?"checked":""}> Verified</label><br><label><input type="checkbox" data-f="featured" ${v.featured?"checked":""}> Featured</label><br><label><input type="checkbox" data-f="hidden" ${v.hidden?"checked":""}> Hidden</label></td>
+      <td><button class="btn btn-teal btn-small" data-saverow="${o.id}">Save</button></td></tr>`}).join("")||`<tr><td colspan="5" class="count">Search for an offer to verify it.</td></tr>`}
+    </tbody></table></div></section>`:""}
+  ${S.adminTab==="stats"?`<section class="panel"><span class="eyebrow">Most clicked offers (all visitors)</span>
+    ${top.length?`<div class="tablewrap"><table><thead><tr><th>Offer</th><th>Category</th><th class="num">Clicks</th></tr></thead><tbody>${top.map(([id,n])=>{const o=S.byId.get(Number(id));return `<tr><td>${esc(o?.name||id)}</td><td>${esc(o?catOf(o):"")}</td><td class="num">${n}</td></tr>`}).join("")}</tbody></table></div>`:`<div class="empty" style="padding:18px">No clicks recorded yet. Clicks appear here as visitors tap “Get offer”.</div>`}</section>`:""}
+  ${S.adminTab==="reports"?`<section class="panel"><span class="eyebrow">Problem reports from visitors</span>
+    ${reps.length?`<div class="tablewrap"><table><thead><tr><th>Offer</th><th>Problem</th><th>Note</th><th>When</th></tr></thead><tbody>${reps.map(r=>{const o=S.byId.get(Number(r.offerId));return `<tr><td>${esc(o?.name||r.offerId)}</td><td>${esc(r.reason)}</td><td>${esc(r.note||"")}</td><td>${esc(fmtDate(r.at))}</td></tr>`}).join("")}</tbody></table></div>`:`<div class="empty" style="padding:18px">No reports yet. Visitors can report a broken link or wrong offer from any offer page.</div>`}</section>`:""}`;
+}
+
+function render(){
+  renderTabs();
+  let html="";
+  if(!S.offers.length){app.innerHTML=`<p class="skeleton">Loading offers…</p>`;return}
+  if(S.view==="home") html=viewHome();
+  else if(S.view==="browse"||S.view==="cat") html=viewBrowse();
+  else if(S.view==="offer") html=viewOffer(S.param);
+  else if(S.view==="students") html=viewStudents();
+  else if(S.view==="saved") html=viewSaved();
+  else if(S.view==="wallet") html=viewWallet();
+  else if(S.view==="admin") html=viewAdmin();
+  else if(S.view==="earn") html=viewEarn();
+  else if(S.view==="about") html=viewAbout();
+  else html=viewHome();
+  app.innerHTML=html;
+  resolveNames();
+}
+
+async function resolveNames(){
+  if(!S.user) return;
+  const els=[...document.querySelectorAll("[data-uname]")]; if(!els.length) return;
+  const ps=await S.user.profiles(els.map(e=>e.dataset.uname));
+  els.forEach(e=>{e.textContent=ps[e.dataset.uname]?.name||"Friend"});
+}
+
+function go(view,param,keepScroll){
+  S.view=view; S.param=param??null;
+  const tok = view==="offer"?`offer-${param}`:view==="cat"?`cat-${param}`:view;
+  try{ if(location.hash.slice(1)!==tok) history.replaceState(null,"","#"+tok);}catch(e){}
+  render(); if(!keepScroll) window.scrollTo({top:0});
+}
+function fromHash(){
+  const h=location.hash.slice(1);
+  if(h.startsWith("ref-")){store("op_pending_ref",h.slice(4).toUpperCase());return go("wallet")}
+  if(h.startsWith("offer-")) return go("offer",h.slice(6));
+  if(h.startsWith("cat-")){const c=S.cats[Number(h.slice(4))];if(c){S.fCat=c.name;return go("cat",h.slice(4))}}
+  if(["home","browse","students","saved","wallet","admin","earn","about"].includes(h)) return go(h);
+  go("home");
+}
+
+let clickTimer=null, pendingClicks=false;
+function recordClick(id){
+  S.clicks[id]=(S.clicks[id]||0)+1; pendingClicks=true;
+  if(!S.db||!S.uid) return;
+  clearTimeout(clickTimer);
+  clickTimer=setTimeout(async()=>{ if(!pendingClicks) return; pendingClicks=false;
+    try{await S.db.doc("clicks/"+S.uid).set({counts:S.clicks,updatedAt:new Date().toISOString()})}catch(e){}
+  },1500);
+}
+let saveBusy=Promise.resolve();
+function toggleSave(id){
+  if(!S.uid){toast(t("signIn"));return}
+  S.saved.has(id)?S.saved.delete(id):S.saved.add(id);
+  render_keep();
+  const saved=[...S.saved];
+  saveBusy=saveBusy.then(()=>S.db.doc(`data/users/${S.uid}/profile`).set({saved,lang:S.lang,updatedAt:new Date().toISOString()})).catch(()=>toast("Couldn't save — check you're signed in with access to this page."));
+}
+function render_keep(){const y=window.scrollY;render();window.scrollTo({top:y})}
+
+function reportModal(id){
+  if(!S.uid){toast(t("signIn"));return}
+  const o=S.byId.get(Number(id));
+  const bg=document.createElement("div");bg.className="modal-bg";
+  bg.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="rt"><h3 id="rt" style="font-size:18px">${esc(t("report"))}: ${esc(o.name)}</h3>
+    <div class="field">What's wrong?<select id="rr"><option>Link doesn't work</option><option>Offer has expired</option><option>Details are wrong</option><option>Other</option></select></div>
+    <div class="field">Anything else? (optional)<textarea id="rn" rows="3" maxlength="300"></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-ghost" id="rc">Cancel</button><button class="btn btn-teal" id="rs">Send report</button></div></div>`;
+  document.body.appendChild(bg);
+  bg.querySelector("#rc").onclick=()=>bg.remove();
+  bg.addEventListener("click",e=>{if(e.target===bg)bg.remove()});
+  bg.querySelector("#rs").onclick=async()=>{
+    const item={offerId:o.id,reason:bg.querySelector("#rr").value,note:bg.querySelector("#rn").value.slice(0,300),at:new Date().toISOString()};
+    S.reports=[item,...S.reports].slice(0,50);
+    try{await S.db.doc("reports/"+S.uid).set({items:S.reports});toast("Report sent. Thank you.")}catch(e){toast("Couldn't send the report. Try again.")}
+    bg.remove();
+  };
+}
+
+async function saveRow(id){
+  const tr=document.querySelector(`[data-row="${id}"]`); if(!tr) return;
+  const get=f=>tr.querySelector(`[data-f="${f}"]`);
+  const prev=S.ov[id]||{};
+  const verified=get("verified").checked;
+  const doc={headline:get("headline").value.trim(),link:get("link").value.trim(),verified,featured:get("featured").checked,hidden:get("hidden").checked,
+    lastChecked:verified?(prev.verified&&prev.lastChecked?prev.lastChecked:new Date().toISOString()):null,updatedAt:new Date().toISOString()};
+  if(verified && get("verified").dataset.touched) doc.lastChecked=new Date().toISOString();
+  if(doc.link && !/^https:\/\//.test(doc.link)){toast("Affiliate links must start with https://");return}
+  try{await S.db.doc("overrides/"+id).set(doc);toast("Saved")}catch(e){toast("Couldn't save. Only the owner and editors can edit offers.")}
+}
+
+async function loadAdmin(){
+  if(!S.isAdmin||!S.db) return;
+  try{
+    const [c,r]=await Promise.all([S.db.collection("clicks").get(),S.db.collection("reports").get()]);
+    S.adminAll.clicks=c.docs.map(d=>d.data());
+    S.adminAll.reports=r.docs.flatMap(d=>(d.data().items||[])).sort((a,b)=>String(b.at).localeCompare(String(a.at)));
+  }catch(e){}
+  if(S.view==="admin") render_keep();
+}
+
+function randCode(){const a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";const b=new Uint32Array(6);crypto.getRandomValues(b);for(const x of b)s+=a[x%a.length];return s}
+
+async function initBackend(){
+  if(!window.claude?.use){render();return}
+  const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+  S.db=db; S.user=user;
+  if(user){ S.isAdmin=await user.canEdit(); S.uid=await user.id(); S.canWrite=await user.can("data.write"); }
+  if(db){
+    db.collection("overrides").onSnapshot(snap=>{const o={};snap.docs.forEach(d=>o[d.id]=d.data());S.ov=o;if(!document.querySelector(".modal-bg")&&!(S.view==="admin"&&document.activeElement?.classList.contains("ai")))render_keep()},()=>{});
+    if(S.uid){
+      db.doc(`data/users/${S.uid}/profile`).onSnapshot(s=>{if(s.exists){const d=s.data();S.saved=new Set(d.saved||[]);if(d.lang&&d.lang!==S.lang){S.lang=d.lang}}render_keep()},()=>{});
+      try{const c=await db.doc("clicks/"+S.uid).get();if(c.exists)S.clicks={...(c.data().counts||{}),...S.clicks}}catch(e){}
+      try{const r=await db.doc("reports/"+S.uid).get();if(r.exists)S.reports=[...(r.data().items||[])]}catch(e){}
+      try{
+        const ref=db.doc("referrals/"+S.uid); const snap=await ref.get();
+        if(snap.exists){S.myRef=snap.data()}
+        else{
+          const pending=store("op_pending_ref");
+          const mine={code:randCode(),invitedBy:(pending&&/^[A-Z0-9]{6}$/.test(pending))?pending:null,joinedAt:new Date().toISOString()};
+          await ref.set(mine); S.myRef=mine;
+        }
+        db.collection("referrals").where("invitedBy","==",S.myRef.code).onSnapshot(q=>{S.friends=q.docs.map(d=>({uid:d.id,...d.data()}));if(S.view==="wallet")render_keep()},()=>{});
+      }catch(e){}
+    }
+    loadAdmin();
+  }
+  render_keep();
+}
+
+document.addEventListener("click",e=>{
+  const el=e.target.closest("[data-go],[data-open],[data-cat],[data-save],[data-click],[data-share],[data-report],[data-copy],[data-sharelink],[data-ck],[data-atab],[data-saverow],#more,#clear,#langbtn,#refreshAdmin");
+  if(!el) return;
+  if(el.dataset.go){e.preventDefault(); if(el.dataset.go==="browse"){S.fCat="";} go(el.dataset.go); if(el.dataset.go==="admin")loadAdmin(); return}
+  if(el.dataset.open){go("offer",el.dataset.open);return}
+  if(el.dataset.cat!==undefined){S.fCat=S.cats[Number(el.dataset.cat)].name;S.limit=48;go("cat",el.dataset.cat);return}
+  if(el.dataset.save){toggleSave(Number(el.dataset.save));return}
+  if(el.dataset.click){recordClick(el.dataset.click);return}
+  if(el.dataset.report){reportModal(el.dataset.report);return}
+  if(el.dataset.share||el.dataset.sharelink){
+    const o=el.dataset.share?S.byId.get(Number(el.dataset.share)):null;
+    const text=o?`${o.name}: ${ov(o).headline||o.description} — ${o.website}`:`Join me on OfferPath India and find offers you can actually use: ${el.dataset.sharelink}`;
+    const a=document.createElement("a");a.href="https://wa.me/?text="+encodeURIComponent(text);a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove();return}
+  if(el.dataset.copy){const v=el.dataset.copy;navigator.clipboard?.writeText(v).then(()=>toast("Invite link copied"),()=>{const c=$("#mycode");if(c){const r=document.createRange();r.selectNodeContents(c);getSelection().removeAllRanges();getSelection().addRange(r)}toast("Select and copy the link below")});return}
+  if(el.dataset.ck){S.checker[el.dataset.ck]=el.dataset.cv;render_keep();return}
+  if(el.dataset.atab){S.adminTab=el.dataset.atab;render_keep();return}
+  if(el.dataset.saverow){saveRow(el.dataset.saverow);return}
+  if(el.id==="more"){S.limit+=48;render_keep();return}
+  if(el.id==="clear"){S.fCat=S.fType=S.fVer="";S.q="";$("#q").value="";go("browse");return}
+  if(el.id==="refreshAdmin"){loadAdmin();return}
+  if(el.id==="langbtn"){S.lang=S.lang==="en"?"te":"en";store("op_lang",S.lang);render_keep();
+    if(S.db&&S.uid){const saved=[...S.saved];saveBusy=saveBusy.then(()=>S.db.doc(`data/users/${S.uid}/profile`).set({saved,lang:S.lang,updatedAt:new Date().toISOString()})).catch(()=>{})}
+    return}
+});
+document.addEventListener("change",e=>{
+  const id=e.target.id;
+  if(id==="fCat"){S.fCat=e.target.value;S.limit=48;render_keep()}
+  if(id==="fType"){S.fType=e.target.value;S.limit=48;render_keep()}
+  if(id==="fVer"){S.fVer=e.target.value;render_keep()}
+  if(id==="sort"){S.sort=e.target.value;render_keep()}
+  if(e.target.dataset.f==="verified") e.target.dataset.touched="1";
+});
+let qTimer=null;
+$("#q").addEventListener("input",e=>{clearTimeout(qTimer);qTimer=setTimeout(()=>{S.q=e.target.value;S.limit=48;if(!["browse","cat"].includes(S.view)){S.fCat="";go("browse")}else render_keep()},180)});
+document.addEventListener("input",e=>{if(e.target.id==="adminQ"){clearTimeout(qTimer);const v=e.target.value;qTimer=setTimeout(()=>{S.adminQ=v;render_keep();const i=$("#adminQ");if(i){i.focus();i.setSelectionRange(v.length,v.length)}},250)}});
+window.addEventListener("hashchange",fromHash);
+
+S.lang=store("op_lang")==="te"?"te":"en";
+renderTabs();
+fetch("offers.json").then(r=>r.json()).then(list=>{
+  S.offers=list; list.forEach(o=>S.byId.set(o.id,o));
+  const m=new Map(); list.forEach(o=>{const c=catOf(o);m.set(c,(m.get(c)||0)+1)});
+  S.cats=[...m].map(([name,n])=>({name,n})).sort((a,b)=>b.n-a.n);
+  fromHash();
+}).catch(()=>{app.innerHTML=`<div class="empty"><b>Couldn't load the offers.</b><span>Reload the page to try again.</span></div>`});
+initBackend();
+</script>
+
+</body></html>
