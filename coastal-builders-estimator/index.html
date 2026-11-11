@@ -1,0 +1,221 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Coastal Builders Estimator</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#eef1f0;--surface:#ffffff;--ink:#0f2a33;--muted:#5a6f76;--line:#d5dddc;--soft:#e4eae9;
+  --sea:#0f4c5c;--sea-ink:#ffffff;--signal:#e3592f;--signal-ink:#ffffff;
+  --c-mat:#0f4c5c;--c-lab:#3f8f8a;--c-fin:#e3592f;
+  --f-display:"Archivo",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a1a1f;--surface:#11262d;--ink:#e3eef0;--muted:#8ea6ad;--line:#213b43;--soft:#173139;
+  --sea:#4fb3c4;--sea-ink:#06161b;--signal:#ff7a4f;--signal-ink:#1a0a04;
+  --c-mat:#4fb3c4;--c-lab:#7fd1bf;--c-fin:#ff7a4f;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a1a1f;--surface:#11262d;--ink:#e3eef0;--muted:#8ea6ad;--line:#213b43;--soft:#173139;
+  --sea:#4fb3c4;--sea-ink:#06161b;--signal:#ff7a4f;--signal-ink:#1a0a04;
+  --c-mat:#4fb3c4;--c-lab:#7fd1bf;--c-fin:#ff7a4f;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 56px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:28px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.mark{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-stretch:115%;letter-spacing:.01em;font-size:17px;text-transform:uppercase}
+.mark svg{width:30px;height:30px}
+.nav-note{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.hero{display:grid;gap:10px;max-width:760px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);font-weight:600}
+h1{font-family:var(--f-display);font-weight:900;font-stretch:118%;font-size:clamp(32px,6vw,64px);line-height:.98;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.lede{color:var(--muted);font-size:17px;max-width:60ch;margin:0}
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px;align-items:start}
+@media (max-width:900px){.calc{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:22px;min-width:0}
+.step{display:grid;gap:12px}
+.step-h{display:flex;align-items:baseline;gap:10px}
+.step-n{font-family:var(--f-mono);font-size:12px;color:var(--sea);font-weight:600}
+.step-t{font-family:var(--f-display);font-weight:700;font-stretch:105%;font-size:18px;margin:0}
+.area{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.area input{font-family:var(--f-display);font-weight:800;font-stretch:110%;font-size:clamp(40px,7vw,58px);border:0;background:transparent;color:var(--ink);width:100%;min-width:0;padding:0;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.area input:focus{outline:none}
+.area:focus-within{border-color:var(--signal)}
+.area span{font-family:var(--f-mono);color:var(--muted);font-size:14px;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--signal)}
+.ticks{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}
+.chip:hover{border-color:var(--sea)}
+.tiers{display:grid;gap:10px}
+.tier{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:12px;align-items:start;padding:14px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;transition:border-color .15s,background .15s}
+.tier:hover{border-color:var(--sea)}
+.tier input{margin:3px 0 0;accent-color:var(--signal);width:18px;height:18px}
+.tier.on{border-color:var(--signal);background:color-mix(in srgb,var(--signal) 7%,var(--surface))}
+.tier b{font-family:var(--f-display);font-stretch:108%;font-size:16px;display:block}
+.tier small{color:var(--muted);font-size:13px;display:block}
+.tier .rate{font-family:var(--f-mono);font-size:13px;font-weight:600;white-space:nowrap;text-align:right}
+.tier .rate em{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:11px}
+button,a.btn{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.result{display:grid;gap:20px}
+.total{display:grid;gap:4px}
+.total .lbl{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.total .big{font-family:var(--f-display);font-weight:900;font-stretch:112%;font-size:clamp(38px,6.4vw,60px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.total .range{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stats div{background:var(--surface);padding:12px 14px;display:grid;gap:2px}
+.stats span{font-size:12px;color:var(--muted)}
+.stats b{font-family:var(--f-mono);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.stats{grid-template-columns:minmax(0,1fr)}}
+.bar{display:flex;height:16px;border-radius:999px;overflow:hidden;gap:3px}
+.bar i{display:block;height:100%;transition:flex-grow .45s cubic-bezier(.2,.8,.2,1)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px}
+.legend span{display:flex;align-items:center;gap:7px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.groups{display:grid;gap:14px}
+.group{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.group summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:14px 16px}
+.group summary::-webkit-details-marker{display:none}
+.group summary .dot{width:12px;height:12px;border-radius:3px}
+.group summary b{font-family:var(--f-display);font-stretch:105%;font-size:16px}
+.group summary .pc{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.group summary .amt{font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums}
+.group[open] summary{border-bottom:1px solid var(--line)}
+.lines{display:grid}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;padding:10px 16px;border-bottom:1px solid var(--soft);font-size:14px}
+.line:last-child{border-bottom:0}
+.line .spec{grid-column:1;color:var(--muted);font-size:12.5px}
+.line .v{font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.line .q{grid-column:2;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);text-align:right}
+.cta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px;border-radius:16px;background:var(--sea);color:var(--sea-ink)}
+@media (max-width:640px){.cta{grid-template-columns:minmax(0,1fr)}}
+.cta h3{margin:0;font-family:var(--f-display);font-stretch:110%;font-weight:800;font-size:22px;text-wrap:balance}
+.cta p{margin:4px 0 0;opacity:.85;font-size:14px}
+.cta .num{font-family:var(--f-mono);font-size:13px;opacity:.9;user-select:all}
+a.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--signal);color:var(--signal-ink);text-decoration:none;font-weight:700;font-size:16px;padding:15px 24px;border-radius:12px;white-space:nowrap;transition:transform .12s}
+a.btn:hover{transform:translateY(-1px)}
+.fine{font-size:12.5px;color:var(--muted);max-width:75ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <nav>
+    <div class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 26h26" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M6 26V14l10-7 10 7v12" fill="none" stroke="var(--sea)" stroke-width="2.4"/><path d="M3 21c3 0 3-2 6.5-2S13 21 16 21s3-2 6.5-2S26 21 29 21" fill="none" stroke="var(--signal)" stroke-width="2.2"/></svg>Coastal Builders</div>
+    <span class="nav-note">Rates updated Nov 2026 · Coastal Andhra</span>
+  </nav>
+
+  <section class="hero">
+    <span class="eyebrow">Construction cost estimator</span>
+    <h1>Know your build cost in under a minute.</h1>
+    <p class="lede">Enter your built-up area and pick a quality level. You get a split across materials, labour and finishing, with quantities your engineer will recognise.</p>
+  </section>
+
+  <section class="calc">
+    <div class="card">
+      <div class="step">
+        <div class="step-h"><span class="step-n">01</span><h2 class="step-t">Built-up area</h2></div>
+        <label class="area" for="sqft"><input id="sqft" type="number" inputmode="numeric" min="300" max="20000" value="1500" aria-label="Built-up area in square feet"><span>sq ft</span></label>
+        <input id="slider" type="range" min="300" max="6000" step="50" value="1500" aria-label="Area slider">
+        <div class="ticks"><span>300</span><span>2,000</span><span>4,000</span><span>6,000</span></div>
+        <div class="chips">
+          <button class="chip" type="button" data-a="900">1BHK · 900</button>
+          <button class="chip" type="button" data-a="1200">2BHK · 1,200</button>
+          <button class="chip" type="button" data-a="1800">3BHK · 1,800</button>
+          <button class="chip" type="button" data-a="2800">G+1 villa · 2,800</button>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-h"><span class="step-n">02</span><h2 class="step-t">Quality level</h2></div>
+        <div class="tiers" id="tiers"></div>
+      </div>
+    </div>
+
+    <div class="card result" aria-live="polite">
+      <div class="total">
+        <span class="lbl">Estimated total</span>
+        <span class="big" id="total">₹0</span>
+        <span class="range" id="range"></span>
+      </div>
+      <div class="stats">
+        <div><span>Rate</span><b id="rate"></b></div>
+        <div><span>Build time</span><b id="time"></b></div>
+        <div><span>Steel grade</span><b id="steel"></b></div>
+      </div>
+      <div class="bar" id="bar"><i style="background:var(--c-mat)"></i><i style="background:var(--c-lab)"></i><i style="background:var(--c-fin)"></i></div>
+      <div class="legend" id="legend"></div>
+      <div class="groups" id="groups"></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h3>Want a site-checked number?</h3>
+      <p>Our engineer visits your plot, checks soil and drawings, and sends a fixed quote within 48 hours.</p>
+      <p class="num">WhatsApp +91 63015 21358</p>
+    </div>
+    <a class="btn" id="quote" href="#" target="_blank" rel="noopener">Get exact quote →</a>
+  </section>
+
+  <p class="fine">Estimates assume RCC framed structure, standard foundation and regular plot access. Final cost can vary by about 10% with soil, design and market rates. Prices include material, labour and finishing; they exclude plan approvals, borewell and compound wall.</p>
+</div>
+
+<script>
+const TIERS={
+  basic:{name:"Basic",rate:1850,note:"Solid, no-frills build for rental or budget homes",split:[58,27,15],steel:"Fe 500",kg:3.8,months:0,
+    fin:{floor:"Ceramic tiles, 2×2 ft",paint:"Tractor emulsion, interior",door:"Flush doors, sal wood frame",fit:"Standard CP & sanitary fittings"}},
+  standard:{name:"Standard",rate:2350,note:"Most chosen for family homes",split:[55,25,20],steel:"Fe 500D",kg:4.0,months:1,
+    fin:{floor:"Vitrified tiles, 2×4 ft",paint:"Premium emulsion + exterior weatherproof",door:"Teak frame, laminated shutters",fit:"Jaquar / Hindware range fittings"}},
+  premium:{name:"Premium",rate:3100,note:"Luxury finishes and marine-grade protection",split:[50,22,28],steel:"Fe 550D CRS",kg:4.3,months:2,
+    fin:{floor:"Italian marble & wooden flooring",paint:"Luxury emulsion + texture finish",door:"Full teak doors, UPVC windows",fit:"Kohler / Grohe fittings, modular kitchen"}}
+};
+const MAT=[["Cement",16,"OPC 53 / PPC grade",a=>Math.round(a*0.4).toLocaleString("en-IN")+" bags"],
+  ["Steel",24,null,(a,t)=>Math.round(a*t.kg).toLocaleString("en-IN")+" kg"],
+  ["Sand",9,"River / M-sand, washed",a=>Math.round(a*1.8).toLocaleString("en-IN")+" cft"],
+  ["Aggregate",7,"20 mm & 40 mm jelly",a=>Math.round(a*1.35).toLocaleString("en-IN")+" cft"],
+  ["Bricks / blocks",14,"Red bricks or AAC blocks",a=>Math.round(a*8).toLocaleString("en-IN")+" nos"],
+  ["Electrical & plumbing",18,"Wiring, conduits, CPVC pipes",null],
+  ["Waterproofing",6,"Salt-air & monsoon protection",null],
+  ["Shuttering & misc",6,"Centring, binding wire, curing",null]];
+const LAB=[["Civil & masonry",55,"Foundation, columns, slabs, walls"],["Steel fixing",15,"Bar bending & tying"],["Electrical & plumbing",15,"Fitting and testing"],["Site supervision",15,"Engineer & daily QC"]];
+const FIN=[["Flooring",30,"floor"],["Painting",22,"paint"],["Doors & windows",28,"door"],["Kitchen & bath fittings",20,"fit"]];
+const $=id=>document.getElementById(id);
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const short=n=>n>=1e7?"₹"+(n/1e7).toFixed(2)+" Cr":"₹"+(n/1e5).toFixed(2)+" L";
+let tier="standard";
+
+$("tiers").innerHTML=Object.entries(TIERS).map(([k,t])=>`<label class="tier${k===tier?" on":""}" data-k="${k}"><input type="radio" name="tier" value="${k}"${k===tier?" checked":""}><span><b>${t.name}</b><small>${t.note}</small></span><span class="rate">₹${t.rate.toLocaleString("en-IN")}<em>per sq ft</em></span></label>`).join("");
+
+function group(title,color,pct,amount,lines,open){
+  return `<details class="group"${open?" open":""}><summary><span class="dot" style="background:${color}"></span><b>${title}</b><span class="pc">${pct}%</span><span class="amt">${inr(amount)}</span></summary><div class="lines">${lines}</div></details>`;
+}
+function render(){
+  let a=parseInt($("sqft").value,10);if(!a||a<0)a=0;
+  const t=TIERS[tier];const total=a*t.rate;
+  const [pm,pl,pf]=t.split;const m=total*pm/100,l=total*pl/100,f=total*pf/100;
+  $("total").textContent=inr(total);
+  $("range").textContent=a?`${short(total*0.9)} – ${short(total*1.1)} likely range`:"Enter your area to see the cost";
+  $("rate").textContent="₹"+t.rate.toLocaleString("en-IN")+"/sq ft";
+  $("time").textContent=a?Math.max(4,Math.ceil(a/450)+2+t.months)+" months":"—";
+  $("steel").textContent=t.steel;
+  [...$("bar").children].forEach((el,i)=>el.style.flexGrow=t.split[i]);
+  $("legend").innerHTML=[["Materials","--c-mat",pm],["Labour","--c-lab",pl],["Finishing","--c-fin",pf]].map(([n,c,p])=>`<span><i style="background:var(${c})"></i>${n} ${p}%</span>`).join("");
+  const matL=MAT.map(([n,p,spec,q])=>`<div class="line"><span>${n}</span><span class="v">${inr(m*p/100)}</span><span class="spec">${spec||(t.steel+" TMT bars")}</span>${q?`<span class="q">${q(a,t)}</span>`:"<span></span>"}</div>`).join("");
+  const labL=LAB.map(([n,p,spec])=>`<div class="line"><span>${n}</span><span class="v">${inr(l*p/100)}</span><span class="spec">${spec}</span><span></span></div>`).join("");
+  const finL=FIN.map(([n,p,k])=>`<div class="line"><span>${n}</span><span class="v">${inr(f*p/100)}</span><span class="spec">${t.fin[k]}</span><span></span></div>`).join("");
+  const open=[...document.querySelectorAll(".group")].map(d=>d.open);
+  $("groups").innerHTML=group("Materials","var(--c-mat)",pm,m,matL,open.length?open[0]:true)+group("Labour","var(--c-lab)",pl,l,labL,open[1]||false)+group("Finishing","var(--c-fin)",pf,f,finL,open[2]||false);
+  const msg=`Hi Coastal Builders, I'd like an exact quote.\n\nArea: ${a.toLocaleString("en-IN")} sq ft\nQuality: ${t.name} (₹${t.rate}/sq ft)\nEstimate: ${inr(total)}\n• Materials: ${inr(m)}\n• Labour: ${inr(l)}\n• Finishing: ${inr(f)}\n\nPlot location: `;
+  $("quote").href="https://wa.me/916301521358?text="+encodeURIComponent(msg);
+  try{localStorage.setItem("cb-est",JSON.stringify({a,tier}))}catch(e){}
+}
+$("sqft").addEventListener("input",()=>{const v=parseInt($("sqft").value,10)||0;$("slider").value=Math.min(6000,Math.max(300,v));render()});
+$("slider").addEventListener("input",()=>{$("sqft").value=$("slider").value;render()});
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{$("sqft").value=c.dataset.a;$("slider").value=c.dataset.a;render()}));
+$("tiers").addEventListener("change",e=>{tier=e.target.value;document.querySelectorAll(".tier").forEach(el=>el.classList.toggle("on",el.dataset.k===tier));render()});
+try{const s=JSON.parse(localStorage.getItem("cb-est")||"null");if(s&&TIERS[s.tier]){tier=s.tier;$("sqft").value=s.a;$("slider").value=Math.min(6000,Math.max(300,s.a));document.querySelectorAll(".tier").forEach(el=>{el.classList.toggle("on",el.dataset.k===tier);el.querySelector("input").checked=el.dataset.k===tier})}}catch(e){}
+render();
+</script>
+
+</body></html>

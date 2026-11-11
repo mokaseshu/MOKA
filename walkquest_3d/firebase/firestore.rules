@@ -1,0 +1,65 @@
+rules_version = '2';
+
+// WalkQuest 3D security rules.
+// Profiles are publicly readable by signed-in players (leaderboards), but only
+// the owner can write them. Sessions, quests and territories are private.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+
+    match /users/{uid} {
+      allow read: if signedIn();
+      allow create, update: if isOwner(uid)
+        // Cheap sanity limits; Cloud Functions re-validate sessions.
+        && request.resource.data.coins is int
+        && request.resource.data.coins >= 0
+        && request.resource.data.xp is int
+        && request.resource.data.xp >= 0;
+      allow delete: if isOwner(uid);
+
+      match /sessions/{sessionId} {
+        allow read, write: if isOwner(uid);
+      }
+      match /quests/{questId} {
+        allow read, write: if isOwner(uid);
+      }
+      match /territories/{territoryId} {
+        // Territories are visible to everyone (map control), writable by owner.
+        allow read: if signedIn();
+        allow write: if isOwner(uid);
+      }
+      match /friends/{friendUid} {
+        allow read: if isOwner(uid);
+        // You may add/remove yourself in someone else's list (mutual friendship).
+        allow write: if isOwner(uid) || (signedIn() && request.auth.uid == friendUid);
+      }
+    }
+
+    match /friendCodes/{code} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && request.resource.data.uid == request.auth.uid
+        && (resource == null || resource.data.uid == request.auth.uid);
+    }
+
+    match /guilds/{guildId} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.memberUids == [request.auth.uid]
+        && request.resource.data.progressSteps == 0;
+      // Members may only add themselves; progress is written by Cloud Functions.
+      allow update: if signedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['memberUids'])
+        && request.resource.data.memberUids.removeAll(resource.data.memberUids) == [request.auth.uid];
+    }
+
+    match /challenges/{id} {
+      allow read: if signedIn() && (resource.data.fromUid == request.auth.uid || resource.data.toUid == request.auth.uid);
+      allow create: if signedIn() && request.resource.data.fromUid == request.auth.uid;
+      allow update: if signedIn() && resource.data.toUid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']);
+    }
+  }
+}

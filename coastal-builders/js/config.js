@@ -1,0 +1,40 @@
+window.CB_CONFIG = {
+  companyName: "Coastal Builders",
+  tagline: "We build homes Vizag trusts.",
+  phone: "+916301521358",
+  phoneDisplay: "+91 63015 21358",
+  whatsapp: "916301521358",
+  email: "hello@coastalbuilders.in",
+  address: "Plot 24, Sector 6, MVP Colony, Visakhapatnam, Andhra Pradesh 530017",
+  addressShort: "MVP Colony, Visakhapatnam",
+  hours: "Mon – Sat · 9:00 AM – 7:00 PM",
+  hoursShort: "Mon–Sat 9–7",
+  mapsLink: "https://maps.google.com/?q=MVP+Colony+Visakhapatnam",
+  mapsEmbed: "https://maps.google.com/maps?q=MVP%20Colony%2C%20Visakhapatnam&t=&z=14&ie=UTF8&iwloc=&output=embed",
+  yearsInBusiness: 14,
+  foundedYear: 2012,
+  projectsCompleted: 180,
+  googleRating: 4.9,
+  googleReviews: 126,
+  sqftBuilt: 640000,
+  familiesHoused: 152,
+  daysAhead: 11,
+  warrantyYears: 10,
+  ownerName: "Ravi Varma",
+  ownerTitle: "Founder & Principal Engineer, B.Tech Civil",
+  serviceAreas: ["MVP Colony", "Madhurawada", "Rushikonda", "Gajuwaka", "Seethammadhara", "PM Palem", "Bheemili", "Anakapalli"],
+  social: {
+    instagram: "https://instagram.com/",
+    facebook: "https://facebook.com/",
+    youtube: "https://youtube.com/",
+    linkedin: "https://linkedin.com/"
+  },
+  videos: {
+    heroDrone: "",
+    heroDroneMobile: "",
+    buildTransform: "",
+    siteWalk: "",
+    interiorWalk: ""
+  },
+  credit:{ name: "RootFix", link: "https://wa.me/916301521358" }
+};
