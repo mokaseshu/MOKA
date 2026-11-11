@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book a Dentist Appointment in Guntur Online | BrightSmile Dental</title>
+<meta name="description" content="Book your dental appointment in Guntur online or on WhatsApp in 30 seconds. Pick a treatment, date and time — BrightSmile Dental confirms within minutes. No phone queues.">
+<link rel="canonical" href="https://mokaseshu.github.io/MOKA/brightsmile-dental/book.html">
+<meta name="theme-color" content="#f6f3ee">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BrightSmile Dental">
+<meta property="og:title" content="Book an appointment – BrightSmile Dental, Guntur">
+<meta property="og:description" content="Book online or on WhatsApp in 30 seconds. No phone queues.">
+<meta property="og:url" content="https://mokaseshu.github.io/MOKA/brightsmile-dental/book.html">
+<meta property="og:image" content="https://mokaseshu.github.io/MOKA/brightsmile-dental/assets/og-image.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Book an appointment – BrightSmile Dental, Guntur">
+<meta name="twitter:description" content="Book online or on WhatsApp in 30 seconds.">
+<meta name="twitter:image" content="https://mokaseshu.github.io/MOKA/brightsmile-dental/assets/og-image.jpg">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script defer src="js/main.js"></script>
+</head>
+<body data-page="book">
+<main id="main" tabindex="-1">
+
+  <section class="page-hero" style="padding-bottom: var(--space-lg)" aria-labelledby="page-title">
+    <div class="container page-hero__inner">
+      <ol class="crumbs" data-reveal><li><a href="index.html">Home</a></li><li><span aria-current="page">Book</span></li></ol>
+      <p class="overline" data-reveal>Book an appointment</p>
+      <h1 class="h1" id="page-title" data-reveal>Book in 30 seconds. <em>No phone queues.</em></h1>
+      <p class="lead" data-reveal>Choose a time that suits you. We confirm on WhatsApp within minutes during clinic hours, and remind you the day before.</p>
+    </div>
+  </section>
+
+  <section class="section" style="--pad: var(--space-md) var(--space-2xl)" aria-label="Booking options">
+    <div class="container book-grid">
+      <div class="stack" style="--flow: var(--space-md)">
+        <div class="card" data-cal-wrap hidden>
+          <div class="stack" style="--flow:10px; margin-bottom:18px">
+            <p class="overline overline--plain">Option 1 · Online calendar</p>
+            <h2 class="h3">Pick a live slot</h2>
+            <p class="muted small">Real-time availability, instant confirmation and automatic email reminders.</p>
+          </div>
+          <div class="cal-embed" id="cal-inline"></div>
+        </div>
+
+        <div class="card form-wrap" data-reveal>
+          <div class="stack" style="--flow:10px; margin-bottom:24px">
+            <p class="overline overline--plain"><span class="no-cal-hide">Option 2 · </span>Book on WhatsApp</p>
+            <h2 class="h3">Send us your preferred time</h2>
+            <p class="muted small">Fill this in and WhatsApp opens with a neat, ready-to-send message.</p>
+          </div>
+          <form class="form" id="book-form" data-wa-form novalidate>
+            <div class="form__row">
+              <div class="field">
+                <label for="bf-name">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="bf-name" name="name" type="text" autocomplete="name" placeholder="e.g. Priya Reddy" required>
+              </div>
+              <div class="field">
+                <label for="bf-phone">Mobile number <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="bf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98xxxxxx10" required>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="bf-treatment">Treatment <span class="req" aria-hidden="true">*</span></label>
+                <select class="select" id="bf-treatment" name="treatment" data-treatments required><option value="">Select a treatment</option></select>
+              </div>
+              <div class="field">
+                <label for="bf-date">Preferred date <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="bf-date" name="date" type="date" required>
+              </div>
+            </div>
+            <fieldset class="slots">
+              <legend>Preferred time <span class="req" aria-hidden="true">*</span></legend>
+              <label class="slot"><input type="radio" name="slot" value="Morning (9:30 AM – 12 PM)" required><span>Morning<small>9:30 – 12</small></span></label>
+              <label class="slot"><input type="radio" name="slot" value="Afternoon (12 – 4 PM)"><span>Afternoon<small>12 – 4</small></span></label>
+              <label class="slot"><input type="radio" name="slot" value="Evening (4 – 8:30 PM)"><span>Evening<small>4 – 8:30</small></span></label>
+            </fieldset>
+            <div class="field">
+              <label for="bf-msg">Message <span class="muted">(optional)</span></label>
+              <textarea class="textarea" id="bf-msg" name="message" placeholder="Anything we should know? e.g. first visit, tooth pain on the left side"></textarea>
+            </div>
+            <button class="btn btn--coral btn--lg btn--block" type="submit"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg> Book on WhatsApp</button>
+            <p class="form__note"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>Please don't share medical records here. Your details are only used to confirm your appointment.</p>
+          </form>
+          <div class="form-success" role="status" aria-live="polite">
+            <svg class="tick" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="40"/><path d="M27 43.5 37.5 54 58 32"/></svg>
+            <h3>You're almost booked, <span data-success-name>friend</span>.</h3>
+            <p>WhatsApp has opened with your appointment request. Just tap send — we'll confirm your slot within minutes.</p>
+            <div class="btn-row" style="justify-content:center">
+              <a class="btn btn--sm btn--outline" data-wa-again href="#" target="_blank" rel="noopener">Open WhatsApp again</a>
+              <button class="btn btn--sm btn--light" type="button" data-form-reset>Book another</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-info" aria-label="Clinic details">
+        <div class="card card--pearl stack" style="--flow:14px">
+          <p class="h4">Clinic timings</p>
+          <table class="hours-table" data-hours-table><tbody><tr><td>Monday – Saturday</td><td>9:30 AM – 8:30 PM</td></tr><tr><td>Sunday</td><td>10 AM – 1:30 PM</td></tr></tbody></table>
+          <p class="small"><span class="status-dot" data-open-dot style="display:inline-block;margin-right:8px"></span><span data-open-status></span></p>
+        </div>
+        <div class="card stack" style="--flow:14px">
+          <p class="h4">What happens next</p>
+          <ol class="timeline" role="list">
+            <li><strong>Within minutes</strong><span>We confirm your exact time on WhatsApp</span></li>
+            <li><strong>Day before</strong><span>A friendly reminder with directions</span></li>
+            <li><strong>Your visit</strong><span>Walk in and get seen on time</span></li>
+          </ol>
+        </div>
+        <div class="card stack" style="--flow:12px">
+          <p class="h4">Prefer to talk?</p>
+          <a class="btn btn--outline btn--block" data-cfg-href="tel" href="tel:+916301521358"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg> <span data-cfg="phoneDisplay">+91 63015 21358</span></a>
+          <a class="link-arrow" data-cfg-href="maps" href="https://maps.google.com"><span data-cfg-address>Brodipet, Guntur</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

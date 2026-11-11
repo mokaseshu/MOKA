@@ -1,0 +1,568 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PN Digital</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a build sheet — left-aligned headings, mono spec labels, browser-frame previews as the hero object */
+:root{
+  --paper:#f5f6f9;
+  --sheet:#ffffff;
+  --ink:#10142a;
+  --graphite:#5a6077;
+  --line:#dde0ea;
+  --cobalt:#2b46d6;
+  --cobalt-soft:#e6eaff;
+  --wa:#1fa855;
+  --wa-bubble:#dcf8c6;
+  --wa-ground:#efe7dd;
+  --amber:#c27a00;
+  --display:"Unbounded",ui-sans-serif,system-ui,sans-serif;
+  --body:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0c0f1d;--sheet:#141831;--ink:#eef0fa;--graphite:#9aa1bd;--line:#262b4a;
+  --cobalt:#7b8fff;--cobalt-soft:#1d2450;--wa:#3ccf75;--wa-bubble:#1f4a33;--wa-ground:#0f1a17;--amber:#f0b44a;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0c0f1d;--sheet:#141831;--ink:#eef0fa;--graphite:#9aa1bd;--line:#262b4a;
+  --cobalt:#7b8fff;--cobalt-soft:#1d2450;--wa:#3ccf75;--wa-bubble:#1f4a33;--wa-ground:#0f1a17;--amber:#f0b44a;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.12}
+p{margin:0}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid var(--ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--display);font-weight:800;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--cobalt);color:#fff;font-style:normal;font-size:13px}
+.nav nav{display:flex;gap:22px;font-weight:500}
+.nav nav a{text-decoration:none;color:var(--graphite)}
+.nav nav a:hover{color:var(--ink)}
+.nav .btn{padding:9px 16px;font-size:14px}
+@media (max-width:760px){.nav nav{display:none}}
+
+.hero{padding-block:72px 56px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero>div{min-width:0}
+.hero h1{font-size:clamp(34px,5.4vw,64px);font-weight:800;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--cobalt)}
+.hero .lede{margin-top:20px;font-size:18px;color:var(--graphite);max-width:52ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+.facts b{display:block;font-family:var(--display);font-size:22px}
+.facts span{font-size:14px;color:var(--graphite)}
+@media (max-width:900px){.hero{grid-template-columns:1fr;padding-block:48px 40px}}
+
+.stack{position:relative;height:420px}
+.frame{position:absolute;background:var(--sheet);border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 60px -30px rgba(16,20,42,.35);overflow:hidden}
+.frame .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--graphite)}
+.frame .bar s{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.frame .bar u{text-decoration:none;margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f1{inset:0 18% 22% 0;animation:rise .8s ease-out both}
+.f2{inset:30% 0 0 30%;animation:rise .8s .15s ease-out both}
+@keyframes rise{from{transform:translateY(18px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.f1,.f2{animation:none}.btn{transition:none}}
+@media (max-width:520px){.stack{height:340px}}
+
+.mk-re{height:100%;background:linear-gradient(160deg,#111 0%,#2b2b2b 100%);color:#fff;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+.mk-re small{font-family:var(--mono);font-size:10px;letter-spacing:.14em;opacity:.7}
+.mk-re strong{font-family:var(--display);font-size:clamp(18px,2.4vw,26px);line-height:1.1}
+.mk-re .pills{display:flex;gap:6px;flex-wrap:wrap}
+.mk-re .pills span{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px 10px;font-size:11px}
+.mk-den{height:100%;background:#f2fbfa;color:#0d3b3a;padding:18px;display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:center}
+.mk-den strong{font-family:var(--display);font-size:clamp(15px,1.8vw,20px);line-height:1.15;display:block}
+.mk-den p{font-size:11px;margin-top:6px;color:#3f6d6b}
+.mk-den .book{margin-top:10px;display:inline-block;background:#0f8f88;color:#fff;border-radius:999px;padding:6px 12px;font-size:11px;font-weight:600}
+.mk-den .slots{display:grid;gap:6px}
+.mk-den .slots span{background:#fff;border:1px solid #cfe9e6;border-radius:8px;padding:6px 8px;font-family:var(--mono);font-size:10px}
+.mk-den .slots span.on{background:#0f8f88;color:#fff;border-color:#0f8f88}
+
+section{padding-block:72px}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(26px,3.4vw,40px);font-weight:700;margin-top:10px;max-width:22ch}
+.sec-head p{color:var(--graphite);max-width:46ch}
+
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:980px){.work{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.work{grid-template-columns:1fr}}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.thumb{aspect-ratio:16/10;max-width:100%;position:relative;display:flex;align-items:flex-end;padding:16px;color:#fff}
+.thumb .tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.92);color:#10142a}
+.thumb .tag.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#1fa855;margin-right:6px;vertical-align:1px}
+.thumb .tag.build::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#e09b00;margin-right:6px;vertical-align:1px}
+.thumb .tag.pitch::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#2b46d6;margin-right:6px;vertical-align:1px}
+.thumb b{font-family:var(--display);font-size:22px;line-height:1.1;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.t-rev{background:linear-gradient(135deg,#1b2a4a,#3b5a8f 60%,#c79a3b)}
+.t-slns{background:linear-gradient(135deg,#0b0b0b,#3a3a3a)}
+.t-chak{background:linear-gradient(135deg,#0e3b5c,#1d7aa8)}
+.t-pet{background:linear-gradient(135deg,#f08a24,#f6c344)}
+.t-roof{background:linear-gradient(135deg,#5a2a1a,#a5532d)}
+.t-biry{background:linear-gradient(135deg,#6b1f12,#d9822b)}
+.card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .meta{font-family:var(--mono);font-size:12px;color:var(--graphite)}
+.card h3{font-size:18px;font-weight:700}
+.card p{color:var(--graphite);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.chips span{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--cobalt-soft);color:var(--cobalt);font-weight:600}
+.card a.visit{font-weight:600;color:var(--cobalt);text-decoration:none;font-size:14px}
+
+.demos{display:grid;gap:28px}
+.demo{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center;background:var(--sheet);border:1px solid var(--line);border-radius:20px;padding:24px}
+.demo:nth-child(even){grid-template-columns:1fr 1.3fr}
+.demo:nth-child(even) .demo-shot{order:2}
+.demo>div{min-width:0}
+@media (max-width:860px){.demo,.demo:nth-child(even){grid-template-columns:1fr}.demo:nth-child(even) .demo-shot{order:0}}
+.demo-shot{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.demo-shot .bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--paper);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--graphite)}
+.demo-shot .bar s{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.demo-shot .bar u{text-decoration:none;margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.demo h3{font-size:clamp(22px,2.6vw,30px);margin-top:10px}
+.demo .desc{color:var(--graphite);margin-top:12px}
+.demo ul{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.demo li{display:flex;gap:10px;font-size:15px}
+.demo li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;background:var(--cobalt-soft);box-shadow:inset 0 0 0 5px var(--cobalt-soft),inset 0 0 0 9px var(--cobalt)}
+.demo-flag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--amber);border:1px solid currentColor;border-radius:6px;padding:2px 8px}
+
+.re{background:#0d0d0d;color:#f4f1ea;font-family:var(--body)}
+.re-nav{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid #262626}
+.re-nav b{font-family:var(--display);letter-spacing:.04em;font-size:12px}
+.re-hero{padding:28px 18px 18px;background:radial-gradient(ellipse at 80% 0%,#3a3a3a,transparent 60%)}
+.re-hero small{font-family:var(--mono);font-size:10px;opacity:.6;letter-spacing:.14em}
+.re-hero strong{display:block;font-family:var(--display);font-size:clamp(20px,3vw,30px);line-height:1.08;margin-top:8px}
+.re-search{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;background:#1a1a1a;border:1px solid #2e2e2e;border-radius:10px;padding:8px}
+.re-search span{flex:1 1 90px;font-size:11px;padding:6px 8px;border-radius:6px;background:#111;color:#bbb}
+.re-search span.go{flex:0 0 auto;background:#f4f1ea;color:#0d0d0d;font-weight:700}
+.re-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 18px 18px}
+.re-list div{background:#171717;border:1px solid #262626;border-radius:8px;padding:8px}
+.re-list i{display:block;height:46px;border-radius:5px;background:linear-gradient(135deg,#444,#222);margin-bottom:6px}
+.re-list i.b{background:linear-gradient(135deg,#5b5146,#2a2622)}
+.re-list i.c{background:linear-gradient(135deg,#3d4a52,#1e2428)}
+.re-list b{display:block;font-size:11px}
+.re-list em{font-style:normal;font-family:var(--mono);font-size:10px;color:#aaa}
+
+.den{background:#f2fbfa;color:#0d3b3a}
+.den-nav{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font-size:12px;border-bottom:1px solid #d6efec}
+.den-nav b{font-family:var(--display);font-size:13px;color:#0f8f88}
+.den-nav span{background:#0f8f88;color:#fff;border-radius:999px;padding:4px 10px;font-weight:600;font-size:11px}
+.den-body{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;padding:20px 18px}
+.den-body>div{min-width:0}
+.den-body strong{font-family:var(--display);font-size:clamp(17px,2.4vw,24px);line-height:1.12;display:block}
+.den-body p{font-size:12px;color:#3f6d6b;margin-top:8px}
+.den-tx{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.den-tx span{font-size:10px;border:1px solid #bfe3df;border-radius:999px;padding:3px 8px;background:#fff}
+.den-book{background:#fff;border:1px solid #d6efec;border-radius:10px;padding:10px;display:grid;gap:6px}
+.den-book b{font-size:11px}
+.den-book .days{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.den-book .days span{font-family:var(--mono);font-size:10px;text-align:center;padding:5px 0;border-radius:6px;background:#eef8f7}
+.den-book .days span.on{background:#0f8f88;color:#fff}
+.den-book .times{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.den-book .times span{font-family:var(--mono);font-size:10px;text-align:center;padding:5px 0;border-radius:6px;border:1px solid #d6efec}
+.den-book .times span.on{border-color:#0f8f88;color:#0f8f88;font-weight:600}
+.den-book .cta{background:#25d366;color:#fff;text-align:center;border-radius:8px;padding:7px;font-size:11px;font-weight:700}
+@media (max-width:460px){.den-body{grid-template-columns:1fr}.re-list{grid-template-columns:1fr 1fr}.re-list div:last-child{display:none}}
+
+.gym{background:#141414;color:#f2f2f2}
+.gym-nav{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font-size:12px;border-bottom:1px solid #2a2a2a}
+.gym-nav b{font-family:var(--display);color:#d4ff3a;font-size:13px}
+.gym-hero{padding:22px 18px}
+.gym-hero strong{font-family:var(--display);font-size:clamp(22px,3.2vw,34px);line-height:1;text-transform:uppercase;display:block}
+.gym-hero strong span{color:#d4ff3a}
+.gym-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.gym-plans div{border:1px solid #2e2e2e;border-radius:8px;padding:10px;font-size:11px}
+.gym-plans div.hot{border-color:#d4ff3a}
+.gym-plans b{display:block;font-family:var(--display);font-size:15px;margin-top:4px}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{padding:22px;border-top:3px solid var(--ink);background:var(--sheet);border-radius:0 0 14px 14px;counter-increment:s}
+.step::before{content:"Step " counter(s);font-family:var(--mono);font-size:12px;color:var(--cobalt);font-weight:600}
+.step h3{font-size:17px;margin-top:10px}
+.step p{color:var(--graphite);font-size:15px;margin-top:8px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--sheet)}
+@media (max-width:860px){.services{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.services{grid-template-columns:1fr}}
+.svc{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.svc h3{font-family:var(--body);font-size:17px;font-weight:700}
+.svc p{color:var(--graphite);font-size:15px;margin-top:6px}
+
+.reviews-band{background:var(--sheet);border-block:1px solid var(--line)}
+.chats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:980px){.chats{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.chats{grid-template-columns:1fr}}
+.chat{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--wa-ground);display:flex;flex-direction:column}
+.chat-top{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#075e54;color:#fff}
+.chat-top i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-style:normal;font-weight:700;font-size:13px;flex:none}
+.chat-top b{display:block;font-size:14px}
+.chat-top small{font-size:11px;opacity:.8}
+.chat-feed{padding:16px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.bub{max-width:88%;padding:8px 10px 18px;border-radius:10px;font-size:14px;position:relative;line-height:1.45}
+.bub.in{background:var(--sheet);align-self:flex-start;border-top-left-radius:2px}
+.bub.out{background:var(--wa-bubble);align-self:flex-end;border-top-right-radius:2px}
+.bub.slot{border:1.5px dashed var(--graphite);background:transparent;color:var(--graphite);font-style:italic;max-width:100%}
+.bub time{position:absolute;right:8px;bottom:3px;font-size:10px;color:var(--graphite);font-family:var(--mono);font-style:normal}
+.review-note{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:18px 22px;border-radius:14px;background:var(--cobalt-soft)}
+.review-note p{max-width:62ch;font-size:15px}
+
+.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.contact>div{min-width:0}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+.contact h2{font-size:clamp(28px,4vw,48px);font-weight:800}
+.contact .lede{color:var(--graphite);margin-top:14px;max-width:48ch}
+.phone{background:var(--sheet);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:14px}
+.phone .num{font-family:var(--mono);font-size:clamp(22px,3vw,28px);font-weight:600;font-variant-numeric:tabular-nums;user-select:all}
+.phone .row{display:flex;flex-wrap:wrap;gap:10px}
+.phone button{font:inherit;font-weight:600;cursor:pointer;background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:11px 18px}
+.phone small{color:var(--graphite);font-size:13px}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--graphite);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><i>PN</i>PN Digital</a>
+    <nav>
+      <a href="#work">Client work</a>
+      <a href="#demos">Demos</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn wa" href="https://wa.me/916301521358" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <p class="label">Web studio · Andhra Pradesh · Working worldwide</p>
+      <h1 style="margin-top:14px">Websites that make your <em>phone ring.</em></h1>
+      <p class="lede">PN Digital designs and builds premium websites for real estate firms, clinics, restaurants and local service businesses. Every site is designed in Figma first, built fast, and wired straight to your WhatsApp so enquiries come to you.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#work">See client work</a>
+        <a class="btn wa" href="https://wa.me/916301521358?text=Hi%20PN%20Digital%2C%20I%20want%20a%20website" target="_blank" rel="noopener">Start on WhatsApp</a>
+      </div>
+      <div class="facts">
+        <div><b>6</b><span>client &amp; brand projects</span></div>
+        <div><b>Figma → Live</b><span>design-first process</span></div>
+        <div><b>1 point</b><span>of contact, start to launch</span></div>
+      </div>
+    </div>
+    <div class="stack" aria-hidden="true">
+      <div class="frame f1">
+        <div class="bar"><s></s><s></s><s></s><u>skyline-residences · demo</u></div>
+        <div class="mk-re">
+          <small>GACHIBOWLI · HYDERABAD</small>
+          <strong>Homes above the city. Possession 2027.</strong>
+          <div class="pills"><span>2 &amp; 3 BHK</span><span>RERA listed</span><span>Site visit</span></div>
+        </div>
+      </div>
+      <div class="frame f2">
+        <div class="bar"><s></s><s></s><s></s><u>smile-studio-dental · demo</u></div>
+        <div class="mk-den">
+          <div>
+            <strong>Painless dental care, booked in a minute.</strong>
+            <p>Implants · Aligners · Root canal</p>
+            <span class="book">Book on WhatsApp</span>
+          </div>
+          <div class="slots"><span>Mon 10:00</span><span class="on">Tue 11:30</span><span>Wed 17:00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">Client work</p>
+          <h2>Real businesses, real builds</h2>
+        </div>
+        <p>Each project is marked with its actual status: live, in build, or a concept pitched to the business.</p>
+      </div>
+      <div class="work">
+        <article class="card">
+          <div class="thumb t-rev"><span class="tag live">Live</span><b>Revanth Autozone</b></div>
+          <div class="body">
+            <p class="meta">Bhimavaram · Gates &amp; shutters</p>
+            <h3>WhatsApp-led service site</h3>
+            <p>Automatic gates, shutters and glass work. Built on Shopify as an enquiry site, with local SEO across a 120 km radius and Google review collection.</p>
+            <a class="visit" href="https://revanthautozone.in" target="_blank" rel="noopener">revanthautozone.in ↗</a>
+            <div class="chips"><span>Shopify</span><span>Local SEO</span><span>Google Ads</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t-slns"><span class="tag build">In build</span><b>SLNS Properties</b></div>
+          <div class="body">
+            <p class="meta">Gachibowli, Hyderabad · Real estate</p>
+            <h3>Black &amp; white premium property site</h3>
+            <p>Website and Google Business Profile for Sri Lakshmi Narasimha Swamy Properties Pvt Ltd, designed in Figma with a monochrome luxury feel.</p>
+            <div class="chips"><span>Figma</span><span>Real estate</span><span>Google Profile</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t-chak"><span class="tag build">In build</span><b>Chakradhar Engineering</b></div>
+          <div class="body">
+            <p class="meta">Engineering · Industrial products</p>
+            <h3>10-page animated business site</h3>
+            <p>Products, product details, services, gallery, industries and contact pages, with a light and dark theme switch.</p>
+            <div class="chips"><span>Static site</span><span>Animation</span><span>Dark mode</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t-pet"><span class="tag pitch">Concept pitch</span><b>Pet2Door</b></div>
+          <div class="body">
+            <p class="meta">Guntur · Pet food delivery</p>
+            <h3>Delivery site with WhatsApp ordering</h3>
+            <p>A demo site pitched to the brand, with a tool for sending WhatsApp updates to many customers at once.</p>
+            <div class="chips"><span>Figma</span><span>WhatsApp tool</span><span>GitHub Pages</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t-roof"><span class="tag live">Portfolio</span><b>Summit Peak Roofing</b></div>
+          <div class="body">
+            <p class="meta">Roofing · Service business</p>
+            <h3>Lead-focused roofing website</h3>
+            <p>A trust-first service site built to turn visitors into quote requests, made for international clients.</p>
+            <div class="chips"><span>Lead forms</span><span>Service site</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t-biry"><span class="tag build">Own brand</span><b>Biryanibox</b></div>
+          <div class="body">
+            <p class="meta">Cloud kitchen · Food ordering</p>
+            <h3>Ordering site for our own kitchen</h3>
+            <p>Our own cloud-kitchen brand, with free delivery on orders of three or more. Proof we build what we use.</p>
+            <div class="chips"><span>Ordering</span><span>.in domain</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="demos" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">Industry demos</p>
+          <h2>What your site could look like</h2>
+        </div>
+        <p>Concept designs built by PN Digital to show the approach for each industry. These are demos, not client sites.</p>
+      </div>
+      <div class="demos">
+        <div class="demo">
+          <div class="demo-shot">
+            <div class="bar"><s></s><s></s><s></s><u>skyline-residences.in</u></div>
+            <div class="re">
+              <div class="re-nav"><b>SKYLINE</b><span>Projects · Amenities · Visit</span></div>
+              <div class="re-hero">
+                <small>RERA REGISTERED · POSSESSION DEC 2027</small>
+                <strong>2 &amp; 3 BHK residences in Gachibowli</strong>
+                <div class="re-search"><span>Location: Gachibowli</span><span>Type: 3 BHK</span><span>Budget: ₹1.2–1.8 Cr</span><span class="go">Search</span></div>
+              </div>
+              <div class="re-list">
+                <div><i></i><b>Tower A · 3 BHK</b><em>1,850 sq ft · East</em></div>
+                <div><i class="b"></i><b>Tower B · 2 BHK</b><em>1,240 sq ft · North</em></div>
+                <div><i class="c"></i><b>Villa plot</b><em>240 sq yd</em></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="demo-flag">Demo · Real estate</span>
+            <h3>Skyline Residences</h3>
+            <p class="desc">A builder site that answers the three questions buyers ask first: price, possession date and RERA status.</p>
+            <ul>
+              <li>Property search by location, BHK and budget</li>
+              <li>Floor plans in sq ft with facing direction</li>
+              <li>One-tap site visit booking on WhatsApp</li>
+              <li>Google Business Profile and map setup</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="demo">
+          <div class="demo-shot">
+            <div class="bar"><s></s><s></s><s></s><u>smilestudiodental.in</u></div>
+            <div class="den">
+              <div class="den-nav"><b>Smile Studio</b><span>Book visit</span></div>
+              <div class="den-body">
+                <div>
+                  <strong>Gentle dental care for the whole family</strong>
+                  <p>Clear pricing before treatment. Same-week appointments.</p>
+                  <div class="den-tx"><span>Cleaning</span><span>Root canal</span><span>Implants</span><span>Aligners</span><span>Kids</span></div>
+                </div>
+                <div class="den-book">
+                  <b>Pick a slot</b>
+                  <div class="days"><span>Mon</span><span class="on">Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
+                  <div class="times"><span>10:00</span><span class="on">11:30</span><span>17:00</span></div>
+                  <div class="cta">Confirm on WhatsApp</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="demo-flag">Demo · Dental clinic</span>
+            <h3>Smile Studio Dental</h3>
+            <p class="desc">A calm clinic site that lowers patient anxiety and gets the appointment booked before they call anyone else.</p>
+            <ul>
+              <li>Day and time slot picker that sends to WhatsApp</li>
+              <li>Treatment pages for implants, aligners and RCT</li>
+              <li>Doctor profile with qualifications and clinic photos</li>
+              <li>"Dentist near me" local SEO setup</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="demo">
+          <div class="demo-shot">
+            <div class="bar"><s></s><s></s><s></s><u>ironhousefitness.in</u></div>
+            <div class="gym">
+              <div class="gym-nav"><b>IRONHOUSE</b><span>Plans · Trainers · Join</span></div>
+              <div class="gym-hero">
+                <strong>Train hard. <span>Start free.</span></strong>
+                <div class="gym-plans">
+                  <div>Monthly<b>₹1,499</b></div>
+                  <div class="hot">Quarterly<b>₹3,999</b></div>
+                  <div>Yearly<b>₹12,999</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="demo-flag">Demo · Gym &amp; fitness</span>
+            <h3>Ironhouse Fitness</h3>
+            <p class="desc">A bold membership site built around one action: claim a free trial session.</p>
+            <ul>
+              <li>Plan cards with clear monthly pricing</li>
+              <li>Free trial form that lands in WhatsApp</li>
+              <li>Trainer profiles and class timetable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">How a project runs</p>
+          <h2>From first message to live site</h2>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>WhatsApp chat</h3><p>You share your business, photos and the result you want. No forms, no meetings needed.</p></div>
+        <div class="step"><h3>Figma design</h3><p>You see the full design before any code. Change colours, sections and text until it feels right.</p></div>
+        <div class="step"><h3>Build &amp; connect</h3><p>The site is built fast and mobile-first, with WhatsApp buttons, maps and your domain connected.</p></div>
+        <div class="step"><h3>Launch &amp; grow</h3><p>Google Business Profile, local SEO and ads setup so customers can find you after launch.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">Services</p>
+          <h2>Everything a local business needs online</h2>
+        </div>
+      </div>
+      <div class="services">
+        <div class="svc"><h3>Business websites</h3><p>Premium multi-page sites designed in Figma, with light and dark themes.</p></div>
+        <div class="svc"><h3>Shopify stores</h3><p>Product shops or WhatsApp-enquiry service stores on your own domain.</p></div>
+        <div class="svc"><h3>Google Business Profile</h3><p>Setup, photos and review collection so you show up on Maps.</p></div>
+        <div class="svc"><h3>Local SEO</h3><p>Rank for "near me" searches in your city and surrounding towns.</p></div>
+        <div class="svc"><h3>Meta &amp; Google Ads</h3><p>Ad setup with posters and short videos, aimed at calls and WhatsApp chats.</p></div>
+        <div class="svc"><h3>WhatsApp AI bots</h3><p>A bot that answers customer questions on WhatsApp, day and night.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="reviews-band">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="label">Client reviews</p>
+          <h2>What clients say on WhatsApp</h2>
+        </div>
+        <p>Messages shared with each client's permission.</p>
+      </div>
+      <div class="chats">
+        <div class="chat">
+          <div class="chat-top"><i>RA</i><div><b>Revanth Autozone</b><small>Bhimavaram</small></div></div>
+          <div class="chat-feed">
+            <div class="bub out">Your site is live on revanthautozone.in. Please check on your phone 🙏<time>—</time></div>
+            <div class="bub slot">Paste Revanth Autozone's real reply here, word for word.<time>—</time></div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="chat-top"><i>SL</i><div><b>SLNS Properties</b><small>Hyderabad</small></div></div>
+          <div class="chat-feed">
+            <div class="bub out">Sharing the Figma design for the home page. Black and white theme as discussed.<time>—</time></div>
+            <div class="bub slot">Paste SLNS Properties' real reply here once received.<time>—</time></div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="chat-top"><i>CE</i><div><b>Chakradhar Engineering</b><small>Client</small></div></div>
+          <div class="chat-feed">
+            <div class="bub out">All 10 pages are ready with the light and dark switch. Sending the link.<time>—</time></div>
+            <div class="bub slot">Paste Chakradhar Engineering's real reply here once received.<time>—</time></div>
+          </div>
+        </div>
+      </div>
+      <div class="review-note">
+        <p><b>Worked with PN Digital?</b> Send your honest feedback on WhatsApp, or leave a Google review. Every review shown here is a real client message.</p>
+        <a class="btn wa" href="https://wa.me/916301521358?text=Hi%2C%20here%20is%20my%20feedback%20for%20PN%20Digital%3A" target="_blank" rel="noopener">Send feedback</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <div>
+        <p class="label">Start a project</p>
+        <h2 style="margin-top:12px">Let's build the site your business deserves.</h2>
+        <p class="lede">Tell me your business name and what you sell. You'll get a design idea and a clear quote on WhatsApp, usually the same day.</p>
+      </div>
+      <div class="phone">
+        <span class="label">WhatsApp · Moka Seshu</span>
+        <span class="num" id="num">+91 63015 21358</span>
+        <div class="row">
+          <a class="btn wa" href="https://wa.me/916301521358?text=Hi%20PN%20Digital%2C%20I%20want%20a%20website" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <button type="button" id="copy">Copy number</button>
+        </div>
+        <small id="copyMsg">Replies within a few hours, 9 am to 9 pm IST.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 PN Digital · Moka Seshu</span>
+    <span>Designed in Figma · Built in Andhra Pradesh</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById("copy").addEventListener("click",()=>{
+  const msg=document.getElementById("copyMsg");
+  const done=()=>{msg.textContent="Number copied."};
+  const fallback=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById("num"));const s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent="Number selected. Press copy on your device."};
+  try{navigator.clipboard.writeText("+916301521358").then(done,fallback)}catch(e){fallback()}
+});
+</script>
+
+</body></html>

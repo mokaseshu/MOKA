@@ -1,0 +1,252 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Velura Salon Booking</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --plum:#3b1c3f;--blush:#f3d3cb;--gold:#b88a4a;
+  --bg:#fbf6f4;--surface:#ffffff;--ink:#2a1430;--muted:#7a6380;--line:#eadde0;--soft:#f7eeec;
+  --accent:var(--plum);--accent-ink:#fff6f2;--tint:var(--blush);--tint-ink:#3b1c3f;--ok:#2f8a5b;--bad:#b4373d;
+  --f-display:"Fraunces",Georgia,"Times New Roman",serif;--f-body:"Manrope",ui-sans-serif,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --plum:#e7b8d9;--blush:#4a2a46;--gold:#d9b072;
+  --bg:#150a17;--surface:#1f1222;--ink:#f6e9ef;--muted:#b89fb8;--line:#3a2540;--soft:#291830;
+  --accent:#e7b8d9;--accent-ink:#2a0f2b;--tint:#4a2a46;--tint-ink:#f6e0ea;--ok:#5fd39a;--bad:#ff7a80;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --plum:#e7b8d9;--blush:#4a2a46;--gold:#d9b072;
+  --bg:#150a17;--surface:#1f1222;--ink:#f6e9ef;--muted:#b89fb8;--line:#3a2540;--soft:#291830;
+  --accent:#e7b8d9;--accent-ink:#2a0f2b;--tint:#4a2a46;--tint-ink:#f6e0ea;--ok:#5fd39a;--bad:#ff7a80;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 56px}
+.wrap{max-width:1160px;margin:0 auto;display:grid;gap:24px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-size:26px;font-weight:600;letter-spacing:.02em;color:var(--accent)}
+.logo i{color:var(--gold);font-style:normal}
+.open{font-size:13px;color:var(--muted)}
+.hero{display:grid;gap:8px;padding-block:8px}
+.hero h1{font-family:var(--f-display);font-weight:500;font-size:clamp(32px,5.6vw,58px);line-height:1.02;letter-spacing:-.02em;margin:0;text-wrap:balance;max-width:16ch}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{margin:0;color:var(--muted);max-width:56ch;font-size:16px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:24px;align-items:start}
+@media (max-width:940px){.layout{grid-template-columns:minmax(0,1fr)}}
+.steps{display:grid;gap:18px;min-width:0}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:14px;min-width:0}
+.step-h{display:flex;align-items:baseline;gap:12px}
+.step-h span{font-family:var(--f-display);font-style:italic;color:var(--gold);font-size:18px}
+.step-h h2{font-family:var(--f-display);font-weight:500;font-size:22px;margin:0}
+.cats{display:flex;gap:6px;flex-wrap:wrap}
+.cats button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--muted);padding:6px 13px;border-radius:99px;cursor:pointer}
+.cats button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.svc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:14px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;background:var(--surface);transition:border-color .15s,background .15s}
+.svc:hover{border-color:var(--gold)}
+.svc input{position:absolute;opacity:0}
+.svc b{font-weight:700}
+.svc .pr{font-weight:700;color:var(--accent)}
+.svc small{color:var(--muted);font-size:12.5px;grid-column:1/-1}
+.svc.on{border-color:var(--accent);background:var(--tint);color:var(--tint-ink)}
+.svc.on small{color:inherit;opacity:.8}
+.svc:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.pros{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.pro{display:grid;justify-items:center;gap:6px;text-align:center;padding:14px 10px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer}
+.pro input{position:absolute;opacity:0}
+.pro .ph{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-size:20px;color:var(--accent-ink);background:var(--accent)}
+.pro b{font-size:14px}
+.pro small{font-size:12px;color:var(--muted);line-height:1.3}
+.pro.on{border-color:var(--accent);background:var(--tint);color:var(--tint-ink)}
+.pro.on small{color:inherit}
+.pro:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.dates{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.date{flex:none;display:grid;justify-items:center;gap:0;min-width:62px;padding:10px 8px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;background:var(--surface);color:var(--ink);font:inherit}
+.date span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.date b{font-family:var(--f-display);font-size:22px;font-weight:500;line-height:1.2}
+.date[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.date[aria-pressed="true"] span{color:inherit;opacity:.8}
+.date:disabled{opacity:.4;cursor:not-allowed}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
+.slot{font:inherit;font-weight:600;font-size:13.5px;padding:9px 4px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums}
+.slot:hover:not(:disabled){border-color:var(--gold)}
+.slot[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.slot:disabled{text-decoration:line-through;color:var(--muted);background:var(--soft);cursor:not-allowed;opacity:.7}
+.legend{font-size:12.5px;color:var(--muted)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.summary{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid}
+.sum-top{background:var(--accent);color:var(--accent-ink);padding:20px;display:grid;gap:4px}
+.sum-top span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.sum-top b{font-family:var(--f-display);font-size:34px;font-weight:500;line-height:1.1}
+.sum-top small{opacity:.85}
+.sum-body{padding:18px 20px;display:grid;gap:12px}
+.sum-line{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.sum-line span:first-child{color:var(--muted)}
+.sum-line span:last-child{text-align:right;font-weight:600}
+.sum-svcs{display:grid;gap:4px;font-size:13.5px}
+.sum-svcs div{display:flex;justify-content:space-between;gap:10px}
+hr{border:0;border-top:1px dashed var(--line);margin:0}
+label{display:grid;gap:5px;font-size:12.5px;font-weight:600;color:var(--muted)}
+input[type=text],input[type=tel]{font:inherit;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;min-width:0}
+.cta{font:inherit;font-weight:700;font-size:15.5px;border:0;border-radius:12px;padding:14px;background:var(--gold);color:#22100f;cursor:pointer;width:100%}
+.cta:disabled{opacity:.45;cursor:not-allowed}
+.err{color:var(--bad);font-size:12.5px;min-height:1em}
+.done{padding:20px;display:grid;gap:12px;text-align:center;justify-items:center}
+.done .tick{width:56px;height:56px;border-radius:50%;background:var(--tint);color:var(--tint-ink);display:grid;place-items:center;font-size:26px}
+.done h3{font-family:var(--f-display);font-weight:500;font-size:24px;margin:0}
+.wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:12px;background:#1a9e55;color:#fff;text-decoration:none;font-weight:700}
+.link{font:inherit;background:none;border:0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.mine{display:grid;gap:10px}
+.bk{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:14px}
+.bk .d{text-align:center;font-family:var(--f-display);line-height:1}
+.bk .d b{display:block;font-size:24px;font-weight:500}
+.bk .d span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.bk small{color:var(--muted);display:block}
+.bk button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:9px;padding:6px 10px;cursor:pointer}
+.bk button:hover{color:var(--bad);border-color:var(--bad)}
+.empty{color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <nav><span class="logo">Velura<i>.</i></span><span class="open">Open 10 AM – 8 PM · Closed Tuesdays</span></nav>
+  <section class="hero">
+    <h1>Your chair is <em>waiting.</em></h1>
+    <p>Choose your services, pick a stylist and book a time that suits you. Confirmation goes straight to WhatsApp.</p>
+  </section>
+
+  <div class="layout">
+    <div class="steps">
+      <section class="step">
+        <div class="step-h"><span>i.</span><h2>Choose services</h2></div>
+        <div class="cats" id="cats" role="group" aria-label="Service category"></div>
+        <div class="svcs" id="svcs"></div>
+      </section>
+      <section class="step">
+        <div class="step-h"><span>ii.</span><h2>Pick a stylist</h2></div>
+        <div class="pros" id="pros"></div>
+      </section>
+      <section class="step">
+        <div class="step-h"><span>iii.</span><h2>Date & time</h2></div>
+        <div class="dates" id="dates" role="group" aria-label="Date"></div>
+        <div class="slots" id="slots" role="group" aria-label="Time"></div>
+        <div class="legend" id="slotNote"></div>
+      </section>
+      <section class="step">
+        <div class="step-h"><span>iv.</span><h2>Your bookings</h2></div>
+        <div class="mine" id="mine"></div>
+      </section>
+    </div>
+
+    <aside class="summary" id="summary" aria-live="polite"></aside>
+  </div>
+</div>
+
+<script>
+const SALON_WA="916301521358";
+const KEY="velura-v1";
+const SVC=[
+  {id:"cut",c:"Hair",n:"Haircut & styling",p:600,m:45,d:"Wash, cut and blow-dry"},
+  {id:"spa",c:"Hair",n:"Hair spa",p:1200,m:60,d:"Deep conditioning with steam"},
+  {id:"color",c:"Hair",n:"Global hair colour",p:3200,m:120,d:"Ammonia-free, root to tip"},
+  {id:"kera",c:"Hair",n:"Keratin smoothening",p:4800,m:150,d:"Frizz-free for 4–5 months"},
+  {id:"clean",c:"Skin",n:"Clean-up",p:800,m:40,d:"Cleanse, scrub and mask"},
+  {id:"facial",c:"Skin",n:"Gold radiance facial",p:2200,m:75,d:"Brightening, with massage"},
+  {id:"thread",c:"Skin",n:"Eyebrow threading",p:80,m:15,d:"Shape and tidy"},
+  {id:"mani",c:"Nails",n:"Classic manicure",p:700,m:40,d:"Shape, cuticle care, polish"},
+  {id:"pedi",c:"Nails",n:"Spa pedicure",p:1000,m:50,d:"Soak, scrub and massage"},
+  {id:"gel",c:"Nails",n:"Gel extensions",p:1800,m:90,d:"Lasts 3–4 weeks"},
+  {id:"bridal",c:"Bridal",n:"Bridal makeup",p:15000,m:180,d:"HD makeup, draping, hairdo"},
+  {id:"party",c:"Bridal",n:"Party makeup",p:3500,m:75,d:"Makeup and simple hairdo"}
+];
+const PROS=[{id:"any",n:"Any stylist",s:"First available",i:"✦"},{id:"meera",n:"Meera",s:"Colour & keratin",i:"M"},{id:"farhan",n:"Farhan",s:"Cuts & styling",i:"F"},{id:"swathi",n:"Swathi",s:"Skin, nails, bridal",i:"S"}];
+const $=id=>document.getElementById(id);
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const parse=s=>{const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const inr=n=>"₹"+n.toLocaleString("en-IN");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const hm=m=>{const h=Math.floor(m/60),mm=m%60;return `${(h%12)||12}:${String(mm).padStart(2,"0")} ${h>=12?"PM":"AM"}`};
+const dur=m=>m>=60?`${Math.floor(m/60)}h${m%60?" "+m%60+"m":""}`:`${m}m`;
+const now=new Date();const TODAY=iso(now);
+let cat="Hair",sel=new Set(["cut","spa"]),pro="any",date=null,time=null,confirmed=null;
+let bookings=[];try{bookings=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
+const saveB=()=>{try{localStorage.setItem(KEY,JSON.stringify(bookings))}catch(e){}};
+
+const days=[];for(let i=0;i<14;i++){const d=new Date(now);d.setDate(d.getDate()+i);days.push(d)}
+date=iso(days.find(d=>d.getDay()!==2&&!(iso(d)===TODAY&&now.getHours()>=19))||days[1]);
+
+function seeded(str){let h=2166136261;for(const c of str){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return()=>{h^=h<<13;h^=h>>>17;h^=h<<5;return((h>>>0)%1000)/1000}}
+function busy(day,p){
+  const r=seeded(day+p);const out=[];
+  for(let t=600;t<1200;t+=30)if(r()<.22)out.push([t,t+(r()<.5?60:30)]);
+  bookings.filter(b=>b.date===day&&b.pro===p).forEach(b=>out.push([b.start,b.start+b.mins]));
+  return out;
+}
+function total(){let p=0,m=0;sel.forEach(id=>{const s=SVC.find(x=>x.id===id);p+=s.p;m+=s.m});return{p,m}}
+function freePro(day,start,mins){
+  const list=pro==="any"?PROS.slice(1):PROS.filter(x=>x.id===pro);
+  for(const x of list){if(!busy(day,x.id).some(([a,b])=>start<b&&start+mins>a))return x.id}
+  return null;
+}
+function render(){
+  $("cats").innerHTML=["Hair","Skin","Nails","Bridal"].map(c=>{const n=SVC.filter(s=>s.c===c&&sel.has(s.id)).length;return `<button type="button" data-cat="${c}" aria-pressed="${c===cat}">${c}${n?` · ${n}`:""}</button>`}).join("");
+  $("svcs").innerHTML=SVC.filter(s=>s.c===cat).map(s=>`<label class="svc${sel.has(s.id)?" on":""}"><input type="checkbox" data-svc="${s.id}"${sel.has(s.id)?" checked":""}><b>${s.n}</b><span class="pr">${inr(s.p)}</span><small>${s.d} · ${dur(s.m)}</small></label>`).join("");
+  $("pros").innerHTML=PROS.map(p=>`<label class="pro${p.id===pro?" on":""}"><input type="radio" name="pro" value="${p.id}"${p.id===pro?" checked":""}><span class="ph">${p.i}</span><b>${p.n}</b><small>${p.s}</small></label>`).join("");
+  $("dates").innerHTML=days.map(d=>{const k=iso(d);const closed=d.getDay()===2;return `<button type="button" class="date" data-date="${k}" aria-pressed="${k===date}"${closed?" disabled title='Closed'":""}><span>${k===TODAY?"Today":d.toLocaleDateString("en-IN",{weekday:"short"})}</span><b>${d.getDate()}</b><span>${closed?"Closed":d.toLocaleDateString("en-IN",{month:"short"})}</span></button>`}).join("");
+  const{p,m}=total();const mins=Math.max(m,30);let free=0;
+  if(time!==null&&!(time+mins<=1200&&freePro(date,time,mins)))time=null;
+  const slots=[];for(let t=600;t+mins<=1200;t+=30){const past=date===TODAY&&t<=now.getHours()*60+now.getMinutes()+30;const ok=!past&&freePro(date,t,mins);if(ok)free++;slots.push(`<button type="button" class="slot" data-t="${t}" aria-pressed="${t===time}"${ok?"":" disabled"}>${hm(t).replace(" "," ")}</button>`)}
+  if(time!==null&&!(time+mins<=1200&&freePro(date,time,mins)))time=null;
+  $("slots").innerHTML=sel.size?slots.join("")||`<span class="empty">Your services run past closing time. Remove one to see slots.</span>`:`<span class="empty">Choose at least one service to see open times.</span>`;
+  $("slotNote").textContent=sel.size?`${free} open start times · slots fit your ${dur(m)} appointment`:"";
+  summary(p,m);mine();
+}
+function summary(p,m){
+  if(confirmed){const b=confirmed;
+    $("summary").innerHTML=`<div class="done"><span class="tick">✓</span><h3>You're booked, ${esc(b.name.split(" ")[0])}</h3><p style="margin:0;color:var(--muted)">${parse(b.date).toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"})} at ${hm(b.start)} with ${esc(b.proName)}</p><a class="wa" href="${waLink(b)}" target="_blank" rel="noopener">Send confirmation on WhatsApp</a><span style="font-size:12.5px;color:var(--muted)">Salon WhatsApp: +91 63015 21358</span><button class="link" type="button" id="again">Book another appointment</button></div>`;return}
+  const items=[...sel].map(id=>SVC.find(x=>x.id===id));
+  const ready=items.length&&date&&time!==null;
+  const proName=time!==null?PROS.find(x=>x.id===freePro(date,time,Math.max(m,30)))?.n:(PROS.find(x=>x.id===pro).n);
+  $("summary").innerHTML=`<div class="sum-top"><span>Your appointment</span><b>${inr(p)}</b><small>${items.length} service${items.length!==1?"s":""} · ${dur(m)}</small></div>
+  <div class="sum-body"><div class="sum-svcs">${items.length?items.map(s=>`<div><span>${s.n}</span><span>${inr(s.p)}</span></div>`).join(""):`<span class="empty">No services selected</span>`}</div><hr>
+  <div class="sum-line"><span>Stylist</span><span>${esc(proName||"—")}</span></div>
+  <div class="sum-line"><span>When</span><span>${date?parse(date).toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"}):"—"}${time!==null?" · "+hm(time):""}</span></div><hr>
+  <label for="cName">Your name<input type="text" id="cName" autocomplete="name"></label>
+  <label for="cPhone">WhatsApp number<input type="tel" id="cPhone" inputmode="tel" placeholder="10 digits"></label>
+  <div class="err" id="err"></div>
+  <button class="cta" type="button" id="confirm"${ready?"":" disabled"}>${ready?"Confirm booking":"Pick services and a time"}</button></div>`;
+  $("cName").value=summary.n||"";$("cPhone").value=summary.ph||"";
+  $("cName").oninput=e=>summary.n=e.target.value;$("cPhone").oninput=e=>summary.ph=e.target.value;
+}
+function waLink(b){
+  const msg=`Hi Velura, I've booked an appointment.\n\nName: ${b.name}\nDate: ${parse(b.date).toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"})}\nTime: ${hm(b.start)} (${dur(b.mins)})\nStylist: ${b.proName}\nServices: ${b.svcs.join(", ")}\nTotal: ${inr(b.price)}\n\nPhone: +91 ${b.phone}`;
+  return `https://wa.me/${SALON_WA}?text=${encodeURIComponent(msg)}`;
+}
+function mine(){
+  const up=bookings.filter(b=>b.date>=TODAY).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
+  $("mine").innerHTML=up.length?up.map(b=>{const d=parse(b.date);return `<div class="bk"><div class="d"><b>${d.getDate()}</b><span>${d.toLocaleDateString("en-IN",{month:"short"})}</span></div><div style="min-width:0"><strong>${hm(b.start)} · ${esc(b.proName)}</strong><small>${esc(b.svcs.join(", "))} · ${inr(b.price)}</small></div><button type="button" data-cancel="${b.id}">Cancel</button></div>`}).join(""):`<span class="empty">No upcoming bookings yet. Your confirmed appointments will show here.</span>`;
+}
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-cat]");if(c){cat=c.dataset.cat;render();return}
+  const d=e.target.closest("[data-date]");if(d){date=d.dataset.date;time=null;render();return}
+  const t=e.target.closest("[data-t]");if(t){time=+t.dataset.t;render();return}
+  if(e.target.id==="again"){confirmed=null;time=null;render();return}
+  const x=e.target.closest("[data-cancel]");
+  if(x){if(x.dataset.arm!=="1"){x.dataset.arm="1";x.textContent="Tap to cancel";setTimeout(()=>{if(x.isConnected){x.dataset.arm="";x.textContent="Cancel"}},3000);return}
+    bookings=bookings.filter(b=>b.id!==x.dataset.cancel);saveB();render();return}
+  if(e.target.id==="confirm"){
+    const name=$("cName").value.trim(),phone=$("cPhone").value.replace(/\D/g,"").slice(-10);
+    if(!name){$("err").textContent="Enter your name.";return}
+    if(phone.length!==10){$("err").textContent="Enter a 10-digit WhatsApp number.";return}
+    const{p,m}=total();const mins=Math.max(m,30);const pid=freePro(date,time,mins);
+    if(!pid){$("err").textContent="That time was just taken. Pick another slot.";time=null;render();return}
+    const b={id:"b"+Date.now(),name,phone,date,start:time,mins,pro:pid,proName:PROS.find(x=>x.id===pid).n,svcs:[...sel].map(id=>SVC.find(s=>s.id===id).n),price:p};
+    bookings.push(b);saveB();confirmed=b;render();
+  }
+});
+document.addEventListener("change",e=>{
+  if(e.target.dataset.svc){const id=e.target.dataset.svc;e.target.checked?sel.add(id):sel.delete(id);render()}
+  if(e.target.name==="pro"){pro=e.target.value;time=null;render()}
+});
+render();
+</script>
+
+</body></html>

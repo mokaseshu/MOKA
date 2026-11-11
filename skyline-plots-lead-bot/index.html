@@ -1,0 +1,298 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Skyline Plots Lead Bot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: lead-qualifying chat left, owner's lead inbox right; stacks on phones */
+:root{
+  --bg:#EEF0EA;--surface:#FFFFFF;--chatbg:#F6F7F2;--ink:#1B2420;--muted:#5F6B64;--line:#D9DED3;
+  --accent:#2F5D46;--accent-ink:#F3F7F1;--soft:#E1EBE2;--me:#2F5D46;--me-ink:#F3F7F1;
+  --hot:#C2410C;--warm:#B7791F;--cold:#3B6EA8;--wa:#1C9B4E;--wa-ink:#FFFFFF;
+  --display:"Space Grotesk",system-ui,sans-serif;--font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1311;--surface:#161D1A;--chatbg:#111715;--ink:#E5ECE6;--muted:#93A199;--line:#26302B;
+  --accent:#7DC09B;--accent-ink:#0B1A12;--soft:#1E2C25;--me:#3C7558;--me-ink:#F3F7F1;
+  --hot:#F27A45;--warm:#E2B04F;--cold:#79A8E0;--wa:#2DBE68;--wa-ink:#05230F;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1311;--surface:#161D1A;--chatbg:#111715;--ink:#E5ECE6;--muted:#93A199;--line:#26302B;
+  --accent:#7DC09B;--accent-ink:#0B1A12;--soft:#1E2C25;--me:#3C7558;--me-ink:#F3F7F1;
+  --hot:#F27A45;--warm:#E2B04F;--cold:#79A8E0;--wa:#2DBE68;--wa-ink:#05230F;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--font);font-size:15px}
+.page{max-width:1100px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.top h1{font-family:var(--display);font-size:24px;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.top span{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:20px;display:flex;flex-direction:column;height:min(700px,84svh);min-height:520px;overflow:hidden;box-shadow:0 24px 60px -38px rgba(20,40,30,.5)}
+.chead{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--accent);color:var(--accent-ink)}
+.avatar{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--accent-ink);color:var(--accent);font-family:var(--display);font-weight:700;flex:none}
+.who{flex:1;min-width:0;line-height:1.2}
+.who b{display:block;font-family:var(--display);font-size:16px}
+.who small{opacity:.85;font-size:12px}
+.iconbtn{border:0;background:transparent;color:inherit;cursor:pointer;font-size:18px;padding:4px 6px;border-radius:8px;flex:none}
+.log{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:8px;background:var(--chatbg);scroll-behavior:smooth}
+.m{max-width:88%;padding:9px 12px;border-radius:14px;line-height:1.5;font-size:14.5px;overflow-wrap:anywhere}
+.m.bot{background:var(--surface);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:4px}
+.m.me{background:var(--me);color:var(--me-ink);align-self:flex-end;border-bottom-right-radius:4px}
+.m.wide{max-width:100%;width:100%}
+.m small{color:var(--muted)}
+.step-tag{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em;display:block;margin-bottom:2px}
+.score{display:flex;align-items:center;gap:14px;margin:6px 0 4px}
+.score .num{font-family:var(--display);font-size:38px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.score .num small{font-size:14px;color:var(--muted);font-weight:500}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 10px}
+.bar i{display:block;height:100%;border-radius:99px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1.5px solid currentColor}
+.pill.hot{color:var(--hot)}.pill.warm{color:var(--warm)}.pill.cold{color:var(--cold)}
+.bar i.hot{background:var(--hot)}.bar i.warm{background:var(--warm)}.bar i.cold{background:var(--cold)}
+.kv{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.kv td{padding:5px 0;border-top:1px dashed var(--line);vertical-align:top}
+.kv td:last-child{text-align:right;font-family:var(--mono);font-size:13px;padding-left:12px;white-space:nowrap}
+.proj{padding:9px 0;border-top:1px dashed var(--line)}
+.proj:first-of-type{border-top:0}
+.proj b{font-family:var(--display)}
+.proj small{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+.chip{border:1.5px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:10px;padding:7px 12px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer}
+.chip:hover{background:var(--soft)}
+.chips.used .chip{opacity:.35;pointer-events:none}
+.chips.used .chip.picked{opacity:1;background:var(--soft)}
+.chip:focus-visible,.send:focus-visible,.iconbtn:focus-visible,.wa:focus-visible,.ghost:focus-visible{outline:2px solid var(--warm);outline-offset:2px}
+.wa{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:var(--wa);color:var(--wa-ink);text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:700}
+.typing{display:flex;gap:4px;padding:12px 14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:b 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none}.log{scroll-behavior:auto}}
+.compose{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:var(--surface)}
+.compose input{flex:1;min-width:0;border:1px solid var(--line);background:var(--chatbg);color:var(--ink);border-radius:10px;padding:10px 14px;font:inherit;font-size:14.5px}
+.compose input:focus{outline:2px solid var(--accent);outline-offset:0}
+.send{border:0;background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:0 16px;font:inherit;font-weight:700;cursor:pointer}
+.side{display:flex;flex-direction:column;gap:20px;min-width:0}
+.side h2{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:600}
+.inbox{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.ihead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.ihead b{font-family:var(--display);font-size:16px}
+.counts{display:flex;gap:8px;flex-wrap:wrap}
+.counts span{font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums}
+.counts .hot{color:var(--hot)}.counts .warm{color:var(--warm)}.counts .cold{color:var(--cold)}
+.tablewrap{overflow-x:auto}
+table.leads{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+.leads th{text-align:left;font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.05em;text-transform:uppercase;padding:9px 14px;border-bottom:1px solid var(--line)}
+.leads td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.leads tr:last-child td{border-bottom:0}
+.leads td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.leads tr.new td{background:var(--soft)}
+.leads .sample{font-size:11px;color:var(--muted);margin-left:6px}
+.ghost{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;padding:5px 10px;font:inherit;font-size:12.5px;cursor:pointer}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.rules{grid-template-columns:minmax(0,1fr)}}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.5}
+.rule b{display:block;margin-bottom:2px}
+.note{border-left:3px solid var(--warm);padding:8px 12px;background:var(--surface);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--muted);line-height:1.55}
+.credit{font-size:12.5px;color:var(--muted)}
+</style>
+
+<div class="page">
+  <div class="top"><h1>Skyline Plots · Lead qualifier</h1><span>Live demo · scores every enquiry</span></div>
+  <div class="grid">
+    <section class="chat" aria-label="Skyline Plots chat">
+      <div class="chead">
+        <div class="avatar" aria-hidden="true">SP</div>
+        <div class="who"><b>Skyline Plots</b><small>CRDA & DTCP approved layouts</small></div>
+        <button class="iconbtn" id="restart" title="Restart chat" aria-label="Restart chat">↻</button>
+      </div>
+      <div class="log" id="log" aria-live="polite"></div>
+      <form class="compose" id="f" autocomplete="off">
+        <input id="msg" placeholder="Type a message…" aria-label="Message">
+        <button class="send" type="submit">Send</button>
+      </form>
+    </section>
+    <aside class="side">
+      <div class="inbox">
+        <div class="ihead">
+          <b>Lead inbox <small style="font-family:var(--font);font-weight:400;color:var(--muted);font-size:12.5px">owner view</small></b>
+          <div class="counts"><span class="hot" id="c-hot">0 Hot</span><span class="warm" id="c-warm">0 Warm</span><span class="cold" id="c-cold">0 Cold</span><button class="ghost" id="clear" type="button">Reset</button></div>
+        </div>
+        <div class="tablewrap">
+          <table class="leads"><thead><tr><th>Lead</th><th>Wants</th><th>Score</th><th>Label</th></tr></thead><tbody id="rows"></tbody></table>
+        </div>
+      </div>
+      <div>
+        <h2>How the score works</h2>
+        <div class="rules">
+          <div class="rule"><b>Budget · up to 35</b>Under ₹20 L 5 · ₹20–40 L 20 · ₹40–75 L 30 · ₹75 L+ 35</div>
+          <div class="rule"><b>Location · up to 25</b>A project area 20–25 · Not decided 5</div>
+          <div class="rule"><b>Timeline · up to 40</b>This month 40 · 1–3 mo 30 · 3–6 mo 15 · Exploring 0</div>
+        </div>
+      </div>
+      <p class="note"><b style="color:var(--hot)">Hot 70+</b> gets the “Talk to sales” WhatsApp button. <b style="color:var(--warm)">Warm 45–69</b> gets project details and a callback option. <b style="color:var(--cold)">Cold</b> gets the brochure only. Demo leads go to +91 63015 21358.</p>
+      <p class="credit">Built by RootFix</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+const WA_NUMBER="916301521358";
+const BRAND="Skyline Plots";
+const BUDGET=[["Under ₹20 L",5],["₹20 – 40 L",20],["₹40 – 75 L",30],["₹75 L +",35]];
+const LOCS=[["Amaravati",25],["Mangalagiri",25],["Guntur",20],["Vijayawada outskirts",20],["Not decided yet",5]];
+const TIME=[["Within 1 month",40],["1 – 3 months",30],["3 – 6 months",15],["Just exploring",0]];
+const PROJECTS=[
+  {loc:"Mangalagiri",name:"Skyline Meadows",size:"150 – 300 sq yd",rate:18500,tag:"CRDA approved · 40 ft roads"},
+  {loc:"Amaravati",name:"Skyline Greens",size:"167 – 400 sq yd",rate:14000,tag:"CRDA approved · near seed access road"},
+  {loc:"Guntur",name:"Skyline Heights",size:"150 – 250 sq yd",rate:9500,tag:"DTCP approved · gated layout"},
+  {loc:"Vijayawada outskirts",name:"Skyline Riverview",size:"200 – 350 sq yd",rate:12000,tag:"DTCP approved · 10 min to NH-16"}
+];
+const SAMPLES=[
+  {name:"Ravi K.",phone:"9849012345",budget:"₹40 – 75 L",loc:"Mangalagiri",time:"Within 1 month",score:95,label:"hot",at:"10:42 AM",sample:1},
+  {name:"Lakshmi P.",phone:"9701122334",budget:"₹20 – 40 L",loc:"Guntur",time:"3 – 6 months",score:55,label:"warm",at:"9:15 AM",sample:1},
+  {name:"Suresh M.",phone:"9000456789",budget:"Under ₹20 L",loc:"Not decided yet",time:"Just exploring",score:10,label:"cold",at:"Yesterday",sample:1}
+];
+const KEY="skyline-leads-v1";
+
+const $=s=>document.querySelector(s);
+const log=$("#log"),form=$("#f"),input=$("#msg");
+let lead={},expect=null,queue=Promise.resolve(),session=0,leads=[];
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const scroll=()=>{log.scrollTop=log.scrollHeight};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const labelOf=s=>s>=70?"hot":s>=45?"warm":"cold";
+const LABEL={hot:"🔥 Hot",warm:"🌤 Warm",cold:"❄ Cold"};
+
+function loadLeads(){try{const v=JSON.parse(localStorage.getItem(KEY)||"null");leads=Array.isArray(v)?v:SAMPLES.slice();}catch(e){leads=SAMPLES.slice();}}
+function saveLeads(){try{localStorage.setItem(KEY,JSON.stringify(leads));}catch(e){}}
+function renderLeads(newIdx){
+  $("#rows").innerHTML=leads.map((l,i)=>`<tr class="${i===newIdx?"new":""}"><td><b>${esc(l.name)}</b>${l.sample?'<span class="sample">example</span>':""}<br><small style="color:var(--muted)">${l.phone.replace(/(\d{5})(\d{5})/,"$1 $2")} · ${l.at}</small></td><td>${esc(l.budget)}<br><small style="color:var(--muted)">${esc(l.loc)} · ${esc(l.time)}</small></td><td class="n">${l.score}</td><td><span class="pill ${l.label}">${LABEL[l.label]}</span></td></tr>`).join("");
+  ["hot","warm","cold"].forEach(k=>$("#c-"+k).textContent=`${leads.filter(l=>l.label===k).length} ${k[0].toUpperCase()+k.slice(1)}`);
+}
+
+function say(html,delay=480,cls=""){
+  const s=session;
+  queue=queue.then(async()=>{
+    if(s!==session)return;
+    const ty=document.createElement("div");ty.className="m bot typing";ty.innerHTML="<i></i><i></i><i></i>";log.append(ty);scroll();
+    await wait(delay);ty.remove();
+    if(s!==session)return;
+    const d=document.createElement("div");d.className="m bot "+cls;d.innerHTML=html;log.append(d);scroll();
+  });
+  return queue;
+}
+function chips(list){
+  const s=session;
+  queue=queue.then(()=>{
+    if(s!==session)return;
+    const row=document.createElement("div");row.className="chips";
+    list.forEach(([label,fn])=>{
+      const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;
+      b.onclick=()=>{row.classList.add("used");b.classList.add("picked");me(label);expect=null;fn();};
+      row.append(b);
+    });
+    log.append(row);scroll();
+  });
+  return queue;
+}
+function me(text){const d=document.createElement("div");d.className="m me";d.textContent=text;log.append(d);scroll();}
+function lockOpenChips(){log.querySelectorAll(".chips:not(.used)").forEach(r=>r.classList.add("used"));}
+
+function home(){
+  say(`Hi! 👋 Welcome to <b>${BRAND}</b>.<br>Answer 3 quick questions and I'll match you with plots in your budget.`,450);
+  chips([["Find my plot",askBudget],["View projects",showProjects]]);
+}
+function askBudget(){
+  lead={};
+  say(`<span class="step-tag">QUESTION 1 OF 3</span>What's your total budget for the plot?`);
+  chips(BUDGET.map(([l,p])=>[l,()=>{lead.budget=l;lead.b=p;askLoc();}]));
+}
+function askLoc(){
+  say(`<span class="step-tag">QUESTION 2 OF 3</span>Which area do you prefer?`);
+  chips(LOCS.map(([l,p])=>[l,()=>{lead.loc=l;lead.l=p;askTime();}]));
+}
+function askTime(){
+  say(`<span class="step-tag">QUESTION 3 OF 3</span>When are you planning to buy?`);
+  chips(TIME.map(([l,p])=>[l,()=>{lead.time=l;lead.t=p;askName();}]));
+}
+function askName(){
+  say("Almost done. What's your name?");
+  expect=v=>{
+    const n=v.trim().replace(/\s+/g," ");
+    if(n.length<2||/^\d+$/.test(n)){say("Please type your name (at least 2 letters).");return true;}
+    lead.name=n.replace(/\b\w/g,c=>c.toUpperCase());expect=null;askPhone();return true;
+  };
+}
+function askPhone(){
+  say(`Thanks ${esc(lead.name)}. Your 10-digit mobile number, so our team can share plot details?`);
+  expect=v=>{
+    const p=v.replace(/[\s\-()]/g,"").replace(/^(\+?91|0)(?=\d{10}$)/,"");
+    if(!/^[6-9]\d{9}$/.test(p)){say("That doesn't look like a 10-digit mobile number. Please try again.");return true;}
+    lead.phone=p;expect=null;result();return true;
+  };
+}
+function matches(){
+  return lead.loc==="Not decided yet"?PROJECTS:PROJECTS.filter(p=>p.loc===lead.loc);
+}
+function projHTML(list){
+  return list.map(p=>`<div class="proj"><b>${p.name}</b> · ${p.loc}<small>${p.size} · from ₹${p.rate.toLocaleString("en-IN")} / sq yd</small><small>${p.tag}</small></div>`).join("");
+}
+function result(){
+  const score=lead.b+lead.l+lead.t,label=labelOf(score);
+  lead.score=score;lead.label=label;
+  lead.at=new Date().toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"});
+  leads.unshift({name:lead.name,phone:lead.phone,budget:lead.budget,loc:lead.loc,time:lead.time,score,label,at:lead.at});
+  leads=leads.slice(0,25);saveLeads();renderLeads(0);
+
+  say(`<span class="step-tag">YOUR MATCH SCORE</span><div class="score"><div class="num">${score}<small> / 100</small></div><span class="pill ${label}">${LABEL[label]} lead</span></div><div class="bar"><i class="${label}" style="width:${score}%"></i></div><table class="kv"><tr><td>Budget · ${esc(lead.budget)}</td><td>+${lead.b}</td></tr><tr><td>Location · ${esc(lead.loc)}</td><td>+${lead.l}</td></tr><tr><td>Timeline · ${esc(lead.time)}</td><td>+${lead.t}</td></tr></table>`,800,"wide");
+
+  const list=matches();
+  if(label==="hot"){
+    const msg=[`🔥 *HOT LEAD* · Score ${score}/100`,`Name: ${lead.name}`,`Mobile: ${lead.phone}`,`Budget: ${lead.budget}`,`Location: ${lead.loc}`,`Timeline: ${lead.time}`,"",`Interested in: ${list.map(p=>p.name).join(", ")}`,"","Please call me to arrange a site visit.","(Sent from the website chat)"].join("\n");
+    say(`Great news, ${esc(lead.name)}! You're a strong match. These plots fit your budget:${projHTML(list)}<a class="wa" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Talk to sales on WhatsApp ↗</a><br><small>Our sales team replies within 15 minutes, 9 AM – 8 PM.</small>`,700,"wide");
+    chips([["Book a site visit",siteVisit],["Start again",askBudget]]);
+  }else if(label==="warm"){
+    say(`Thanks ${esc(lead.name)}! Here are projects that fit what you told me:${projHTML(list)}<small>We'll WhatsApp you the price sheet and layout map.</small>`,700,"wide");
+    chips([["Request a callback",()=>{say("Done ✅ Our team will call you within one working day.");chips([["Start again",askBudget]]);}],["Change my answers",askBudget]]);
+  }else{
+    say(`Thanks ${esc(lead.name)}! Take your time. We'll send you our brochure and new launch offers on WhatsApp so you can compare at your own pace.`,600);
+    chips([["View projects",showProjects],["Change my answers",askBudget]]);
+  }
+}
+function siteVisit(){
+  say("Which day works for a site visit?");
+  const opts=[];
+  for(let i=1;i<=4;i++){const d=new Date();d.setDate(d.getDate()+i);const l=d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});opts.push([l,()=>{say(`Booked ✅ Site visit on <b>${l}</b>, 10:30 AM. Free pickup from Mangalagiri bus stand. Our sales team will confirm on WhatsApp.`);chips([["Start again",askBudget]]);}]);}
+  chips(opts);
+}
+function showProjects(){
+  say(`<b>Our projects</b>${projHTML(PROJECTS)}`,600,"wide");
+  chips([["Find my plot",askBudget]]);
+}
+
+function route(raw){
+  const v=raw.toLowerCase();
+  if(/project|layout|venture|show|list/.test(v)){showProjects();return;}
+  if(/price|rate|cost|sq|yard|plot|buy|budget|find/.test(v)){askBudget();return;}
+  if(/^(hi|hii+|hello|hey|namaste|namaskaram)\b/.test(v)){home();return;}
+  say("I can match you with plots in 3 quick questions.");
+  chips([["Find my plot",askBudget],["View projects",showProjects]]);
+}
+
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=input.value.trim();if(!v)return;
+  input.value="";me(v);
+  if(expect&&expect(v))return;
+  lockOpenChips();route(v);
+});
+function start(){session++;queue=Promise.resolve();expect=null;lead={};log.innerHTML="";home();}
+$("#restart").onclick=start;
+$("#clear").onclick=()=>{leads=SAMPLES.slice();saveLeads();renderLeads();};
+loadLeads();renderLeads();start();
+</script>
+
+</body></html>

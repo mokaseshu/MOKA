@@ -1,0 +1,335 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>BrightSmile Dental Bot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: working chat panel left, short demo guide right; stacks to one column on phones */
+:root{
+  --bg:#EAF3F1;--surface:#FFFFFF;--chatbg:#F4F9F8;--ink:#0F2A29;--muted:#5A7371;--line:#D3E3E0;
+  --accent:#0E7C7B;--accent-ink:#FFFFFF;--soft:#DCEFEC;--me:#0E7C7B;--me-ink:#FFFFFF;--wa:#1C9B4E;--wa-ink:#FFFFFF;--warm:#B4541A;
+  --font:"Manrope","Noto Sans Telugu",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#091514;--surface:#10201F;--chatbg:#0C1A19;--ink:#E2F0EE;--muted:#8FA8A6;--line:#1F3533;
+  --accent:#3BBFB4;--accent-ink:#052220;--soft:#173331;--me:#1D8A83;--me-ink:#FFFFFF;--wa:#2DBE68;--wa-ink:#05230F;--warm:#E59B63;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#091514;--surface:#10201F;--chatbg:#0C1A19;--ink:#E2F0EE;--muted:#8FA8A6;--line:#1F3533;
+  --accent:#3BBFB4;--accent-ink:#052220;--soft:#173331;--me:#1D8A83;--me-ink:#FFFFFF;--wa:#2DBE68;--wa-ink:#05230F;--warm:#E59B63;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--font);font-size:15px}
+.page{max-width:1060px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.top h1{font-size:22px;font-weight:800;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.top span{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:840px){.grid{grid-template-columns:minmax(0,1fr)}}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;height:min(700px,84svh);min-height:520px;overflow:hidden;box-shadow:0 24px 60px -36px rgba(8,40,38,.45)}
+.chead{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--accent);color:var(--accent-ink)}
+.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--accent-ink);color:var(--accent);font-weight:800;font-size:15px;flex:none}
+.who{flex:1;min-width:0;line-height:1.2}
+.who b{display:block;font-size:15px}
+.who small{opacity:.85;font-size:12px}
+.seg{display:flex;border:1px solid currentColor;border-radius:999px;overflow:hidden;flex:none}
+.seg button{border:0;background:transparent;color:inherit;font:inherit;font-size:12.5px;font-weight:700;padding:5px 10px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent-ink);color:var(--accent)}
+.iconbtn{border:0;background:transparent;color:inherit;cursor:pointer;font-size:18px;padding:4px 6px;border-radius:8px;flex:none}
+.log{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:8px;background:var(--chatbg);scroll-behavior:smooth}
+.m{max-width:88%;padding:9px 12px;border-radius:15px;line-height:1.5;font-size:14.5px;overflow-wrap:anywhere}
+.m.bot{background:var(--surface);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:5px}
+.m.me{background:var(--me);color:var(--me-ink);align-self:flex-end;border-bottom-right-radius:5px}
+.m small{color:var(--muted)}
+.m a{color:var(--accent);font-weight:700}
+.kv{border-collapse:collapse;margin-top:6px;width:100%;font-variant-numeric:tabular-nums}
+.kv td{padding:5px 0;border-top:1px dashed var(--line);vertical-align:top}
+.kv td:first-child{color:var(--muted);padding-right:14px;white-space:nowrap}
+.kv td:last-child{text-align:right;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+.chip{border:1.5px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.chip:hover{background:var(--soft)}
+.chip:focus-visible,.send:focus-visible,.seg button:focus-visible,.iconbtn:focus-visible,.wa:focus-visible{outline:2px solid var(--warm);outline-offset:2px}
+.chips.used .chip{opacity:.35;pointer-events:none}
+.chips.used .chip.picked{opacity:1;background:var(--soft)}
+.wa{display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:var(--wa);color:var(--wa-ink)!important;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800}
+.typing{display:flex;gap:4px;padding:12px 14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:b 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none}.log{scroll-behavior:auto}}
+.compose{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:var(--surface)}
+.compose input{flex:1;min-width:0;border:1px solid var(--line);background:var(--chatbg);color:var(--ink);border-radius:999px;padding:10px 14px;font:inherit;font-size:14.5px}
+.compose input:focus{outline:2px solid var(--accent);outline-offset:0}
+.send{border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:0 16px;font:inherit;font-weight:800;cursor:pointer}
+.info{display:flex;flex-direction:column;gap:22px;min-width:0}
+.info h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.info p,.info li{line-height:1.6;max-width:62ch}
+.info ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.tries{display:flex;flex-wrap:wrap;gap:8px}
+.tries button{border:1px dashed var(--accent);background:transparent;color:var(--ink);border-radius:10px;padding:7px 11px;font:inherit;font-size:13.5px;cursor:pointer}
+.note{border-left:3px solid var(--warm);padding:8px 12px;background:var(--surface);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--muted)}
+.credit{font-size:12.5px;color:var(--muted)}
+</style>
+
+<div class="page">
+  <div class="top"><h1>BrightSmile Dental · Chat assistant</h1><span>Live demo · Telugu + English</span></div>
+  <div class="grid">
+    <section class="chat" aria-label="BrightSmile Dental chat">
+      <div class="chead">
+        <div class="avatar" aria-hidden="true">BS</div>
+        <div class="who"><b>BrightSmile Dental</b><small id="status">Online · replies instantly</small></div>
+        <div class="seg" role="group" aria-label="Language">
+          <button id="lang-en" aria-pressed="true">EN</button>
+          <button id="lang-te" aria-pressed="false">తెలుగు</button>
+        </div>
+        <button class="iconbtn" id="restart" title="Restart chat" aria-label="Restart chat">↻</button>
+      </div>
+      <div class="log" id="log" aria-live="polite"></div>
+      <form class="compose" id="f" autocomplete="off">
+        <input id="msg" placeholder="Type a message…" aria-label="Message">
+        <button class="send" type="submit">Send</button>
+      </form>
+    </section>
+    <aside class="info">
+      <div>
+        <h2>What this bot does</h2>
+        <ol>
+          <li>Answers timings, fees and location with one tap.</li>
+          <li>Switches the whole chat between Telugu and English.</li>
+          <li>Books a visit: name, treatment, day, free slot, mobile number.</li>
+          <li>Ends with a pre-filled WhatsApp message to the clinic, so the front desk just confirms.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>Try typing</h2>
+        <div class="tries">
+          <button data-try="what are your fees?">what are your fees?</button>
+          <button data-try="timings">timings</button>
+          <button data-try="పంటి నొప్పి">పంటి నొప్పి</button>
+          <button data-try="book appointment">book appointment</button>
+        </div>
+      </div>
+      <p class="note">Demo: bookings open WhatsApp to +91 63015 21358. For a real clinic, this number, the timings, fees and address are swapped for theirs.</p>
+      <p class="credit">Built by RootFix</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+const WA_NUMBER="916301521358";
+const CLINIC="BrightSmile Dental";
+const $=s=>document.querySelector(s);
+const log=$("#log"),form=$("#f"),input=$("#msg");
+let lang="en",expect=null,booking={},queue=Promise.resolve(),session=0;
+
+const TREATS=[["checkup","Check-up","చెకప్"],["cleaning","Teeth cleaning","పళ్ళ క్లీనింగ్"],["pain","Tooth pain","పంటి నొప్పి"],["rct","Root canal","రూట్ కెనాల్"],["braces","Braces / aligners","బ్రేసెస్"],["other","Something else","ఇతర సమస్య"]];
+const SLOTS=[10,11,12,13,17,18,19,20];
+const SUN_SLOTS=[10,11,12];
+
+const T={
+en:{
+  hello:`Hi! 👋 I'm the ${CLINIC} assistant. I can share timings and fees, or book your visit in under a minute.`,
+  ask:"What would you like to do?",
+  b_time:"🕘 Timings",b_fee:"💰 Fees",b_book:"📅 Book appointment",b_loc:"📍 Location",b_call:"💬 Talk to clinic",
+  time:`<b>Clinic timings</b><table class="kv"><tr><td>Mon – Sat</td><td>10:00 AM – 2:00 PM<br>5:00 PM – 9:00 PM</td></tr><tr><td>Sunday</td><td>10:00 AM – 1:00 PM<br><small>appointments only</small></td></tr></table>`,
+  fee:`<b>Fees</b> <small>(demo prices)</small><table class="kv"><tr><td>Consultation</td><td>₹200</td></tr><tr><td>Teeth cleaning</td><td>₹800</td></tr><tr><td>Filling</td><td>from ₹1,000</td></tr><tr><td>Root canal</td><td>from ₹4,500</td></tr><tr><td>Braces</td><td>from ₹25,000</td></tr></table><small>Consultation fee is adjusted if you take treatment the same day.</small>`,
+  loc:`<b>${CLINIC}</b><br>1st floor, Sai Plaza, Main Road, Guntur 522002<br><a href="https://www.google.com/maps/search/?api=1&query=Guntur" target="_blank" rel="noopener">Open in Google Maps ↗</a>`,
+  call:"You can chat with our front desk directly on WhatsApp.",
+  name:"Great, let's book it. What's the patient's name?",
+  shortname:"Please type a name (at least 2 letters).",
+  treat:n=>`Thanks, ${n}. What's the visit for?`,
+  day:"Which day suits you?",today:"Today",tomorrow:"Tomorrow",
+  slot:d=>`Pick a time on ${d}:`,
+  noslot:"No slots left today. Please pick another day.",
+  phone:"Last step: your 10-digit mobile number?",
+  badphone:"That doesn't look like a 10-digit mobile number. Please try again (e.g. 98480 12345).",
+  sum:"Please check your details:",
+  l_name:"Name",l_treat:"Visit for",l_date:"Date",l_time:"Time",l_phone:"Mobile",
+  confirm:"Confirm on WhatsApp",restart:"Start over",
+  done:"Tap the green button to send this to the clinic on WhatsApp. They'll confirm your slot there.",
+  pain:"Sorry you're in pain 😟 We keep emergency slots every day. Let's book you the earliest one.",
+  fallback:"I didn't catch that. Try one of these:",
+  menu:"Main menu",switched:"Switched to English.",ph:"Type a message…",status:"Online · replies instantly",
+  locale:"en-IN"
+},
+te:{
+  hello:`నమస్కారం! 👋 నేను ${CLINIC} అసిస్టెంట్‌ని. సమయాలు, ఫీజులు చెప్తాను, ఒక్క నిమిషంలో అపాయింట్‌మెంట్ బుక్ చేస్తాను.`,
+  ask:"మీకు ఏమి కావాలి?",
+  b_time:"🕘 సమయాలు",b_fee:"💰 ఫీజులు",b_book:"📅 అపాయింట్‌మెంట్ బుక్",b_loc:"📍 అడ్రస్",b_call:"💬 క్లినిక్‌తో మాట్లాడండి",
+  time:`<b>క్లినిక్ సమయాలు</b><table class="kv"><tr><td>సోమ – శని</td><td>ఉదయం 10:00 – మధ్యాహ్నం 2:00<br>సాయంత్రం 5:00 – రాత్రి 9:00</td></tr><tr><td>ఆదివారం</td><td>ఉదయం 10:00 – మధ్యాహ్నం 1:00<br><small>అపాయింట్‌మెంట్ ఉంటేనే</small></td></tr></table>`,
+  fee:`<b>ఫీజులు</b> <small>(డెమో ధరలు)</small><table class="kv"><tr><td>కన్సల్టేషన్</td><td>₹200</td></tr><tr><td>పళ్ళ క్లీనింగ్</td><td>₹800</td></tr><tr><td>ఫిల్లింగ్</td><td>₹1,000 నుండి</td></tr><tr><td>రూట్ కెనాల్</td><td>₹4,500 నుండి</td></tr><tr><td>బ్రేసెస్</td><td>₹25,000 నుండి</td></tr></table><small>అదే రోజు చికిత్స తీసుకుంటే కన్సల్టేషన్ ఫీజు అందులోనే కలుపుతాం.</small>`,
+  loc:`<b>${CLINIC}</b><br>1వ అంతస్తు, సాయి ప్లాజా, మెయిన్ రోడ్, గుంటూరు 522002<br><a href="https://www.google.com/maps/search/?api=1&query=Guntur" target="_blank" rel="noopener">Google Maps లో తెరవండి ↗</a>`,
+  call:"క్లినిక్ రిసెప్షన్‌తో నేరుగా WhatsApp లో మాట్లాడవచ్చు.",
+  name:"సరే, బుక్ చేద్దాం. పేషెంట్ పేరు చెప్పండి?",
+  shortname:"దయచేసి పేరు టైప్ చేయండి (కనీసం 2 అక్షరాలు).",
+  treat:n=>`ధన్యవాదాలు ${n} గారు. ఏ సమస్య కోసం వస్తున్నారు?`,
+  day:"ఏ రోజు రావాలనుకుంటున్నారు?",today:"ఈరోజు",tomorrow:"రేపు",
+  slot:d=>`${d} న ఏ సమయం సరిపోతుంది?`,
+  noslot:"ఈరోజు స్లాట్లు అయిపోయాయి. వేరే రోజు ఎంచుకోండి.",
+  phone:"చివరి స్టెప్: మీ 10 అంకెల మొబైల్ నంబర్?",
+  badphone:"ఇది సరైన 10 అంకెల నంబర్ కాదు. మళ్ళీ టైప్ చేయండి (ఉదా: 98480 12345).",
+  sum:"మీ వివరాలు సరిచూడండి:",
+  l_name:"పేరు",l_treat:"సమస్య",l_date:"తేదీ",l_time:"సమయం",l_phone:"మొబైల్",
+  confirm:"WhatsApp లో కన్ఫర్మ్ చేయండి",restart:"మళ్ళీ మొదలుపెట్టండి",
+  done:"ఆకుపచ్చ బటన్ నొక్కి WhatsApp లో క్లినిక్‌కి పంపండి. వాళ్ళు మీ స్లాట్ కన్ఫర్మ్ చేస్తారు.",
+  pain:"నొప్పిగా ఉందా 😟 ప్రతి రోజు ఎమర్జెన్సీ స్లాట్లు ఉంటాయి. త్వరగా ఉన్న స్లాట్ బుక్ చేద్దాం.",
+  fallback:"అర్థం కాలేదు. వీటిలో ఒకటి ఎంచుకోండి:",
+  menu:"మెయిన్ మెనూ",switched:"ఇప్పుడు తెలుగులో మాట్లాడుతున్నాను.",ph:"మెసేజ్ టైప్ చేయండి…",status:"ఆన్‌లైన్ · వెంటనే రిప్లై",
+  locale:"te-IN"
+}};
+const t=k=>T[lang][k];
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const scroll=()=>{log.scrollTop=log.scrollHeight};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+function say(html,delay=520){
+  const s=session;
+  queue=queue.then(async()=>{
+    if(s!==session)return;
+    const ty=document.createElement("div");ty.className="m bot typing";ty.innerHTML="<i></i><i></i><i></i>";log.append(ty);scroll();
+    await wait(delay);ty.remove();
+    if(s!==session)return;
+    const d=document.createElement("div");d.className="m bot";d.innerHTML=html;log.append(d);scroll();
+  });
+  return queue;
+}
+function chips(list){
+  const s=session;
+  queue=queue.then(()=>{
+    if(s!==session)return;
+    const row=document.createElement("div");row.className="chips";
+    list.forEach(([label,fn])=>{
+      const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;
+      b.onclick=()=>{row.classList.add("used");b.classList.add("picked");me(label);expect=null;fn();};
+      row.append(b);
+    });
+    log.append(row);scroll();
+  });
+  return queue;
+}
+function me(text){const d=document.createElement("div");d.className="m me";d.textContent=text;log.append(d);scroll();}
+function lockOpenChips(){log.querySelectorAll(".chips:not(.used)").forEach(r=>r.classList.add("used"));}
+
+function menu(){
+  say(t("ask"),380);
+  chips([[t("b_book"),startBooking],[t("b_time"),showTimings],[t("b_fee"),showFees],[t("b_loc"),showLocation],[t("b_call"),talkToClinic]]);
+}
+function showTimings(){say(t("time"));chips([[t("b_book"),startBooking],[t("menu"),menu]]);}
+function showFees(){say(t("fee"));chips([[t("b_book"),startBooking],[t("menu"),menu]]);}
+function showLocation(){say(t("loc"));chips([[t("b_book"),startBooking],[t("menu"),menu]]);}
+function talkToClinic(){
+  const msg=`Hello ${CLINIC}, I have a question.`;
+  say(`${t("call")}<br><a class="wa" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">WhatsApp ↗</a>`);
+  chips([[t("menu"),menu]]);
+}
+
+function startBooking(pre){
+  booking={};
+  if(pre)booking.treat=pre;
+  say(t("name"));
+  expect=v=>{
+    const n=v.trim().replace(/\s+/g," ");
+    if(n.length<2||/^\d+$/.test(n)){say(t("shortname"));return true;}
+    booking.name=n.replace(/\b\w/g,c=>c.toUpperCase());
+    expect=null;
+    booking.treat?askDay():askTreat();
+    return true;
+  };
+}
+function askTreat(){
+  say(T[lang].treat(esc(booking.name)));
+  chips(TREATS.map(tr=>[lang==="te"?tr[2]:tr[1],()=>{booking.treat=tr[0];askDay();}]));
+}
+function dayLabel(d,loc){return d.toLocaleDateString(loc,{weekday:"short",day:"numeric",month:"short"});}
+function slotsFor(d){
+  const base=d.getDay()===0?SUN_SLOTS:SLOTS;
+  const now=new Date();
+  if(d.toDateString()===now.toDateString())return base.filter(h=>h>now.getHours()+1);
+  return base;
+}
+function askDay(){
+  say(t("day"));
+  const opts=[];
+  for(let i=0;i<5;i++){
+    const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+i);
+    if(i===0&&!slotsFor(d).length)continue;
+    const lbl=i===0?`${t("today")} · ${dayLabel(d,t("locale"))}`:i===1?`${t("tomorrow")} · ${dayLabel(d,t("locale"))}`:dayLabel(d,t("locale"));
+    opts.push([lbl,()=>{booking.date=d;askSlot();}]);
+  }
+  chips(opts);
+}
+const fmtH=h=>`${((h+11)%12)+1}:00 ${h<12?"AM":"PM"}`;
+function askSlot(){
+  const s=slotsFor(booking.date);
+  if(!s.length){say(t("noslot"));askDay();return;}
+  say(T[lang].slot(dayLabel(booking.date,t("locale"))));
+  chips(s.map(h=>[fmtH(h),()=>{booking.time=fmtH(h);askPhone();}]));
+}
+function askPhone(){
+  say(t("phone"));
+  expect=v=>{
+    let p=v.replace(/[\s\-()]/g,"").replace(/^(\+?91|0)(?=\d{10}$)/,"");
+    if(!/^[6-9]\d{9}$/.test(p)){say(t("badphone"));return true;}
+    booking.phone=p;expect=null;summary();return true;
+  };
+}
+function summary(){
+  const tr=TREATS.find(x=>x[0]===booking.treat);
+  const trLocal=lang==="te"?tr[2]:tr[1];
+  const dateLocal=dayLabel(booking.date,t("locale"));
+  const dateEn=booking.date.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  const phonePretty=booking.phone.replace(/(\d{5})(\d{5})/,"$1 $2");
+  const msg=[`Hello ${CLINIC}, I'd like to book an appointment.`,"",`Name: ${booking.name}`,`Visit for: ${tr[1]}`,`Date: ${dateEn}`,`Time: ${booking.time}`,`Mobile: ${booking.phone}`,`Preferred language: ${lang==="te"?"Telugu":"English"}`,"","(Sent from the website chat)"].join("\n");
+  say(`<b>${t("sum")}</b><table class="kv"><tr><td>${t("l_name")}</td><td>${esc(booking.name)}</td></tr><tr><td>${t("l_treat")}</td><td>${trLocal}</td></tr><tr><td>${t("l_date")}</td><td>${dateLocal}</td></tr><tr><td>${t("l_time")}</td><td>${booking.time}</td></tr><tr><td>${t("l_phone")}</td><td>${phonePretty}</td></tr></table><a class="wa" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${t("confirm")} ↗</a>`,700);
+  say(t("done"));
+  chips([[t("restart"),()=>startBooking()],[t("menu"),menu]]);
+}
+
+function route(raw){
+  const v=raw.toLowerCase();
+  if(/pain|ache|emergenc|swell|bleed|నొప్పి|వాపు|రక్తం/.test(v)){say(t("pain"));startBooking("pain");return;}
+  if(/book|appoint|slot|visit|బుక్|అపాయింట్/.test(v)){startBooking();return;}
+  if(/fee|price|cost|charge|rate|how much|ఫీజు|ధర|ఖర్చు|ఎంత/.test(v)){showFees();return;}
+  if(/tim|hour|open|close|sunday|when|samay|సమయ|టైమ్|ఎప్పుడు/.test(v)){showTimings();return;}
+  if(/where|locat|address|map|direction|ఎక్కడ|అడ్రస్|లొకేషన్/.test(v)){showLocation();return;}
+  if(/human|doctor|call|talk|whatsapp|staff|డాక్టర్|మాట్లాడ/.test(v)){talkToClinic();return;}
+  if(/^(hi|hii+|hello|hey|namaste|namaskaram|హాయ్|నమస్కారం|నమస్తే)\b/.test(v)){say(t("hello"),420);menu();return;}
+  if(/telugu|తెలుగు/.test(v)){setLang("te");return;}
+  if(/english/.test(v)){setLang("en");return;}
+  say(t("fallback"),420);
+  chips([[t("b_book"),startBooking],[t("b_time"),showTimings],[t("b_fee"),showFees],[t("b_loc"),showLocation]]);
+}
+
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=input.value.trim();if(!v)return;
+  input.value="";lockOpenChips();me(v);
+  if(expect&&expect(v))return;
+  route(v);
+});
+
+function paintLang(){
+  $("#lang-en").setAttribute("aria-pressed",lang==="en");
+  $("#lang-te").setAttribute("aria-pressed",lang==="te");
+  input.placeholder=t("ph");$("#status").textContent=t("status");
+  document.documentElement.lang=lang==="te"?"te":"en";
+}
+function setLang(l){
+  if(l===lang)return;
+  lang=l;paintLang();lockOpenChips();expect=null;
+  say(t("switched"),300);menu();
+}
+$("#lang-en").onclick=()=>setLang("en");
+$("#lang-te").onclick=()=>setLang("te");
+
+function start(){
+  session++;queue=Promise.resolve();expect=null;booking={};log.innerHTML="";
+  say(t("hello"),450);menu();
+}
+$("#restart").onclick=start;
+document.querySelectorAll("[data-try]").forEach(b=>b.onclick=()=>{input.value=b.dataset.try;form.requestSubmit();});
+paintLang();start();
+</script>
+
+</body></html>

@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Brew & Bite Menu</title>
+<meta name="description" content="Brew & Bite café menu — coffee, breakfast, burgers and desserts. Order from your table on WhatsApp.">
+<meta name="theme-color" content="#6b3e26">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html{background:#fbf6ef}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:#fbf6ef}
+
+:root{--bg:#fbf6ef;--card:#fff;--ink:#22180f;--muted:#7b6a5a;--brand:#6b3e26;--accent:#d98e32;--line:#eadfce;--veg:#1f8a3b;--nonveg:#b3261e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:96px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-top:12px}
+.hero{background:radial-gradient(circle at 85% 0,#a8653d 0,transparent 55%),var(--brand);color:#fff;padding:28px 20px 26px;position:relative}
+.hero h1{font-family:"DM Serif Display",serif;font-size:38px;line-height:1;margin-top:12px}
+.hero p{opacity:.85;font-size:14px;margin-top:8px;line-height:1.45;max-width:300px}
+.hero small{display:block;opacity:.7;font-size:12px;margin-top:10px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.14);padding:5px 10px;border-radius:99px}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#7ee08f}
+.badge.closed::before{background:#f08a7e}
+.hero .table{position:absolute;right:20px;top:28px;background:var(--accent);color:#22180f}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 8px}
+.top h1{font-family:"DM Serif Display",serif;font-size:26px;color:var(--brand)}
+.top small{display:block;color:var(--muted);font-size:12px}
+.table{font-size:12px;font-weight:700;background:var(--brand);color:#fff;border-radius:99px;padding:5px 10px}
+.tools{display:flex;gap:8px;padding:0 16px 10px}
+.tools input{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font:inherit;font-size:14px}
+.vegtoggle{border:1px solid var(--line);background:#fff;border-radius:12px;padding:0 12px;font:inherit;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.vegtoggle.on{border-color:var(--veg);color:var(--veg)}
+nav{display:flex;gap:8px;overflow-x:auto;padding:0 16px 12px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;text-decoration:none;color:var(--ink);font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 14px}
+nav a.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{padding:8px 16px;max-width:640px;margin:0 auto}
+section{scroll-margin-top:120px;margin-top:18px}
+h2{font-family:"DM Serif Display",serif;font-size:22px;margin-bottom:8px}
+.item{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px}
+.item img{width:84px;height:84px;object-fit:cover;border-radius:12px;flex:none}
+.info{flex:1;min-width:0}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.nm{font-weight:700;font-size:15px;display:flex;gap:7px;align-items:center}
+.mark{width:14px;height:14px;border:1.5px solid;border-radius:3px;display:grid;place-items:center;flex:none}
+.mark i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.mark.veg{color:var(--veg)}
+.mark.nonveg{color:var(--nonveg)}
+.mark.nonveg i{border-radius:0;width:0;height:0;background:none;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid currentColor}
+.mark.egg{color:#c98a0b}
+.price{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.desc{color:var(--muted);font-size:13px;line-height:1.45;margin-top:4px}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;background:#fdebd2;color:#8a4f12;border-radius:99px;padding:2px 8px;margin-top:6px}
+.qty{display:flex;align-items:center;gap:10px;margin-top:8px}
+.qty button{width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:17px;font-weight:700;color:var(--brand)}
+.qty .add{width:auto;padding:0 14px;font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:40px 0;display:none}
+footer{max-width:640px;margin:24px auto 0;padding:16px;color:var(--muted);font-size:13px;line-height:1.7;text-align:center}
+footer a{color:var(--brand);font-weight:600}
+.cart{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));max-width:608px;margin:0 auto;background:var(--veg);color:#fff;border:0;border-radius:16px;padding:15px;font:inherit;font-weight:700;font-size:15px;display:none;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+</style>
+
+
+<div class="hero"><div class="badge" id="status"></div><h1 id="cname"></h1><p id="ctag"></p><small id="ctime"></small><span class="table" id="tbl" hidden></span></div>
+<header>
+<div class="tools"><input id="q" type="search" placeholder="Search dishes, drinks…"><button class="vegtoggle" id="veg"><span class="mark veg"><i></i></span>Veg</button></div>
+<nav id="nav"></nav>
+</header>
+<main id="menu"></main>
+<p class="empty" id="empty">No dishes match your search.</p>
+<footer id="foot"></footer>
+<button class="cart" id="cart"></button>
+<script>
+const CAFE={name:"Brew & Bite",tagline:"Coffee roasted in small batches, food made to order",timings:"Open daily · 8 am – 11 pm",open:[8,23],whatsapp:"916301521358",ordering:true,address:"MG Road, Vijayawada",maps:"https://maps.google.com/?q=MG+Road+Vijayawada",instagram:"https://instagram.com/",wifi:"BrewBite_Guest",taxNote:"All prices in ₹, inclusive of GST"};
+const MENU=[
+{cat:"Coffee",items:[
+{name:"Filter Coffee",price:60,type:"veg",desc:"Strong South Indian decoction, frothed with hot milk",tag:"Signature",img:""},
+{name:"Cappuccino",price:150,type:"veg",desc:"Double espresso, velvety microfoam",tag:"",img:""},
+{name:"Hazelnut Latte",price:190,type:"veg",desc:"Espresso, steamed milk, toasted hazelnut",tag:"",img:""},
+{name:"Cold Brew",price:170,type:"veg",desc:"Steeped 18 hours, smooth and low-acid, over ice",tag:"Bestseller",img:""},
+{name:"Vietnamese Iced Coffee",price:190,type:"veg",desc:"Dark roast, condensed milk, crushed ice",tag:"",img:""}]},
+{cat:"Tea & Coolers",items:[
+{name:"Masala Chai",price:50,type:"veg",desc:"Ginger, cardamom, house spice blend",tag:"",img:""},
+{name:"Lemon Iced Tea",price:120,type:"veg",desc:"Fresh-brewed, lemon, mint",tag:"",img:""},
+{name:"Mango Smoothie",price:170,type:"veg",desc:"Banganapalli mango, yoghurt, honey",tag:"Seasonal",img:""},
+{name:"Cold Coffee Frappe",price:180,type:"veg",desc:"Blended with vanilla ice cream",tag:"",img:""}]},
+{cat:"All-Day Breakfast",items:[
+{name:"Ghee Podi Idli",price:110,type:"veg",desc:"Mini idlis tossed in ghee and gunpowder",tag:"Spicy",img:""},
+{name:"Masala Omelette Toast",price:140,type:"egg",desc:"Two-egg omelette, onion, chilli, butter toast",tag:"",img:""},
+{name:"Avocado Toast",price:220,type:"veg",desc:"Sourdough, smashed avocado, chilli flakes, feta",tag:"",img:""},
+{name:"Pancake Stack",price:190,type:"veg",desc:"Three fluffy pancakes, maple, berries",tag:"",img:""}]},
+{cat:"Burgers & Sandwiches",items:[
+{name:"Crispy Chicken Burger",price:230,type:"nonveg",desc:"Buttermilk fried chicken, slaw, chipotle mayo",tag:"Bestseller",img:""},
+{name:"Paneer Tikka Sandwich",price:180,type:"veg",desc:"Charred paneer, mint mayo, pickled onion",tag:"",img:""},
+{name:"Club Sandwich",price:210,type:"egg",desc:"Triple-decker, egg, cheese, veggies, fries",tag:"",img:""}]},
+{cat:"Mains",items:[
+{name:"Chicken Biryani Bowl",price:260,type:"nonveg",desc:"Dum biryani, raita, mirchi salan",tag:"Chef's pick",img:""},
+{name:"Alfredo Pasta",price:240,type:"veg",desc:"Penne, creamy parmesan sauce, garlic bread",tag:"",img:""},
+{name:"Peri Peri Chicken Rice",price:270,type:"nonveg",desc:"Grilled chicken, herbed rice, peri peri sauce",tag:"Spicy",img:""}]},
+{cat:"Desserts",items:[
+{name:"Brownie with Ice Cream",price:170,type:"veg",desc:"Warm walnut brownie, vanilla scoop",tag:"",img:""},
+{name:"Biscoff Cheesecake",price:220,type:"veg",desc:"Baked, Lotus biscuit crumb",tag:"New",img:""},
+{name:"Tiramisu Jar",price:200,type:"veg",desc:"Espresso-soaked sponge, mascarpone",tag:"",img:""}]}
+];
+const table=new URLSearchParams(location.search).get("table");
+const cart={};let vegOnly=false;
+const rupee=n=>"₹"+n.toLocaleString("en-IN");
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+const $=id=>document.getElementById(id);
+$("cname").textContent=CAFE.name;$("ctime").textContent=CAFE.timings;$("ctag").textContent=CAFE.tagline;const hr=new Date().getHours(),isOpen=hr>=CAFE.open[0]&&hr<CAFE.open[1];$("status").textContent=isOpen?"Open now":"Closed now";$("status").classList.toggle("closed",!isOpen);document.title=CAFE.name+" · Menu";
+if(table){$("tbl").hidden=false;$("tbl").textContent="Table "+table}
+$("nav").innerHTML=MENU.map(c=>`<a href="#${slug(c.cat)}">${c.cat}</a>`).join("");
+const key=(c,i)=>c+"|"+i;
+function render(){
+const q=$("q").value.trim().toLowerCase();let shown=0;
+$("menu").innerHTML=MENU.map(c=>{const items=c.items.map((it,i)=>({...it,k:key(c.cat,i)})).filter(it=>(!vegOnly||it.type==="veg")&&(!q||(it.name+" "+it.desc).toLowerCase().includes(q)));shown+=items.length;if(!items.length)return"";return`<section id="${slug(c.cat)}"><h2>${c.cat}</h2>${items.map(it=>`<div class="item">${it.img?`<img src="${it.img}" alt="" loading="lazy">`:""}<div class="info"><div class="row"><span class="nm"><span class="mark ${it.type}"><i></i></span>${it.name}</span><span class="price">${rupee(it.price)}</span></div>${it.desc?`<p class="desc">${it.desc}</p>`:""}${it.tag?`<span class="tag">${it.tag}</span>`:""}${CAFE.ordering?`<div class="qty" data-k="${it.k}">${cart[it.k]?`<button data-d="-1">−</button><b>${cart[it.k]}</b><button data-d="1">+</button>`:`<button class="add" data-d="1">Add</button>`}</div>`:""}</div></div>`).join("")}</section>`}).join("");
+$("empty").style.display=shown?"none":"block";spy();updateCart()}
+function find(k){const[c,i]=k.split("|");return MENU.find(m=>m.cat===c).items[+i]}
+function updateCart(){const ks=Object.keys(cart).filter(k=>cart[k]>0);if(!CAFE.ordering||!ks.length){$("cart").style.display="none";return}
+const n=ks.reduce((a,k)=>a+cart[k],0),t=ks.reduce((a,k)=>a+cart[k]*find(k).price,0);
+$("cart").style.display="block";$("cart").textContent=`Order on WhatsApp · ${n} item${n>1?"s":""} · ${rupee(t)}`;
+$("cart").onclick=()=>{const lines=ks.map(k=>`${cart[k]} × ${find(k).name} — ${rupee(cart[k]*find(k).price)}`);const msg=`Order from ${CAFE.name}${table?` (Table ${table})`:""}:\n${lines.join("\n")}\nTotal: ${rupee(t)}`;const a=document.createElement("a");a.href=`https://wa.me/${CAFE.whatsapp}?text=${encodeURIComponent(msg)}`;a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove()}}
+$("menu").addEventListener("click",e=>{const b=e.target.closest("button[data-d]");if(!b)return;const k=b.parentElement.dataset.k;cart[k]=Math.max(0,(cart[k]||0)+ +b.dataset.d);render()});
+$("q").addEventListener("input",render);
+$("veg").onclick=()=>{vegOnly=!vegOnly;$("veg").classList.toggle("on",vegOnly);render()};
+let lastCur="";
+function spy(){const secs=[...document.querySelectorAll("section")];let cur=secs[0]?.id;secs.forEach(s=>{if(s.getBoundingClientRect().top<140)cur=s.id});if(cur===lastCur)return;lastCur=cur;document.querySelectorAll("nav a").forEach(a=>{const on=a.getAttribute("href")==="#"+cur;a.classList.toggle("active",on);if(on){const n=$("nav");n.scrollTo({left:a.offsetLeft-n.clientWidth/2+a.clientWidth/2,behavior:"smooth"})}})}
+addEventListener("scroll",spy,{passive:true});
+$("foot").innerHTML=`${CAFE.timings}<br><a href="${CAFE.maps}">${CAFE.address}</a> · <a href="${CAFE.instagram}">Instagram</a>${CAFE.wifi?`<br>Wi-Fi: ${CAFE.wifi}`:""}${CAFE.taxNote?`<br>${CAFE.taxNote}`:""}`;
+render();
+</script>
+</body></html>

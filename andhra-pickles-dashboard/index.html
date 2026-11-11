@@ -1,0 +1,330 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Andhra Pickles Co.</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Tiro+Telugu&display=swap">
+<style>
+:root{
+  --bg:#FBF6EE;--surface:#FFFFFF;--surface-2:#F5ECDF;--ink:#2B1812;--muted:#7D665A;--line:#EADCCB;
+  --chili:#C42A1F;--chili-2:#E2564B;--chili-soft:#FBE3DF;--turmeric:#E39B12;--turmeric-soft:#FCEFD3;--gongura:#3C7A37;--gongura-soft:#E2F0DF;
+  --band:#B3241A;--band-2:#8F1A12;--band-ink:#FFF4E6;--band-accent:#FFC24B;
+  --display:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --telugu:"Tiro Telugu","Noto Sans Telugu","Nirmala UI",serif;
+  --shadow:0 1px 2px rgba(43,24,18,.05),0 12px 28px -18px rgba(43,24,18,.28);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17100D;--surface:#211814;--surface-2:#2B201B;--ink:#F7EBDF;--muted:#B49E90;--line:#3A2C25;
+  --chili:#F0574B;--chili-2:#F58B82;--chili-soft:#3D1B17;--turmeric:#F5B840;--turmeric-soft:#3A2B12;--gongura:#7DC274;--gongura-soft:#1E3220;
+  --band:#6E150F;--band-2:#4A0E09;--band-ink:#FFF0E0;--band-accent:#FFC857;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 28px -18px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17100D;--surface:#211814;--surface-2:#2B201B;--ink:#F7EBDF;--muted:#B49E90;--line:#3A2C25;
+  --chili:#F0574B;--chili-2:#F58B82;--chili-soft:#3D1B17;--turmeric:#F5B840;--turmeric-soft:#3A2B12;--gongura:#7DC274;--gongura-soft:#1E3220;
+  --band:#6E150F;--band-2:#4A0E09;--band-ink:#FFF0E0;--band-accent:#FFC857;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 28px -18px rgba(0,0,0,.6);color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{background:radial-gradient(120% 140% at 85% -20%,var(--chili) 0%,var(--band) 45%,var(--band-2) 100%);color:var(--band-ink);position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.09) 1px,transparent 0);background-size:18px 18px;pointer-events:none}
+.band-in{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;padding-block:28px 30px}
+.brand{display:flex;align-items:center;gap:16px;min-width:0}
+.jar{width:58px;height:58px;flex:none}
+.te{font-family:var(--telugu);font-size:20px;color:var(--band-accent);line-height:1.2}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.6vw,44px);letter-spacing:-.02em;line-height:1;margin:2px 0 0;text-wrap:balance}
+.tag{margin:8px 0 0;font-size:14px;opacity:.85}
+.band-meta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--band-accent);display:block}
+main{padding-block:28px 40px;display:flex;flex-direction:column;gap:20px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:-52px;position:relative;z-index:2}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0}
+.kpi-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi-value{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi-value.wrap-v{white-space:normal;font-size:24px;line-height:1.15}
+.kpi-value small{font-family:var(--telugu);font-size:15px;font-weight:400;color:var(--muted);margin-left:6px}
+.delta{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:1px 8px;font-weight:700;font-size:12px;font-variant-numeric:tabular-nums}
+.up{background:var(--gongura-soft);color:var(--gongura)}
+.down{background:var(--chili-soft);color:var(--chili)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.span2{grid-column:span 2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h2{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0}
+.sub{font-size:13px;color:var(--muted);margin:2px 0 0}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:10px;padding:3px;gap:2px}
+.seg button{font:600 13px var(--body);border:0;background:transparent;color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg button:focus-visible,.cta a:focus-visible{outline:2px solid var(--turmeric);outline-offset:2px}
+.chart{position:relative;height:290px}
+.chart.tall{height:330px}
+.regions{display:flex;flex-direction:column;gap:14px}
+.region{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:baseline}
+.region b{font-weight:600}
+.region span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+.bar{grid-column:1/-1;height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--turmeric),var(--chili))}
+.note{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px;margin-top:auto}
+.table-wrap{overflow-x:auto;margin:0 -22px;padding:0 22px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:680px}
+th{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.oid{font-weight:600;font-variant-numeric:tabular-nums}
+.city small{display:block;color:var(--muted);font-size:12px}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.s-new{background:var(--turmeric-soft);color:var(--turmeric)}
+.s-ship{background:var(--chili-soft);color:var(--chili)}
+.s-done{background:var(--gongura-soft);color:var(--gongura)}
+.cta{background:var(--surface-2);border-radius:20px;padding:22px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.cta p{margin:0;font-size:15px}
+.cta strong{font-family:var(--display);font-size:18px;display:block}
+.cta a{display:inline-flex;align-items:center;gap:8px;background:#1FAF5A;color:#fff;text-decoration:none;font-weight:700;padding:11px 18px;border-radius:12px;white-space:nowrap}
+.cta .num{font-variant-numeric:tabular-nums;user-select:all;color:var(--muted);font-size:13px}
+@media (max-width:980px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}.span2{grid-column:auto}}
+@media (max-width:520px){.kpis{gap:10px}.kpi{padding:14px}.kpi-value{font-size:23px}.kpi-value small{display:none}.band-meta{align-items:flex-start}.chart{height:240px}.card{padding:18px 16px}.table-wrap{margin:0 -16px;padding:0 16px}.jar{width:46px;height:46px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="band">
+  <div class="wrap band-in">
+    <div class="brand">
+      <svg class="jar" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="18" y="6" width="28" height="9" rx="3" fill="#FFC24B"/>
+        <rect x="20" y="13" width="24" height="5" rx="1.5" fill="#E39B12"/>
+        <path d="M17 20h30c3 0 5 2 5 5v28c0 4-3 7-7 7H19c-4 0-7-3-7-7V25c0-3 2-5 5-5z" fill="#FFF4E6"/>
+        <path d="M14 34c6-3 12 3 18 0s12-3 18 0v19c0 3-2 5-5 5H19c-3 0-5-2-5-5z" fill="#D8361F"/>
+        <circle cx="24" cy="42" r="2.4" fill="#FFC24B"/><circle cx="36" cy="47" r="2" fill="#FFC24B"/><circle cx="41" cy="40" r="1.6" fill="#7A1A10"/><circle cx="29" cy="51" r="1.6" fill="#7A1A10"/>
+        <rect x="22" y="25" width="20" height="6" rx="2" fill="#3C7A37"/>
+      </svg>
+      <div>
+        <div class="te">ఆంధ్ర పచ్చళ్ళు</div>
+        <h1>Andhra Pickles Co.</h1>
+        <p class="tag">Sales dashboard · Homemade pickles shipped across India and abroad</p>
+      </div>
+    </div>
+    <div class="band-meta">
+      <span class="chip"><i></i>Sample data</span>
+      <span id="today"></span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="kpis" id="kpis" aria-label="Key numbers"></section>
+
+  <section class="grid">
+    <article class="card span2">
+      <div class="card-head">
+        <div><h2>Daily orders</h2><p class="sub" id="dailySub">Orders placed per day</p></div>
+        <div class="seg" role="group" aria-label="Range">
+          <button type="button" id="r14" data-r="14" aria-pressed="false">14D</button>
+          <button type="button" id="r30" data-r="30" aria-pressed="true">30D</button>
+          <button type="button" id="r90" data-r="90" aria-pressed="false">90D</button>
+        </div>
+      </div>
+      <div class="chart"><canvas id="daily" aria-label="Daily orders chart" role="img"></canvas></div>
+    </article>
+    <article class="card">
+      <div class="card-head"><div><h2>Top products</h2><p class="sub">Jars sold, last 30 days</p></div></div>
+      <div class="chart tall"><canvas id="top" aria-label="Top products chart" role="img"></canvas></div>
+    </article>
+
+    <article class="card span2">
+      <div class="card-head"><div><h2>Monthly revenue</h2><p class="sub">Gross sales in ₹, current month to date</p></div></div>
+      <div class="chart"><canvas id="monthly" aria-label="Monthly revenue chart" role="img"></canvas></div>
+    </article>
+    <article class="card">
+      <div class="card-head"><div><h2>Where orders ship</h2><p class="sub">Share of revenue, last 30 days</p></div></div>
+      <div class="regions" id="regions"></div>
+      <p class="note" id="nriNote"></p>
+    </article>
+
+    <article class="card span2" style="grid-column:1/-1">
+      <div class="card-head"><div><h2>Recent orders</h2><p class="sub">Latest 8 orders across all channels</p></div></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Order</th><th>Customer</th><th>Ship to</th><th>Items</th><th class="num">Amount</th><th>Status</th></tr></thead>
+          <tbody id="orders"></tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <section class="cta">
+    <p><strong>Want a dashboard like this for your business?</strong>Built by RootFix. Your own sales data, charts and reports in one page.</p>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <a href="https://wa.me/916301521358?text=Hi%20PN%20Digital%2C%20I%20saw%20the%20Andhra%20Pickles%20dashboard%20demo%20and%20want%20one%20for%20my%20business." target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.8-1.1-4.6-4-4.8-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+        Chat on WhatsApp</a>
+      <span class="num">+91 63015 21358</span>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+(function(){
+  const PRODUCTS=[
+    {name:"Mango Avakaya",te:"ఆవకాయ",price:320,w:26},
+    {name:"Gongura Pachadi",te:"గోంగూర",price:290,w:20},
+    {name:"Chicken Pickle",te:"కోడి పచ్చడి",price:540,w:12},
+    {name:"Prawn Pickle",te:"రొయ్యల పచ్చడి",price:690,w:8},
+    {name:"Lemon Pickle",te:"నిమ్మకాయ",price:240,w:11},
+    {name:"Tomato Pachadi",te:"టమాట",price:220,w:10},
+    {name:"Garlic Pickle",te:"వెల్లుల్లి",price:300,w:8},
+    {name:"Allam Pachadi",te:"అల్లం",price:260,w:5}
+  ];
+  const CITIES=[
+    ["Vijayawada","Andhra Pradesh","AP",20],["Guntur","Andhra Pradesh","AP",16],["Visakhapatnam","Andhra Pradesh","AP",10],["Nellore","Andhra Pradesh","AP",5],
+    ["Hyderabad","Telangana","TS",22],["Warangal","Telangana","TS",4],
+    ["Bengaluru","Karnataka","IN",12],["Chennai","Tamil Nadu","IN",6],["Pune","Maharashtra","IN",4],
+    ["Dallas","USA","NRI",6],["New Jersey","USA","NRI",4],["Dubai","UAE","NRI",5]
+  ];
+  const REGION_NAMES={AP:"Andhra Pradesh",TS:"Telangana",IN:"Rest of India",NRI:"NRI (USA, UAE)"};
+  const NAMES=["Lakshmi Prasanna","Ravi Teja","Sravani K","Venkat Rao","Harika M","Srinivas P","Anusha R","Kiran Kumar","Divya Sree","Mahesh B","Padmavathi","Sai Charan","Bhargavi","Naresh G","Pranathi","Suresh Babu"];
+
+  let seed=26111;
+  const rnd=()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+  const pick=arr=>{const total=arr.reduce((s,x)=>s+(x.w??x[3]),0);let r=rnd()*total;for(const x of arr){r-=(x.w??x[3]);if(r<=0)return x}return arr[arr.length-1]};
+
+  const startOfDay=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x};
+  const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+  const TODAY=startOfDay(new Date());
+  const START=new Date(TODAY.getFullYear(),TODAY.getMonth()-5,1);
+  const inr=new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0});
+  const num=new Intl.NumberFormat("en-IN");
+  const lakh=v=>v>=100000?"₹"+(v/100000).toFixed(v>=1000000?1:2).replace(/\.?0+$/,"")+" L":inr.format(v);
+  const dayLabel=d=>d.toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+
+  const days=[];
+  const orders=[];
+  let oid=10001;
+  const totalDays=Math.round((TODAY-START)/864e5)+1;
+  for(let i=0;i<totalDays;i++){
+    const date=addDays(START,i);
+    const dow=date.getDay();
+    const m=date.getMonth();
+    let base=13+(i/totalDays)*11;
+    if(dow===0||dow===6)base+=5;
+    if(m===9||m===10)base+=4;
+    if(m===0)base+=6;
+    const n=Math.max(4,Math.round(base+(rnd()-.5)*9));
+    const day={date,orders:0,revenue:0};
+    for(let k=0;k<n;k++){
+      const items=[];
+      const count=rnd()<.55?1:rnd()<.7?2:3;
+      for(let j=0;j<count;j++){
+        const p=pick(PRODUCTS);
+        const ex=items.find(x=>x.p===p);
+        const q=rnd()<.8?1:2;
+        if(ex)ex.q+=q;else items.push({p,q});
+      }
+      const city=pick(CITIES);
+      let amount=items.reduce((s,x)=>s+x.p.price*x.q,0);
+      if(city[2]==="NRI")amount+=900;
+      orders.push({id:oid++,date,items,amount,city,name:NAMES[Math.floor(rnd()*NAMES.length)],hour:8+Math.floor(rnd()*13),min:Math.floor(rnd()*60)});
+      day.orders++;day.revenue+=amount;
+    }
+    days.push(day);
+  }
+
+  const sameDay=(a,b)=>a.getTime()===b.getTime();
+  const tDay=days[days.length-1],yDay=days[days.length-2];
+  const inMonth=(d,y,m)=>d.getFullYear()===y&&d.getMonth()===m;
+  const ty=TODAY.getFullYear(),tm=TODAY.getMonth(),td=TODAY.getDate();
+  const lm=new Date(ty,tm-1,1);
+  const thisMonth=orders.filter(o=>inMonth(o.date,ty,tm));
+  const lastMonthSame=orders.filter(o=>inMonth(o.date,lm.getFullYear(),lm.getMonth())&&o.date.getDate()<=td);
+  const sum=a=>a.reduce((s,o)=>s+o.amount,0);
+  const revTM=sum(thisMonth),revLM=sum(lastMonthSame);
+  const aovTM=revTM/thisMonth.length,aovLM=revLM/lastMonthSame.length;
+  const jars=list=>{const map=new Map(PRODUCTS.map(p=>[p,0]));list.forEach(o=>o.items.forEach(x=>map.set(x.p,map.get(x.p)+x.q)));return[...map.entries()].sort((a,b)=>b[1]-a[1])};
+  const bestTM=jars(thisMonth)[0];
+  const pct=(a,b)=>b?((a-b)/b)*100:0;
+  const pillHTML=v=>`<span class="pill ${v>=0?"up":"down"}">${v>=0?"▲":"▼"} ${Math.abs(v).toFixed(1)}%</span>`;
+
+  document.getElementById("today").textContent=TODAY.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  const monthName=TODAY.toLocaleDateString("en-IN",{month:"long"});
+  const kpis=[
+    {label:"Orders today",value:num.format(tDay.orders),delta:`${pillHTML(pct(tDay.orders,yDay.orders))} vs yesterday (${yDay.orders})`},
+    {label:`${monthName} revenue`,value:lakh(revTM),delta:`${pillHTML(pct(revTM,revLM))} vs same days last month`},
+    {label:"Avg order value",value:inr.format(Math.round(aovTM)),delta:`${pillHTML(pct(aovTM,aovLM))} vs last month`},
+    {label:"Best seller this month",wrap:true,value:`${bestTM[0].name}<small>${bestTM[0].te}</small>`,delta:`<span class="pill up">${num.format(bestTM[1])} jars</span> sold so far`}
+  ];
+  document.getElementById("kpis").innerHTML=kpis.map(k=>`<div class="kpi"><span class="kpi-label">${k.label}</span><span class="kpi-value${k.wrap?" wrap-v":""}">${k.value}</span><span class="delta">${k.delta}</span></div>`).join("");
+
+  const last30=orders.filter(o=>(TODAY-o.date)/864e5<30);
+  const regionRev={AP:0,TS:0,IN:0,NRI:0};
+  last30.forEach(o=>regionRev[o.city[2]]+=o.amount);
+  const totalRev=Object.values(regionRev).reduce((a,b)=>a+b,0);
+  document.getElementById("regions").innerHTML=Object.entries(regionRev).sort((a,b)=>b[1]-a[1]).map(([k,v])=>{const p=v/totalRev*100;return`<div class="region"><b>${REGION_NAMES[k]}</b><span>${lakh(v)} · ${p.toFixed(0)}%</span><div class="bar"><i style="width:${p.toFixed(1)}%"></i></div></div>`}).join("");
+  const nri=last30.filter(o=>o.city[2]==="NRI");
+  document.getElementById("nriNote").textContent=`${nri.length} NRI orders in 30 days, average ${inr.format(Math.round(sum(nri)/nri.length))} including international shipping.`;
+
+  const nowMins=new Date().getHours()*60+new Date().getMinutes();
+  const tMins=o=>o.hour*60+o.min;
+  orders.filter(o=>sameDay(o.date,TODAY)&&tMins(o)>nowMins).forEach(o=>{const t=Math.floor(rnd()*Math.max(nowMins-480,1))+480;o.hour=Math.floor(t/60);o.min=t%60});
+  const byTime=(a,b)=>tMins(b)-tMins(a);
+  const recent=[...orders.filter(o=>sameDay(o.date,TODAY)).sort(byTime).slice(0,5),...orders.filter(o=>sameDay(o.date,addDays(TODAY,-1))).sort(byTime).slice(0,3)];
+  const statusOf=o=>{const age=Math.round((TODAY-o.date)/864e5);return age===0?(nowMins-tMins(o)>240?["Shipped","s-ship"]:["Packing","s-new"]):["Delivered","s-done"]};
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  document.getElementById("orders").innerHTML=recent.map(o=>{
+    const [st,cls]=statusOf(o);
+    const when=sameDay(o.date,TODAY)?"Today":sameDay(o.date,addDays(TODAY,-1))?"Yesterday":dayLabel(o.date);
+    const items=o.items.map(x=>`${x.p.name} × ${x.q}`).join(", ");
+    return`<tr><td><span class="oid">#APC-${o.id}</span><div class="sub">${when}, ${String(o.hour%12||12)}:${String(o.min).padStart(2,"0")} ${o.hour<12?"AM":"PM"}</div></td><td>${esc(o.name)}</td><td class="city">${o.city[0]}<small>${o.city[1]}</small></td><td>${items}</td><td class="num"><b>${inr.format(o.amount)}</b></td><td><span class="status ${cls}">${st}</span></td></tr>`;
+  }).join("");
+
+  const months=[];
+  for(let i=0;i<6;i++){const d=new Date(START.getFullYear(),START.getMonth()+i,1);months.push({d,rev:sum(orders.filter(o=>inMonth(o.date,d.getFullYear(),d.getMonth())))})}
+  const topList=jars(last30);
+
+  if(!window.Chart){document.querySelectorAll(".chart").forEach(c=>c.innerHTML='<p class="sub">Charts need an internet connection to load.</p>');return}
+
+  let range=30;
+  const charts={};
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function alpha(hex,a){const h=hex.replace("#","");const v=parseInt(h.length===3?h.split("").map(c=>c+c).join(""):h,16);return`rgba(${v>>16&255},${v>>8&255},${v&255},${a})`}
+
+  function build(){
+    Object.values(charts).forEach(c=>c.destroy());
+    const ink=css("--ink"),muted=css("--muted"),line=css("--line"),chili=css("--chili"),turmeric=css("--turmeric"),surface=css("--surface");
+    Chart.defaults.font.family=css("--body");
+    Chart.defaults.color=muted;
+    const tooltip={backgroundColor:ink,titleColor:surface,bodyColor:surface,padding:10,cornerRadius:10,displayColors:false,titleFont:{weight:"600"}};
+    const grid={color:line,drawTicks:false};
+
+    const slice=days.slice(-range);
+    const ctx=document.getElementById("daily").getContext("2d");
+    const g=ctx.createLinearGradient(0,0,0,290);
+    g.addColorStop(0,alpha(chili,.28));g.addColorStop(1,alpha(chili,0));
+    const avg=slice.reduce((s,d)=>s+d.orders,0)/slice.length;
+    document.getElementById("dailySub").textContent=`${num.format(slice.reduce((s,d)=>s+d.orders,0))} orders in ${range} days · avg ${avg.toFixed(1)} a day`;
+    charts.daily=new Chart(ctx,{type:"line",data:{labels:slice.map(d=>dayLabel(d.date)),datasets:[
+      {data:slice.map(d=>d.orders),borderColor:chili,backgroundColor:g,fill:true,tension:.35,borderWidth:2.5,pointRadius:slice.map((_,i)=>i===slice.length-1?5:0),pointBackgroundColor:chili,pointBorderColor:surface,pointBorderWidth:2,pointHoverRadius:5},
+      {data:slice.map(()=>avg),borderColor:alpha(turmeric,.9),borderDash:[5,5],borderWidth:1.5,pointRadius:0,fill:false}
+    ]},options:{maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{display:false},tooltip:{...tooltip,filter:i=>i.datasetIndex===0,callbacks:{label:c=>`${c.parsed.y} orders · ${lakh(slice[c.dataIndex].revenue)}`}}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:range>30?9:8,maxRotation:0}},y:{grid,border:{display:false},beginAtZero:true,ticks:{padding:8,precision:0}}}}});
+
+    charts.top=new Chart(document.getElementById("top"),{type:"bar",data:{labels:topList.map(x=>x[0].name),datasets:[{data:topList.map(x=>x[1]),backgroundColor:topList.map((_,i)=>i===0?chili:i<3?alpha(chili,.62):alpha(turmeric,.55)),borderRadius:6,barThickness:16}]},options:{indexAxis:"y",maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{title:c=>`${topList[c[0].dataIndex][0].name} · ${topList[c[0].dataIndex][0].te}`,label:c=>`${c.parsed.x} jars · ${inr.format(c.parsed.x*topList[c.dataIndex][0].price)}`}}},scales:{x:{grid,border:{display:false},ticks:{precision:0}},y:{grid:{display:false},border:{display:false},ticks:{color:ink,font:{weight:"500"}}}}}});
+
+    charts.monthly=new Chart(document.getElementById("monthly"),{type:"bar",data:{labels:months.map((m,i)=>m.d.toLocaleDateString("en-IN",{month:"short"})+(i===5?" (to date)":"")),datasets:[{data:months.map(m=>m.rev),backgroundColor:months.map((_,i)=>i===5?alpha(chili,.35):i===4?chili:alpha(chili,.72)),borderColor:months.map((_,i)=>i===5?chili:"transparent"),borderWidth:months.map((_,i)=>i===5?1.5:0),borderSkipped:false,borderRadius:10,maxBarThickness:64}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>inr.format(c.parsed.y)}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{color:ink}},y:{grid,border:{display:false},beginAtZero:true,ticks:{padding:8,callback:v=>"₹"+(v/100000).toFixed(1).replace(/\.0$/,"")+"L"}}}}});
+  }
+
+  document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{
+    range=+b.dataset.r;
+    document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+    build();
+  }));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",build);
+  new MutationObserver(build).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+  build();
+})();
+</script>
+
+</body></html>

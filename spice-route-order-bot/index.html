@@ -1,0 +1,358 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Spice Route Order Bot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: ordering chat left with a live cart bar, short demo guide right; stacks on phones */
+:root{
+  --bg:#F6EFE6;--surface:#FFFFFF;--chatbg:#FBF6F0;--ink:#2A1510;--muted:#7A5F55;--line:#EADBCB;
+  --accent:#8E2414;--accent-ink:#FFF6EC;--gold:#D88A00;--soft:#F7E5D3;--me:#8E2414;--me-ink:#FFF6EC;
+  --wa:#1C9B4E;--wa-ink:#FFFFFF;--veg:#1E8A3A;--nonveg:#B3261E;
+  --display:"Bricolage Grotesque","Inter",system-ui,sans-serif;--font:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#170D0A;--surface:#22140F;--chatbg:#1B100C;--ink:#F5E7DC;--muted:#B39687;--line:#3A251D;
+  --accent:#E0644C;--accent-ink:#1E0B06;--gold:#F0B23A;--soft:#3A1F17;--me:#B33A25;--me-ink:#FFF3EA;
+  --wa:#2DBE68;--wa-ink:#05230F;--veg:#47C26A;--nonveg:#EE6A5F;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#170D0A;--surface:#22140F;--chatbg:#1B100C;--ink:#F5E7DC;--muted:#B39687;--line:#3A251D;
+  --accent:#E0644C;--accent-ink:#1E0B06;--gold:#F0B23A;--soft:#3A1F17;--me:#B33A25;--me-ink:#FFF3EA;
+  --wa:#2DBE68;--wa-ink:#05230F;--veg:#47C26A;--nonveg:#EE6A5F;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--font);font-size:15px}
+.page{max-width:1060px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.top h1{font-family:var(--display);font-size:26px;font-weight:800;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.top span{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:840px){.grid{grid-template-columns:minmax(0,1fr)}}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;height:min(720px,86svh);min-height:540px;overflow:hidden;box-shadow:0 24px 60px -36px rgba(60,15,5,.5)}
+.chead{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--accent);color:var(--accent-ink)}
+.avatar{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--gold);color:#2A1510;font-family:var(--display);font-weight:800;font-size:15px;flex:none}
+.who{flex:1;min-width:0;line-height:1.2}
+.who b{display:block;font-family:var(--display);font-size:16px}
+.who small{opacity:.85;font-size:12px}
+.iconbtn{border:0;background:transparent;color:inherit;cursor:pointer;font-size:18px;padding:4px 6px;border-radius:8px;flex:none}
+.log{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:8px;background:var(--chatbg);scroll-behavior:smooth}
+.m{max-width:88%;padding:9px 12px;border-radius:15px;line-height:1.5;font-size:14.5px;overflow-wrap:anywhere}
+.m.bot{background:var(--surface);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:5px}
+.m.me{background:var(--me);color:var(--me-ink);align-self:flex-end;border-bottom-right-radius:5px}
+.m.wide{max-width:100%;width:100%}
+.m small{color:var(--muted)}
+.cat-title{font-family:var(--display);font-weight:800;font-size:16px;margin-bottom:4px}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-top:1px dashed var(--line)}
+.item:first-of-type{border-top:0}
+.dot{width:14px;height:14px;border:1.5px solid var(--veg);display:grid;place-items:center;border-radius:3px}
+.dot::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--veg)}
+.dot.nv{border-color:var(--nonveg)}.dot.nv::after{background:var(--nonveg)}
+.iname{font-weight:600;line-height:1.3}
+.iname small{display:block;font-weight:400}
+.price{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.step{display:flex;align-items:center;border:1.5px solid var(--accent);border-radius:9px;overflow:hidden;min-width:84px;justify-content:center}
+.step button{border:0;background:transparent;color:var(--accent);font:inherit;font-weight:800;cursor:pointer;padding:5px 10px}
+.step .add{width:100%;letter-spacing:.06em;font-size:12.5px}
+.step .q{min-width:18px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+.step.on{background:var(--soft)}
+.kv{border-collapse:collapse;margin-top:6px;width:100%;font-variant-numeric:tabular-nums}
+.kv td{padding:5px 0;border-top:1px dashed var(--line);vertical-align:top}
+.kv td:last-child{text-align:right;font-weight:600;padding-left:12px;white-space:nowrap}
+.kv tr.total td{border-top:1.5px solid var(--ink);font-weight:800;font-size:15.5px}
+.kv td.muted{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-self:flex-start;max-width:100%}
+.chip{border:1.5px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.chip:hover{background:var(--soft)}
+.chips.used .chip{opacity:.35;pointer-events:none}
+.chips.used .chip.picked{opacity:1;background:var(--soft)}
+.chip:focus-visible,.send:focus-visible,.iconbtn:focus-visible,.wa:focus-visible,.step button:focus-visible,.cartbar:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wa{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:var(--wa);color:var(--wa-ink);text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800}
+.typing{display:flex;gap:4px;padding:12px 14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:b 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+@media (prefers-reduced-motion:reduce){.typing i{animation:none}.log{scroll-behavior:auto}}
+.cartbar{display:flex;align-items:center;justify-content:space-between;gap:10px;border:0;margin:0;padding:11px 16px;background:var(--gold);color:#2A1510;font:inherit;font-weight:800;cursor:pointer;text-align:left}
+.cartbar span{font-variant-numeric:tabular-nums}
+.compose{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:var(--surface)}
+.compose input{flex:1;min-width:0;border:1px solid var(--line);background:var(--chatbg);color:var(--ink);border-radius:999px;padding:10px 14px;font:inherit;font-size:14.5px}
+.compose input:focus{outline:2px solid var(--accent);outline-offset:0}
+.send{border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:0 16px;font:inherit;font-weight:800;cursor:pointer}
+.info{display:flex;flex-direction:column;gap:22px;min-width:0}
+.info h2{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.info p,.info li{line-height:1.6;max-width:62ch}
+.info ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.tries{display:flex;flex-wrap:wrap;gap:8px}
+.tries button{border:1px dashed var(--accent);background:transparent;color:var(--ink);border-radius:10px;padding:7px 11px;font:inherit;font-size:13.5px;cursor:pointer}
+.note{border-left:3px solid var(--gold);padding:8px 12px;background:var(--surface);border-radius:0 10px 10px 0;font-size:13.5px;color:var(--muted)}
+.credit{font-size:12.5px;color:var(--muted)}
+</style>
+
+<div class="page">
+  <div class="top"><h1>Spice Route · WhatsApp ordering bot</h1><span>Live demo · menu, cart, checkout</span></div>
+  <div class="grid">
+    <section class="chat" aria-label="Spice Route order chat">
+      <div class="chead">
+        <div class="avatar" aria-hidden="true">SR</div>
+        <div class="who"><b>Spice Route Restaurant</b><small>Open now · 11 AM – 11 PM</small></div>
+        <button class="iconbtn" id="restart" title="Restart chat" aria-label="Restart chat">↻</button>
+      </div>
+      <div class="log" id="log" aria-live="polite"></div>
+      <button class="cartbar" id="cartbar" type="button" hidden><span id="cartsum">0 items · ₹0</span><span>View cart →</span></button>
+      <form class="compose" id="f" autocomplete="off">
+        <input id="msg" placeholder="Type “menu”, “biryani”, “cart”…" aria-label="Message">
+        <button class="send" type="submit">Send</button>
+      </form>
+    </section>
+    <aside class="info">
+      <div>
+        <h2>What this bot does</h2>
+        <ol>
+          <li>Shows the menu by category with veg and non-veg marks.</li>
+          <li>Customer taps Add and adjusts quantities; the cart total updates live.</li>
+          <li>Checkout asks delivery or pickup, name, mobile, address and payment.</li>
+          <li>Sends a clean, itemised order summary to the owner on WhatsApp.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>Try typing</h2>
+        <div class="tries">
+          <button data-try="biryani">biryani</button>
+          <button data-try="show menu">show menu</button>
+          <button data-try="delivery charges?">delivery charges?</button>
+          <button data-try="cart">cart</button>
+        </div>
+      </div>
+      <p class="note">Demo: orders open WhatsApp to +91 63015 21358. For a real restaurant, their number, menu and prices go in instead.</p>
+      <p class="credit">Built by RootFix</p>
+    </aside>
+  </div>
+</div>
+
+<script>
+const WA_NUMBER="916301521358";
+const SHOP="Spice Route Restaurant";
+const DELIVERY_FEE=40,FREE_ABOVE=499;
+const MENU=[
+  {id:"biryani",name:"Biryani",items:[
+    ["b1","Chicken Dum Biryani",249,0,"Hyderabadi style, with raita & salan"],
+    ["b2","Mutton Biryani",349,0,"Slow-cooked goat, kacchi style"],
+    ["b3","Prawn Biryani",329,0,"Coastal masala prawns"],
+    ["b4","Egg Biryani",199,0,"Two boiled eggs, masala rice"],
+    ["b5","Veg Dum Biryani",189,1,"Seasonal vegetables & paneer"]]},
+  {id:"starters",name:"Starters",items:[
+    ["s1","Chicken 65",219,0,"Crispy, curry-leaf tempered"],
+    ["s2","Apollo Fish",279,0,"Boneless fish, spicy toss"],
+    ["s3","Paneer 65",199,1,""],
+    ["s4","Gobi Manchurian",169,1,"Dry"]]},
+  {id:"curries",name:"Curries",items:[
+    ["c1","Gongura Mutton",329,0,"Andhra special, sorrel leaves"],
+    ["c2","Butter Chicken",269,0,""],
+    ["c3","Paneer Butter Masala",229,1,""],
+    ["c4","Dal Tadka",159,1,""]]},
+  {id:"breads",name:"Breads & Rice",items:[
+    ["r1","Butter Naan",49,1,""],
+    ["r2","Tandoori Roti",29,1,""],
+    ["r3","Jeera Rice",139,1,""]]},
+  {id:"sweets",name:"Drinks & Desserts",items:[
+    ["d1","Sweet Lassi",79,1,""],
+    ["d2","Fresh Lime Soda",69,1,""],
+    ["d3","Double Ka Meetha",99,1,"Hyderabadi bread pudding"],
+    ["d4","Qubani Ka Meetha",129,1,"Apricot dessert with cream"]]}
+];
+const ITEMS={};MENU.forEach(c=>c.items.forEach(([id,name,price,veg,desc])=>ITEMS[id]={id,name,price,veg,desc,cat:c.id}));
+
+const $=s=>document.querySelector(s);
+const log=$("#log"),form=$("#f"),input=$("#msg"),cartbar=$("#cartbar");
+let cart={},order={},expect=null,queue=Promise.resolve(),session=0;
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const rs=n=>"₹"+n.toLocaleString("en-IN");
+const scroll=()=>{log.scrollTop=log.scrollHeight};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+function say(html,delay=480,cls=""){
+  const s=session;
+  queue=queue.then(async()=>{
+    if(s!==session)return;
+    const ty=document.createElement("div");ty.className="m bot typing";ty.innerHTML="<i></i><i></i><i></i>";log.append(ty);scroll();
+    await wait(delay);ty.remove();
+    if(s!==session)return;
+    const d=document.createElement("div");d.className="m bot "+cls;d.innerHTML=html;log.append(d);scroll();
+  });
+  return queue;
+}
+function chips(list){
+  const s=session;
+  queue=queue.then(()=>{
+    if(s!==session)return;
+    const row=document.createElement("div");row.className="chips";
+    list.forEach(([label,fn])=>{
+      const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;
+      b.onclick=()=>{row.classList.add("used");b.classList.add("picked");me(label);expect=null;fn();};
+      row.append(b);
+    });
+    log.append(row);scroll();
+  });
+  return queue;
+}
+function me(text){const d=document.createElement("div");d.className="m me";d.textContent=text;log.append(d);scroll();}
+function lockOpenChips(){log.querySelectorAll(".chips:not(.used)").forEach(r=>r.classList.add("used"));}
+
+const count=()=>Object.values(cart).reduce((a,b)=>a+b,0);
+const subtotal=()=>Object.entries(cart).reduce((a,[id,q])=>a+ITEMS[id].price*q,0);
+
+function stepperHTML(id){
+  const q=cart[id]||0;
+  return q?`<div class="step on" data-id="${id}"><button type="button" data-dec="${id}" aria-label="Remove one">−</button><span class="q">${q}</span><button type="button" data-inc="${id}" aria-label="Add one">+</button></div>`
+          :`<div class="step" data-id="${id}"><button type="button" class="add" data-inc="${id}">ADD</button></div>`;
+}
+function refresh(){
+  log.querySelectorAll(".step[data-id]").forEach(el=>{el.outerHTML=stepperHTML(el.dataset.id);});
+  const n=count();
+  cartbar.hidden=!n;
+  $("#cartsum").textContent=`${n} item${n===1?"":"s"} · ${rs(subtotal())}`;
+}
+log.addEventListener("click",e=>{
+  const inc=e.target.closest("[data-inc]"),dec=e.target.closest("[data-dec]");
+  if(inc){cart[inc.dataset.inc]=(cart[inc.dataset.inc]||0)+1;refresh();}
+  if(dec){const id=dec.dataset.dec;cart[id]=(cart[id]||0)-1;if(cart[id]<=0)delete cart[id];refresh();}
+});
+cartbar.onclick=()=>{lockOpenChips();expect=null;me("View cart");showCart();};
+
+function home(){
+  say("What would you like?",350);
+  chips([["📖 View menu",showCategories],["⭐ Today's specials",specials],["🛒 My cart",showCart],["🕚 Timings & delivery",info]]);
+}
+function showCategories(){
+  say("Pick a category:",380);
+  chips(MENU.map(c=>[c.name,()=>showCategory(c.id)]));
+}
+function showCategory(cid){
+  const c=MENU.find(x=>x.id===cid);
+  const rows=c.items.map(([id,name,price,veg,desc])=>`<div class="item"><span class="dot ${veg?"":"nv"}" title="${veg?"Veg":"Non-veg"}"></span><div class="iname">${name}${desc?`<small>${desc}</small>`:""}<span class="price">${rs(price)}</span></div>${stepperHTML(id)}</div>`).join("");
+  say(`<div class="cat-title">${c.name}</div>${rows}`,520,"wide");
+  const others=MENU.filter(x=>x.id!==cid).slice(0,3).map(x=>[x.name,()=>showCategory(x.id)]);
+  chips([["🛒 View cart",showCart],...others,["All categories",showCategories]]);
+}
+function specials(){
+  const ids=["b1","c1","s2","d3"];
+  const rows=ids.map(id=>{const it=ITEMS[id];return `<div class="item"><span class="dot ${it.veg?"":"nv"}"></span><div class="iname">${it.name}${it.desc?`<small>${it.desc}</small>`:""}<span class="price">${rs(it.price)}</span></div>${stepperHTML(id)}</div>`}).join("");
+  say(`<div class="cat-title">Today's specials</div>${rows}`,520,"wide");
+  chips([["🛒 View cart",showCart],["Full menu",showCategories]]);
+}
+function info(){
+  say(`<b>Timings</b>: 11:00 AM – 11:00 PM, all days<br><b>Delivery</b>: within 5 km, about 35–45 min<br><b>Delivery charge</b>: ${rs(DELIVERY_FEE)}, free above ${rs(FREE_ABOVE)}<br><b>Payment</b>: UPI or cash on delivery`);
+  chips([["📖 View menu",showCategories],["🛒 My cart",showCart]]);
+}
+function cartTable(delivery){
+  const lines=Object.entries(cart).map(([id,q])=>`<tr><td>${q} × ${ITEMS[id].name}</td><td>${rs(ITEMS[id].price*q)}</td></tr>`).join("");
+  const sub=subtotal();
+  const fee=delivery&&sub<=FREE_ABOVE?DELIVERY_FEE:0;
+  const feeRow=delivery?`<tr><td class="muted">Delivery</td><td class="muted">${fee?rs(fee):"Free"}</td></tr>`:"";
+  return {html:`<table class="kv">${lines}<tr><td class="muted">Subtotal</td><td class="muted">${rs(sub)}</td></tr>${feeRow}<tr class="total"><td>Total</td><td>${rs(sub+fee)}</td></tr></table>`,fee,total:sub+fee,sub};
+}
+function showCart(){
+  if(!count()){say("Your cart is empty. Let's add something tasty 😋");chips([["📖 View menu",showCategories],["⭐ Today's specials",specials]]);return;}
+  const sub=subtotal();
+  const hint=sub<=FREE_ABOVE?`<br><small>Add ${rs(FREE_ABOVE+1-sub)} more for free delivery.</small>`:`<br><small>You get free delivery 🎉</small>`;
+  say(`<b>Your cart</b>${cartTable(true).html}${hint}`,500,"wide");
+  chips([["✅ Checkout",checkout],["➕ Add more",showCategories],["🗑 Clear cart",()=>{cart={};refresh();say("Cart cleared.");home();}]]);
+}
+function checkout(){
+  order={id:"SR-"+Math.floor(1000+Math.random()*9000)};
+  say("Delivery or pickup?");
+  chips([["🛵 Delivery",()=>{order.type="Delivery";askName();}],["🏃 Pickup",()=>{order.type="Pickup";askName();}]]);
+}
+function askName(){
+  say("Your name?");
+  expect=v=>{
+    const n=v.trim().replace(/\s+/g," ");
+    if(n.length<2||/^\d+$/.test(n)){say("Please type your name (at least 2 letters).");return true;}
+    order.name=n.replace(/\b\w/g,c=>c.toUpperCase());expect=null;askPhone();return true;
+  };
+}
+function askPhone(){
+  say(`Thanks ${esc(order.name)}! Your 10-digit mobile number?`);
+  expect=v=>{
+    const p=v.replace(/[\s\-()]/g,"").replace(/^(\+?91|0)(?=\d{10}$)/,"");
+    if(!/^[6-9]\d{9}$/.test(p)){say("That doesn't look right. Please send a 10-digit mobile number, e.g. 98480 12345.");return true;}
+    order.phone=p;expect=null;order.type==="Delivery"?askAddress():askNotes();return true;
+  };
+}
+function askAddress(){
+  say("Delivery address? (house no, street, landmark)");
+  expect=v=>{
+    if(v.trim().length<8){say("Please add a bit more detail so the rider can find you.");return true;}
+    order.address=v.trim();expect=null;askNotes();return true;
+  };
+}
+function askNotes(){
+  say("Any cooking notes? Type them, or tap below.");
+  chips([["No notes",()=>{order.notes="";askPay();}],["Less spicy",()=>{order.notes="Less spicy";askPay();}],["Extra spicy",()=>{order.notes="Extra spicy";askPay();}]]);
+  expect=v=>{order.notes=v.trim();lockOpenChips();expect=null;askPay();return true;};
+}
+function askPay(){
+  say("How will you pay?");
+  chips([["UPI on "+(order.type==="Delivery"?"delivery":"pickup"),()=>{order.pay="UPI";finish();}],["Cash",()=>{order.pay="Cash";finish();}]]);
+}
+function finish(){
+  const d=order.type==="Delivery";
+  const c=cartTable(d);
+  const lines=Object.entries(cart).map(([id,q])=>`${q} × ${ITEMS[id].name} = ${rs(ITEMS[id].price*q)}`);
+  const msg=[
+    `🧾 *New order ${order.id}*`,
+    `Customer: ${order.name}`,
+    `Mobile: ${order.phone}`,
+    `Type: ${order.type}`,
+    ...(d?[`Address: ${order.address}`]:[]),
+    "",
+    ...lines,
+    "",
+    `Subtotal: ${rs(c.sub)}`,
+    ...(d?[`Delivery: ${c.fee?rs(c.fee):"Free"}`]:[]),
+    `*Total: ${rs(c.total)}*`,
+    `Payment: ${order.pay}`,
+    ...(order.notes?[`Notes: ${order.notes}`]:[]),
+    "",
+    "(Sent from the website chat)"
+  ].join("\n");
+  say(`<b>Order ${order.id}</b> · ${order.type}<br><small>${esc(order.name)} · ${order.phone.replace(/(\d{5})(\d{5})/,"$1 $2")}${d?`<br>${esc(order.address)}`:""}</small>${c.html}<small>Payment: ${order.pay}${order.notes?` · Notes: ${esc(order.notes)}`:""}</small><br><a class="wa" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Send order on WhatsApp ↗</a>`,700,"wide");
+  say("Tap the green button to send your order to the restaurant. They'll confirm on WhatsApp with the ready time.");
+  chips([["🆕 New order",()=>{cart={};refresh();home();}],["📖 Menu",showCategories]]);
+}
+
+function route(raw){
+  const v=raw.toLowerCase();
+  for(const c of MENU){if(v.includes(c.id.replace(/s$/,""))||v.includes(c.name.toLowerCase())){showCategory(c.id);return;}}
+  if(/curry|gongura|chicken|mutton|paneer/.test(v)&&!/biryani/.test(v)){showCategory(/65|fish|manchurian/.test(v)?"starters":"curries");return;}
+  if(/naan|roti|rice|bread/.test(v)){showCategory("breads");return;}
+  if(/lassi|drink|soda|dessert|sweet|meetha/.test(v)){showCategory("sweets");return;}
+  if(/menu|food|eat|order|hungry/.test(v)){showCategories();return;}
+  if(/special|best|recommend|popular/.test(v)){specials();return;}
+  if(/cart|basket|checkout|bill|total/.test(v)){showCart();return;}
+  if(/time|open|close|deliver|charge|fee|pay|upi|cash|how long/.test(v)){info();return;}
+  if(/^(hi|hii+|hello|hey|namaste|namaskaram)\b/.test(v)){say("Hi! 👋");home();return;}
+  say("I can help you order. Try one of these:");
+  home();
+}
+
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=input.value.trim();if(!v)return;
+  input.value="";me(v);
+  if(expect&&expect(v))return;
+  lockOpenChips();route(v);
+});
+
+function start(){
+  session++;queue=Promise.resolve();expect=null;cart={};order={};log.innerHTML="";refresh();
+  say(`Welcome to <b>${SHOP}</b> 🍛<br>Order in a few taps: browse the menu, add items, and send the order straight to our kitchen on WhatsApp.`,450);
+  home();
+}
+$("#restart").onclick=start;
+document.querySelectorAll("[data-try]").forEach(b=>b.onclick=()=>{input.value=b.dataset.try;form.requestSubmit();});
+start();
+</script>
+
+</body></html>

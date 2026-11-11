@@ -1,0 +1,384 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Skyline Plots CRM</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#EFF3F1;--surface:#FFFFFF;--surface-2:#F5F8F6;--ink:#0E2723;--muted:#5A6E69;--line:#D9E2DE;
+  --brand:#0F4C43;--brand-2:#0A332D;--brass:#B8862B;--brass-soft:#F6ECD7;--on-brand:#F2F7F5;
+  --c-new:#2F68D4;--c-new-soft:#E2EBFB;--c-contact:#C98512;--c-contact-soft:#FBEFD6;--c-visit:#7E48C9;--c-visit-soft:#EEE5FA;--c-closed:#178C5E;--c-closed-soft:#DDF2E8;
+  --today:#E0461E;--today-soft:#FDE5DD;--late:#C0262D;--late-soft:#FBE0E1;
+  --display:"Sora","Manrope",system-ui,sans-serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --shadow:0 1px 2px rgba(14,39,35,.06),0 6px 16px -10px rgba(14,39,35,.25);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1513;--surface:#13201D;--surface-2:#182824;--ink:#E7F0ED;--muted:#93A8A2;--line:#24362F;
+  --brand:#0D3D36;--brand-2:#082A25;--brass:#E0B05A;--brass-soft:#3A2E17;--on-brand:#EAF3F0;
+  --c-new:#6E9BF0;--c-new-soft:#1A2843;--c-contact:#EDB04A;--c-contact-soft:#3A2D14;--c-visit:#AD82EE;--c-visit-soft:#2C2142;--c-closed:#4CC892;--c-closed-soft:#14352A;
+  --today:#FF7A52;--today-soft:#3E2016;--late:#FF6168;--late-soft:#3F1A1C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 16px -10px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1513;--surface:#13201D;--surface-2:#182824;--ink:#E7F0ED;--muted:#93A8A2;--line:#24362F;
+  --brand:#0D3D36;--brand-2:#082A25;--brass:#E0B05A;--brass-soft:#3A2E17;--on-brand:#EAF3F0;
+  --c-new:#6E9BF0;--c-new-soft:#1A2843;--c-contact:#EDB04A;--c-contact-soft:#3A2D14;--c-visit:#AD82EE;--c-visit-soft:#2C2142;--c-closed:#4CC892;--c-closed-soft:#14352A;
+  --today:#FF7A52;--today-soft:#3E2016;--late:#FF6168;--late-soft:#3F1A1C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 16px -10px rgba(0,0,0,.6);color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{background:var(--brand);color:var(--on-brand);position:relative;overflow:hidden}
+.top::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 30px;mask-image:linear-gradient(90deg,transparent 30%,#000 100%);-webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 100%)}
+.top-in{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand svg{flex:none}
+.brand h1{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:-.02em;margin:0;line-height:1.1}
+.brand p{margin:3px 0 0;font-size:13px;opacity:.75}
+.top-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px}
+.tag-demo{border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:4px 11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding-block:20px 6px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.stat span{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stat b{font-family:var(--display);font-size:28px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
+.stat small{color:var(--muted);font-size:12px}
+.stat.hot{background:var(--today-soft);border-color:transparent}
+.stat.hot b,.stat.hot span{color:var(--today)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-block:14px}
+.search{position:relative;flex:1;min-width:200px;max-width:360px}
+.search input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px 10px 36px}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer}
+.toggle[aria-pressed="true"]{background:var(--today-soft);border-color:var(--today);color:var(--today)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--today);display:inline-block}
+.spacer{flex:1}
+.btn{border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;white-space:nowrap}
+.btn-brand{background:var(--brand);color:var(--on-brand)}
+.btn-ghost{background:var(--surface);border:1px solid var(--line)}
+.btn-danger{background:var(--late);color:#fff}
+.btn-wa{background:#1FAF5A;color:#fff}
+.btn-sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.board-wrap{overflow-x:auto;padding-bottom:12px;scroll-snap-type:x proximity}
+.board{display:grid;grid-template-columns:repeat(4,minmax(270px,1fr));gap:14px;min-width:min-content}
+.col{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-height:420px;scroll-snap-align:start;transition:border-color .15s,background .15s}
+.col.over{border-color:var(--sc);background:var(--sc-soft)}
+.col-head{padding:14px 14px 10px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--line)}
+.col-title{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:600;font-size:15px}
+.col-title i{width:10px;height:10px;border-radius:3px;background:var(--sc)}
+.col-title em{font-style:normal;margin-left:auto;background:var(--sc-soft);color:var(--sc);font-weight:800;border-radius:999px;padding:1px 9px;font-size:12px;font-family:var(--body);font-variant-numeric:tabular-nums}
+.col-head small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.cards{display:flex;flex-direction:column;gap:10px;padding:12px;flex:1}
+.lead{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 12px 10px;box-shadow:var(--shadow);cursor:grab;display:flex;flex-direction:column;gap:8px;position:relative;text-align:left;width:100%}
+.lead:hover{border-color:var(--sc)}
+.lead.dragging{opacity:.45}
+.lead.is-today{border-color:var(--today);box-shadow:0 0 0 1px var(--today),var(--shadow)}
+.lead.is-late{border-color:var(--late)}
+.lead-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.lead-name{font-weight:800;font-size:15px;line-height:1.25}
+.src{font-size:11px;font-weight:700;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.interest{color:var(--muted);font-size:13px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.budget{font-weight:800;font-size:13px;background:var(--brass-soft);color:var(--brass);border-radius:6px;padding:2px 8px;font-variant-numeric:tabular-nums}
+.fu{font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;display:inline-flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums;background:var(--surface-2);color:var(--muted)}
+.fu.today{background:var(--today);color:#fff}
+.fu.today::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+.fu.late{background:var(--late-soft);color:var(--late)}
+.fu.done{background:var(--c-closed-soft);color:var(--c-closed)}
+@keyframes pulse{50%{opacity:.25}}
+.note-line{font-size:12.5px;color:var(--ink);opacity:.82;border-top:1px dashed var(--line);padding-top:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lead-actions{display:flex;gap:6px;justify-content:flex-end}
+.icon-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--muted);text-decoration:none}
+.icon-btn:hover{color:var(--ink);border-color:var(--ink)}
+.icon-btn.wa{color:#1FAF5A}
+.col-empty{color:var(--muted);font-size:13px;text-align:center;padding:24px 8px;border:1.5px dashed var(--line);border-radius:12px}
+.hint{color:var(--muted);font-size:12.5px;margin:0 0 6px}
+.cta{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-block:18px 40px}
+.cta strong{font-family:var(--display);font-size:18px;display:block}
+.cta p{margin:0;color:var(--muted)}
+.cta .num{font-variant-numeric:tabular-nums;user-select:all;color:var(--muted);font-size:13px;text-align:right}
+.scrim{position:fixed;inset:0;background:rgba(5,15,13,.45);z-index:20}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);z-index:21;display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(0,0,0,.4);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.panel-head h2{font-family:var(--display);font-size:19px;margin:0;font-weight:700}
+.panel-body{flex:1;overflow:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.panel-foot{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--surface-2);border-radius:10px;padding:10px 12px;width:100%;font-size:14px}
+.field textarea{min-height:110px;resize:vertical;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stage-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.stage-pick button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 4px;font-weight:700;font-size:12px;cursor:pointer}
+.stage-pick button[aria-pressed="true"]{background:var(--sc);border-color:var(--sc);color:#fff}
+.quick{display:flex;gap:6px;flex-wrap:wrap}
+.quick button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;cursor:pointer}
+.err{color:var(--late);font-size:13px;font-weight:700;margin:0;min-height:1em}
+.created{font-size:12px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 16px));transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:12px 18px;border-radius:12px;font-weight:700;z-index:30;max-width:calc(100% - 32px)}
+@media (max-width:1100px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat:first-child{grid-column:1/-1}.board{grid-template-columns:repeat(4,82vw)}.search{max-width:none;flex-basis:100%}.two{grid-template-columns:1fr}.spacer{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand">
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+        <rect x="1" y="1" width="42" height="42" rx="11" fill="#B8862B"/>
+        <path d="M8 31h28" stroke="#0F4C43" stroke-width="2.4" stroke-linecap="round"/>
+        <rect x="10" y="19" width="6" height="12" fill="#0F4C43"/><rect x="18" y="12" width="7" height="19" fill="#0F4C43"/><rect x="27" y="16" width="6" height="15" fill="#0F4C43"/>
+        <path d="M8 35.5h28" stroke="#0F4C43" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+      </svg>
+      <div><h1>Skyline Plots</h1><p>Lead CRM · Skyline Meadows, Mangalagiri &amp; Skyline Enclave, Tadepalli · APCRDA approved</p></div>
+    </div>
+    <div class="top-meta"><span class="tag-demo">Demo · sample leads</span><span id="today"></span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="stats" id="stats" aria-label="Pipeline summary"></section>
+
+  <section class="toolbar">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search name, phone, plot or note" aria-label="Search leads">
+    </div>
+    <button class="toggle" id="todayOnly" type="button" aria-pressed="false"><span class="dot"></span>Due today only</button>
+    <span class="spacer"></span>
+    <button class="btn btn-ghost" id="resetBtn" type="button">Reset demo</button>
+    <button class="btn btn-brand" id="addBtn" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add lead</button>
+  </section>
+  <p class="hint">Drag a card to another column to change its stage, or use the arrow button. Click a card to edit notes and the follow-up date.</p>
+
+  <div class="board-wrap"><section class="board" id="board" aria-label="Lead pipeline"></section></div>
+
+  <section class="cta">
+    <div><strong>Want a CRM like this for your real estate business?</strong><p>Built by RootFix. Leads, follow-ups and site visits tracked in one page.</p></div>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+      <a class="btn btn-wa" href="https://wa.me/916301521358?text=Hi%20PN%20Digital%2C%20I%20saw%20the%20Skyline%20Plots%20CRM%20demo%20and%20want%20one%20for%20my%20business." target="_blank" rel="noopener">Chat on WhatsApp</a>
+      <span class="num">+91 63015 21358</span>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" hidden aria-labelledby="pTitle" role="dialog">
+  <form id="pForm" novalidate style="display:contents">
+    <div class="panel-head"><h2 id="pTitle">Edit lead</h2><button class="icon-btn" type="button" id="pClose" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="panel-body">
+      <div class="field"><label>Stage</label><div class="stage-pick" id="pStage"></div></div>
+      <div class="two">
+        <div class="field"><label for="pName">Name</label><input id="pName" autocomplete="off"></div>
+        <div class="field"><label for="pPhone">Phone</label><input id="pPhone" inputmode="numeric" maxlength="10" autocomplete="off"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="pProject">Project</label><select id="pProject"><option>Skyline Meadows</option><option>Skyline Enclave</option></select></div>
+        <div class="field"><label for="pSource">Source</label><select id="pSource"><option>Instagram</option><option>99acres</option><option>MagicBricks</option><option>Walk-in</option><option>Referral</option><option>Hoarding</option></select></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="pSize">Plot size (sq. yd)</label><select id="pSize"><option>150</option><option>167</option><option>200</option><option>240</option><option>267</option><option>300</option></select></div>
+        <div class="field"><label for="pFacing">Facing</label><select id="pFacing"><option>East</option><option>North</option><option>West</option><option>South</option><option>North-East corner</option></select></div>
+      </div>
+      <div class="field"><label for="pBudget">Budget (₹ lakhs)</label><input id="pBudget" type="number" min="1" step="1" inputmode="numeric"></div>
+      <div class="field">
+        <label for="pFollow">Follow-up date</label>
+        <input id="pFollow" type="date">
+        <div class="quick" id="pQuick"><button type="button" data-d="0">Today</button><button type="button" data-d="1">Tomorrow</button><button type="button" data-d="3">In 3 days</button><button type="button" data-d="7">Next week</button><button type="button" data-d="">Clear</button></div>
+      </div>
+      <div class="field"><label for="pNotes">Notes</label><textarea id="pNotes" placeholder="What did they say? Preferred plot, family decision, loan status…"></textarea></div>
+      <p class="err" id="pErr"></p>
+      <span class="created" id="pCreated"></span>
+    </div>
+    <div class="panel-foot">
+      <div id="pDel"></div>
+      <div style="display:flex;gap:8px"><a class="btn btn-wa btn-sm" id="pWa" target="_blank" rel="noopener" href="#">WhatsApp</a><button class="btn btn-brand" type="submit">Save lead</button></div>
+    </div>
+  </form>
+</aside>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  const STAGES=[
+    {k:"new",name:"New",c:"--c-new"},
+    {k:"contacted",name:"Contacted",c:"--c-contact"},
+    {k:"visit",name:"Site Visit",c:"--c-visit"},
+    {k:"closed",name:"Closed",c:"--c-closed"}
+  ];
+  const KEY="skyline-crm-demo-v1";
+  const startOfDay=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x};
+  const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+  const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const parse=s=>{const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+  const TODAY=startOfDay(new Date());
+  const diff=(a,b)=>Math.round((startOfDay(a)-startOfDay(b))/864e5);
+  const short=d=>d.toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const money=l=>l>=100?`₹${(l/100).toFixed(2).replace(/\.?0+$/,"")} Cr`:`₹${l} L`;
+
+  const SEED=[
+    ["Ramesh Babu","9848011223","Skyline Meadows",200,"East",42,"Instagram","new",0,"Saw the reel. Wants price list and layout PDF. Works in Hyderabad, comes home weekends."],
+    ["Kavya Reddy","9701455678","Skyline Enclave",167,"North",35,"99acres","new",1,"Asked about bank loan tie-ups. Prefers plot near the park."],
+    ["Mohammed Irfan","9866778899","Skyline Meadows",240,"North-East corner",58,"Walk-in","new",-1,"Came to site office on Sunday. Asked for corner plot rates."],
+    ["Sirisha V","9949123400","Skyline Enclave",150,"East",28,"MagicBricks","new",2,"First-time buyer. Budget is tight, interested in 150 sq.yd."],
+    ["Prakash Naidu","9550223344","Skyline Meadows",300,"East",75,"Referral","new",4,"Referred by Venkatesh (Plot 47). NRI in Dubai, calls after 8 PM IST."],
+    ["Anjali Sharma","8121334455","Skyline Enclave",200,"North",44,"Instagram","contacted",0,"Sent brochure on WhatsApp. Husband wants to see the road width first."],
+    ["Srinivas Rao","9603445566","Skyline Meadows",267,"East",62,"Hoarding","contacted",-3,"Called twice, said he will discuss with family. Follow up on rates for East facing."],
+    ["Lavanya K","9391556677","Skyline Meadows",200,"West",39,"99acres","contacted",2,"Comparing with a project in Nambur. Send price comparison and amenities list."],
+    ["Rajesh Chowdary","7032667788","Skyline Enclave",240,"East",55,"Referral","contacted",5,"Wants 2 adjacent plots for brothers. Ask for combined discount approval."],
+    ["Bhaskar & Family","9177778899","Skyline Meadows",200,"East",46,"Walk-in","visit",0,"Site visit today 4:30 PM. Pick-up from Mangalagiri bus stand. Show plots 112 to 118."],
+    ["Nandini P","8885889900","Skyline Enclave",167,"North",36,"Instagram","visit",1,"Visited Saturday, liked plot 23. Waiting for father's approval."],
+    ["Vikram Varma","9989990011","Skyline Meadows",300,"North-East corner",82,"MagicBricks","visit",-2,"Liked corner plot 9. Negotiating on price. Offered ₹78 L, we quoted ₹82 L."],
+    ["Harika Devi","9441001122","Skyline Enclave",200,"East",43,"Referral","visit",3,"Site visit done. Needs loan sanction letter from SBI before booking."],
+    ["Venkatesh M","9052112233","Skyline Meadows",200,"East",45,"Referral","closed",null,"Booked plot 47. Token ₹2 L paid. Registration on the 28th."],
+    ["Sunitha Rani","9010223344","Skyline Enclave",167,"North",34,"Instagram","closed",null,"Booked plot 31. Full payment through HDFC loan."],
+    ["Krishna Teja","8309334455","Skyline Meadows",240,"East",57,"Walk-in","closed",null,"Booked plot 64. Registration done. Asked about villa construction partners."]
+  ];
+  const seedLeads=()=>SEED.map((s,i)=>({id:"l"+(i+1),name:s[0],phone:s[1],project:s[2],size:s[3],facing:s[4],budget:s[5],source:s[6],stage:s[7],follow:s[8]===null?"":iso(addDays(TODAY,s[8])),notes:s[9],created:iso(addDays(TODAY,-(3+i*2)))}));
+
+  let leads;
+  try{leads=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){leads=null}
+  if(!Array.isArray(leads)||!leads.length)leads=seedLeads();
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(leads))}catch(e){}};
+
+  let query="",todayOnly=false,editing=null,draftStage="new",confirmDel=false;
+  const fuState=l=>{if(l.stage==="closed")return"done";if(!l.follow)return"none";const d=diff(parse(l.follow),TODAY);return d<0?"late":d===0?"today":"later"};
+  const waLink=l=>`https://wa.me/91${l.phone}?text=${encodeURIComponent(`Hi ${l.name.split(" ")[0]}, this is Skyline Plots. Following up on the ${l.size} sq.yd ${l.facing} facing plot at ${l.project}. When is a good time to talk?`)}`;
+  const waIcon=`<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.8-1.1-4.6-4-4.8-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`;
+
+  function renderStats(){
+    const open=leads.filter(l=>l.stage!=="closed");
+    const today=leads.filter(l=>fuState(l)==="today").length;
+    const late=leads.filter(l=>fuState(l)==="late").length;
+    const visits=leads.filter(l=>l.stage==="visit").length;
+    const closed=leads.filter(l=>l.stage==="closed");
+    const conv=leads.length?Math.round(closed.length/leads.length*100):0;
+    const cards=[
+      ["Open leads",open.length,`${money(open.reduce((s,l)=>s+(+l.budget||0),0))} in pipeline`,""],
+      ["Follow up today",today,today?"call these first":"all caught up","hot"],
+      ["Overdue follow-ups",late,"missed dates",""],
+      ["At site visit",visits,"families visiting plots",""],
+      ["Closed",closed.length,`${money(closed.reduce((s,l)=>s+(+l.budget||0),0))} · ${conv}% conversion`,""]
+    ];
+    document.getElementById("stats").innerHTML=cards.map(c=>`<div class="stat ${c[3]}"><span>${c[0]}</span><b>${c[1]}</b><small>${c[2]}</small></div>`).join("");
+  }
+
+  function fuBadge(l){
+    const s=fuState(l);
+    if(s==="done")return`<span class="fu done">✓ Booked</span>`;
+    if(s==="none")return`<span class="fu">No follow-up set</span>`;
+    const d=diff(parse(l.follow),TODAY);
+    if(s==="today")return`<span class="fu today">Follow up today</span>`;
+    if(s==="late")return`<span class="fu late">${-d} day${d===-1?"":"s"} overdue</span>`;
+    return`<span class="fu">${d===1?"Tomorrow":short(parse(l.follow))}</span>`;
+  }
+
+  function renderBoard(){
+    const q=query.trim().toLowerCase();
+    const match=l=>(!todayOnly||["today","late"].includes(fuState(l)))&&(!q||[l.name,l.phone,l.project,l.notes,l.facing,String(l.size)].join(" ").toLowerCase().includes(q));
+    const rank={late:0,today:1,later:2,none:3,done:4};
+    document.getElementById("board").innerHTML=STAGES.map((st,si)=>{
+      const items=leads.filter(l=>l.stage===st.k&&match(l)).sort((a,b)=>rank[fuState(a)]-rank[fuState(b)]||(a.follow||"9").localeCompare(b.follow||"9"));
+      const total=leads.filter(l=>l.stage===st.k).reduce((s,l)=>s+(+l.budget||0),0);
+      const next=STAGES[si+1];
+      return`<div class="col" data-stage="${st.k}" style="--sc:var(${st.c});--sc-soft:var(${st.c}-soft)">
+        <div class="col-head"><div class="col-title"><i></i>${st.name}<em>${items.length}</em></div><small>${money(total)} total budget</small></div>
+        <div class="cards">${items.length?items.map(l=>{
+          const s=fuState(l);
+          return`<div class="lead ${s==="today"?"is-today":s==="late"?"is-late":""}" draggable="true" data-id="${l.id}" tabindex="0" role="button" aria-label="Open ${esc(l.name)}">
+            <div class="lead-top"><span class="lead-name">${esc(l.name)}</span><span class="src">${esc(l.source)}</span></div>
+            <span class="interest">${esc(l.size)} sq.yd · ${esc(l.facing)} · ${esc(l.project)}</span>
+            <div class="meta"><span class="budget">${money(+l.budget||0)}</span>${fuBadge(l)}</div>
+            ${l.notes?`<div class="note-line">${esc(l.notes)}</div>`:""}
+            <div class="lead-actions">
+              <a class="icon-btn wa" href="${waLink(l)}" target="_blank" rel="noopener" aria-label="WhatsApp ${esc(l.name)}" data-stop>${waIcon}</a>
+              ${next?`<button class="icon-btn" type="button" data-next="${l.id}" aria-label="Move to ${next.name}" title="Move to ${next.name}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>`:""}
+            </div>
+          </div>`}).join(""):`<div class="col-empty">${todayOnly||q?"No matching leads":"Drop a lead here"}</div>`}</div>
+      </div>`;
+    }).join("");
+  }
+  const render=()=>{renderStats();renderBoard()};
+
+  let toastTimer;
+  function toast(m){const t=document.getElementById("toast");t.textContent=m;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,2600)}
+
+  function moveTo(id,stage){
+    const l=leads.find(x=>x.id===id);if(!l||l.stage===stage)return;
+    l.stage=stage;
+    if(stage==="visit"&&!l.follow)l.follow=iso(addDays(TODAY,1));
+    save();render();toast(`${l.name} moved to ${STAGES.find(s=>s.k===stage).name}`);
+  }
+
+  const board=document.getElementById("board");
+  let dragId=null;
+  board.addEventListener("dragstart",e=>{const c=e.target.closest(".lead");if(!c)return;dragId=c.dataset.id;c.classList.add("dragging");e.dataTransfer.effectAllowed="move";try{e.dataTransfer.setData("text/plain",dragId)}catch(_){}});
+  board.addEventListener("dragend",e=>{const c=e.target.closest(".lead");if(c)c.classList.remove("dragging");board.querySelectorAll(".col.over").forEach(x=>x.classList.remove("over"))});
+  board.addEventListener("dragover",e=>{const col=e.target.closest(".col");if(!col||!dragId)return;e.preventDefault();board.querySelectorAll(".col.over").forEach(x=>x!==col&&x.classList.remove("over"));col.classList.add("over")});
+  board.addEventListener("dragleave",e=>{const col=e.target.closest(".col");if(col&&!col.contains(e.relatedTarget))col.classList.remove("over")});
+  board.addEventListener("drop",e=>{const col=e.target.closest(".col");if(!col||!dragId)return;e.preventDefault();const id=dragId;dragId=null;moveTo(id,col.dataset.stage)});
+  board.addEventListener("click",e=>{
+    if(e.target.closest("[data-stop]"))return;
+    const nb=e.target.closest("[data-next]");
+    if(nb){const l=leads.find(x=>x.id===nb.dataset.next);const i=STAGES.findIndex(s=>s.k===l.stage);moveTo(l.id,STAGES[i+1].k);return}
+    const c=e.target.closest(".lead");if(c)openPanel(c.dataset.id);
+  });
+  board.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("lead")){e.preventDefault();openPanel(e.target.dataset.id)}});
+
+  const panel=document.getElementById("panel"),scrim=document.getElementById("scrim");
+  const $=id=>document.getElementById(id);
+  function renderStagePick(){$("pStage").innerHTML=STAGES.map(s=>`<button type="button" data-s="${s.k}" style="--sc:var(${s.c})" aria-pressed="${draftStage===s.k}">${s.name}</button>`).join("")}
+  function renderDel(){
+    $("pDel").innerHTML=!editing?"":confirmDel
+      ?`<span style="display:flex;gap:6px;align-items:center;font-weight:700;font-size:13px">Delete this lead?<button class="btn btn-danger btn-sm" type="button" data-del="yes">Delete</button><button class="btn btn-ghost btn-sm" type="button" data-del="no">Keep</button></span>`
+      :`<button class="btn btn-ghost btn-sm" type="button" data-del="ask">Delete</button>`;
+  }
+  function openPanel(id){
+    editing=id?leads.find(l=>l.id===id):null;
+    const l=editing||{name:"",phone:"",project:"Skyline Meadows",size:200,facing:"East",budget:40,source:"Instagram",stage:"new",follow:iso(TODAY),notes:"",created:iso(TODAY)};
+    draftStage=l.stage;confirmDel=false;
+    $("pTitle").textContent=editing?"Edit lead":"New lead";
+    $("pName").value=l.name;$("pPhone").value=l.phone;$("pProject").value=l.project;$("pSize").value=String(l.size);$("pFacing").value=l.facing;$("pBudget").value=l.budget;$("pSource").value=l.source;$("pFollow").value=l.follow;$("pNotes").value=l.notes;$("pErr").textContent="";
+    $("pCreated").textContent=editing?`Lead added on ${parse(l.created).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"})} · ${l.source}`:"";
+    $("pWa").hidden=!editing;if(editing)$("pWa").href=waLink(l);
+    renderStagePick();renderDel();
+    panel.hidden=false;scrim.hidden=false;$("pName").focus();
+  }
+  const closePanel=()=>{panel.hidden=true;scrim.hidden=true;editing=null};
+  $("pClose").addEventListener("click",closePanel);
+  scrim.addEventListener("click",closePanel);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)closePanel()});
+  $("pStage").addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;draftStage=b.dataset.s;renderStagePick()});
+  $("pQuick").addEventListener("click",e=>{const b=e.target.closest("[data-d]");if(!b)return;$("pFollow").value=b.dataset.d===""?"":iso(addDays(TODAY,+b.dataset.d))});
+  $("pPhone").addEventListener("input",e=>e.target.value=e.target.value.replace(/\D/g,"").slice(0,10));
+  $("pDel").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;
+    if(b.dataset.del==="ask"){confirmDel=true;renderDel()}
+    else if(b.dataset.del==="no"){confirmDel=false;renderDel()}
+    else{const n=editing.name;leads=leads.filter(l=>l!==editing);save();closePanel();render();toast(`${n} deleted`)}
+  });
+  $("pForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    const name=$("pName").value.trim(),phone=$("pPhone").value.trim(),budget=parseInt($("pBudget").value,10);
+    if(name.length<2){$("pErr").textContent="Enter the lead's name.";$("pName").focus();return}
+    if(!/^[6-9]\d{9}$/.test(phone)){$("pErr").textContent="Enter a 10-digit mobile number starting with 6, 7, 8 or 9.";$("pPhone").focus();return}
+    if(!(budget>0)){$("pErr").textContent="Enter the budget in lakhs, for example 45.";$("pBudget").focus();return}
+    const data={name,phone,project:$("pProject").value,size:+$("pSize").value,facing:$("pFacing").value,budget,source:$("pSource").value,stage:draftStage,follow:$("pFollow").value,notes:$("pNotes").value.trim()};
+    if(editing){Object.assign(editing,data);toast(`${name} saved`)}
+    else{leads.unshift({id:"l"+Date.now(),created:iso(TODAY),...data});toast(`${name} added to ${STAGES.find(s=>s.k===draftStage).name}`)}
+    save();closePanel();render();
+  });
+
+  $("addBtn").addEventListener("click",()=>openPanel(null));
+  $("q").addEventListener("input",e=>{query=e.target.value;renderBoard()});
+  $("todayOnly").addEventListener("click",e=>{todayOnly=!todayOnly;e.currentTarget.setAttribute("aria-pressed",String(todayOnly));renderBoard()});
+  $("resetBtn").addEventListener("click",()=>{leads=seedLeads();save();query="";todayOnly=false;$("q").value="";$("todayOnly").setAttribute("aria-pressed","false");render();toast("Demo data reset")});
+  $("today").textContent=TODAY.toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  render();
+})();
+</script>
+
+</body></html>
