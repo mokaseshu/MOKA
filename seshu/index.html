@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Moka Seshu — Websites, Apps & AI for Business</title>
+<meta name="description" content="Moka Seshu builds premium websites, Shopify stores, web apps, AI bots and automations for businesses in India and worldwide. Founder of RootFix.">
+<meta property="og:title" content="Moka Seshu — Websites, Apps & AI for Business">
+<meta property="og:description" content="Premium websites, Shopify stores, web apps and AI bots. One person, AI as the team.">
+<meta property="og:image" content="https://mokaseshu.github.io/MOKA/seshu/assets/og.jpg">
+<meta name="theme-color" content="#05060A">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#05060A;--bg2:#0A0C15;--text:#EDF1FF;--dim:#8D95B0;--faint:#4A5170;--line:rgba(255,255,255,.1);--line2:rgba(255,255,255,.18);--cyan:#22E6FF;--vio:#7B6CFF;--mag:#FF3DCB;--ok:#3DFFA2;--grad:linear-gradient(110deg,#22E6FF 0%,#7B6CFF 50%,#FF3DCB 100%);--r:22px;--pad:clamp(20px,5vw,72px);--ease:cubic-bezier(.2,.8,.2,1)}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--mag);color:#000}
+.mono{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{padding-inline:var(--pad);max-width:1480px;margin-inline:auto}
+
+.ambient{position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+radial-gradient(40vw 40vw at 85% 10%,rgba(123,108,255,.16),transparent 70%),
+radial-gradient(35vw 35vw at 5% 60%,rgba(34,230,255,.10),transparent 70%),
+radial-gradient(45vw 45vw at 70% 95%,rgba(255,61,203,.10),transparent 70%),var(--bg)}
+.gridbg{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 80%)}
+.noise{position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.glass{position:relative;background:linear-gradient(140deg,rgba(255,255,255,.11),rgba(255,255,255,.025) 45%,rgba(255,255,255,.04));border:1px solid var(--line);border-radius:var(--r);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(255,255,255,.03),0 40px 80px -40px rgba(0,0,0,.9);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%)}
+.neon::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;pointer-events:none;transition:opacity .4s}
+
+#loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .7s var(--ease),visibility .7s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .lm{width:96px;animation:pulse 1.4s ease-in-out infinite}
+#loader .bar{width:180px;height:2px;background:var(--line);margin:26px auto 0;border-radius:2px;overflow:hidden}
+#loader .bar i{display:block;height:100%;width:0;background:var(--grad);transition:width .3s}
+#loader .pc{text-align:center;margin-top:12px;color:var(--dim)}
+@keyframes pulse{50%{filter:drop-shadow(0 0 22px rgba(123,108,255,.7));transform:scale(1.04)}}
+
+header{position:fixed;top:14px;left:0;right:0;z-index:50;transition:transform .45s var(--ease)}
+header.hide{transform:translateY(-130%)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 12px 10px 16px;border-radius:999px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:38px;height:38px}
+.brand b{font:700 15px/1 Unbounded,sans-serif;letter-spacing:.12em}
+.brand b span{display:block;font-weight:400;font-size:9.5px;letter-spacing:.42em;margin-top:5px}
+.links{display:flex;gap:4px}
+.links a{padding:9px 16px;border-radius:999px;font-size:14px;color:var(--dim);transition:color .3s,background .3s}
+.links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s var(--ease),box-shadow .3s}
+.btn-neon{background:var(--grad);color:#05060A;box-shadow:0 10px 40px -10px rgba(123,108,255,.8),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-neon:hover{box-shadow:0 14px 50px -8px rgba(255,61,203,.75),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-glass{border:1px solid var(--line2);background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.btn-glass:hover{background:rgba(255,255,255,.1)}
+.btn svg{width:18px;height:18px}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2)}
+.burger i{display:block;width:16px;height:1.5px;background:#fff;margin:4px auto;transition:transform .3s}
+
+#hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:110px;padding-bottom:70px;overflow:hidden}
+#gl{position:absolute;inset:0;z-index:0;width:100%;height:100%}
+.hero-fade{position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(transparent,var(--bg));z-index:1;pointer-events:none}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(30px,5vw,80px);align-items:center;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;color:var(--dim)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok);animation:blink 2s infinite}
+@keyframes blink{50%{opacity:.35}}
+h1{font:800 clamp(44px,7.4vw,124px)/.95 Unbounded,sans-serif;letter-spacing:-.035em;margin:26px 0 26px}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+h1 .ln>span{display:inline-block}
+.lead{font-size:clamp(17px,1.35vw,20px);color:var(--dim);max-width:600px;margin:0 0 34px}
+.lead b{color:var(--text);font-weight:600}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;gap:clamp(18px,3vw,44px);margin-top:48px;flex-wrap:wrap}
+.facts div{min-width:110px}
+.facts b{display:block;font:700 clamp(28px,3vw,42px)/1 Unbounded,sans-serif}
+.facts span{color:var(--dim);font-size:13px}
+
+.idcard{padding:18px;transform-style:preserve-3d;will-change:transform}
+.avatar{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#090B14;transform:translateZ(40px)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);mix-blend-mode:overlay;pointer-events:none}
+.avatar .sweep{position:absolute;left:0;right:0;height:30%;background:linear-gradient(transparent,rgba(34,230,255,.18),transparent);animation:sweep 4.5s linear infinite;pointer-events:none}
+@keyframes sweep{from{top:-30%}to{top:100%}}
+.avatar .corner{position:absolute;width:22px;height:22px;border:2px solid var(--cyan);filter:drop-shadow(0 0 6px var(--cyan))}
+.c1{top:12px;left:12px;border-right:0!important;border-bottom:0!important}.c2{top:12px;right:12px;border-left:0!important;border-bottom:0!important;border-color:var(--mag)!important;filter:drop-shadow(0 0 6px var(--mag))!important}.c3{bottom:12px;left:12px;border-right:0!important;border-top:0!important;border-color:var(--mag)!important;filter:drop-shadow(0 0 6px var(--mag))!important}.c4{bottom:12px;right:12px;border-left:0!important;border-top:0!important}
+.avatar .hud{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;align-items:flex-end;color:#fff;text-shadow:0 0 10px rgba(0,0,0,.8)}
+.ph{position:absolute;inset:0;display:grid;place-items:center}
+.ph svg{width:100%;height:100%}
+.idmeta{display:flex;justify-content:space-between;align-items:center;padding:16px 6px 4px;transform:translateZ(25px)}
+.idmeta h3{margin:0;font:700 19px/1.1 Unbounded,sans-serif}
+.idmeta p{margin:4px 0 0;color:var(--dim);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:12px 6px 4px;transform:translateZ(20px)}
+.chip{padding:6px 11px;border-radius:999px;border:1px solid var(--line2);font-size:12px;color:var(--dim);background:rgba(255,255,255,.03)}
+
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:22px 0;background:rgba(255,255,255,.015)}
+.mq{display:flex;gap:56px;width:max-content;animation:mq 38s linear infinite}
+.mq span{font:500 clamp(18px,2vw,26px)/1 Unbounded,sans-serif;color:var(--faint);white-space:nowrap;display:flex;align-items:center;gap:56px}
+.mq span::after{content:"";width:9px;height:9px;transform:rotate(45deg);background:var(--grad)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{position:relative}
+.sec{padding-block:clamp(90px,12vw,170px)}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(40px,5vw,70px);flex-wrap:wrap}
+.shead .mono{color:var(--cyan);display:block;margin-bottom:18px}
+h2{font:800 clamp(34px,5.2vw,78px)/1 Unbounded,sans-serif;letter-spacing:-.03em;margin:0;max-width:900px}
+.shead p{max-width:420px;color:var(--dim);margin:0}
+
+.feature{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(20px,3vw,44px);align-items:center;padding:clamp(14px,1.6vw,22px);margin-bottom:28px}
+.feature:nth-child(even){grid-template-columns:1fr 1.35fr}
+.feature:nth-child(even) .fmedia{order:2}
+.fmedia{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#0b0d18;cursor:pointer}
+.fmedia img,.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
+.fmedia:hover img,.fmedia:hover video{transform:scale(1.035)}
+.play{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;font-size:13px;background:rgba(5,6,10,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line2)}
+.fbody{padding:clamp(6px,2vw,26px)}
+.ftags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tag{padding:6px 12px;border-radius:999px;font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--dim)}
+.tag.hot{border-color:rgba(61,255,162,.4);color:var(--ok)}
+.tag.own{border-color:rgba(34,230,255,.4);color:var(--cyan)}
+.tag.con{border-color:rgba(255,61,203,.35);color:#FF8BE0}
+.fbody h3{font:700 clamp(26px,3vw,44px)/1.05 Unbounded,sans-serif;letter-spacing:-.02em;margin:0 0 16px}
+.fbody p{color:var(--dim);margin:0 0 12px}
+.fbody .where{font-size:14px;color:var(--faint)}
+.links2{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prod{padding:12px;transform-style:preserve-3d}
+.prod .pm{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#0b0d18;transform:translateZ(30px);cursor:pointer}
+.prod .pm img,.prod .pm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.prod .pb{padding:18px 8px 8px;transform:translateZ(18px)}
+.prod h3{font:700 20px/1.15 Unbounded,sans-serif;margin:10px 0 8px}
+.prod p{margin:0;color:var(--dim);font-size:15px}
+.prod .pl{display:flex;gap:14px;margin-top:14px;font-size:14px}
+.prod .pl a,.card .cl a{color:var(--cyan);display:inline-flex;gap:6px;align-items:center}
+.prod .pl a:hover,.card .cl a:hover{color:#fff}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
+.filters button{padding:10px 16px;border-radius:999px;border:1px solid var(--line2);font-size:14px;color:var(--dim);background:rgba(255,255,255,.03);transition:all .3s}
+.filters button sup{font:500 10px "JetBrains Mono",monospace;margin-left:5px;color:var(--faint)}
+.filters button.on{color:#05060A;background:#EDF1FF;border-color:#EDF1FF}
+.filters button.on sup{color:#05060A}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{border-radius:18px;padding:10px;background:linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.015));border:1px solid var(--line);position:relative;transition:border-color .4s,transform .5s var(--ease),opacity .4s}
+.card:hover{border-color:rgba(123,108,255,.5)}
+.card.out{display:none}
+.card .cm{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0b0d18;cursor:pointer}
+.card .cm img,.card .cm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.card .cm video{opacity:0;transition:opacity .4s}
+.card .cm.playing video{opacity:1}
+.card .cm .tag{position:absolute;top:10px;left:10px;background:rgba(5,6,10,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.card .cb{padding:16px 8px 8px}
+.card .cat{color:var(--faint);font-size:11px}
+.card h3{font:700 18px/1.2 Unbounded,sans-serif;margin:8px 0 8px}
+.card p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.5}
+.card .cl{display:flex;gap:16px;margin-top:14px;font-size:14px}
+
+.svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{padding:30px 28px 32px;overflow:hidden}
+.svc .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line2);margin-bottom:26px;box-shadow:0 0 30px -6px rgba(123,108,255,.5)}
+.svc .ic svg{width:26px;height:26px}
+.svc h3{font:700 21px/1.2 Unbounded,sans-serif;margin:0 0 12px}
+.svc p{color:var(--dim);margin:0 0 18px;font-size:15.5px}
+.svc ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.svc li{font-size:12.5px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--dim)}
+.svc .n{position:absolute;right:22px;top:20px;color:var(--faint)}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:34px 26px 10px 0;border-right:1px solid var(--line);margin-right:26px}
+.step:last-child{border-right:0}
+.step .mono{color:var(--mag)}
+.step h3{font:700 22px/1.2 Unbounded,sans-serif;margin:18px 0 10px}
+.step p{color:var(--dim);margin:0;font-size:15.5px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);align-items:start;margin-bottom:clamp(60px,8vw,110px)}
+.about .big{font:500 clamp(24px,2.6vw,38px)/1.3 Unbounded,sans-serif;letter-spacing:-.01em;margin:0}
+.about .big em{font-style:normal}
+.about .txt p{color:var(--dim);margin:0 0 18px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+
+.contact{padding:clamp(28px,5vw,70px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);overflow:hidden}
+.contact h2{font-size:clamp(34px,4.6vw,68px)}
+.contact .side p{color:var(--dim);margin:22px 0 30px;max-width:460px}
+.wa{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid var(--line2);background:rgba(255,255,255,.03);max-width:380px}
+.wa .wi{width:46px;height:46px;border-radius:12px;background:#25D366;display:grid;place-items:center;color:#05060A}
+.wa b{display:block;font-size:17px}
+.wa span{color:var(--dim);font-size:13px}
+form{display:grid;gap:14px}
+label{display:grid;gap:8px;font-size:13px;color:var(--dim)}
+input,textarea{font:inherit;color:var(--text);background:rgba(5,6,10,.5);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;outline:none;transition:border-color .3s,box-shadow .3s;width:100%}
+input:focus,textarea:focus{border-color:var(--vio);box-shadow:0 0 0 4px rgba(123,108,255,.18)}
+textarea{min-height:110px;resize:vertical}
+.needs{display:flex;flex-wrap:wrap;gap:8px}
+.needs input{position:absolute;opacity:0;pointer-events:none;width:1px}
+.needs label{display:block;padding:9px 14px;border-radius:999px;border:1px solid var(--line2);font-size:13.5px;color:var(--dim);cursor:pointer;transition:all .25s}
+.needs input:checked+label{background:var(--grad);color:#05060A;border-color:transparent;font-weight:600}
+.needs input:focus-visible+label{outline:2px solid var(--cyan)}
+form .btn{justify-content:center;margin-top:6px}
+
+footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80px,10vw,140px)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--dim);font-size:14px}
+.foot a:hover{color:#fff}
+.bigname{font:800 clamp(56px,15.5vw,250px)/.85 Unbounded,sans-serif;letter-spacing:-.05em;text-align:center;margin:0 0 50px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+
+#lb{position:fixed;inset:0;z-index:150;display:none;place-items:center;background:rgba(3,4,8,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:20px}
+#lb.on{display:grid}
+#lb .box{width:min(1200px,100%);padding:12px}
+#lb video,#lb img{width:100%;max-height:78vh;object-fit:contain;border-radius:12px;background:#000}
+#lb .lbh{display:flex;justify-content:space-between;align-items:center;padding:6px 6px 14px;gap:14px}
+#lb .lbh b{font:700 18px Unbounded,sans-serif}
+#lb .x{width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);font-size:20px}
+
+.cursor{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid rgba(34,230,255,.7);pointer-events:none;z-index:120;transition:width .3s,height .3s,margin .3s,background .3s,border-color .3s;mix-blend-mode:screen;display:none}
+.cursor.big{width:76px;height:76px;margin:-38px 0 0 -38px;background:rgba(123,108,255,.18);border-color:rgba(255,61,203,.8)}
+@media (hover:hover) and (pointer:fine){.cursor{display:block}}
+
+.rv{opacity:0;transform:translateY(40px)}
+.noanim .rv{opacity:1;transform:none}
+
+@media (max-width:1100px){.grid,.prods,.svcs{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}}
+@media (max-width:900px){
+.links,.nav>.btn{display:none}.burger{display:block}
+.nav.open{border-radius:24px;flex-wrap:wrap}
+.nav.open .links{display:flex;flex-direction:column;width:100%;order:3;padding:8px 0}
+.nav.open .links a{font-size:18px;padding:14px 10px}
+.nav.open .burger i:first-child{transform:translateY(2.75px) rotate(45deg)}.nav.open .burger i:last-child{transform:translateY(-2.75px) rotate(-45deg)}
+.hero-grid,.feature,.feature:nth-child(even),.about,.contact{grid-template-columns:1fr}
+.feature:nth-child(even) .fmedia{order:0}
+.idcard{max-width:420px;width:100%;margin:0 auto}
+}
+@media (max-width:640px){.grid,.prods,.svcs,.steps{grid-template-columns:1fr}.step{border-right:0;margin-right:0;border-bottom:1px solid var(--line);padding-bottom:28px}.facts div{min-width:0;flex:1}.btn{padding:12px 18px}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){.mq,.avatar .sweep,.dot,#loader .lm{animation:none}}
+</style>
+</head>
+<body>
+<div class="ambient"></div><div class="gridbg"></div><div class="noise"></div><div class="cursor"></div>
+
+<div id="loader"><div><svg class="lm" viewBox="0 0 120 120">
+<defs>
+<linearGradient id="m1n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
+<linearGradient id="m1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+<linearGradient id="m1d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A3A"/><stop offset="1" stop-color="#2A0E30"/></linearGradient>
+<filter id="m1glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="m1c"><polygon points="60,8 105,34 105,86 60,112 15,86 15,34"/></clipPath>
+</defs>
+<polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#m1d)" opacity=".9"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#070912" fill-opacity=".72"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="url(#m1g)"/>
+<g clip-path="url(#m1c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#m1n)" stroke-width="2.2"/>
+<g fill="none" stroke="url(#m1n)" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter" filter="url(#m1glow)">
+<path d="M31 79V41l14 18 14-18v38"/>
+<path d="M90 41H68v19h22v19H66"/>
+</g>
+<circle cx="90" cy="41" r="2.4" fill="#fff"/>
+</svg><div class="bar"><i></i></div><div class="pc mono">Loading 0%</div></div></div>
+
+<header><nav class="nav glass">
+<a href="#top" class="brand" aria-label="Moka Seshu home"><svg viewBox="0 0 120 120">
+<defs>
+<linearGradient id="m2n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
+<linearGradient id="m2g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+<linearGradient id="m2d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A3A"/><stop offset="1" stop-color="#2A0E30"/></linearGradient>
+<filter id="m2glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="m2c"><polygon points="60,8 105,34 105,86 60,112 15,86 15,34"/></clipPath>
+</defs>
+<polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#m2d)" opacity=".9"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#070912" fill-opacity=".72"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="url(#m2g)"/>
+<g clip-path="url(#m2c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#m2n)" stroke-width="2.2"/>
+<g fill="none" stroke="url(#m2n)" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter" filter="url(#m2glow)">
+<path d="M31 79V41l14 18 14-18v38"/>
+<path d="M90 41H68v19h22v19H66"/>
+</g>
+<circle cx="90" cy="41" r="2.4" fill="#fff"/>
+</svg><b>MOKA<span class="grad">SESHU</span></b></a>
+<div class="links"><a href="#clients">Clients</a><a href="#products">Products</a><a href="#work">All work</a><a href="#services">Services</a><a href="#about">About</a></div>
+<a class="btn btn-neon mag" href="#contact">Start a project</a>
+<button class="burger" aria-label="Menu"><i></i><i></i></button>
+</nav></header>
+
+<main id="top">
+<section id="hero">
+<canvas id="gl" aria-hidden="true"></canvas><div class="hero-fade"></div>
+<div class="wrap hero-grid">
+<div>
+<span class="eyebrow glass mono"><i class="dot"></i>Available for new projects</span>
+<h1><span class="ln"><span>Build.</span></span><span class="ln"><span>Automate.</span></span><span class="ln"><span class="grad">Level up.</span></span></h1>
+<p class="lead">I'm <b>Moka Seshu</b> — I design and build premium <b>websites, Shopify stores, web apps and AI bots</b> that bring businesses more customers. One person, AI as the team, shipped fast.</p>
+<div class="ctas"><a class="btn btn-neon mag" href="#work">See all my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-glass mag" href="https://wa.me/916301521358?text=Hi%20Seshu%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>WhatsApp me</a></div>
+<div class="facts"><div><b class="grad" data-count="total">0</b><span>projects built</span></div><div><b data-count="clients">0</b><span>live client projects</span></div><div><b data-count="products">0</b><span>own products</span></div></div>
+</div>
+<div class="idcard glass neon tilt" data-max="10">
+<div class="avatar">
+<div class="ph" id="avph"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="avg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".5" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient><radialGradient id="avb" cx=".5" cy=".38" r=".7"><stop offset="0" stop-color="#2a1b5e"/><stop offset=".6" stop-color="#0d0b22"/><stop offset="1" stop-color="#06070d"/></radialGradient><filter id="avf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="400" height="500" fill="url(#avb)"/>
+<g stroke="#7B6CFF" stroke-opacity=".18"><path d="M0 300H400"/><path d="M0 322H400"/><path d="M0 344H400"/><path d="M0 366H400"/><path d="M0 388H400"/><path d="M0 410H400"/><path d="M0 432H400"/><path d="M0 454H400"/><path d="M0 476H400"/><path d="M0 498H400"/><path d="M60.0 300L-200 500"/><path d="M77.50000000000001 300L-150 500"/><path d="M95.0 300L-100 500"/><path d="M112.5 300L-50 500"/><path d="M130.0 300L0 500"/><path d="M147.5 300L50 500"/><path d="M165.0 300L100 500"/><path d="M182.5 300L150 500"/><path d="M200.0 300L200 500"/><path d="M217.5 300L250 500"/><path d="M235.0 300L300 500"/><path d="M252.5 300L350 500"/><path d="M270.0 300L400 500"/><path d="M287.5 300L450 500"/><path d="M305.0 300L500 500"/><path d="M322.5 300L550 500"/><path d="M340.0 300L600 500"/></g>
+<circle cx="200" cy="190" r="128" fill="none" stroke="url(#avg)" stroke-opacity=".35" stroke-dasharray="4 10"/>
+<path d="M200 92c-46 0-74 34-74 80 0 30 10 54 26 70 8 8 12 18 12 30v10c-46 10-96 34-108 82-4 18-6 40-6 56h300c0-16-2-38-6-56-12-48-62-72-108-82v-10c0-12 4-22 12-30 16-16 26-40 26-70 0-46-28-80-74-80Z" fill="#05060c" stroke="url(#avg)" stroke-width="2.5" filter="url(#avf)"/>
+<path d="M134 170h132l-8 22H142z" fill="url(#avg)" opacity=".9" filter="url(#avf)"/>
+<path d="M146 176h108" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
+<path d="M164 262h72M150 330l50 30 50-30" stroke="url(#avg)" stroke-width="2" fill="none" opacity=".7"/>
+<text x="200" y="430" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="4" fill="#8D95B0">MOKA SESHU</text></svg></div>
+<img id="avimg" src="assets/avatar.jpg" alt="Moka Seshu" onerror="this.remove()">
+<div class="scan"></div><div class="sweep"></div><i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
+<div class="hud mono"><span>ID // MS-001</span><span class="grad">ONLINE</span></div>
+</div>
+<div class="idmeta"><div><h3>Moka Seshu</h3><p>Founder, RootFix · India → worldwide</p></div><svg viewBox="0 0 120 120" width="44" height="44">
+<defs>
+<linearGradient id="m3n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
+<linearGradient id="m3g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+<linearGradient id="m3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A3A"/><stop offset="1" stop-color="#2A0E30"/></linearGradient>
+<filter id="m3glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="m3c"><polygon points="60,8 105,34 105,86 60,112 15,86 15,34"/></clipPath>
+</defs>
+<polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#m3d)" opacity=".9"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#070912" fill-opacity=".72"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="url(#m3g)"/>
+<g clip-path="url(#m3c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#m3n)" stroke-width="2.2"/>
+<g fill="none" stroke="url(#m3n)" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter" filter="url(#m3glow)">
+<path d="M31 79V41l14 18 14-18v38"/>
+<path d="M90 41H68v19h22v19H66"/>
+</g>
+<circle cx="90" cy="41" r="2.4" fill="#fff"/>
+</svg></div>
+<div class="chips"><span class="chip">Websites</span><span class="chip">Shopify</span><span class="chip">Web apps</span><span class="chip">AI bots</span><span class="chip">Automation</span></div>
+</div>
+</div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="mq"></div></div>
+
+<section id="clients" class="sec wrap">
+<div class="shead"><div><span class="mono">01 / Client work</span><h2 class="rv">Real businesses, <span class="grad">live online.</span></h2></div><p class="rv">Sites I designed and built for paying clients — gates and shutters, real estate, pet food delivery and roofing.</p></div>
+<div id="features"></div>
+</section>
+
+<section id="products" class="sec wrap">
+<div class="shead"><div><span class="mono">02 / Own products</span><h2 class="rv">Things I build <span class="grad">for myself.</span></h2></div><p class="rv">Apps, stores and tools I designed, built and run — proof I can take an idea from zero to launched.</p></div>
+<div class="prods" id="prods"></div>
+</section>
+
+<section id="work" class="sec wrap">
+<div class="shead"><div><span class="mono">03 / Every build</span><h2 class="rv">The full <span class="grad">archive.</span></h2></div><p class="rv">Every build so far — open the live demo or the case file. Concept work is marked “Concept”: built to show what I'd make for that kind of business.</p></div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="services" class="sec wrap">
+<div class="shead"><div><span class="mono">04 / Services</span><h2 class="rv">What I can <span class="grad">build for you.</span></h2></div><p class="rv">One-time builds or full setups. Everything ends in one place: more enquiries on your WhatsApp.</p></div>
+<div class="svcs" id="svcs"></div>
+</section>
+
+<section id="about" class="sec wrap">
+<div class="about">
+<div><span class="mono" style="color:var(--cyan);display:block;margin-bottom:18px">05 / About</span><p class="big rv">A one-person studio with <em class="grad">AI as the team</em> — so you get agency-level work at the speed of one focused builder.</p></div>
+<div class="txt rv"><p>I'm Moka Seshu, founder of <a href="../rootfix/" style="color:var(--cyan)">RootFix</a>. I build with Claude, Figma, Shopify and GitHub, and I design every project around one question: what is stopping this business from getting customers?</p><p>No office, no layers of staff. You talk to the person who builds your site, and AI handles the heavy lifting so every project ships fast without cutting corners.</p>
+<div class="tools"><span class="chip">Claude</span><span class="chip">Figma</span><span class="chip">GitHub</span><span class="chip">Shopify</span><span class="chip">Three.js</span><span class="chip">GSAP</span><span class="chip">WhatsApp API</span><span class="chip">Google Business</span><span class="chip">Meta Ads</span><span class="chip">Canva</span></div></div>
+</div>
+<div class="steps">
+<div class="step rv"><span class="mono">Step 01</span><h3>Diagnose</h3><p>I look at your shop, site, Google listing and WhatsApp to find what is losing you customers.</p></div>
+<div class="step rv"><span class="mono">Step 02</span><h3>Design</h3><p>A premium design in Figma, shaped around how your customers actually buy.</p></div>
+<div class="step rv"><span class="mono">Step 03</span><h3>Build</h3><p>Fast, mobile-first build with WhatsApp, booking or ordering wired in.</p></div>
+<div class="step rv"><span class="mono">Step 04</span><h3>Grow</h3><p>SEO, Google profile, ads and automations so the enquiries keep coming.</p></div>
+</div>
+</section>
+
+<section id="contact" class="wrap">
+<div class="contact glass neon">
+<div class="side"><span class="mono" style="color:var(--cyan)">06 / Contact</span><h2 style="margin-top:18px">Let's build your <span class="grad">next level.</span></h2><p>Tell me about your business and what you need. The form opens WhatsApp with your brief ready to send — I reply personally.</p>
+<a class="wa mag" href="https://wa.me/916301521358" target="_blank" rel="noopener"><span class="wi"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span><span><b>+91 63015 21358</b><span>WhatsApp · replies same day</span></span></a>
+</div>
+<form id="brief">
+<label>Your name<input name="name" required autocomplete="name" placeholder="e.g. Ravi Kumar"></label>
+<label>Business<input name="biz" placeholder="e.g. Sri Lakshmi Sweets, Vijayawada"></label>
+<div><label style="margin-bottom:8px">What do you need?</label><div class="needs" id="needs"></div></div>
+<label>Anything else?<textarea name="msg" placeholder="Your goal, deadline, reference sites…"></textarea></label>
+<button class="btn btn-neon mag" type="submit">Send brief on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+</form>
+</div>
+</section>
+</main>
+
+<footer class="wrap">
+<p class="bigname" aria-hidden="true">MOKA SESHU</p>
+<div class="foot"><a href="#top" class="brand"><svg viewBox="0 0 120 120">
+<defs>
+<linearGradient id="m4n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
+<linearGradient id="m4g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+<linearGradient id="m4d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A3A"/><stop offset="1" stop-color="#2A0E30"/></linearGradient>
+<filter id="m4glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="m4c"><polygon points="60,8 105,34 105,86 60,112 15,86 15,34"/></clipPath>
+</defs>
+<polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#m4d)" opacity=".9"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#070912" fill-opacity=".72"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="url(#m4g)"/>
+<g clip-path="url(#m4c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#m4n)" stroke-width="2.2"/>
+<g fill="none" stroke="url(#m4n)" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter" filter="url(#m4glow)">
+<path d="M31 79V41l14 18 14-18v38"/>
+<path d="M90 41H68v19h22v19H66"/>
+</g>
+<circle cx="90" cy="41" r="2.4" fill="#fff"/>
+</svg><b>MOKA<span class="grad">SESHU</span></b></a><span>© <span id="yr"></span> Moka Seshu · Founder of <a href="../rootfix/" style="color:var(--cyan)">RootFix</a></span><a href="https://wa.me/916301521358" target="_blank" rel="noopener">WhatsApp ↗</a></div>
+</footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Project preview"><div class="box glass"><div class="lbh"><b id="lbt"></b><div style="display:flex;gap:10px;align-items:center"><a id="lbl" class="btn btn-glass" target="_blank" rel="noopener">Open live ↗</a><button class="x" aria-label="Close">×</button></div></div><div id="lbm"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+const WORKS=[{"s":"coastal-builders","c":"websites","l":"Websites","t":"Concept","n":"Coastal Builders","p":"Customers ask for a quote, then go quiet.","f":"A 15-page site built around proof: project gallery, before/after sliders and a WhatsApp quote form.","img":"../rootfix/assets/work/coastal-builders.jpg","v":"../rootfix/assets/work/coastal-builders.mp4","live":"../coastal-builders/","case":"../rootfix/work/coastal-builders.html"},{"s":"skyline-meadows","c":"stores","l":"Landing page","t":"Concept","n":"Skyline Meadows","p":"Real estate ads bring leads who never planned to buy.","f":"A lead page that asks budget, timing and plot size, then sorts serious buyers to WhatsApp.","img":"../rootfix/assets/work/skyline-meadows.jpg","v":"../rootfix/assets/work/skyline-meadows.mp4","live":"../skyline-meadows/","case":"../rootfix/work/skyline-meadows.html"},{"s":"brightsmile-dental-bot","c":"bots","l":"AI bots","t":"Concept","n":"BrightSmile Dental Bot","p":"The receptionist answers the same questions fifty times a day.","f":"A chat assistant in Telugu and English that answers, then books.","img":"../rootfix/assets/work/brightsmile-dental-bot.jpg","v":"../rootfix/assets/work/brightsmile-dental-bot.mp4","live":"../brightsmile-dental-bot/","case":"../rootfix/work/brightsmile-dental-bot.html"},{"s":"velura-salon-booking","c":"automation","l":"Automation","t":"Concept","n":"Velura Salon Booking","p":"Customers forget appointments and no-shows cost the day's revenue.","f":"Online booking with services, stylist, date and open slots, confirmed on WhatsApp.","img":"../rootfix/assets/work/velura-salon-booking.jpg","v":"../rootfix/assets/work/velura-salon-booking.mp4","live":"../velura-salon-booking/","case":"../rootfix/work/velura-salon-booking.html"},{"s":"gst-invoice-generator","c":"apps","l":"Web apps","t":"Own product","n":"GST Invoice Generator","p":"Shops write GST bills by hand.","f":"Fill the form, get the tax split, download the PDF, share it on WhatsApp.","img":"../rootfix/assets/work/gst-invoice-generator.jpg","v":"../rootfix/assets/work/gst-invoice-generator.mp4","live":"../gst-invoice-generator/","case":"../rootfix/work/gst-invoice-generator.html"},{"s":"andhra-pickles-dashboard","c":"dashboards","l":"Dashboards","t":"Concept","n":"Andhra Pickles Sales Dashboard","p":"The owner doesn't know which pickle sells most.","f":"A sales dashboard: daily orders, top products, monthly revenue and regions.","img":"../rootfix/assets/work/andhra-pickles-dashboard.jpg","v":"../rootfix/assets/work/andhra-pickles-dashboard.mp4","live":"../andhra-pickles-dashboard/","case":"../rootfix/work/andhra-pickles-dashboard.html"},{"s":"brightsmile-dental","c":"websites","l":"Websites","t":"Concept","n":"BrightSmile Dental","p":"The phone is busy during clinic hours and bookings are missed.","f":"A 14-page clinic site with online booking and one-tap WhatsApp on every page.","img":"../rootfix/assets/work/brightsmile-dental.jpg","v":"../rootfix/assets/work/brightsmile-dental.mp4","live":"../brightsmile-dental/","case":"../rootfix/work/brightsmile-dental.html"},{"s":"sri-sai-tuition","c":"websites","l":"Websites","t":"Concept","n":"Sri Sai Tuition Centre","p":"Parents keep calling to ask fees and timings.","f":"A tuition site with a fee table, batch timings, results and one-tap enquiry.","img":"../rootfix/assets/work/sri-sai-tuition.jpg","v":"../rootfix/assets/work/sri-sai-tuition.mp4","live":"../sri-sai-tuition/","case":"../rootfix/work/sri-sai-tuition.html"},{"s":"revanth-autozone","c":"websites","l":"Websites","t":"Client","n":"Revanth Autozone","p":"Gates, shutters, glass work and emergency steps, with no single place to see them.","f":"A WhatsApp-led service site on Shopify, with each service on its own section.","img":"../rootfix/assets/work/revanth-autozone.jpg","v":"../rootfix/assets/work/revanth-autozone.mp4","live":"https://revanthautozone.in","case":"../rootfix/work/revanth-autozone.html"},{"s":"slns","c":"websites","l":"Websites","t":"Client","n":"SLNS Properties","p":"Plots are hard to judge from a brochure PDF.","f":"A real estate site with a 3D aerial hero and a plot explorer.","img":"../rootfix/assets/work/slns.jpg","v":"../rootfix/assets/work/slns.mp4","live":"../slns/","case":"../rootfix/work/slns.html"},{"s":"pet2door","c":"websites","l":"Websites","t":"Client","n":"Pet2Door","p":"Pet food orders arrive as scattered WhatsApp messages.","f":"A delivery site for Guntur with the catalogue and WhatsApp ordering.","img":"../rootfix/assets/work/pet2door.jpg","v":"../rootfix/assets/work/pet2door.mp4","live":"../pet2door/","case":"../rootfix/work/pet2door.html"},{"s":"fitzone-gym","c":"stores","l":"Landing page","t":"Concept","n":"FitZone Gym","p":"The gym gets Instagram views but no sign-ups.","f":"One offer page with a countdown, pricing and a WhatsApp lead form.","img":"../rootfix/assets/work/fitzone-gym.jpg","v":"../rootfix/assets/work/fitzone-gym.mp4","live":"../fitzone-gym/","case":"../rootfix/work/fitzone-gym.html"},{"s":"spice-route-order-bot","c":"bots","l":"AI bots","t":"Concept","n":"Spice Route Order Bot","p":"Phone orders get mixed up at peak time.","f":"An ordering bot with the menu, a live cart and one clean order summary.","img":"../rootfix/assets/work/spice-route-order-bot.jpg","v":"../rootfix/assets/work/spice-route-order-bot.mp4","live":"../spice-route-order-bot/","case":"../rootfix/work/spice-route-order-bot.html"},{"s":"skyline-plots-lead-bot","c":"bots","l":"AI bots","t":"Concept","n":"Skyline Plots Lead Bot","p":"The sales team spends its day on enquiries that go nowhere.","f":"A bot that asks three questions and scores each lead Hot, Warm or Cold.","img":"../rootfix/assets/work/skyline-plots-lead-bot.jpg","v":"../rootfix/assets/work/skyline-plots-lead-bot.mp4","live":"../skyline-plots-lead-bot/","case":"../rootfix/work/skyline-plots-lead-bot.html"},{"s":"coastal-builders-estimator","c":"apps","l":"Web apps","t":"Concept","n":"Construction Cost Estimator","p":"Every caller asks how much it will cost.","f":"An estimator by square feet and quality level, with a quote button.","img":"../rootfix/assets/work/coastal-builders-estimator.jpg","v":"../rootfix/assets/work/coastal-builders-estimator.mp4","live":"../coastal-builders-estimator/","case":"../rootfix/work/coastal-builders-estimator.html"},{"s":"exam-study-planner","c":"apps","l":"Web apps","t":"Own product","n":"Exam Study Planner","p":"Students can't see whether they are on track.","f":"Add subjects and dates, get a timetable with sessions to tick off.","img":"../rootfix/assets/work/exam-study-planner.jpg","v":"../rootfix/assets/work/exam-study-planner.mp4","live":"../exam-study-planner/","case":"../rootfix/work/exam-study-planner.html"},{"s":"countr-shop-billing","c":"apps","l":"Web apps","t":"Own product","n":"Countr Shop Billing","p":"Billing at a kirana counter is slow at rush hour.","f":"Tap products, take cash, UPI or card, send the receipt on WhatsApp.","img":"../rootfix/assets/work/countr-shop-billing.jpg","v":"../rootfix/assets/work/countr-shop-billing.mp4","live":"../countr-shop-billing/","case":"../rootfix/work/countr-shop-billing.html"},{"s":"anjaneya-quotation","c":"apps","l":"Web apps","t":"Client","n":"Quotation Maker","p":"Writing a shutter quotation takes an evening.","f":"A quotation maker with a shutter size calculator and remembered prices.","img":"../rootfix/assets/work/anjaneya-quotation.jpg","v":"../rootfix/assets/work/anjaneya-quotation.mp4","live":"../anjaneya-quotation/","case":"../rootfix/work/anjaneya-quotation.html"},{"s":"quickserve-app","c":"apps","l":"App design","t":"Concept","n":"QuickServe","p":"People can't find a trusted electrician or plumber quickly.","f":"Six mobile screens: search, profile, booking, chat and payment.","img":"../rootfix/assets/work/quickserve-app.jpg","v":"../rootfix/assets/work/quickserve-app.mp4","live":"../quickserve-app/","case":"../rootfix/work/quickserve-app.html"},{"s":"mediremind-app","c":"apps","l":"App design","t":"Concept","n":"MediRemind","p":"Elderly patients forget their medicines.","f":"Five large-text screens with reminders, refills and family alerts.","img":"../rootfix/assets/work/mediremind-app.jpg","v":"../rootfix/assets/work/mediremind-app.mp4","live":"../mediremind-app/","case":"../rootfix/work/mediremind-app.html"},{"s":"tamarind-cafe-kiosk","c":"apps","l":"App design","t":"Concept","n":"Tamarind Café Kiosk","p":"A queue forms at the café counter every rush hour.","f":"A tablet self-order screen with menu, cart and pay.","img":"../rootfix/assets/work/tamarind-cafe-kiosk.jpg","v":"../rootfix/assets/work/tamarind-cafe-kiosk.mp4","live":"../tamarind-cafe-kiosk/","case":"../rootfix/work/tamarind-cafe-kiosk.html"},{"s":"fitzone-fee-desk","c":"dashboards","l":"Dashboards","t":"Concept","n":"FitZone Fee Desk","p":"The gym doesn't know whose fees are due.","f":"A fee tracker with due and overdue lists and one-click WhatsApp reminders.","img":"../rootfix/assets/work/fitzone-fee-desk.jpg","v":"../rootfix/assets/work/fitzone-fee-desk.mp4","live":"../fitzone-fee-desk/","case":"../rootfix/work/fitzone-fee-desk.html"},{"s":"skyline-plots-crm","c":"dashboards","l":"CRM","t":"Concept","n":"Skyline Plots CRM","p":"Leads written in notebooks get forgotten.","f":"A simple CRM: lead stages, follow-up dates and notes.","img":"../rootfix/assets/work/skyline-plots-crm.jpg","v":"../rootfix/assets/work/skyline-plots-crm.mp4","live":"../skyline-plots-crm/","case":"../rootfix/work/skyline-plots-crm.html"},{"s":"andhra-pickles-price-list","c":"brand","l":"Print","t":"Concept","n":"Andhra Pickles Price List","p":"There is no price list to send on WhatsApp.","f":"A two-page A4 price list with Telugu names and a WhatsApp order QR.","img":"../rootfix/assets/work/andhra-pickles-price-list.jpg","v":"../rootfix/assets/work/andhra-pickles-price-list.mp4","live":"../andhra-pickles-price-list/","case":"../rootfix/work/andhra-pickles-price-list.html"},{"s":"brew-bite-qr-menu","c":"brand","l":"QR menu","t":"Concept","n":"Brew & Bite QR Menu","p":"Printed menus get dirty and go out of date.","f":"A mobile QR menu with search, a veg filter and a WhatsApp order cart.","img":"../rootfix/assets/work/brew-bite-qr-menu.jpg","v":"../rootfix/assets/work/brew-bite-qr-menu.mp4","live":"../brew-bite-qr-menu/","case":"../rootfix/work/brew-bite-qr-menu.html"},{"s":"coastal-builders-digital-card","c":"brand","l":"Digital card","t":"Concept","n":"Coastal Builders Digital Card","p":"The owner hands out a bare phone number.","f":"A digital visiting card with contact actions, services and recent projects.","img":"../rootfix/assets/work/coastal-builders-digital-card.jpg","v":"../rootfix/assets/work/coastal-builders-digital-card.mp4","live":"../coastal-builders-digital-card/","case":"../rootfix/work/coastal-builders-digital-card.html"},{"s":"seo-audit","c":"marketing","l":"SEO","t":"Concept","n":"BrightSmile SEO Audit","p":"The clinic doesn't appear for dentist searches nearby.","f":"A three-page audit: what is wrong, 18 keywords and five rewritten titles.","img":"../rootfix/assets/img/seo-audit-1.jpg","v":"","live":"","case":"../rootfix/work/seo-audit.html"},{"s":"google-profile","c":"marketing","l":"Google profile","t":"Concept","n":"Spice Route Google Profile","p":"The Maps listing has no photos and few reviews.","f":"A complete Google Business Profile, shown before and after, with four posts.","img":"../rootfix/assets/img/google-profile-1.jpg","v":"","live":"","case":"../rootfix/work/google-profile.html"},{"s":"meta-ads","c":"marketing","l":"Ads","t":"Concept","n":"FitZone Meta Ads Plan","p":"The gym boosts posts and gets nothing back.","f":"A 21-day campaign plan: audience, budget and three ads with copy.","img":"../rootfix/assets/img/meta-ads-1.jpg","v":"","live":"","case":"../rootfix/work/meta-ads.html"},{"s":"festival-ads","c":"marketing","l":"Ads","t":"Concept","n":"Andhra Pickles Festival Ads","p":"The shop can't reach customers outside the district.","f":"Festival sale creatives and a carousel that ends on shipping across India.","img":"../rootfix/assets/img/festival-ads-1.jpg","v":"","live":"","case":"../rootfix/work/festival-ads.html"},{"s":"ebook","c":"marketing","l":"Ebook","t":"Own product","n":"Take Your Shop Online in 7 Days","p":"Shop owners don't know where to start online.","f":"A 19-page ebook with one task per day for seven days.","img":"../rootfix/assets/img/ebook-1.jpg","v":"","live":"","case":"../rootfix/work/ebook.html"},{"s":"whatsapp-broadcasts","c":"marketing","l":"WhatsApp","t":"Concept","n":"Glow Salon WhatsApp Broadcasts","p":"Weekdays are slow at the salon.","f":"Four broadcasts, one per slow day, each with a creative and a one-tap reply.","img":"../rootfix/assets/img/whatsapp-broadcasts-1.jpg","v":"","live":"","case":"../rootfix/work/whatsapp-broadcasts.html"}];
+const M='../portfolio/media/';
+const CLIENTS=[
+{n:'Revanth Autozone',w:'Bhimavaram · Shopify',t:'Live client',img:M+'revanth.jpg',v:M+'revanth.mp4',live:'https://revanthautozone.in',case:'../rootfix/work/revanth-autozone.html',p:'Automatic gates, shutters and glass work — a WhatsApp-led service site on Shopify with local SEO across a 120 km radius, Google reviews and 3D hero renders.',k:['Shopify','Local SEO','WhatsApp leads','Google Ads']},
+{n:'SLNS Properties',w:'Gachibowli, Hyderabad · Real estate',t:'Client',img:M+'slns-noir.jpg',v:M+'slns-noir.mp4',live:'../slns/',case:'../rootfix/work/slns.html',p:'Sri Lakshmi Narasimha Swamy Properties — a premium real estate site in Ivory and Noir themes with a 3D aerial venture flyover and a plot explorer.',k:['Premium theme','3D flyover','Plot explorer','Google Business']},
+{n:'Pet2Door',w:'Guntur · Pet food delivery',t:'Client pitch',img:M+'pet2door.jpg',v:M+'pet2door.mp4',live:'../pet2door/',case:'../rootfix/work/pet2door.html',p:'A delivery site for Guntur pet parents with the full catalogue and WhatsApp ordering, designed in Figma.',k:['Figma','Catalogue','WhatsApp orders']},
+{n:'Palm Grove Enclave',w:'Venture microsite',t:'Client',img:M+'palmgrove.jpg',v:M+'palmgrove.mp4',live:'',case:'',p:'A venture microsite with a 3D flyover and live plot availability, so buyers can see the layout before they visit.',k:['3D flyover','Plot availability','Lead capture']},
+{n:'Summit Peak Roofing',w:'Roofing contractor',t:'Client',img:M+'summit.jpg',v:'',live:'',case:'',p:'A roofing contractor website built to turn local searches into quote requests.',k:['Service site','Quote requests']}
+];
+const PRODUCTS=[
+{n:'RootFix',d:'My digital studio — finds why a business is stuck and fixes it at the root. Multi-page site with case files.',img:'../rootfix/assets/og.jpg',v:'',live:'../rootfix/',k:'Studio'},
+{n:'Levelora Members',d:'A gamified life-upgrade planner: trackers, daily tasks, streaks and a friends-only leaderboard.',img:M+'levelora-app.jpg',v:M+'levelora-app.mp4',live:'',k:'App'},
+{n:'Levelora All-Access Pass',d:'The sales page for Levelora — every planner, journal and tracker in one pass.',img:M+'levelora-pass.jpg',v:M+'levelora-pass.mp4',live:'',k:'Store'},
+{n:'OfferPath India',d:'A directory of affiliate, refer-and-earn and student offers in India, with a rewards model.',img:M+'offerpath.jpg',v:M+'offerpath.mp4',live:'../offerpath/',k:'Web app'},
+{n:'ShareStack',d:'A tool-seat storefront where orders arrive straight on WhatsApp.',img:M+'sharestack.jpg',v:M+'sharestack.mp4',live:'',k:'Store'},
+{n:'Toolstack',d:'A curated directory of AI, design and SEO tools.',img:M+'toolstack.jpg',v:M+'toolstack.mp4',live:'',k:'Directory'},
+{n:'WalkQuest 3D',d:'A Flutter walking RPG — your real steps level up a 3D character.',img:M+'walkquest.jpg',v:'',live:'https://github.com/mokaseshu/MOKA/tree/feature/walkquest-3d/walkquest_3d',k:'Mobile game'},
+{n:'GST Invoice Generator',d:'Fill the form, get the CGST/SGST/IGST split, download the PDF, share on WhatsApp.',img:'../rootfix/assets/work/gst-invoice-generator.jpg',v:'../rootfix/assets/work/gst-invoice-generator.mp4',live:'../gst-invoice-generator/',k:'Web app'},
+{n:'Countr Shop Billing',d:'Tap products, take cash, UPI or card, send the receipt on WhatsApp.',img:'../rootfix/assets/work/countr-shop-billing.jpg',v:'../rootfix/assets/work/countr-shop-billing.mp4',live:'../countr-shop-billing/',k:'Web app'}
+];
+const SVCS=[
+['Websites','Premium, fast business sites that turn visitors into WhatsApp enquiries.',['Business sites','Landing pages','3D & motion','SEO-ready'],'<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/>'],
+['Shopify stores','Stores and service sites on Shopify, set up end to end with reviews and payments.',['Store setup','Custom theme','Reviews','Domain & DNS'],'<path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/>'],
+['Web apps','Billing, invoices, estimators, planners and CRMs built for how your shop works.',['Billing','Invoices','CRM','Dashboards'],'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>'],
+['AI bots','Chat assistants that answer, qualify and book — in Telugu and English.',['WhatsApp bots','Lead scoring','Ordering','Booking'],'<rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V3M9 13h.01M15 13h.01"/>'],
+['Automation','Bookings, reminders and follow-ups that run without you touching them.',['Reminders','Broadcasts','Follow-ups','Agents'],'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'],
+['Brand & marketing','Logos, menus, cards, ads, Google profile and SEO audits that bring people in.',['Branding','Meta ads','Google profile','SEO audit'],'<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>']
+];
+const TOOLS=['Websites','Shopify','Web apps','AI bots','WhatsApp automation','Dashboards','3D web','Branding','SEO','Meta ads','Figma','Claude'];
+
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const arrow='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+const tagCls=t=>/client/i.test(t)?'hot':/own/i.test(t)?'own':/concept/i.test(t)?'con':'';
+
+$('#yr').textContent=new Date().getFullYear();
+$('.mq').innerHTML=[...TOOLS,...TOOLS].map(t=>`<span>${t}</span>`).join('');
+
+$('#features').innerHTML=CLIENTS.map((c,i)=>`<article class="feature glass neon rv">
+<div class="fmedia" data-lb="${i}" data-kind="c"><img src="${c.img}" alt="${esc(c.n)} website" loading="lazy">${c.v?`<video src="${c.v}" muted loop playsinline preload="none" aria-hidden="true"></video><span class="play">▶ Watch</span>`:''}</div>
+<div class="fbody"><div class="ftags"><span class="tag hot">${c.t}</span>${c.k.map(k=>`<span class="tag">${k}</span>`).join('')}</div>
+<h3>${esc(c.n)}</h3><p>${esc(c.p)}</p><p class="where mono">${esc(c.w)}</p>
+<div class="links2">${c.live?`<a class="btn btn-neon mag" href="${c.live}" target="_blank" rel="noopener">Visit live ${arrow}</a>`:''}${c.case?`<a class="btn btn-glass mag" href="${c.case}">Case file</a>`:''}</div></div></article>`).join('');
+
+$('#prods').innerHTML=PRODUCTS.map((p,i)=>`<article class="prod glass tilt rv" data-max="7">
+<div class="pm" data-lb="${i}" data-kind="p"><img src="${p.img}" alt="${esc(p.n)}" loading="lazy">${p.v?`<video src="${p.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}</div>
+<div class="pb"><span class="tag own">${p.k}</span><h3>${esc(p.n)}</h3><p>${esc(p.d)}</p><div class="pl">${p.v?`<a href="#" data-open="${i}" data-kind="p">▶ Preview</a>`:''}${p.live?`<a href="${p.live}" target="_blank" rel="noopener">Open ${arrow}</a>`:''}</div></div></article>`).join('');
+
+const cats=[['all','All'],['client','Client work'],['websites','Websites'],['stores','Landing pages'],['apps','Web apps'],['bots','AI bots'],['automation','Automation'],['dashboards','Dashboards'],['brand','Brand & print'],['marketing','Marketing']];
+const inCat=(w,c)=>c==='all'||(c==='client'?w.t==='Client':w.c===c);
+$('#filters').innerHTML=cats.map(([k,l],i)=>`<button class="${i?'':'on'}" data-f="${k}">${l}<sup>${WORKS.filter(w=>inCat(w,k)).length}</sup></button>`).join('');
+$('#grid').innerHTML=WORKS.map((w,i)=>`<article class="card" data-i="${i}">
+<div class="cm" data-lb="${i}" data-kind="w"><img src="${w.img}" alt="${esc(w.n)}" loading="lazy">${w.v?`<video data-src="${w.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}<span class="tag ${tagCls(w.t)}">${w.t}</span></div>
+<div class="cb"><span class="cat mono">${w.l}</span><h3>${esc(w.n)}</h3><p>${esc(w.f)}</p>
+<div class="cl">${w.live?`<a href="${w.live}" target="_blank" rel="noopener">Live demo ${arrow}</a>`:''}<a href="${w.case}">Case file ${arrow}</a></div></div></article>`).join('');
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('#filters button').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;$$('#grid .card').forEach(c=>c.classList.toggle('out',!inCat(WORKS[c.dataset.i],f)));window.ScrollTrigger&&ScrollTrigger.refresh()});
+
+$('#svcs').innerHTML=SVCS.map(([h,p,l,ic],i)=>`<article class="svc glass neon tilt rv" data-max="6"><span class="n mono">0${i+1}</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="url(#ig)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></div><h3>${h}</h3><p>${p}</p><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
+document.body.insertAdjacentHTML('beforeend','<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient></defs></svg>');
+$('#needs').innerHTML=['Website','Shopify store','Web app','AI / WhatsApp bot','Automation','Branding','Ads & SEO'].map((n,i)=>`<input type="checkbox" id="n${i}" value="${n}"><label for="n${i}">${n}</label>`).join('');
+
+const seen=new Set(),uniq=[...CLIENTS.map(c=>c.n),...PRODUCTS.map(p=>p.n),...WORKS.map(w=>w.n)].filter(n=>{const k=n.toLowerCase().replace(/[^a-z]/g,'').replace('properties','');if(seen.has(k))return false;seen.add(k);return true});
+const COUNTS={total:uniq.length,clients:CLIENTS.length,products:PRODUCTS.length+WORKS.filter(w=>w.t==='Own product'&&!PRODUCTS.some(p=>p.n===w.n)).length};
+
+$('#brief').addEventListener('submit',e=>{e.preventDefault();const f=e.target,needs=$$('#needs input:checked').map(i=>i.value);
+const t=`Hi Seshu, I saw your portfolio.\nName: ${f.name.value}\nBusiness: ${f.biz.value||'-'}\nNeed: ${needs.join(', ')||'-'}\n${f.msg.value?'Details: '+f.msg.value:''}`;
+window.open('https://wa.me/916301521358?text='+encodeURIComponent(t),'_blank','noopener')});
+
+const lb=$('#lb');
+function openLB(kind,i){const d=kind==='c'?CLIENTS[i]:kind==='p'?PRODUCTS[i]:WORKS[i];$('#lbt').textContent=d.n;
+$('#lbm').innerHTML=d.v?`<video src="${d.v}" poster="${d.img}" controls autoplay muted loop playsinline></video>`:`<img src="${d.img}" alt="${esc(d.n)}">`;
+const l=$('#lbl');if(d.live){l.href=d.live;l.style.display=''}else if(d.case){l.href=d.case;l.textContent='Case file ↗';l.style.display=''}else l.style.display='none';
+if(d.live)l.textContent='Open live ↗';lb.classList.add('on');lenis&&lenis.stop()}
+function closeLB(){lb.classList.remove('on');$('#lbm').innerHTML='';lenis&&lenis.start()}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-lb],[data-open]');if(!t||e.target.closest('a[href]:not([data-open])'))return;e.preventDefault();openLB(t.dataset.kind,+(t.dataset.lb??t.dataset.open))});
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.closest('.x'))closeLB()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+
+const fine=matchMedia('(hover:hover) and (pointer:fine)').matches,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function hoverVideo(sel){$$(sel).forEach(m=>{const v=m.querySelector('video');if(!v)return;
+const on=()=>{if(v.dataset.src&&!v.src)v.src=v.dataset.src;v.play().then(()=>m.classList.add('playing')).catch(()=>{})},off=()=>{v.pause();m.classList.remove('playing')};
+if(fine){m.addEventListener('mouseenter',on);m.addEventListener('mouseleave',off)}})}
+hoverVideo('.card .cm');
+$$('.fmedia video,.pm video').forEach(v=>{v.style.opacity=0;v.style.transition='opacity .5s';new IntersectionObserver(([en])=>{if(en.isIntersecting&&!reduce){v.preload='auto';v.play().then(()=>v.style.opacity=1).catch(()=>{})}else v.pause()},{threshold:.35}).observe(v)});
+
+if(fine&&!reduce){$$('.tilt').forEach(el=>{const mx=+el.dataset.max||8;el.style.transition='transform .6s cubic-bezier(.2,.8,.2,1)';
+el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.transition='transform .12s linear';el.style.transform=`perspective(1000px) rotateX(${-y*mx}deg) rotateY(${x*mx}deg)`});
+el.addEventListener('mouseleave',()=>{el.style.transition='transform .8s cubic-bezier(.2,.8,.2,1)';el.style.transform=''})});
+const cur=$('.cursor');let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
+(function lp(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(lp)})();
+document.addEventListener('mouseover',e=>cur.classList.toggle('big',!!e.target.closest('a,button,.cm,.fmedia,.pm,label')));
+$$('.mag').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.25}px)`});b.addEventListener('mouseleave',()=>b.style.transform='')})}
+
+const nav=$('.nav');$('.burger').addEventListener('click',()=>nav.classList.toggle('open'));$$('.links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+let lenis=null;
+function countUp(){$$('[data-count]').forEach(el=>{const n=COUNTS[el.dataset.count];if(reduce||!window.gsap){el.textContent=n;return}const o={v:0};gsap.to(o,{v:n,duration:1.8,ease:'power3.out',onUpdate:()=>el.textContent=Math.round(o.v)})})}
+function intro(){
+if(!window.gsap||reduce){document.documentElement.classList.add('noanim');countUp();return}
+gsap.registerPlugin(ScrollTrigger);
+if(window.Lenis){lenis=new Lenis({lerp:.1});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=a.getAttribute('href');if(t.length>1&&$(t)){e.preventDefault();lenis.scrollTo(t,{offset:-90})}else if(t==='#top'){e.preventDefault();lenis.scrollTo(0)}}))}
+const tl=gsap.timeline({defaults:{ease:'expo.out'}});
+tl.from('h1 .ln>span',{yPercent:110,duration:1.3,stagger:.1}).from('.eyebrow,.lead,.ctas,.facts',{y:30,opacity:0,duration:1,stagger:.08},'-=1').from('.idcard',{y:60,opacity:0,rotateY:-18,duration:1.4},'-=1.1').from('header',{y:-80,opacity:0,duration:1},'-=1.2').add(countUp,'-=.9');
+$$('.rv').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}}));
+ScrollTrigger.batch('.card',{start:'top 92%',once:true,onEnter:b=>gsap.from(b,{y:50,opacity:0,duration:1,stagger:.08,ease:'expo.out'})});
+gsap.to('.bigname',{backgroundPosition:'0 0',yPercent:-10,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
+let last=0;ScrollTrigger.create({onUpdate:s=>{const y=s.scroll();$('header').classList.toggle('hide',y>last&&y>400&&!nav.classList.contains('open'));last=y}});
+}
+const bar=$('#loader .bar i'),pc=$('#loader .pc');let prog=0;const tick=setInterval(()=>{prog=Math.min(prog+Math.random()*18,92);bar.style.width=prog+'%';pc.textContent='Loading '+Math.round(prog)+'%'},120);
+function done(){clearInterval(tick);bar.style.width='100%';pc.textContent='Loading 100%';setTimeout(()=>{$('#loader').classList.add('done');intro()},350)}
+let finished=false;const fin=()=>{if(!finished){finished=true;done()}};
+Promise.all([document.fonts.ready,new Promise(r=>addEventListener('load',r))]).then(fin);setTimeout(fin,3500);
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
+const cv=document.getElementById('gl'),hero=document.getElementById('hero');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,mobile=innerWidth<900;
+let renderer;try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,powerPreference:'high-performance'})}catch(e){cv.remove()}
+if(renderer){
+renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:1.75));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,.1,100);cam.position.set(0,0,12);
+const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.55;
+
+const bgMat=new THREE.ShaderMaterial({uniforms:{t:{value:0}},transparent:true,depthWrite:false,vertexShader:'varying vec2 u;void main(){u=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+fragmentShader:`varying vec2 u;uniform float t;
+float g(vec2 p,float w){vec2 q=abs(fract(p)-.5);return smoothstep(w,0.,min(q.x,q.y));}
+void main(){vec2 p=u*vec2(16.,10.);p.y+=t*.25;float l=g(p,.025)*.22;
+vec3 c=mix(vec3(.13,.9,1.),vec3(1.,.24,.8),u.x);
+float b1=smoothstep(.55,0.,distance(u,vec2(.72+.05*sin(t*.4),.6)));float b2=smoothstep(.45,0.,distance(u,vec2(.3,.35+.05*cos(t*.3))));
+vec3 col=c*l+vec3(.48,.42,1.)*b1*.55+vec3(.13,.9,1.)*b2*.35+vec3(1.,.24,.8)*b1*b2*.6;
+float a=clamp(l+b1*.6+b2*.45,0.,1.)*smoothstep(0.,.25,u.y)*smoothstep(1.,.7,u.y);
+gl_FragColor=vec4(col,a);}`});
+const bg=new THREE.Mesh(new THREE.PlaneGeometry(34,20),bgMat);bg.position.z=-6;scene.add(bg);
+
+const glass=new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:0,roughness:.03,transmission:1,thickness:1.1,ior:1.5,clearcoat:1,clearcoatRoughness:.04,iridescence:.85,iridescenceIOR:1.35,attenuationColor:new THREE.Color(0x8F7BFF),attenuationDistance:2.2,transparent:true,opacity:.92});
+const group=new THREE.Group();scene.add(group);
+const hex=new THREE.Mesh(new THREE.CylinderGeometry(1.9,1.9,.7,6,1),glass);hex.rotation.x=Math.PI/2;
+const hexW=new THREE.Group();if(mobile)hexW.scale.setScalar(.6);
+const shape=new THREE.Shape();[[-.95,-.75],[-.95,.75],[-.48,.15],[0,.75],[0,-.75]];
+const neon=(col)=>new THREE.MeshBasicMaterial({color:col,toneMapped:false});
+const tube=(pts,col)=>new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(p[0],p[1],0)),false,'catmullrom',0),64,.075,8,false),neon(col));
+const P=(a)=>{const o=[];for(let i=0;i<a.length-1;i++){const [x1,y1]=a[i],[x2,y2]=a[i+1];for(let s=0;s<=10;s++){o.push([x1+(x2-x1)*s/10,y1+(y2-y1)*s/10])}}return o};
+const mM=tube(P([[-1.15,-.72],[-1.15,.72],[-.62,.05],[-.1,.72],[-.1,-.72]]),0x22E6FF);
+const mS=tube(P([[1.15,.72],[.28,.72],[.28,0],[1.15,0],[1.15,-.72],[.2,-.72]]),0xFF3DCB);
+hexW.position.set(mobile?2.2:4.1,mobile?4.6:.2,-1.5);group.add(hexW);
+
+const items=[];
+const add=(geo,pos,s,sp)=>{const m=new THREE.Mesh(geo,glass);m.position.set(...pos);m.scale.setScalar(s);m.userData={sp,base:pos[1],ph:Math.random()*6};group.add(m);items.push(m)};
+add(new THREE.TorusGeometry(1,.34,40,120),[mobile?-3.2:1.75,mobile?-4.6:-1.7,-3],mobile?.7:.5,.5);
+add(new THREE.IcosahedronGeometry(1,0),[mobile?3.4:7.4,mobile?-2:-3.4,-1],.8,.7);
+if(!mobile)add(new RoundedBoxGeometry(1.3,1.3,1.3,6,.22),[1.4,-4.3,-3],.7,.6);
+add(new THREE.SphereGeometry(.5,48,48),[mobile?2.8:7.2,mobile?5.6:3.8,-1.5],.9,.9);
+if(!mobile)add(new THREE.TorusKnotGeometry(.6,.2,160,24),[-8.9,-5.7,-4],.9,.4);
+
+const ringMat=neon(0x7B6CFF);const ring=new THREE.Mesh(new THREE.TorusGeometry(2.55,.012,8,160),ringMat);hexW.add(ring);
+const ring2=new THREE.Mesh(new THREE.TorusGeometry(2.85,.008,8,160),neon(0x22E6FF));ring2.rotation.x=.3;hexW.add(ring2);
+
+const pts=new THREE.BufferGeometry(),N=mobile?160:380,arr=new Float32Array(N*3);for(let i=0;i<N;i++){arr[i*3]=(Math.random()-.5)*26;arr[i*3+1]=(Math.random()-.5)*16;arr[i*3+2]=(Math.random()-.5)*8-2}
+pts.setAttribute('position',new THREE.BufferAttribute(arr,3));const dust=new THREE.Points(pts,new THREE.PointsMaterial({size:.035,color:0x9fe9ff,transparent:true,opacity:.7}));scene.add(dust);
+
+const l1=new THREE.PointLight(0x22E6FF,40,30);l1.position.set(-4,3,4);const l2=new THREE.PointLight(0xFF3DCB,40,30);l2.position.set(5,-3,4);scene.add(l1,l2,new THREE.AmbientLight(0xffffff,.2));
+
+function size(){const w=hero.clientWidth,h=hero.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.position.z=mobile?15:12;cam.updateProjectionMatrix()}
+size();addEventListener('resize',size);
+let mx=0,my=0,visible=true,sy=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});addEventListener('scroll',()=>sy=scrollY,{passive:true});
+new IntersectionObserver(([e])=>visible=e.isIntersecting).observe(hero);
+const clock=new THREE.Clock();
+renderer.setAnimationLoop(()=>{if(!visible)return;const t=clock.getElapsedTime(),k=reduce?0:1;
+bgMat.uniforms.t.value=t*k;
+hexW.rotation.y+=((mx*.7+Math.sin(t*.5)*.25*k)-hexW.rotation.y)*.05;hexW.rotation.x+=((my*.4)-hexW.rotation.x)*.05;
+ring.rotation.z=t*.3*k;ring2.rotation.z=-t*.2*k;
+items.forEach(m=>{m.rotation.x+=.003*m.userData.sp*k;m.rotation.y+=.004*m.userData.sp*k;m.position.y=m.userData.base+Math.sin(t*m.userData.sp+m.userData.ph)*.25*k});
+group.position.y=sy*.0035;group.rotation.y+=((mx*.15)-group.rotation.y)*.03;dust.rotation.y=t*.01*k;
+l1.position.x=-4+Math.sin(t*.6)*2*k;l2.position.y=-3+Math.cos(t*.5)*2*k;
+renderer.render(scene,cam)});
+}
+</script>
+</body>
+</html>
