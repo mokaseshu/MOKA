@@ -51,16 +51,38 @@ header.hide{transform:translateY(-130%)}
 .brand svg{width:38px;height:38px}
 .brand b{font:700 15px/1 Unbounded,sans-serif;letter-spacing:.12em}
 .brand b span{display:block;font-weight:400;font-size:9.5px;letter-spacing:.42em;margin-top:5px}
-.links{display:flex;gap:4px}
+.links{display:flex;gap:2px;position:relative;padding:4px;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+.links .pill{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:999px;background:linear-gradient(140deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid var(--line2);box-shadow:0 0 22px -4px rgba(123,108,255,.6);transition:left .45s var(--ease),width .45s var(--ease),opacity .3s;opacity:0}
+.links a{position:relative;z-index:1}
+.links a.on{color:var(--text)}
 .links a{padding:9px 16px;border-radius:999px;font-size:14px;color:var(--dim);transition:color .3s,background .3s}
-.links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.links a:hover{color:var(--text)}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s var(--ease),box-shadow .3s}
 .btn-neon{background:var(--grad);color:#05060A;box-shadow:0 10px 40px -10px rgba(123,108,255,.8),inset 0 1px 0 rgba(255,255,255,.5)}
 .btn-neon:hover{box-shadow:0 14px 50px -8px rgba(255,61,203,.75),inset 0 1px 0 rgba(255,255,255,.5)}
 .btn-glass{border:1px solid var(--line2);background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .btn-glass:hover{background:rgba(255,255,255,.1)}
 .btn svg{width:18px;height:18px}
-.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2)}
+.burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);background:rgba(255,255,255,.05);position:relative;z-index:60}
+#mmenu{position:fixed;inset:0;z-index:45;display:flex;flex-direction:column;justify-content:space-between;padding:110px var(--pad) calc(30px + env(safe-area-inset-bottom));background:rgba(5,6,10,.72);-webkit-backdrop-filter:blur(26px) saturate(160%);backdrop-filter:blur(26px) saturate(160%);opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+#mmenu::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60vw 60vw at 90% 0%,rgba(123,108,255,.28),transparent 70%),radial-gradient(60vw 60vw at 0% 100%,rgba(255,61,203,.18),transparent 70%)}
+body.menu-open #mmenu{opacity:1;visibility:visible}
+body.menu-open{overflow:hidden}
+.mlinks{display:flex;flex-direction:column}
+.mlinks a{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font:700 clamp(30px,9vw,46px)/1.05 Unbounded,sans-serif;letter-spacing:-.02em;opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease),color .3s}
+.mlinks a .mono{font-size:11px;color:var(--cyan);font-weight:400;letter-spacing:.14em}
+.mlinks a.on{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.menu-open .mlinks a{opacity:1;transform:none}
+body.menu-open .mlinks a:nth-child(1){transition-delay:0.06s}
+body.menu-open .mlinks a:nth-child(2){transition-delay:0.11s}
+body.menu-open .mlinks a:nth-child(3){transition-delay:0.16s}
+body.menu-open .mlinks a:nth-child(4){transition-delay:0.21s}
+body.menu-open .mlinks a:nth-child(5){transition-delay:0.26s}
+body.menu-open .mlinks a:nth-child(6){transition-delay:0.31s}
+.mfoot{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mfoot .btn{flex:1;justify-content:center}
+.mfoot p{width:100%;color:var(--faint);margin:14px 0 0;font-size:10.5px}
+@media (min-width:901px){#mmenu{display:none}}
 .burger i{display:block;width:16px;height:1.5px;background:#fff;margin:4px auto;transition:transform .3s}
 
 #hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:110px;padding-bottom:70px;overflow:hidden}
@@ -148,7 +170,9 @@ h2{font:800 clamp(34px,5.2vw,78px)/1 Unbounded,sans-serif;letter-spacing:-.03em;
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .card{border-radius:18px;padding:10px;background:linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.015));border:1px solid var(--line);position:relative;transition:border-color .4s,transform .5s var(--ease),opacity .4s}
 .card:hover{border-color:rgba(123,108,255,.5)}
-.card.out{display:none}
+.card.out,.card.cut{display:none}
+.more{display:flex;justify-content:center;margin-top:36px}
+.more.hide{display:none}
 .card .cm{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0b0d18;cursor:pointer}
 .card .cm img,.card .cm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
 .card .cm video{opacity:0;transition:opacity .4s}
@@ -224,15 +248,27 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 @media (max-width:1100px){.grid,.prods,.svcs{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}}
 @media (max-width:900px){
 .links,.nav>.btn{display:none}.burger{display:block}
-.nav.open{border-radius:24px;flex-wrap:wrap}
-.nav.open .links{display:flex;flex-direction:column;width:100%;order:3;padding:8px 0}
-.nav.open .links a{font-size:18px;padding:14px 10px}
-.nav.open .burger i:first-child{transform:translateY(2.75px) rotate(45deg)}.nav.open .burger i:last-child{transform:translateY(-2.75px) rotate(-45deg)}
+body.menu-open .burger i:first-child{transform:translateY(2.75px) rotate(45deg)}body.menu-open .burger i:last-child{transform:translateY(-2.75px) rotate(-45deg)}
+header{top:10px}.nav{margin-inline:12px;padding:8px 8px 8px 12px}
 .hero-grid,.feature,.feature:nth-child(even),.about,.contact{grid-template-columns:1fr}
 .feature:nth-child(even) .fmedia{order:0}
 .idcard{max-width:420px;width:100%;margin:0 auto}
 }
-@media (max-width:640px){.grid,.prods,.svcs,.steps{grid-template-columns:1fr}.step{border-right:0;margin-right:0;border-bottom:1px solid var(--line);padding-bottom:28px}.facts div{min-width:0;flex:1}.btn{padding:12px 18px}body{font-size:16px}}
+@media (max-width:900px){
+header.hide~main .filters{top:0}
+.filters{transition:top .45s var(--ease);position:sticky;top:76px;z-index:20;flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(var(--pad)*-1);padding:10px var(--pad);scrollbar-width:none;background:linear-gradient(var(--bg) 70%,transparent);-webkit-mask:linear-gradient(90deg,transparent,#000 var(--pad),#000 calc(100% - var(--pad)),transparent)}
+.filters::-webkit-scrollbar{display:none}.filters button{flex:none}
+.prods,.svcs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:calc(var(--pad)*-1);padding:6px var(--pad) 18px;scrollbar-width:none}
+.prods::-webkit-scrollbar,.svcs::-webkit-scrollbar{display:none}
+.prod,.svc{flex:0 0 min(78vw,340px);scroll-snap-align:center}
+.swipe{display:flex!important}
+}
+.swipe{display:none;align-items:center;gap:8px;color:var(--faint);margin-top:4px}
+@media (max-width:640px){.grid{grid-template-columns:1fr 1fr;gap:12px}.steps{grid-template-columns:1fr}
+.card{padding:6px;border-radius:14px}.card .cm{border-radius:10px;aspect-ratio:4/3}.card .cm .tag{top:6px;left:6px;padding:4px 7px;font-size:9px}.card .cb{padding:10px 4px 4px}.card .cat{font-size:9.5px;letter-spacing:.08em}.card h3{font-size:13.5px;margin:5px 0 0}.card p{display:none}.card .cl{flex-direction:column;gap:6px;margin-top:10px;font-size:12.5px}
+.sec{padding-block:80px}.shead{margin-bottom:30px}
+h1{margin:20px 0}.facts{margin-top:36px}.hero-grid{gap:44px}
+.contact{border-radius:18px}.bigname{margin-bottom:30px}.step{border-right:0;margin-right:0;border-bottom:1px solid var(--line);padding-bottom:28px}.facts div{min-width:0;flex:1}.btn{padding:12px 18px}body{font-size:16px}}
 @media (prefers-reduced-motion:reduce){.mq,.avatar .sweep,.dot,#loader .lm{animation:none}}
 </style>
 </head>
@@ -279,10 +315,16 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 </g>
 <circle cx="90" cy="41" r="2.4" fill="#fff"/>
 </svg><b>MOKA<span class="grad">SESHU</span></b></a>
-<div class="links"><a href="#clients">Clients</a><a href="#products">Products</a><a href="#work">All work</a><a href="#services">Services</a><a href="#about">About</a></div>
+<div class="links"><span class="pill" aria-hidden="true"></span><a href="#products">Products</a><a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></div>
 <a class="btn btn-neon mag" href="#contact">Start a project</a>
-<button class="burger" aria-label="Menu"><i></i><i></i></button>
+<button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
 </nav></header>
+<div id="mmenu" aria-hidden="true">
+<nav class="mlinks">
+<a href="#top"><span class="mono">00</span>Home</a><a href="#products"><span class="mono">01</span>Products</a><a href="#work"><span class="mono">02</span>Work</a><a href="#services"><span class="mono">03</span>Services</a><a href="#about"><span class="mono">04</span>About</a><a href="#contact"><span class="mono">05</span>Contact</a>
+</nav>
+<div class="mfoot"><a class="btn btn-neon" href="#contact">Start a project</a><a class="btn btn-glass" href="https://wa.me/916301521358" target="_blank" rel="noopener">WhatsApp</a><p class="mono">Moka Seshu · Founder, RootFix</p></div>
+</div>
 
 <main id="top">
 <section id="hero">
@@ -293,7 +335,7 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 <h1><span class="ln"><span>Build.</span></span><span class="ln"><span>Automate.</span></span><span class="ln"><span class="grad">Level up.</span></span></h1>
 <p class="lead">I'm <b>Moka Seshu</b> — I design and build premium <b>websites, Shopify stores, web apps and AI bots</b> that bring businesses more customers. One person, AI as the team, shipped fast.</p>
 <div class="ctas"><a class="btn btn-neon mag" href="#work">See all my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-glass mag" href="https://wa.me/916301521358?text=Hi%20Seshu%2C%20I%20saw%20your%20portfolio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>WhatsApp me</a></div>
-<div class="facts"><div><b class="grad" data-count="total">0</b><span>projects built</span></div><div><b data-count="clients">0</b><span>live client projects</span></div><div><b data-count="products">0</b><span>own products</span></div></div>
+<div class="facts"><div><b class="grad" data-count="total">0</b><span>projects built</span></div><div><b data-count="clients">0</b><span>client projects</span></div><div><b data-count="products">0</b><span>own products</span></div></div>
 </div>
 <div class="idcard glass neon tilt" data-max="10">
 <div class="avatar">
@@ -336,30 +378,27 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 
 <div class="marquee" aria-hidden="true"><div class="mq"></div></div>
 
-<section id="clients" class="sec wrap">
-<div class="shead"><div><span class="mono">01 / Client work</span><h2 class="rv">Real businesses, <span class="grad">live online.</span></h2></div><p class="rv">Sites I designed and built for paying clients — gates and shutters, real estate, pet food delivery and roofing.</p></div>
-<div id="features"></div>
-</section>
 
 <section id="products" class="sec wrap">
-<div class="shead"><div><span class="mono">02 / Own products</span><h2 class="rv">Things I build <span class="grad">for myself.</span></h2></div><p class="rv">Apps, stores and tools I designed, built and run — proof I can take an idea from zero to launched.</p></div>
-<div class="prods" id="prods"></div>
+<div class="shead"><div><span class="mono">01 / Own products</span><h2 class="rv">Things I build <span class="grad">for myself.</span></h2></div><p class="rv">Apps, stores and tools I designed, built and run — proof I can take an idea from zero to launched.</p></div>
+<div class="prods" id="prods"></div><p class="swipe mono">Swipe →</p>
 </section>
 
 <section id="work" class="sec wrap">
-<div class="shead"><div><span class="mono">03 / Every build</span><h2 class="rv">The full <span class="grad">archive.</span></h2></div><p class="rv">Every build so far — open the live demo or the case file. Concept work is marked “Concept”: built to show what I'd make for that kind of business.</p></div>
+<div class="shead"><div><span class="mono">02 / Every build</span><h2 class="rv">The full <span class="grad">archive.</span></h2></div><p class="rv">Every build so far — open the live demo or the case file. Concept work is marked “Concept”: built to show what I'd make for that kind of business.</p></div>
 <div class="filters" id="filters"></div>
 <div class="grid" id="grid"></div>
+<div class="more"><button class="btn btn-glass" id="more"></button></div>
 </section>
 
 <section id="services" class="sec wrap">
-<div class="shead"><div><span class="mono">04 / Services</span><h2 class="rv">What I can <span class="grad">build for you.</span></h2></div><p class="rv">One-time builds or full setups. Everything ends in one place: more enquiries on your WhatsApp.</p></div>
-<div class="svcs" id="svcs"></div>
+<div class="shead"><div><span class="mono">03 / Services</span><h2 class="rv">What I can <span class="grad">build for you.</span></h2></div><p class="rv">One-time builds or full setups. Everything ends in one place: more enquiries on your WhatsApp.</p></div>
+<div class="svcs" id="svcs"></div><p class="swipe mono">Swipe →</p>
 </section>
 
 <section id="about" class="sec wrap">
 <div class="about">
-<div><span class="mono" style="color:var(--cyan);display:block;margin-bottom:18px">05 / About</span><p class="big rv">A one-person studio with <em class="grad">AI as the team</em> — so you get agency-level work at the speed of one focused builder.</p></div>
+<div><span class="mono" style="color:var(--cyan);display:block;margin-bottom:18px">04 / About</span><p class="big rv">A one-person studio with <em class="grad">AI as the team</em> — so you get agency-level work at the speed of one focused builder.</p></div>
 <div class="txt rv"><p>I'm Moka Seshu, founder of <a href="../rootfix/" style="color:var(--cyan)">RootFix</a>. I build with Claude, Figma, Shopify and GitHub, and I design every project around one question: what is stopping this business from getting customers?</p><p>No office, no layers of staff. You talk to the person who builds your site, and AI handles the heavy lifting so every project ships fast without cutting corners.</p>
 <div class="tools"><span class="chip">Claude</span><span class="chip">Figma</span><span class="chip">GitHub</span><span class="chip">Shopify</span><span class="chip">Three.js</span><span class="chip">GSAP</span><span class="chip">WhatsApp API</span><span class="chip">Google Business</span><span class="chip">Meta Ads</span><span class="chip">Canva</span></div></div>
 </div>
@@ -373,7 +412,7 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 
 <section id="contact" class="wrap">
 <div class="contact glass neon">
-<div class="side"><span class="mono" style="color:var(--cyan)">06 / Contact</span><h2 style="margin-top:18px">Let's build your <span class="grad">next level.</span></h2><p>Tell me about your business and what you need. The form opens WhatsApp with your brief ready to send — I reply personally.</p>
+<div class="side"><span class="mono" style="color:var(--cyan)">05 / Contact</span><h2 style="margin-top:18px">Let's build your <span class="grad">next level.</span></h2><p>Tell me about your business and what you need. The form opens WhatsApp with your brief ready to send — I reply personally.</p>
 <a class="wa mag" href="https://wa.me/916301521358" target="_blank" rel="noopener"><span class="wi"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span><span><b>+91 63015 21358</b><span>WhatsApp · replies same day</span></span></a>
 </div>
 <form id="brief">
@@ -418,13 +457,6 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 <script>
 const WORKS=[{"s":"coastal-builders","c":"websites","l":"Websites","t":"Concept","n":"Coastal Builders","p":"Customers ask for a quote, then go quiet.","f":"A 15-page site built around proof: project gallery, before/after sliders and a WhatsApp quote form.","img":"../rootfix/assets/work/coastal-builders.jpg","v":"../rootfix/assets/work/coastal-builders.mp4","live":"../coastal-builders/","case":"../rootfix/work/coastal-builders.html"},{"s":"skyline-meadows","c":"stores","l":"Landing page","t":"Concept","n":"Skyline Meadows","p":"Real estate ads bring leads who never planned to buy.","f":"A lead page that asks budget, timing and plot size, then sorts serious buyers to WhatsApp.","img":"../rootfix/assets/work/skyline-meadows.jpg","v":"../rootfix/assets/work/skyline-meadows.mp4","live":"../skyline-meadows/","case":"../rootfix/work/skyline-meadows.html"},{"s":"brightsmile-dental-bot","c":"bots","l":"AI bots","t":"Concept","n":"BrightSmile Dental Bot","p":"The receptionist answers the same questions fifty times a day.","f":"A chat assistant in Telugu and English that answers, then books.","img":"../rootfix/assets/work/brightsmile-dental-bot.jpg","v":"../rootfix/assets/work/brightsmile-dental-bot.mp4","live":"../brightsmile-dental-bot/","case":"../rootfix/work/brightsmile-dental-bot.html"},{"s":"velura-salon-booking","c":"automation","l":"Automation","t":"Concept","n":"Velura Salon Booking","p":"Customers forget appointments and no-shows cost the day's revenue.","f":"Online booking with services, stylist, date and open slots, confirmed on WhatsApp.","img":"../rootfix/assets/work/velura-salon-booking.jpg","v":"../rootfix/assets/work/velura-salon-booking.mp4","live":"../velura-salon-booking/","case":"../rootfix/work/velura-salon-booking.html"},{"s":"gst-invoice-generator","c":"apps","l":"Web apps","t":"Own product","n":"GST Invoice Generator","p":"Shops write GST bills by hand.","f":"Fill the form, get the tax split, download the PDF, share it on WhatsApp.","img":"../rootfix/assets/work/gst-invoice-generator.jpg","v":"../rootfix/assets/work/gst-invoice-generator.mp4","live":"../gst-invoice-generator/","case":"../rootfix/work/gst-invoice-generator.html"},{"s":"andhra-pickles-dashboard","c":"dashboards","l":"Dashboards","t":"Concept","n":"Andhra Pickles Sales Dashboard","p":"The owner doesn't know which pickle sells most.","f":"A sales dashboard: daily orders, top products, monthly revenue and regions.","img":"../rootfix/assets/work/andhra-pickles-dashboard.jpg","v":"../rootfix/assets/work/andhra-pickles-dashboard.mp4","live":"../andhra-pickles-dashboard/","case":"../rootfix/work/andhra-pickles-dashboard.html"},{"s":"brightsmile-dental","c":"websites","l":"Websites","t":"Concept","n":"BrightSmile Dental","p":"The phone is busy during clinic hours and bookings are missed.","f":"A 14-page clinic site with online booking and one-tap WhatsApp on every page.","img":"../rootfix/assets/work/brightsmile-dental.jpg","v":"../rootfix/assets/work/brightsmile-dental.mp4","live":"../brightsmile-dental/","case":"../rootfix/work/brightsmile-dental.html"},{"s":"sri-sai-tuition","c":"websites","l":"Websites","t":"Concept","n":"Sri Sai Tuition Centre","p":"Parents keep calling to ask fees and timings.","f":"A tuition site with a fee table, batch timings, results and one-tap enquiry.","img":"../rootfix/assets/work/sri-sai-tuition.jpg","v":"../rootfix/assets/work/sri-sai-tuition.mp4","live":"../sri-sai-tuition/","case":"../rootfix/work/sri-sai-tuition.html"},{"s":"revanth-autozone","c":"websites","l":"Websites","t":"Client","n":"Revanth Autozone","p":"Gates, shutters, glass work and emergency steps, with no single place to see them.","f":"A WhatsApp-led service site on Shopify, with each service on its own section.","img":"../rootfix/assets/work/revanth-autozone.jpg","v":"../rootfix/assets/work/revanth-autozone.mp4","live":"https://revanthautozone.in","case":"../rootfix/work/revanth-autozone.html"},{"s":"slns","c":"websites","l":"Websites","t":"Client","n":"SLNS Properties","p":"Plots are hard to judge from a brochure PDF.","f":"A real estate site with a 3D aerial hero and a plot explorer.","img":"../rootfix/assets/work/slns.jpg","v":"../rootfix/assets/work/slns.mp4","live":"../slns/","case":"../rootfix/work/slns.html"},{"s":"pet2door","c":"websites","l":"Websites","t":"Client","n":"Pet2Door","p":"Pet food orders arrive as scattered WhatsApp messages.","f":"A delivery site for Guntur with the catalogue and WhatsApp ordering.","img":"../rootfix/assets/work/pet2door.jpg","v":"../rootfix/assets/work/pet2door.mp4","live":"../pet2door/","case":"../rootfix/work/pet2door.html"},{"s":"fitzone-gym","c":"stores","l":"Landing page","t":"Concept","n":"FitZone Gym","p":"The gym gets Instagram views but no sign-ups.","f":"One offer page with a countdown, pricing and a WhatsApp lead form.","img":"../rootfix/assets/work/fitzone-gym.jpg","v":"../rootfix/assets/work/fitzone-gym.mp4","live":"../fitzone-gym/","case":"../rootfix/work/fitzone-gym.html"},{"s":"spice-route-order-bot","c":"bots","l":"AI bots","t":"Concept","n":"Spice Route Order Bot","p":"Phone orders get mixed up at peak time.","f":"An ordering bot with the menu, a live cart and one clean order summary.","img":"../rootfix/assets/work/spice-route-order-bot.jpg","v":"../rootfix/assets/work/spice-route-order-bot.mp4","live":"../spice-route-order-bot/","case":"../rootfix/work/spice-route-order-bot.html"},{"s":"skyline-plots-lead-bot","c":"bots","l":"AI bots","t":"Concept","n":"Skyline Plots Lead Bot","p":"The sales team spends its day on enquiries that go nowhere.","f":"A bot that asks three questions and scores each lead Hot, Warm or Cold.","img":"../rootfix/assets/work/skyline-plots-lead-bot.jpg","v":"../rootfix/assets/work/skyline-plots-lead-bot.mp4","live":"../skyline-plots-lead-bot/","case":"../rootfix/work/skyline-plots-lead-bot.html"},{"s":"coastal-builders-estimator","c":"apps","l":"Web apps","t":"Concept","n":"Construction Cost Estimator","p":"Every caller asks how much it will cost.","f":"An estimator by square feet and quality level, with a quote button.","img":"../rootfix/assets/work/coastal-builders-estimator.jpg","v":"../rootfix/assets/work/coastal-builders-estimator.mp4","live":"../coastal-builders-estimator/","case":"../rootfix/work/coastal-builders-estimator.html"},{"s":"exam-study-planner","c":"apps","l":"Web apps","t":"Own product","n":"Exam Study Planner","p":"Students can't see whether they are on track.","f":"Add subjects and dates, get a timetable with sessions to tick off.","img":"../rootfix/assets/work/exam-study-planner.jpg","v":"../rootfix/assets/work/exam-study-planner.mp4","live":"../exam-study-planner/","case":"../rootfix/work/exam-study-planner.html"},{"s":"countr-shop-billing","c":"apps","l":"Web apps","t":"Own product","n":"Countr Shop Billing","p":"Billing at a kirana counter is slow at rush hour.","f":"Tap products, take cash, UPI or card, send the receipt on WhatsApp.","img":"../rootfix/assets/work/countr-shop-billing.jpg","v":"../rootfix/assets/work/countr-shop-billing.mp4","live":"../countr-shop-billing/","case":"../rootfix/work/countr-shop-billing.html"},{"s":"anjaneya-quotation","c":"apps","l":"Web apps","t":"Client","n":"Quotation Maker","p":"Writing a shutter quotation takes an evening.","f":"A quotation maker with a shutter size calculator and remembered prices.","img":"../rootfix/assets/work/anjaneya-quotation.jpg","v":"../rootfix/assets/work/anjaneya-quotation.mp4","live":"../anjaneya-quotation/","case":"../rootfix/work/anjaneya-quotation.html"},{"s":"quickserve-app","c":"apps","l":"App design","t":"Concept","n":"QuickServe","p":"People can't find a trusted electrician or plumber quickly.","f":"Six mobile screens: search, profile, booking, chat and payment.","img":"../rootfix/assets/work/quickserve-app.jpg","v":"../rootfix/assets/work/quickserve-app.mp4","live":"../quickserve-app/","case":"../rootfix/work/quickserve-app.html"},{"s":"mediremind-app","c":"apps","l":"App design","t":"Concept","n":"MediRemind","p":"Elderly patients forget their medicines.","f":"Five large-text screens with reminders, refills and family alerts.","img":"../rootfix/assets/work/mediremind-app.jpg","v":"../rootfix/assets/work/mediremind-app.mp4","live":"../mediremind-app/","case":"../rootfix/work/mediremind-app.html"},{"s":"tamarind-cafe-kiosk","c":"apps","l":"App design","t":"Concept","n":"Tamarind Café Kiosk","p":"A queue forms at the café counter every rush hour.","f":"A tablet self-order screen with menu, cart and pay.","img":"../rootfix/assets/work/tamarind-cafe-kiosk.jpg","v":"../rootfix/assets/work/tamarind-cafe-kiosk.mp4","live":"../tamarind-cafe-kiosk/","case":"../rootfix/work/tamarind-cafe-kiosk.html"},{"s":"fitzone-fee-desk","c":"dashboards","l":"Dashboards","t":"Concept","n":"FitZone Fee Desk","p":"The gym doesn't know whose fees are due.","f":"A fee tracker with due and overdue lists and one-click WhatsApp reminders.","img":"../rootfix/assets/work/fitzone-fee-desk.jpg","v":"../rootfix/assets/work/fitzone-fee-desk.mp4","live":"../fitzone-fee-desk/","case":"../rootfix/work/fitzone-fee-desk.html"},{"s":"skyline-plots-crm","c":"dashboards","l":"CRM","t":"Concept","n":"Skyline Plots CRM","p":"Leads written in notebooks get forgotten.","f":"A simple CRM: lead stages, follow-up dates and notes.","img":"../rootfix/assets/work/skyline-plots-crm.jpg","v":"../rootfix/assets/work/skyline-plots-crm.mp4","live":"../skyline-plots-crm/","case":"../rootfix/work/skyline-plots-crm.html"},{"s":"andhra-pickles-price-list","c":"brand","l":"Print","t":"Concept","n":"Andhra Pickles Price List","p":"There is no price list to send on WhatsApp.","f":"A two-page A4 price list with Telugu names and a WhatsApp order QR.","img":"../rootfix/assets/work/andhra-pickles-price-list.jpg","v":"../rootfix/assets/work/andhra-pickles-price-list.mp4","live":"../andhra-pickles-price-list/","case":"../rootfix/work/andhra-pickles-price-list.html"},{"s":"brew-bite-qr-menu","c":"brand","l":"QR menu","t":"Concept","n":"Brew & Bite QR Menu","p":"Printed menus get dirty and go out of date.","f":"A mobile QR menu with search, a veg filter and a WhatsApp order cart.","img":"../rootfix/assets/work/brew-bite-qr-menu.jpg","v":"../rootfix/assets/work/brew-bite-qr-menu.mp4","live":"../brew-bite-qr-menu/","case":"../rootfix/work/brew-bite-qr-menu.html"},{"s":"coastal-builders-digital-card","c":"brand","l":"Digital card","t":"Concept","n":"Coastal Builders Digital Card","p":"The owner hands out a bare phone number.","f":"A digital visiting card with contact actions, services and recent projects.","img":"../rootfix/assets/work/coastal-builders-digital-card.jpg","v":"../rootfix/assets/work/coastal-builders-digital-card.mp4","live":"../coastal-builders-digital-card/","case":"../rootfix/work/coastal-builders-digital-card.html"},{"s":"seo-audit","c":"marketing","l":"SEO","t":"Concept","n":"BrightSmile SEO Audit","p":"The clinic doesn't appear for dentist searches nearby.","f":"A three-page audit: what is wrong, 18 keywords and five rewritten titles.","img":"../rootfix/assets/img/seo-audit-1.jpg","v":"","live":"","case":"../rootfix/work/seo-audit.html"},{"s":"google-profile","c":"marketing","l":"Google profile","t":"Concept","n":"Spice Route Google Profile","p":"The Maps listing has no photos and few reviews.","f":"A complete Google Business Profile, shown before and after, with four posts.","img":"../rootfix/assets/img/google-profile-1.jpg","v":"","live":"","case":"../rootfix/work/google-profile.html"},{"s":"meta-ads","c":"marketing","l":"Ads","t":"Concept","n":"FitZone Meta Ads Plan","p":"The gym boosts posts and gets nothing back.","f":"A 21-day campaign plan: audience, budget and three ads with copy.","img":"../rootfix/assets/img/meta-ads-1.jpg","v":"","live":"","case":"../rootfix/work/meta-ads.html"},{"s":"festival-ads","c":"marketing","l":"Ads","t":"Concept","n":"Andhra Pickles Festival Ads","p":"The shop can't reach customers outside the district.","f":"Festival sale creatives and a carousel that ends on shipping across India.","img":"../rootfix/assets/img/festival-ads-1.jpg","v":"","live":"","case":"../rootfix/work/festival-ads.html"},{"s":"ebook","c":"marketing","l":"Ebook","t":"Own product","n":"Take Your Shop Online in 7 Days","p":"Shop owners don't know where to start online.","f":"A 19-page ebook with one task per day for seven days.","img":"../rootfix/assets/img/ebook-1.jpg","v":"","live":"","case":"../rootfix/work/ebook.html"},{"s":"whatsapp-broadcasts","c":"marketing","l":"WhatsApp","t":"Concept","n":"Glow Salon WhatsApp Broadcasts","p":"Weekdays are slow at the salon.","f":"Four broadcasts, one per slow day, each with a creative and a one-tap reply.","img":"../rootfix/assets/img/whatsapp-broadcasts-1.jpg","v":"","live":"","case":"../rootfix/work/whatsapp-broadcasts.html"}];
 const M='../portfolio/media/';
-const CLIENTS=[
-{n:'Revanth Autozone',w:'Bhimavaram · Shopify',t:'Live client',img:M+'revanth.jpg',v:M+'revanth.mp4',live:'https://revanthautozone.in',case:'../rootfix/work/revanth-autozone.html',p:'Automatic gates, shutters and glass work — a WhatsApp-led service site on Shopify with local SEO across a 120 km radius, Google reviews and 3D hero renders.',k:['Shopify','Local SEO','WhatsApp leads','Google Ads']},
-{n:'SLNS Properties',w:'Gachibowli, Hyderabad · Real estate',t:'Client',img:M+'slns-noir.jpg',v:M+'slns-noir.mp4',live:'../slns/',case:'../rootfix/work/slns.html',p:'Sri Lakshmi Narasimha Swamy Properties — a premium real estate site in Ivory and Noir themes with a 3D aerial venture flyover and a plot explorer.',k:['Premium theme','3D flyover','Plot explorer','Google Business']},
-{n:'Pet2Door',w:'Guntur · Pet food delivery',t:'Client pitch',img:M+'pet2door.jpg',v:M+'pet2door.mp4',live:'../pet2door/',case:'../rootfix/work/pet2door.html',p:'A delivery site for Guntur pet parents with the full catalogue and WhatsApp ordering, designed in Figma.',k:['Figma','Catalogue','WhatsApp orders']},
-{n:'Palm Grove Enclave',w:'Venture microsite',t:'Client',img:M+'palmgrove.jpg',v:M+'palmgrove.mp4',live:'',case:'',p:'A venture microsite with a 3D flyover and live plot availability, so buyers can see the layout before they visit.',k:['3D flyover','Plot availability','Lead capture']},
-{n:'Summit Peak Roofing',w:'Roofing contractor',t:'Client',img:M+'summit.jpg',v:'',live:'',case:'',p:'A roofing contractor website built to turn local searches into quote requests.',k:['Service site','Quote requests']}
-];
 const PRODUCTS=[
 {n:'RootFix',d:'My digital studio — finds why a business is stuck and fixes it at the root. Multi-page site with case files.',img:'../rootfix/assets/og.jpg',v:'',live:'../rootfix/',k:'Studio'},
 {n:'Levelora Members',d:'A gamified life-upgrade planner: trackers, daily tasks, streaks and a friends-only leaderboard.',img:M+'levelora-app.jpg',v:M+'levelora-app.mp4',live:'',k:'App'},
@@ -454,11 +486,6 @@ const tagCls=t=>/client/i.test(t)?'hot':/own/i.test(t)?'own':/concept/i.test(t)?
 $('#yr').textContent=new Date().getFullYear();
 $('.mq').innerHTML=[...TOOLS,...TOOLS].map(t=>`<span>${t}</span>`).join('');
 
-$('#features').innerHTML=CLIENTS.map((c,i)=>`<article class="feature glass neon rv">
-<div class="fmedia" data-lb="${i}" data-kind="c"><img src="${c.img}" alt="${esc(c.n)} website" loading="lazy">${c.v?`<video src="${c.v}" muted loop playsinline preload="none" aria-hidden="true"></video><span class="play">▶ Watch</span>`:''}</div>
-<div class="fbody"><div class="ftags"><span class="tag hot">${c.t}</span>${c.k.map(k=>`<span class="tag">${k}</span>`).join('')}</div>
-<h3>${esc(c.n)}</h3><p>${esc(c.p)}</p><p class="where mono">${esc(c.w)}</p>
-<div class="links2">${c.live?`<a class="btn btn-neon mag" href="${c.live}" target="_blank" rel="noopener">Visit live ${arrow}</a>`:''}${c.case?`<a class="btn btn-glass mag" href="${c.case}">Case file</a>`:''}</div></div></article>`).join('');
 
 $('#prods').innerHTML=PRODUCTS.map((p,i)=>`<article class="prod glass tilt rv" data-max="7">
 <div class="pm" data-lb="${i}" data-kind="p"><img src="${p.img}" alt="${esc(p.n)}" loading="lazy">${p.v?`<video src="${p.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}</div>
@@ -471,14 +498,18 @@ $('#grid').innerHTML=WORKS.map((w,i)=>`<article class="card" data-i="${i}">
 <div class="cm" data-lb="${i}" data-kind="w"><img src="${w.img}" alt="${esc(w.n)}" loading="lazy">${w.v?`<video data-src="${w.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}<span class="tag ${tagCls(w.t)}">${w.t}</span></div>
 <div class="cb"><span class="cat mono">${w.l}</span><h3>${esc(w.n)}</h3><p>${esc(w.f)}</p>
 <div class="cl">${w.live?`<a href="${w.live}" target="_blank" rel="noopener">Live demo ${arrow}</a>`:''}<a href="${w.case}">Case file ${arrow}</a></div></div></article>`).join('');
-$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('#filters button').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;$$('#grid .card').forEach(c=>c.classList.toggle('out',!inCat(WORKS[c.dataset.i],f)));window.ScrollTrigger&&ScrollTrigger.refresh()});
+let cur='all',open=false;const LIM=()=>innerWidth<640?6:9;
+function applyF(){let n=0,tot=0;$$('#grid .card').forEach(c=>{const ok=inCat(WORKS[c.dataset.i],cur);c.classList.toggle('out',!ok);if(ok){tot++;c.classList.toggle('cut',!open&&++n>LIM())}else c.classList.remove('cut')});
+const m=$('#more');m.parentElement.classList.toggle('hide',open||tot<=LIM());m.textContent=`Show all ${tot} builds`;window.ScrollTrigger&&ScrollTrigger.refresh()}
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('#filters button').forEach(x=>x.classList.toggle('on',x===b));cur=b.dataset.f;open=false;applyF();b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})});
+$('#more').addEventListener('click',()=>{open=true;applyF();$$('#grid .card').forEach(c=>{c.style.opacity=1;c.style.transform='none'})});applyF();
 
 $('#svcs').innerHTML=SVCS.map(([h,p,l,ic],i)=>`<article class="svc glass neon tilt rv" data-max="6"><span class="n mono">0${i+1}</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="url(#ig)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ic}</svg></div><h3>${h}</h3><p>${p}</p><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
 document.body.insertAdjacentHTML('beforeend','<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient></defs></svg>');
 $('#needs').innerHTML=['Website','Shopify store','Web app','AI / WhatsApp bot','Automation','Branding','Ads & SEO'].map((n,i)=>`<input type="checkbox" id="n${i}" value="${n}"><label for="n${i}">${n}</label>`).join('');
 
-const seen=new Set(),uniq=[...CLIENTS.map(c=>c.n),...PRODUCTS.map(p=>p.n),...WORKS.map(w=>w.n)].filter(n=>{const k=n.toLowerCase().replace(/[^a-z]/g,'').replace('properties','');if(seen.has(k))return false;seen.add(k);return true});
-const COUNTS={total:uniq.length,clients:CLIENTS.length,products:PRODUCTS.length+WORKS.filter(w=>w.t==='Own product'&&!PRODUCTS.some(p=>p.n===w.n)).length};
+const seen=new Set(),uniq=[...PRODUCTS.map(p=>p.n),...WORKS.map(w=>w.n)].filter(n=>{const k=n.toLowerCase().replace(/[^a-z]/g,'').replace('properties','');if(seen.has(k))return false;seen.add(k);return true});
+const COUNTS={total:uniq.length,clients:WORKS.filter(w=>w.t==='Client').length,products:PRODUCTS.length+WORKS.filter(w=>w.t==='Own product'&&!PRODUCTS.some(p=>p.n===w.n)).length};
 $$('[data-count]').forEach(el=>el.textContent=COUNTS[el.dataset.count]);
 
 $('#brief').addEventListener('submit',e=>{e.preventDefault();const f=e.target,needs=$$('#needs input:checked').map(i=>i.value);
@@ -486,7 +517,7 @@ const t=`Hi Seshu, I saw your portfolio.\nName: ${f.name.value}\nBusiness: ${f.b
 window.open('https://wa.me/916301521358?text='+encodeURIComponent(t),'_blank','noopener')});
 
 const lb=$('#lb');
-function openLB(kind,i){const d=kind==='c'?CLIENTS[i]:kind==='p'?PRODUCTS[i]:WORKS[i];$('#lbt').textContent=d.n;
+function openLB(kind,i){const d=kind==='p'?PRODUCTS[i]:WORKS[i];$('#lbt').textContent=d.n;
 $('#lbm').innerHTML=d.v?`<video src="${d.v}" poster="${d.img}" controls autoplay muted loop playsinline></video>`:`<img src="${d.img}" alt="${esc(d.n)}">`;
 const l=$('#lbl');if(d.live){l.href=d.live;l.style.display=''}else if(d.case){l.href=d.case;l.textContent='Case file ↗';l.style.display=''}else l.style.display='none';
 if(d.live)l.textContent='Open live ↗';lb.classList.add('on');lenis&&lenis.stop()}
@@ -510,7 +541,15 @@ const cur=$('.cursor');let cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;addEvent
 document.addEventListener('mouseover',e=>cur.classList.toggle('big',!!e.target.closest('a,button,.cm,.fmedia,.pm,label')));
 $$('.mag').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.25}px)`});b.addEventListener('mouseleave',()=>b.style.transform='')})}
 
-const nav=$('.nav');$('.burger').addEventListener('click',()=>nav.classList.toggle('open'));$$('.links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+const nav=$('.nav'),bg=$('.burger'),mm=$('#mmenu');
+function setMenu(o){document.body.classList.toggle('menu-open',o);bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu');mm.setAttribute('aria-hidden',!o);if(lenis)o?lenis.stop():lenis.start()}
+bg.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
+$$('#mmenu a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+const pill=$('.links .pill'),secs=['products','work','services','about','contact'].map(id=>$('#'+id));
+function spy(){const y=innerHeight*.4;let act=null;secs.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<y&&r.bottom>y)act=s.id});
+$$('.links a,.mlinks a').forEach(a=>a.classList.toggle('on',act&&a.getAttribute('href')==='#'+act));
+const a=act&&$(`.links a[href="#${act}"]`);if(a){pill.style.opacity=1;pill.style.left=a.offsetLeft+'px';pill.style.width=a.offsetWidth+'px'}else pill.style.opacity=0}
+addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);
 
 let lenis=null;
 function countUp(){$$('[data-count]').forEach(el=>{const n=COUNTS[el.dataset.count];if(reduce||!window.gsap){el.textContent=n;return}const o={v:0};gsap.to(o,{v:n,duration:1.8,ease:'power3.out',onUpdate:()=>el.textContent=Math.round(o.v)})})}
@@ -518,13 +557,13 @@ function intro(){
 if(!window.gsap||reduce){document.documentElement.classList.add('noanim');countUp();return}
 gsap.registerPlugin(ScrollTrigger);
 if(window.Lenis){lenis=new Lenis({lerp:.1});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
-$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=a.getAttribute('href');if(t.length>1&&$(t)){e.preventDefault();lenis.scrollTo(t,{offset:-90})}else if(t==='#top'){e.preventDefault();lenis.scrollTo(0)}}))}
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=a.getAttribute('href');if(t.length>1&&$(t)){e.preventDefault();lenis.scrollTo(t,{offset:-90,duration:1.2})}else if(t==='#top'){e.preventDefault();lenis.scrollTo(0)}}))}
 const tl=gsap.timeline({defaults:{ease:'expo.out'}});
-tl.from('h1 .ln>span',{yPercent:110,duration:1.3,stagger:.1}).from('.eyebrow,.lead,.ctas,.facts',{y:30,opacity:0,duration:1,stagger:.08},'-=1').from('.idcard',{y:60,opacity:0,rotateY:-18,duration:1.4},'-=1.1').from('header',{y:-80,opacity:0,duration:1},'-=1.2').add(countUp,'-=.9');
+tl.from('h1 .ln>span',{yPercent:110,duration:1.3,stagger:.1}).from('.eyebrow,.lead,.ctas,.facts',{y:30,opacity:0,duration:1,stagger:.08},'-=1').from('.idcard',{y:60,opacity:0,rotateY:-18,duration:1.4},'-=1.1').add(countUp,'-=.9');
 $$('.rv').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}}));
 ScrollTrigger.batch('.card',{start:'top 92%',once:true,onEnter:b=>gsap.from(b,{y:50,opacity:0,duration:1,stagger:.08,ease:'expo.out'})});
 gsap.to('.bigname',{backgroundPosition:'0 0',yPercent:-10,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
-let last=0;ScrollTrigger.create({onUpdate:s=>{const y=s.scroll();$('header').classList.toggle('hide',y>last&&y>400&&!nav.classList.contains('open'));last=y}});
+let last=0;ScrollTrigger.create({onUpdate:s=>{const y=s.scroll();$('header').classList.toggle('hide',y>last&&y>400&&!document.body.classList.contains('menu-open'));last=y;spy()}});
 }
 const bar=$('#loader .bar i'),pc=$('#loader .pc');let prog=0;const tick=setInterval(()=>{prog=Math.min(prog+Math.random()*18,92);bar.style.width=prog+'%';pc.textContent='Loading '+Math.round(prog)+'%'},120);
 function done(){clearInterval(tick);bar.style.width='100%';pc.textContent='Loading 100%';setTimeout(()=>{$('#loader').classList.add('done');intro()},350)}
@@ -541,7 +580,7 @@ const cv=document.getElementById('gl'),hero=document.getElementById('hero');
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,mobile=innerWidth<900;
 let renderer;try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,powerPreference:'high-performance'})}catch(e){cv.remove()}
 if(renderer){
-renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.5:1.75));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
+renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:1.6));renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
 const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,.1,100);cam.position.set(0,0,12);
 const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(),.04).texture;scene.environmentIntensity=.55;
 
