@@ -4,6 +4,7 @@ Portfolio builds by RootFix. Concept projects unless noted.
 
 | # | Project | Live link |
 |---|---|---|
+| | **Moka Seshu portfolio (3D glass)** | https://mokaseshu.github.io/MOKA/seshu/ |
 | | **RootFix website** | https://mokaseshu.github.io/MOKA/rootfix/ |
 | 1 | BrightSmile Dental website | https://mokaseshu.github.io/MOKA/brightsmile-dental/ |
 | 2 | Coastal Builders website | https://mokaseshu.github.io/MOKA/coastal-builders/ |

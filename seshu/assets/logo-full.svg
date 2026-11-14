@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120">
+<defs>
+<linearGradient id="n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
+<linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
+<linearGradient id="d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A3A"/><stop offset="1" stop-color="#2A0E30"/></linearGradient>
+<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="c"><polygon points="60,8 105,34 105,86 60,112 15,86 15,34"/></clipPath>
+</defs>
+<polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#d)" opacity=".9"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#070912" fill-opacity=".72"/>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="url(#g)"/>
+<g clip-path="url(#c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g>
+<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#n)" stroke-width="2.2"/>
+<g fill="none" stroke="url(#n)" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter" filter="url(#glow)">
+<path d="M31 79V41l14 18 14-18v38"/>
+<path d="M90 41H68v19h22v19H66"/>
+</g>
+<circle cx="90" cy="41" r="2.4" fill="#fff"/>
+<g font-family="Unbounded, sans-serif" fill="#EDF1FF"><text x="138" y="62" font-size="38" font-weight="700" letter-spacing="3">MOKA</text><text x="138" y="98" font-size="22" font-weight="400" letter-spacing="12.5" fill="url(#n)">SESHU</text></g></svg>
