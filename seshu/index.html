@@ -479,6 +479,7 @@ $('#needs').innerHTML=['Website','Shopify store','Web app','AI / WhatsApp bot','
 
 const seen=new Set(),uniq=[...CLIENTS.map(c=>c.n),...PRODUCTS.map(p=>p.n),...WORKS.map(w=>w.n)].filter(n=>{const k=n.toLowerCase().replace(/[^a-z]/g,'').replace('properties','');if(seen.has(k))return false;seen.add(k);return true});
 const COUNTS={total:uniq.length,clients:CLIENTS.length,products:PRODUCTS.length+WORKS.filter(w=>w.t==='Own product'&&!PRODUCTS.some(p=>p.n===w.n)).length};
+$$('[data-count]').forEach(el=>el.textContent=COUNTS[el.dataset.count]);
 
 $('#brief').addEventListener('submit',e=>{e.preventDefault();const f=e.target,needs=$$('#needs input:checked').map(i=>i.value);
 const t=`Hi Seshu, I saw your portfolio.\nName: ${f.name.value}\nBusiness: ${f.biz.value||'-'}\nNeed: ${needs.join(', ')||'-'}\n${f.msg.value?'Details: '+f.msg.value:''}`;
