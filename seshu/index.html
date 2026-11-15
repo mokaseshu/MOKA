@@ -104,7 +104,7 @@ h1 .ln>span{display:inline-block}
 
 .idcard{padding:18px;transform-style:preserve-3d;will-change:transform}
 .avatar{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#090B14;transform:translateZ(40px)}
-.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .avatar .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);mix-blend-mode:overlay;pointer-events:none}
 .avatar .sweep{position:absolute;left:0;right:0;height:30%;background:linear-gradient(transparent,rgba(34,230,255,.18),transparent);animation:sweep 4.5s linear infinite;pointer-events:none}
 @keyframes sweep{from{top:-30%}to{top:100%}}
@@ -353,7 +353,7 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 <path d="M146 176h108" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
 <path d="M164 262h72M150 330l50 30 50-30" stroke="url(#avg)" stroke-width="2" fill="none" opacity=".7"/>
 <text x="200" y="430" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="13" letter-spacing="4" fill="#8D95B0">MOKA SESHU</text></svg></div>
-<img id="avimg" src="assets/avatar.jpg" alt="Moka Seshu" onerror="this.remove()">
+<img id="avimg" src="assets/avatar.jpg" srcset="assets/avatar-sm.jpg 568w, assets/avatar.jpg 1136w" sizes="(max-width:900px) 90vw, 420px" alt="Moka Seshu — cyberpunk portrait" fetchpriority="high" onload="document.getElementById('avph').remove()" onerror="this.remove()">
 <div class="scan"></div><div class="sweep"></div><i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
 <div class="hud mono"><span>ID // MS-001</span><span class="grad">ONLINE</span></div>
 </div>
