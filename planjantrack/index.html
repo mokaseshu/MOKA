@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Levelora Members</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#f5f6f2;--surface:#ffffff;--ink:#14201d;--muted:#5a6863;--line:#dfe4de;
+  --accent:#0d7a6a;--accent-ink:#ffffff;--xp:#f2a516;--xp-ink:#241700;--xp-soft:#fdf1d8;--tint:#e6f2ee;--danger:#b84a2f;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1513;--surface:#16201d;--ink:#e9efec;--muted:#9aaba5;--line:#26332f;
+  --accent:#2fb39e;--accent-ink:#06120f;--xp:#f5b53a;--xp-ink:#241700;--xp-soft:#2b2412;--tint:#132a25;--danger:#e0795e;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1513;--surface:#16201d;--ink:#e9efec;--muted:#9aaba5;--line:#26332f;
+  --accent:#2fb39e;--accent-ink:#06120f;--xp:#f5b53a;--xp-ink:#241700;--xp-soft:#2b2412;--tint:#132a25;--danger:#e0795e;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]:not([hidden=until-found i]){display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
+h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+img{max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--xp);outline-offset:2px}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:11px;padding:11px 18px;font-weight:700;background:var(--accent);color:var(--accent-ink);transition:transform .12s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn.xp{background:var(--xp);color:var(--xp-ink)}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;font-weight:600;color:var(--muted)}
+.input{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:transparent}
+
+#login{min-height:100%;display:grid;place-items:center;padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.login-card{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px;display:grid;gap:18px}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.03em}
+.logo i{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-style:normal;font-size:15px}
+.login-card h1{font-size:30px}
+.err{color:var(--danger);font-size:13px;min-height:1em}
+
+.shell{display:grid;grid-template-columns:232px 1fr;min-height:100%}
+.rail{position:sticky;top:0;height:100vh;height:100dvh;border-right:1px solid var(--line);background:var(--surface);padding:22px 14px;display:flex;flex-direction:column;gap:22px}
+.nav{display:grid;gap:4px}
+.nav button{display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:11px 12px;border-radius:10px;font-weight:600;text-align:left;color:var(--muted)}
+.nav button svg{width:20px;height:20px;flex:none}
+.nav button:hover{background:var(--bg);color:var(--ink)}
+.nav button[aria-current="page"]{background:var(--tint);color:var(--accent)}
+.rail-xp{margin-top:auto;padding:14px;border-radius:14px;background:var(--bg);display:grid;gap:8px;font-size:13px}
+.main{min-width:0;padding-block:28px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.page{max-width:1040px;margin:0 auto;display:grid;gap:24px}
+.page-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px}
+.page-head h1{font-size:clamp(26px,3.6vw,36px)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+
+.xpbar{height:10px;border-radius:99px;background:var(--xp-soft);overflow:hidden}
+.xpbar span{display:block;height:100%;background:var(--xp);border-radius:99px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0}
+
+.hero-lvl{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;background:var(--ink);color:var(--bg);border-radius:20px;padding:24px}
+.badge{width:76px;height:76px;border-radius:20px;background:var(--xp);color:var(--xp-ink);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:34px;line-height:1}
+.badge small{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em}
+.hero-lvl .xpbar{background:rgba(255,255,255,.14);height:12px}
+.hero-lvl h2{font-size:26px}
+.hero-stats{display:flex;gap:22px}
+.hero-stats div{display:grid;text-align:right}
+.hero-stats b{font-family:var(--display);font-size:26px;color:var(--xp)}
+.hero-stats span{font-size:12px;opacity:.75}
+
+.today-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.tcard{display:grid;gap:14px;align-content:start}
+.tcard-head{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.tcard-head h3{font-size:18px}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tasks{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.task{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:11px;background:var(--bg);border:1px solid transparent;width:100%;text-align:left}
+.task .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;flex:none;transition:all .15s}
+.task .lbl{flex:1;font-weight:600;min-width:0}
+.task small{font-family:var(--mono);font-weight:700;color:var(--xp);font-size:12px}
+.task.done{background:var(--tint)}
+.task.done .box{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.task.done .lbl{color:var(--muted);text-decoration:line-through}
+.task:hover{border-color:var(--line)}
+.mini-prog{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.mini-prog .xpbar{flex:1;height:6px}
+.iconbtn{border:0;background:transparent;color:var(--muted);padding:4px;border-radius:8px;line-height:0}
+.iconbtn:hover{background:var(--bg);color:var(--danger)}
+
+.empty{text-align:center;padding:44px 22px;display:grid;gap:12px;justify-items:center;border:2px dashed var(--line);border-radius:18px}
+.empty h3{font-size:22px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toolbar .input{max-width:320px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.chip{flex:none;border:1px solid var(--line);background:var(--surface);padding:7px 14px;border-radius:99px;font-weight:600;font-size:13px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cap{font-family:var(--mono);font-size:13px;font-weight:700;padding:7px 12px;border-radius:9px;background:var(--xp-soft)}
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.lcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:space-between;min-width:0}
+.lcard h4{font-size:16px}
+.lcard p{font-size:13px;color:var(--muted)}
+.lcard.on{border-color:var(--accent);background:var(--tint)}
+.more{justify-self:center}
+
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.book{border:0;padding:0;background:transparent;text-align:left;display:grid;gap:10px}
+.cover{aspect-ratio:3/4;max-width:100%;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;font-family:var(--display);font-weight:800;font-size:22px;line-height:1.05;position:relative;overflow:hidden;transition:transform .15s}
+.cover small{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;opacity:.85}
+.cover::after{content:"";position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;border:16px solid rgba(255,255,255,.15)}
+.book:hover .cover{transform:translateY(-3px)}
+.book h4{font-size:15px}
+.book .meta{font-size:12px;color:var(--muted)}
+
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.tool{display:grid;gap:14px;align-content:start}
+.tool h3{font-size:20px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result{padding:14px;border-radius:12px;background:var(--bg);display:grid;gap:4px}
+.result b{font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums}
+.timer{font-family:var(--display);font-weight:800;font-size:64px;text-align:center;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.seg{display:flex;gap:6px;background:var(--bg);padding:4px;border-radius:11px}
+.seg button{flex:1;border:0;background:transparent;padding:8px;border-radius:8px;font-weight:600;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.board{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.brow{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.brow .rk{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--muted)}
+.brow.top .rk{color:var(--xp)}
+.brow.me{border-color:var(--accent);background:var(--tint)}
+.brow .nm{display:flex;align-items:center;gap:10px;min-width:0;font-weight:600}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;flex:none}
+.brow .pts{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
+.split{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start}
+.code{display:flex;gap:8px}
+.code .input{font-family:var(--mono);font-weight:700;letter-spacing:.08em}
+
+.ladder{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.ladder li{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:10px;background:var(--bg);font-weight:600}
+.ladder li.cur{background:var(--xp-soft)}
+.ladder li.lock{color:var(--muted)}
+.ladder small{font-family:var(--mono);font-size:12px}
+
+.tabbar{display:none}
+.lcard.create{border:2px dashed var(--line);background:transparent;place-items:center;text-align:center;align-content:center;gap:10px;min-height:170px}
+.lcard.create .plus{width:44px;height:44px;border-radius:12px;background:var(--tint);color:var(--accent);display:grid;place-items:center;font-size:24px;font-weight:700}
+.ctag{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;padding:2px 7px;border-radius:5px;background:var(--xp-soft);color:var(--ink);margin-left:6px;vertical-align:middle}
+.lc-actions{display:flex;gap:8px}
+.lc-actions .btn{flex:1}
+.iconbtn.edit:hover{color:var(--accent)}
+.cb-rows{display:grid;gap:8px}
+textarea.input{resize:vertical;min-height:96px;line-height:1.5}
+.ai-note{background:var(--xp-soft);padding:10px 14px;border-radius:10px;font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
+.ai-status{font-size:14px;color:var(--muted);min-height:1.4em}
+.ai-status.bad{color:var(--danger)}
+.lcard.create.ai .plus{background:var(--xp-soft);color:var(--ink)}
+.cb-row{display:grid;grid-template-columns:1fr 96px 36px;gap:8px;align-items:center}
+.cb-row .iconbtn:disabled{opacity:.3;cursor:not-allowed}
+.cb-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.check{display:flex;align-items:center;gap:10px;font-weight:600}
+.check input{width:18px;height:18px;accent-color:var(--accent)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;pointer-events:none;transition:all .25s;z-index:60;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast b{color:var(--xp)}
+
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,18,16,.55);display:grid;place-items:center;padding-block:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sheet{background:var(--surface);border-radius:20px;width:100%;max-width:640px;max-height:100%;overflow:auto;padding:28px;display:grid;gap:16px}
+.sheet.sm{max-width:400px}
+.reader h2{font-size:28px}
+.reader h3{font-size:19px;margin-top:6px}
+.reader p{max-width:62ch;color:var(--ink)}
+.reader .toc{display:flex;flex-wrap:wrap;gap:6px}
+.levelup{text-align:center;justify-items:center}
+.levelup .badge{width:96px;height:96px;font-size:44px;animation:pop .6s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .rail{display:none}
+  .main{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .tabbar{display:grid;grid-template-columns:repeat(6,1fr);position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  .tabbar button{border:0;background:transparent;display:grid;justify-items:center;gap:3px;padding:10px 2px 9px;font-size:10px;font-weight:600;color:var(--muted)}
+  .tabbar svg{width:21px;height:21px}
+  .tabbar button[aria-current="page"]{color:var(--accent)}
+  .split{grid-template-columns:1fr}
+  .hero-lvl{grid-template-columns:auto 1fr}
+  .hero-stats{grid-column:1/-1;justify-content:space-between}
+  .hero-stats div{text-align:left}
+  .toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:420px){.row2{grid-template-columns:1fr}.timer{font-size:52px}.sheet{padding:22px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <form class="login-card" id="loginForm" novalidate>
+    <div class="logo"><i>L</i>Levelora</div>
+    <div style="display:grid;gap:6px">
+      <h1>Welcome, member</h1>
+      <p class="muted">Sign in with the email you paid with and the access code from your welcome message.</p>
+    </div>
+    <div class="field"><label for="lgName">Your name</label><input class="input" id="lgName" autocomplete="name" placeholder="Seshu"></div>
+    <div class="field"><label for="lgEmail">Email</label><input class="input" id="lgEmail" type="email" autocomplete="email" placeholder="you@email.com"></div>
+    <div class="field"><label for="lgCode">Access code</label><input class="input mono" id="lgCode" placeholder="LVL-XXXX-XXXX" autocomplete="one-time-code"></div>
+    <p class="err" id="lgErr" role="alert"></p>
+    <button class="btn" type="submit">Enter Levelora</button>
+    <p class="muted" style="font-size:12px">Demo: any email works with code <span class="mono">LVL-DEMO-2999</span></p>
+  </form>
+</div>
+
+<div class="shell" id="app" hidden>
+  <aside class="rail">
+    <div class="logo"><i>L</i>Levelora</div>
+    <nav class="nav" id="nav"></nav>
+    <div class="rail-xp" id="railXp"></div>
+  </aside>
+  <main class="main"><div class="page" id="view"></div></main>
+  <nav class="tabbar" id="tabbar"></nav>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="modal" id="modal" hidden></div>
+
+<script>
+const ICONS={
+today:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>',
+library:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+ebooks:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>',
+tools:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>',
+board:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>',
+profile:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+pen:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+x:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',
+check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'
+};
+const TABS=[["today","Today"],["library","Library"],["ebooks","Ebooks"],["tools","Tools"],["board","Leaderboard"],["profile","Profile"]];
+
+const CATS={
+"Fitness":[["Gym Progress","Log workout","Hit protein goal","Stretch 10 min"],["Daily Steps","Walk 8,000 steps","Take stairs once","Evening walk"],["Home Workout","20-min session","Plank 1 min","Cool down"],["Running Log","Run or jog","Log distance","Hydrate after"],["Yoga Flow","Morning flow","Breathing practice","Note how you feel"],["Strength Split","Main lift","Accessory sets","Log weights"],["Flexibility","Hamstring stretch","Hip openers","Shoulder mobility"],["Cycling","Ride","Log km","Check tyre pressure weekly"],["Push-up Challenge","Do today's reps","Form check","Rest day note"],["Sports Practice","Drill session","Skill focus","Recovery"],["Posture Fix","Wall angels","Screen breaks","Sit tall check"]],
+"Nutrition":[["Meal Planner","Plan tomorrow's meals","Eat a home-cooked meal","No late snacking"],["Water Intake","Drink 8 glasses","Water before meals","Carry a bottle"],["Protein Tracker","Protein at breakfast","Protein at lunch","Protein at dinner"],["Sugar-Free","No added sugar","Fruit instead of sweets","Read one label"],["Veggie Boost","Two veg servings","Try a new vegetable","Salad with lunch"],["Mindful Eating","Eat without phone","Chew slowly","Stop at 80% full"],["Grocery List","Check pantry","Write list","Stick to list"],["Fasting Window","Start window","End window","Log energy"],["Healthy Snacks","Prep snacks","Nuts or fruit","Skip packaged"],["Cooking Practice","Cook one dish","Learn a technique","Clean as you go"],["Tiffin Planner","Pack tomorrow's lunch","Balanced plate","Note what worked"]],
+"Reading":[["Reading Log","Read 20 pages","Note one idea","Log the book"],["Book Notes","Highlight key lines","Write a summary","Share one insight"],["Vocabulary","Learn 5 words","Use one in a sentence","Review yesterday's"],["Article a Day","Read one article","Save the best line","Skim headlines"],["Audiobook","Listen 30 min","Note a takeaway","Pick the next title"],["Telugu Reading","Read one page","Read aloud","Learn new words"],["Classics Club","Read a chapter","Note the theme","Discuss with a friend"],["Study Session","Review notes","Practice questions","Plan next topic"],["Library Visit","Return books","Pick two new","Read in the library"],["Kids Reading","Read together","Ask three questions","Let them choose"],["Speed Reading","Timed reading","Comprehension check","Log WPM"]],
+"Money":[["Budget Tracker","Log every spend","Check category limits","No impulse buys"],["Savings Goal","Move money to savings","Track the balance","Skip one expense"],["Expense Diary","Record cash spends","Record UPI spends","Review tonight"],["Bill Reminder","Check due bills","Pay on time","File the receipt"],["No-Spend Day","Spend nothing extra","Cook at home","Note what you avoided"],["Debt Payoff","Pay installment","Track remaining","Plan extra payment"],["Investing Habit","Read one market note","Review SIP","Learn one term"],["Side Income","Work on side project","Reach one client","Log earnings"],["Subscription Audit","List subscriptions","Cancel one unused","Note savings"],["Family Budget","Share spends","Plan month","Set kids' allowance"],["Festival Budget","Set limit","Track gifts","Track shopping"]],
+"Productivity":[["Daily Planner","Write top 3 tasks","Finish task one","Plan tomorrow"],["Deep Work","90-min focus block","Phone in other room","Log output"],["Inbox Zero","Clear email","Reply to pending","Unsubscribe from one"],["Time Blocking","Block the day","Stick to blocks","Review tonight"],["Pomodoro","Four pomodoros","Short breaks","Log tasks done"],["Weekly Review","Review goals","Clean task list","Plan next week"],["Project Tracker","Move project forward","Update status","Remove a blocker"],["Desk Reset","Clear desk","File papers","Prep for tomorrow"],["Learning Sprint","Study 30 min","Practice","Teach back"],["Meeting Notes","Prep agenda","Take notes","Send action items"],["Screen Time","Under 2 hrs social","App limits on","Grey-scale evening"]],
+"Mind":[["Gratitude Journal","Write 3 good things","Thank someone","Notice a small joy"],["Meditation","10-min sit","Breath focus","Note how you feel"],["Mood Journal","Morning check-in","Evening check-in","Name the feeling"],["Digital Detox","No phone first hour","No phone in bed","One offline activity"],["Sleep Tracker","Bed by 11","Screens off at 10","Wake same time"],["Self-Talk","Catch one negative thought","Reframe it","Write an affirmation"],["Journaling","Free-write 1 page","One lesson today","One goal tomorrow"],["Calm Breaks","Three breathing breaks","Step outside","Stretch"],["Prayer & Reflection","Morning prayer","Evening reflection","Read a verse"],["Kindness","One kind act","Compliment someone","Help without asking"],["Nature Time","20 min outdoors","Notice five things","Sunlight in morning"]],
+"Home":[["Cleaning Rota","15-min tidy","One deep-clean zone","Dishes done"],["Laundry","Wash","Fold","Put away"],["Plant Care","Water plants","Check leaves","Rotate for sun"],["Declutter","Remove 5 items","Donate bag","Clear one drawer"],["Kitchen Reset","Clean counters","Empty sink","Prep breakfast"],["Home Maintenance","Check one repair","Order parts","Fix it"],["Pet Care","Feed on time","Walk","Fresh water"],["Morning Routine","Make bed","Open windows","Quick sweep"],["Evening Routine","Reset living room","Plan meals","Lights out on time"],["Weekend Chores","Groceries","Bathroom clean","Change bedsheets"],["Garden","Weed","Water","Note growth"]],
+"Career":[["Job Search","Apply to 2 roles","Update resume","Follow up once"],["Skill Builder","Practice 30 min","Build something","Share progress"],["Networking","Message one person","Comment thoughtfully","Thank a mentor"],["Interview Prep","Answer 3 questions","Mock interview","Research company"],["Portfolio","Add a project","Improve one piece","Get feedback"],["English Speaking","Speak 10 min","Record yourself","Learn 5 phrases"],["Certification","Study module","Practice test","Review mistakes"],["Freelance Pipeline","Send 3 pitches","Follow up leads","Update rates"],["Personal Brand","Post once","Engage 10 min","Plan next post"],["Work Wins","Log a win","Note feedback","Plan improvement"],["Coding Practice","Solve one problem","Read code","Commit"]],
+"Relationships":[["Family Time","Meal together","Call parents","Plan outing"],["Friend Check-ins","Message a friend","Plan a meetup","Remember birthdays"],["Couple Goals","Ask about their day","Plan date","Say thank you"],["Parenting","Play 20 min","Read together","Praise effort"],["Community","Help a neighbour","Join an event","Volunteer"],["Listening","No interrupting","Ask follow-ups","Summarise back"],["Letters","Write a note","Send it","Keep a copy"],["Elder Care","Check on elders","Medicine reminder","Spend time"],["Celebrations","Note dates","Plan gifts","Send wishes"],["Phone-Free Dinners","Phones away","Talk","Share highlights"],["Conflict Reset","Cool down","Talk calmly","Agree on a step"]],
+"Creativity":[["Drawing","Sketch 15 min","Try a new tool","Share one piece"],["Writing","Write 300 words","Edit yesterday's","Read a writer"],["Music Practice","Practice 20 min","Learn a part","Record"],["Photography","Take 10 photos","Edit one","Study a photo"],["Content Creation","Script","Shoot","Post"],["Language Learning","Lesson","Speak aloud","Review"],["Crafts","Work on project","Learn a stitch","Organise supplies"],["Cooking Experiments","New recipe","Plate nicely","Note changes"],["Idea Journal","Capture 3 ideas","Pick one","Take first step"],["Dance","Practice routine","Learn a move","Record"],["Design Practice","Daily UI","Study a layout","Get feedback"]],
+"Travel":[["Weekend Planner","Pick a place","Book stay","Make packing list"],["Trip Budget","Set budget","Track spends","Compare prices"],["Packing List","Clothes","Documents","Chargers"],["Bucket List","Add a place","Research","Save money for it"],["Road Trip","Route plan","Vehicle check","Stops list"],["Pilgrimage","Plan dates","Book darshan","Pack essentials"],["Travel Journal","Write daily","Save tickets","Best moment"],["Itinerary","Day plan","Bookings","Backup plan"],["Visa & Docs","Check validity","Copies","Apply on time"],["Local Explorer","Visit a new spot","Try local food","Take photos"],["Commute","Leave on time","Podcast","Log time"]],
+"Business":[["Sales Tracker","Contact 5 leads","Follow up","Log sales"],["Content Calendar","Plan posts","Create one","Schedule"],["Client Work","Deliver task","Update client","Invoice"],["Shop Daily","Open on time","Stock check","Count cash"],["Marketing","Run one campaign","Check results","Adjust"],["Customer Care","Reply to queries","Ask for review","Solve one issue"],["Product Launch","Build","Test","Announce"],["Inventory","Count stock","Reorder","Update sheet"],["Finance Log","Record income","Record costs","Check margin"],["WhatsApp Leads","Reply within 1 hr","Send catalogue","Close one deal"],["Team Check-in","Daily huddle","Assign tasks","Review"]]
+};
+const VARIANTS=[["Starter","A simple daily version to build the habit."],["30-Day","Thirty days with a streak to protect."],["Weekly","A lighter weekly rhythm."],["Pro","Higher targets once the basics stick."]];
+const CAT_COL={"Fitness":"#0d7a6a","Nutrition":"#5f8f2a","Reading":"#3d5a9e","Money":"#b07a12","Productivity":"#7a4fa0","Mind":"#2f7f9a","Home":"#9a5b3c","Career":"#2e6a5a","Relationships":"#b04a63","Creativity":"#c0602c","Travel":"#2b7ab0","Business":"#55606e","Personal":"#a8457a"};
+const LIB=[];
+Object.entries(CATS).forEach(([cat,list])=>list.forEach(([name,...tasks],i)=>VARIANTS.forEach(([v,d],j)=>{
+  if(LIB.length<528)LIB.push({id:cat.slice(0,3).toLowerCase()+"-"+i+"-"+j,cat,name:name+" · "+v,base:name,desc:d,tasks:tasks.map((t,k)=>({t,xp:[10,15,20][k]}))});
+})));
+LIB.length=500;
+
+const BOOKS=[
+{id:"b1",title:"The 1% Upgrade",sub:"Small habits, big levels",col:"#0d7a6a",ch:[["Start smaller than feels useful","Pick one habit so small you cannot fail: two push-ups, one page, one glass of water. The goal of week one is to show up, not to perform. Showing up builds the identity; the identity builds the results."],["Stack it on something you already do","Attach the new habit to an existing one. After I brush my teeth, I write my top three tasks. The old habit becomes the trigger, so you never rely on remembering."],["Track it where you can see it","A visible streak is motivation you can hold. Tick the box the moment you finish. Missing once is normal; missing twice starts a new pattern, so protect day two."],["Raise the bar every two weeks","When a habit feels automatic, add 10 percent. Twenty pages becomes twenty-two. This is how levels are earned: slowly, then all at once."]]},
+{id:"b2",title:"Money Level One",sub:"Budgeting for real life",col:"#b07a12",ch:[["Know where it goes","For seven days, record every rupee, including UPI and cash. Do not judge yet. Most people find two or three categories that quietly eat their income."],["Pay yourself first","On salary day, move a fixed amount to savings before you spend anything. Start with 10 percent. Automate it so the decision is made once."],["Give every rupee a job","Split the rest into needs, wants and goals. When a category is empty, it is empty. This turns budgeting from guilt into simple rules."],["Build a three-month cushion","Your first savings target is an emergency fund. It changes how you make decisions, because you stop choosing out of fear."]]},
+{id:"b3",title:"Deep Work Days",sub:"Focus in a noisy world",col:"#7a4fa0",ch:[["Protect one block","Every day, guard one 90-minute block for your most important work. Put the phone in another room. Close every tab you do not need."],["Decide before you start","Write the single outcome for the block on paper. Vague goals invite distraction; a clear finish line pulls you forward."],["Batch the shallow work","Email, messages and small tasks go into two fixed windows a day. Answering instantly feels productive but splits your attention into pieces."],["Shut down on purpose","End each day by writing tomorrow's top three. Your mind lets go when it trusts the plan exists."]]},
+{id:"b4",title:"Fit at Home",sub:"No gym, no excuses",col:"#5f8f2a",ch:[["The 20-minute rule","Twenty focused minutes beats an hour you skip. Squats, push-ups, lunges and planks cover the whole body with no equipment."],["Progress without weights","Slow the tempo, add reps, shorten rest, or move to harder variations. Your body adapts to challenge, not to the price of the equipment."],["Eat to support it","Get protein in every meal: dal, eggs, paneer, curd, chicken. Drink water before you feel thirsty."],["Recovery is training","Sleep seven hours and take one easy day a week. Muscles grow during rest, not during the workout."]]},
+{id:"b5",title:"Calm Mind Daily",sub:"A gentler routine for stress",col:"#2f7f9a",ch:[["Notice before you fix","When stress rises, name it: tight chest, racing thoughts. Naming a feeling gives you a little distance from it."],["Breathe out longer","Breathe in for four counts and out for six. A longer exhale tells your body it is safe. Three rounds is enough to reset."],["Write it down","Two minutes of journaling moves worries from your head to the page, where they look smaller and more solvable."],["Talk to someone","Calm routines help, but they are not a replacement for people. If stress stays heavy for weeks, speak with a trusted person or a professional."]]},
+{id:"b6",title:"Morning Reset",sub:"Win the first hour",col:"#c0602c",ch:[["No phone for 30 minutes","The first thing you see shapes the day. Start with water, light and movement instead of other people's news."],["Move your body","Five minutes of stretching or a short walk wakes up your energy faster than coffee alone."],["Pick the one thing","Ask: what would make today a win? Write it down and start it before noon."],["Prepare the night before","Lay out clothes, pack the bag, set tomorrow's top three. A good morning starts the evening before."]]},
+{id:"b7",title:"Side Income Starter",sub:"Your first ₹10,000 online",col:"#55606e",ch:[["Sell a skill you already have","Writing, design, tutoring, editing, spreadsheets. Start with what people already ask you for help with."],["Make one clear offer","One service, one price, one result. 'I design 10 Instagram posts for ₹2,000' sells better than 'I do design'."],["Reach out every day","Message five potential clients daily. Most will not reply. The few who do become your first reviews."],["Deliver, then ask","Over-deliver on your first jobs and ask for a testimonial and a referral. Reputation compounds faster than ads."]]},
+{id:"b8",title:"Sleep Like a Pro",sub:"Better nights, sharper days",col:"#3d5a9e",ch:[["Same time, every day","A fixed wake-up time, even on weekends, sets your body clock better than any supplement."],["Dim the evening","Lower the lights and screens an hour before bed. Bright light late at night tells your brain it is still day."],["Keep the room cool and dark","A cool, dark, quiet room is the simplest sleep upgrade. Curtains and a fan go a long way."],["Caffeine has a long tail","Stop tea and coffee by early afternoon. Caffeine can stay in your system for many hours."]]}
+];
+
+const TITLES=["Spark","Seed","Sprout","Climber","Builder","Achiever","Pathfinder","Champion","Master","Legend"];
+const EXAMPLE_FRIENDS=[["Ananya R",640,"#b04a63"],["Karthik M",580,"#3d5a9e"],["Divya S",455,"#5f8f2a"],["Rahul P",390,"#c0602c"],["Sneha K",310,"#7a4fa0"],["Vikram T",220,"#2f7f9a"]];
+const MAX_ACTIVE=15;
+const KEY="levelora-app-v1";
+
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const dayShift=(s,n)=>{const d=new Date(s+"T12:00:00");d.setDate(d.getDate()+n);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+
+const fresh=()=>({user:null,active:["fit-0-0","rea-0-0","mon-0-0"],done:{},xpLog:{},totalXp:0,read:{},custom:[],theme:null,invite:"LVL-"+Math.random().toString(36).slice(2,6).toUpperCase()});
+let S=load();
+function load(){try{const r=localStorage.getItem(KEY);if(r)return Object.assign(fresh(),JSON.parse(r))}catch(e){}return fresh()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+const levelOf=xp=>{let l=1;while(xp>=need(l+1))l++;return l};
+const need=l=>l<=1?0:50*(l-1)*l;
+const titleOf=l=>TITLES[Math.min(TITLES.length-1,Math.floor((l-1)/2))];
+const weekXp=()=>{let s=0,t=today();for(let i=0;i<7;i++)s+=S.xpLog[dayShift(t,-i)]||0;return s};
+const streak=()=>{let n=0,t=today();if(!(S.xpLog[t]>0))t=dayShift(t,-1);while(S.xpLog[t]>0){n++;t=dayShift(t,-1)}return n};
+const byId=id=>LIB.find(x=>x.id===id)||S.custom.find(x=>x.id===id);
+const doneKey=(tid,i)=>today()+"|"+tid+"|"+i;
+
+let tab="today",libCat="All",libQ="",libShown=48;
+
+function toast(html){const t=document.getElementById("toast");t.innerHTML=html;t.classList.add("show");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("show"),2200)}
+function openModal(html,cls=""){const m=document.getElementById("modal");m.innerHTML='<div class="sheet '+cls+'" role="dialog" aria-modal="true">'+html+'</div>';m.hidden=false;m.querySelector("button,input")?.focus()}
+function closeModal(){const m=document.getElementById("modal");m.hidden=true;m.innerHTML=""}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal"||e.target.closest("[data-close]"))closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+function gainXp(n){
+  const before=levelOf(S.totalXp);
+  S.totalXp=Math.max(0,S.totalXp+n);
+  S.xpLog[today()]=Math.max(0,(S.xpLog[today()]||0)+n);
+  save();
+  const after=levelOf(S.totalXp);
+  if(after>before){
+    openModal('<div class="levelup" style="display:grid;gap:14px"><div class="badge">'+after+'</div><span class="eyebrow">Level up</span><h2 style="font-size:30px">You are now a '+titleOf(after)+'</h2><p class="muted">'+(need(after+1)-S.totalXp)+' XP to level '+(after+1)+'. Keep the streak alive.</p><button class="btn xp" data-close>Keep going</button></div>',"sm");
+  }else if(n>0)toast('<b>+'+n+' XP</b> · nice work');
+}
+
+function renderNav(){
+  const html=TABS.map(([k,l])=>'<button data-tab="'+k+'"'+(tab===k?' aria-current="page"':'')+'>'+ICONS[k]+'<span>'+l+'</span></button>').join("");
+  document.getElementById("nav").innerHTML=html;
+  document.getElementById("tabbar").innerHTML=html.replace(/Leaderboard/,"Ranks");
+  const l=levelOf(S.totalXp),pct=Math.min(100,(S.totalXp-need(l))/(need(l+1)-need(l))*100);
+  document.getElementById("railXp").innerHTML='<div style="display:flex;justify-content:space-between"><b>Lvl '+l+' · '+titleOf(l)+'</b><span class="mono muted">'+S.totalXp+'</span></div><div class="xpbar"><span style="width:'+pct+'%"></span></div><span class="muted">'+(need(l+1)-S.totalXp)+' XP to next level</span>';
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(b){tab=b.dataset.tab;render();window.scrollTo(0,0)}});
+
+function render(){renderNav();({today:vToday,library:vLibrary,ebooks:vEbooks,tools:vTools,board:vBoard,profile:vProfile})[tab]()}
+
+function vToday(){
+  const l=levelOf(S.totalXp),pct=Math.min(100,(S.totalXp-need(l))/(need(l+1)-need(l))*100);
+  const first=(S.user?.name||"there").split(" ")[0];
+  const hr=new Date().getHours(),greet=hr<12?"Good morning":hr<17?"Good afternoon":"Good evening";
+  let doneCount=0,total=0;
+  const cards=S.active.map(byId).filter(Boolean).map(t=>{
+    const d=t.tasks.filter((_,i)=>S.done[doneKey(t.id,i)]).length;doneCount+=d;total+=t.tasks.length;
+    return '<article class="panel tcard"><div class="tcard-head"><div style="display:grid;gap:4px;min-width:0"><span class="cat" style="color:'+CAT_COL[t.cat]+'">'+t.cat+(t.custom?' · Custom':'')+'</span><h3>'+esc(t.name)+'</h3></div><div style="display:flex">'+(t.custom?'<button class="iconbtn edit" data-edit="'+t.id+'" aria-label="Edit '+esc(t.name)+'">'+ICONS.pen+'</button>':'')+'<button class="iconbtn" data-remove="'+t.id+'" aria-label="Remove '+esc(t.name)+'">'+ICONS.x+'</button></div></div><ul class="tasks">'+t.tasks.map((k,i)=>{const on=S.done[doneKey(t.id,i)];return '<li><button class="task'+(on?' done':'')+'" data-task="'+t.id+'|'+i+'" aria-pressed="'+!!on+'"><span class="box">'+(on?ICONS.check:'')+'</span><span class="lbl">'+esc(k.t)+'</span><small>+'+k.xp+'</small></button></li>'}).join("")+'</ul><div class="mini-prog"><div class="xpbar"><span style="width:'+(d/t.tasks.length*100)+'%"></span></div>'+d+'/'+t.tasks.length+'</div></article>';
+  }).join("");
+  document.getElementById("view").innerHTML=
+  '<div class="page-head"><div style="display:grid;gap:6px"><span class="eyebrow">'+new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"})+'</span><h1>'+greet+', '+esc(first)+'</h1></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn ghost" data-create>'+ICONS.pen+' Create your own</button><button class="btn xp" data-ai>✨ Create with prompt</button><button class="btn" data-tab="library">+ Add tracker</button></div></div>'+
+  '<section class="hero-lvl"><div class="badge"><div style="text-align:center"><small>LVL</small>'+l+'</div></div><div style="display:grid;gap:10px;min-width:0"><h2>'+titleOf(l)+'</h2><div class="xpbar"><span style="width:'+pct+'%"></span></div><span style="font-size:13px;opacity:.8">'+S.totalXp+' XP · '+(need(l+1)-S.totalXp)+' to level '+(l+1)+'</span></div><div class="hero-stats"><div><b>'+streak()+'</b><span>day streak</span></div><div><b>'+doneCount+'/'+total+'</b><span>done today</span></div><div><b>'+weekXp()+'</b><span>XP this week</span></div></div></section>'+
+  (S.active.length?'<div class="page-head"><h2 style="font-size:22px">Today\'s quests</h2><span class="cap">'+S.active.length+'/'+MAX_ACTIVE+' active</span></div><div class="today-grid">'+cards+'</div>':
+  '<div class="empty"><h3>No active trackers yet</h3><p class="muted">Pick up to 15 from the library. Each finished task earns XP.</p><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button class="btn" data-tab="library">Browse 500+ trackers</button><button class="btn ghost" data-create>Create your own</button><button class="btn xp" data-ai>✨ Create with prompt</button></div></div>');
+}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-task]");
+  if(t){const[id,i]=t.dataset.task.split("|");const k=doneKey(id,+i);const xp=byId(id).tasks[+i].xp;
+    if(S.done[k]){delete S.done[k];gainXp(-xp)}else{S.done[k]=1;gainXp(xp)}render();return}
+  const r=e.target.closest("[data-remove]");
+  if(r){const tr=byId(r.dataset.remove);openModal('<h3 style="font-size:22px">Remove this tracker?</h3><p class="muted">'+esc(tr.name)+' leaves your Today list. XP you already earned stays.</p><div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn ghost" data-close>Keep it</button><button class="btn" data-confirm-remove="'+tr.id+'">Remove</button></div>',"sm");return}
+  const cr=e.target.closest("[data-confirm-remove]");
+  if(cr){S.active=S.active.filter(x=>x!==cr.dataset.confirmRemove);save();closeModal();render();toast("Tracker removed");return}
+  const a=e.target.closest("[data-toggle]");
+  if(a){const id=a.dataset.toggle;
+    if(S.active.includes(id)){S.active=S.active.filter(x=>x!==id);toast("Removed from Today")}
+    else if(S.active.length>=MAX_ACTIVE){toast("You have 15 active. Remove one on Today first.");return}
+    else{S.active.push(id);toast("Added to Today")}
+    save();render();return}
+});
+
+function vLibrary(){
+  const q=libQ.trim().toLowerCase();
+  const list=[...S.custom.slice().reverse(),...LIB].filter(t=>(libCat==="All"||(libCat==="Mine"?t.custom:t.cat===libCat))&&(!q||(t.name+" "+t.cat+" "+t.tasks.map(x=>x.t).join(" ")).toLowerCase().includes(q)));
+  document.getElementById("view").innerHTML=
+  '<div class="page-head"><div style="display:grid;gap:6px"><span class="eyebrow">Library</span><h1>500 planners &amp; trackers</h1></div><span class="cap">'+S.active.length+'/'+MAX_ACTIVE+' active</span></div>'+
+  '<div class="toolbar"><input class="input" id="libSearch" type="search" placeholder="Search gym, budget, reading…" value="'+esc(libQ)+'" aria-label="Search trackers"><span class="muted">'+list.length+' found</span></div>'+
+  '<div class="chips" role="group" aria-label="Categories">'+["All","Mine",...Object.keys(CATS),"Personal"].map(c=>'<button class="chip" data-cat="'+c+'" aria-pressed="'+(libCat===c)+'">'+(c==="Mine"?'★ My trackers ('+S.custom.length+')':c)+'</button>').join("")+'</div>'+
+  '<div class="lib">'+((libCat==="All"||libCat==="Mine")&&!q?'<button class="lcard create" data-create><span class="plus">+</span><h4>Build your own tracker</h4><p>Name it, add your own daily tasks and pick the XP for each.</p></button><button class="lcard create ai" data-ai><span class="plus">✨</span><h4>Create with a prompt</h4><p>Describe your goal in one line. Levelora writes the tracker for you.</p></button>':'')+list.slice(0,libShown).map(t=>{const on=S.active.includes(t.id);return '<article class="lcard'+(on?' on':'')+'"><div style="display:grid;gap:6px"><span class="cat" style="color:'+CAT_COL[t.cat]+'">'+t.cat+(t.custom?'<span class="ctag">CUSTOM</span>':'')+'</span><h4>'+esc(t.name)+'</h4><p>'+esc(t.tasks.map(x=>x.t).join(" · "))+'</p></div><div class="lc-actions"><button class="btn sm '+(on?'ghost':'')+'" data-toggle="'+t.id+'">'+(on?'✓ Active · Remove':'+ Add to Today')+'</button>'+(t.custom?'<button class="btn sm ghost" data-edit="'+t.id+'" style="flex:none" aria-label="Edit '+esc(t.name)+'">'+ICONS.pen+'</button>':'')+'</div></article>'}).join("")+'</div>'+
+  (list.length>libShown?'<button class="btn ghost more" id="libMore">Show more ('+(list.length-libShown)+' left)</button>':'')+
+  (!list.length&&libCat==="Mine"?'':!list.length?'<div class="empty"><h3>No trackers match</h3><p class="muted">Try a shorter word, or pick another category.</p></div>':'');
+  const s=document.getElementById("libSearch");
+  s.addEventListener("input",()=>{libQ=s.value;libShown=48;const pos=s.selectionStart;vLibrary();const n=document.getElementById("libSearch");n.focus();n.setSelectionRange(pos,pos)});
+  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{libCat=b.dataset.cat;libShown=48;vLibrary()});
+  document.getElementById("libMore")?.addEventListener("click",()=>{libShown+=48;vLibrary()});
+}
+
+function vEbooks(){
+  document.getElementById("view").innerHTML=
+  '<div class="page-head"><div style="display:grid;gap:6px"><span class="eyebrow">Ebooks</span><h1>Level-up library</h1></div><span class="muted">Finish a book for +50 XP</span></div>'+
+  '<div class="books">'+BOOKS.map(b=>{const r=S.read[b.id]||0;return '<button class="book" data-book="'+b.id+'"><div class="cover" style="background:'+b.col+'"><small>LEVELORA</small><span>'+esc(b.title)+'</span><small>'+b.ch.length+' CHAPTERS</small></div><h4>'+esc(b.title)+'</h4><span class="meta">'+esc(b.sub)+' · '+(r>=b.ch.length?'✓ Finished':r?'Chapter '+r+' of '+b.ch.length:'Not started')+'</span></button>'}).join("")+'</div>';
+}
+function openBook(id,c){
+  const b=BOOKS.find(x=>x.id===id);c=c??Math.min(S.read[id]||0,b.ch.length-1);
+  const[h,p]=b.ch[c];
+  openModal('<div class="reader" style="display:grid;gap:16px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><div style="display:grid;gap:6px"><span class="eyebrow" style="color:'+b.col+'">'+esc(b.title)+'</span><h2>'+esc(h)+'</h2></div><button class="iconbtn" data-close aria-label="Close">'+ICONS.x+'</button></div><div class="toc">'+b.ch.map((_,i)=>'<button class="chip" data-ch="'+id+'|'+i+'" aria-pressed="'+(i===c)+'">Ch '+(i+1)+'</button>').join("")+'</div><p style="font-size:17px;line-height:1.7">'+esc(p)+'</p><div style="display:flex;justify-content:space-between;gap:10px">'+(c>0?'<button class="btn ghost" data-ch="'+id+'|'+(c-1)+'">← Previous</button>':'<span></span>')+(c<b.ch.length-1?'<button class="btn" data-next="'+id+'|'+c+'">Next chapter →</button>':'<button class="btn xp" data-finish="'+id+'">Finish book</button>')+'</div></div>');
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-book]");if(b){openBook(b.dataset.book);return}
+  const c=e.target.closest("[data-ch]");if(c){const[id,i]=c.dataset.ch.split("|");openBook(id,+i);return}
+  const n=e.target.closest("[data-next]");if(n){const[id,i]=n.dataset.next.split("|");S.read[id]=Math.max(S.read[id]||0,+i+1);save();openBook(id,+i+1);return}
+  const f=e.target.closest("[data-finish]");if(f){const id=f.dataset.finish,bk=BOOKS.find(x=>x.id===id);const first=(S.read[id]||0)<bk.ch.length;S.read[id]=bk.ch.length;save();closeModal();if(first)gainXp(50);else toast("Already finished, nice re-read");if(tab==="ebooks")render();else renderNav()}
+});
+
+let timer={mode:25,left:25*60,run:false,h:null};
+function vTools(){
+  document.getElementById("view").innerHTML=
+  '<div class="page-head"><div style="display:grid;gap:6px"><span class="eyebrow">Mini apps</span><h1>Pocket tools</h1></div></div>'+
+  '<div class="tools">'+
+  '<section class="panel tool"><span class="cat">Focus</span><h3>Focus Timer</h3><div class="seg" role="group" aria-label="Session length">'+[25,45,5].map(m=>'<button data-mode="'+m+'" aria-pressed="'+(timer.mode===m)+'">'+(m===5?'Break 5':m+' min')+'</button>').join("")+'</div><div class="timer" id="tmr">'+fmt(timer.left)+'</div><div style="display:flex;gap:10px"><button class="btn" id="tStart" style="flex:1">'+(timer.run?'Pause':'Start')+'</button><button class="btn ghost" id="tReset">Reset</button></div><p class="muted" style="font-size:13px">Finish a focus session for +25 XP.</p></section>'+
+  '<section class="panel tool"><span class="cat">Money</span><h3>Monthly Budget</h3><div class="row2"><div class="field"><label for="bInc">Monthly income</label><input class="input" id="bInc" type="number" inputmode="numeric" value="40000"></div><div class="field"><label for="bNeeds">Needs (rent, bills)</label><input class="input" id="bNeeds" type="number" inputmode="numeric" value="18000"></div><div class="field"><label for="bWants">Wants</label><input class="input" id="bWants" type="number" inputmode="numeric" value="9000"></div><div class="field"><label for="bEmi">EMIs</label><input class="input" id="bEmi" type="number" inputmode="numeric" value="5000"></div></div><div class="result" id="bOut"></div></section>'+
+  '<section class="panel tool"><span class="cat">Savings</span><h3>Goal Planner</h3><div class="field"><label for="gName">Saving for</label><input class="input" id="gName" value="New laptop"></div><div class="row2"><div class="field"><label for="gAmt">Target amount</label><input class="input" id="gAmt" type="number" inputmode="numeric" value="60000"></div><div class="field"><label for="gMon">Months</label><input class="input" id="gMon" type="number" inputmode="numeric" value="8"></div></div><div class="field"><label for="gHave">Already saved</label><input class="input" id="gHave" type="number" inputmode="numeric" value="10000"></div><div class="result" id="gOut"></div></section>'+
+  '<section class="panel tool"><span class="cat">Fitness</span><h3>Water &amp; Protein</h3><div class="row2"><div class="field"><label for="wKg">Body weight (kg)</label><input class="input" id="wKg" type="number" inputmode="numeric" value="68"></div><div class="field"><label for="wAct">Activity</label><select class="input" id="wAct"><option value="0.8">Light</option><option value="1.2" selected>Active</option><option value="1.6">Training hard</option></select></div></div><div class="result" id="wOut"></div><p class="muted" style="font-size:12px">General guide only. Check with a doctor for medical conditions.</p></section>'+
+  '</div>';
+  const calcB=()=>{const v=id=>+document.getElementById(id).value||0;const inc=v("bInc"),left=inc-v("bNeeds")-v("bWants")-v("bEmi");const rate=inc?left/inc*100:0;
+    document.getElementById("bOut").innerHTML='<span class="muted">Left to save each month</span><b style="color:'+(left<0?'var(--danger)':'var(--ink)')+'">'+inr(left)+'</b><span class="muted">'+(left<0?'You are spending more than you earn. Trim wants first.':rate>=20?'Savings rate '+rate.toFixed(0)+'%. Strong.':'Savings rate '+rate.toFixed(0)+'%. Aim for 20%.')+'</span>'};
+  const calcG=()=>{const v=id=>+document.getElementById(id).value||0;const rem=Math.max(0,v("gAmt")-v("gHave")),m=Math.max(1,v("gMon"));
+    document.getElementById("gOut").innerHTML='<span class="muted">Save each month for '+esc(document.getElementById("gName").value||"your goal")+'</span><b>'+inr(rem/m)+'</b><span class="muted">'+inr(rem/m/30)+' a day · '+inr(rem)+' to go</span>'};
+  const calcW=()=>{const kg=+document.getElementById("wKg").value||0,f=+document.getElementById("wAct").value;
+    document.getElementById("wOut").innerHTML='<span class="muted">Daily target</span><b>'+(kg*0.035).toFixed(1)+' L water</b><span class="muted">About '+Math.round(kg*f)+' g protein</span>'};
+  ["bInc","bNeeds","bWants","bEmi"].forEach(i=>document.getElementById(i).oninput=calcB);
+  ["gName","gAmt","gMon","gHave"].forEach(i=>document.getElementById(i).oninput=calcG);
+  ["wKg","wAct"].forEach(i=>document.getElementById(i).oninput=calcW);
+  calcB();calcG();calcW();
+  document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{clearInterval(timer.h);timer={mode:+b.dataset.mode,left:+b.dataset.mode*60,run:false,h:null};vTools()});
+  document.getElementById("tStart").onclick=()=>{
+    if(timer.run){clearInterval(timer.h);timer.run=false}
+    else{timer.run=true;timer.h=setInterval(()=>{timer.left--;const el=document.getElementById("tmr");if(el)el.textContent=fmt(timer.left);
+      if(timer.left<=0){clearInterval(timer.h);const was=timer.mode;timer={mode:was,left:was*60,run:false,h:null};if(was!==5)gainXp(25);else toast("Break over. Back to it.");if(tab==="tools")vTools();renderNav()}},1000)}
+    const b=document.getElementById("tStart");if(b)b.textContent=timer.run?"Pause":"Start"};
+  document.getElementById("tReset").onclick=()=>{clearInterval(timer.h);timer.left=timer.mode*60;timer.run=false;vTools()};
+}
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+
+function vBoard(){
+  const me=[S.user?.name||"You",weekXp(),"var(--accent)",true];
+  const rows=[...EXAMPLE_FRIENDS.map(f=>[...f,false]),me].sort((a,b)=>b[1]-a[1]);
+  document.getElementById("view").innerHTML=
+  '<div class="page-head"><div style="display:grid;gap:6px"><span class="eyebrow">Weekly leaderboard</span><h1>Friends this week</h1></div><span class="muted">Resets every Monday · Top spot wins a free month</span></div>'+
+  '<div class="split"><ol class="board">'+rows.map((r,i)=>'<li class="brow'+(i<3?' top':'')+(r[3]?' me':'')+'"><span class="rk">#'+(i+1)+'</span><span class="nm"><span class="av" style="background:'+r[2]+'">'+esc(r[0].split(" ").map(x=>x[0]).join("").slice(0,2).toUpperCase())+'</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(r[0])+(r[3]?' (you)':'')+'</span></span><span class="pts">'+r[1]+' XP</span></li>').join("")+'</ol>'+
+  '<aside class="panel" style="display:grid;gap:14px"><h3 style="font-size:20px">Invite friends</h3><p class="muted">Share your code. Friends who join show up here and you compete on weekly XP. Your board is private to friends.</p><div class="code"><input class="input" id="inv" readonly value="'+S.invite+'" aria-label="Your invite code"><button class="btn" id="copyInv">Copy</button></div><p class="muted" style="font-size:12px">The friends shown are example players for this preview.</p></aside></div>';
+  document.getElementById("copyInv").onclick=()=>{const i=document.getElementById("inv");const fb=()=>{i.select();toast("Code selected. Copy it from the box.")};try{navigator.clipboard.writeText(i.value).then(()=>toast("Invite code copied"),fb)}catch(e){fb()}};
+}
+
+function vProfile(){
+  const l=levelOf(S.totalXp);
+  const booksDone=BOOKS.filter(b=>(S.read[b.id]||0)>=b.ch.length).length;
+  const stages=TITLES.map((t,i)=>({t,from:i*2+1}));
+  document.getElementById("view").innerHTML=
+  '<div class="page-head"><div style="display:grid;gap:6px"><span class="eyebrow">Profile</span><h1>'+esc(S.user?.name||"Member")+'</h1><span class="muted">'+esc(S.user?.email||"")+' · All-Access Pass</span></div><button class="btn ghost" id="logout">Sign out</button></div>'+
+  '<div class="split"><section class="panel" style="display:grid;gap:14px"><h3 style="font-size:20px">Evolution ladder</h3><ol class="ladder">'+stages.map(s=>{const cur=titleOf(l)===s.t,lock=l<s.from;return '<li class="'+(cur?'cur':lock?'lock':'')+'"><span>'+(lock?'🔒 ':cur?'★ ':'✓ ')+s.t+'</span><small>Level '+s.from+'+</small></li>'}).join("")+'</ol></section>'+
+  '<aside style="display:grid;gap:18px"><section class="panel" style="display:grid;gap:12px"><h3 style="font-size:20px">Your stats</h3>'+
+  [["Total XP",S.totalXp],["Level",l],["Best streak now",streak()+" days"],["Books finished",booksDone+" / "+BOOKS.length],["Custom trackers",S.custom.length],["Active trackers",S.active.length+" / "+MAX_ACTIVE]].map(([k,v])=>'<div style="display:flex;justify-content:space-between"><span class="muted">'+k+'</span><b class="mono">'+v+'</b></div>').join("")+
+  '</section><section class="panel" style="display:grid;gap:12px"><h3 style="font-size:20px">Appearance</h3><div class="seg" role="group" aria-label="Theme">'+[["","System"],["light","Light"],["dark","Dark"]].map(([v,n])=>'<button data-theme-set="'+v+'" aria-pressed="'+((S.theme||"")===v)+'">'+n+'</button>').join("")+'</div><button class="btn ghost" id="resetAll" style="color:var(--danger)">Reset all progress</button></section></aside></div>';
+  document.querySelectorAll("[data-theme-set]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.themeSet||null;applyTheme();save();vProfile()});
+  document.getElementById("logout").onclick=()=>{S.user=null;save();boot()};
+  document.getElementById("resetAll").onclick=()=>openModal('<h3 style="font-size:22px">Reset all progress?</h3><p class="muted">This clears your XP, streaks, trackers and reading progress on this device. It cannot be undone.</p><div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn ghost" data-close>Cancel</button><button class="btn" id="doReset" style="background:var(--danger)">Reset</button></div>',"sm");
+}
+document.addEventListener("click",e=>{if(e.target.id==="doReset"){const u=S.user;S=fresh();S.user=u;save();closeModal();tab="today";render();toast("Progress reset")}});
+
+let draft=null;
+const XP_OPTS=[5,10,15,20,30,50];
+function openBuilder(id){
+  const ex=id&&S.custom.find(x=>x.id===id);
+  draft=ex?{id:ex.id,name:ex.name,cat:ex.cat,desc:ex.desc||"",tasks:ex.tasks.map(t=>({...t})),addNow:false}
+    :{id:null,name:"",cat:"Personal",desc:"",tasks:[{t:"",xp:10},{t:"",xp:15},{t:"",xp:20}],addNow:S.active.length<MAX_ACTIVE};
+  drawBuilder();
+}
+function syncDraft(){
+  const m=document.getElementById("modal");if(!m.querySelector("#cbName"))return;
+  draft.name=m.querySelector("#cbName").value;draft.cat=m.querySelector("#cbCat").value;draft.desc=m.querySelector("#cbDesc").value;
+  draft.tasks=[...m.querySelectorAll(".cb-row")].map(r=>({t:r.querySelector("input").value,xp:+r.querySelector("select").value}));
+  const a=m.querySelector("#cbAddNow");if(a)draft.addNow=a.checked;
+}
+function drawBuilder(err="",focusLast=false){
+  const editing=!!draft.id,full=S.active.length>=MAX_ACTIVE;
+  const note=draft.note?'<div class="ai-note"><span>✨ '+esc(draft.note)+'</span>'+(draft.prompt!=null?'<button type="button" class="btn ghost sm" id="cbReprompt">Change prompt</button>':'')+'</div>':'';
+  const cats=["Personal",...Object.keys(CATS)].map(c=>'<option'+(c===draft.cat?' selected':'')+'>'+c+'</option>').join("");
+  const rows=draft.tasks.map((t,i)=>'<div class="cb-row"><input class="input" id="cbT'+i+'" value="'+esc(t.t)+'" placeholder="Task '+(i+1)+', e.g. '+["Drink 3L water","Practice guitar 20 min","Call a client","Revise 1 chapter","Walk after dinner","No sugar today","Journal 5 lines","Plan tomorrow"][i%8]+'" maxlength="60" aria-label="Task '+(i+1)+'"><select class="input" id="cbX'+i+'" aria-label="XP for task '+(i+1)+'">'+XP_OPTS.map(x=>'<option value="'+x+'"'+(x===t.xp?' selected':'')+'>+'+x+' XP</option>').join("")+'</select><button type="button" class="iconbtn" data-cb-rm="'+i+'" aria-label="Remove task '+(i+1)+'"'+(draft.tasks.length<=1?' disabled':'')+'>'+ICONS.x+'</button></div>').join("");
+  const total=draft.tasks.reduce((s,t)=>s+(t.t.trim()?t.xp:0),0);
+  openModal(
+  '<div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><div style="display:grid;gap:6px"><span class="eyebrow">Custom tracker</span><h2 style="font-size:26px">'+(editing?'Edit your tracker':'Create your own tracker')+'</h2></div><button class="iconbtn" data-close aria-label="Close">'+ICONS.x+'</button></div>'+
+  note+'<div class="field"><label for="cbName">Tracker name</label><input class="input" id="cbName" value="'+esc(draft.name)+'" maxlength="40" placeholder="e.g. Guitar Practice, Exam Prep, Shop Opening"></div>'+
+  '<div class="row2"><div class="field"><label for="cbCat">Category</label><select class="input" id="cbCat">'+cats+'</select></div><div class="field"><label for="cbDesc">What is it for? (optional)</label><input class="input" id="cbDesc" value="'+esc(draft.desc)+'" maxlength="80" placeholder="Pass my exam in March"></div></div>'+
+  '<div style="display:flex;justify-content:space-between;align-items:baseline"><label class="muted" style="font-size:13px;font-weight:600">Daily tasks</label><span class="mono muted" style="font-size:12px">'+draft.tasks.length+'/8</span></div>'+
+  '<div class="cb-rows">'+rows+'</div>'+
+  '<div class="cb-foot"><button type="button" class="btn ghost sm" id="cbAdd"'+(draft.tasks.length>=8?' disabled':'')+'>+ Add task</button><span class="cap" id="cbTotal">Up to +'+total+' XP a day</span></div>'+
+  (editing?'':'<label class="check"><input type="checkbox" id="cbAddNow"'+(draft.addNow&&!full?' checked':'')+(full?' disabled':'')+'> '+(full?'Today is full (15/15). It will wait in My trackers.':'Add to Today right away')+'</label>')+
+  '<p class="err" role="alert">'+esc(err)+'</p>'+
+  '<div class="cb-foot">'+(editing?'<button type="button" class="btn ghost" id="cbDel" style="color:var(--danger)">Delete tracker</button>':'<span></span>')+'<div style="display:flex;gap:10px"><button type="button" class="btn ghost" data-close>Cancel</button><button type="button" class="btn" id="cbSave">'+(editing?'Save changes':'Create tracker')+'</button></div></div>');
+  const m=document.getElementById("modal");
+  const upd=()=>{syncDraft();m.querySelector("#cbTotal").textContent="Up to +"+draft.tasks.reduce((s,t)=>s+(t.t.trim()?t.xp:0),0)+" XP a day"};
+  m.querySelectorAll(".cb-row input,.cb-row select").forEach(el=>el.addEventListener("input",upd));
+  const f=focusLast?m.querySelector("#cbT"+(draft.tasks.length-1)):err?null:m.querySelector("#cbName");f?.focus();
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-create]")){openBuilder();return}
+  const ed=e.target.closest("[data-edit]");if(ed){openBuilder(ed.dataset.edit);return}
+  if(e.target.closest("#cbAdd")){syncDraft();if(draft.tasks.length<8){draft.tasks.push({t:"",xp:10});drawBuilder("",true)}return}
+  const rm=e.target.closest("[data-cb-rm]");if(rm){syncDraft();if(draft.tasks.length>1){draft.tasks.splice(+rm.dataset.cbRm,1);drawBuilder()}return}
+  if(e.target.closest("#cbSave")){
+    syncDraft();
+    const name=draft.name.trim(),tasks=draft.tasks.map(t=>({t:t.t.trim(),xp:t.xp})).filter(t=>t.t);
+    if(!name){drawBuilder("Give your tracker a name.");document.getElementById("cbName").focus();return}
+    if(!tasks.length){drawBuilder("Add at least one daily task.");document.getElementById("cbT0")?.focus();return}
+    const clash=S.custom.find(x=>x.name.toLowerCase()===name.toLowerCase()&&x.id!==draft.id);
+    if(clash){drawBuilder("You already have a tracker called "+clash.name+". Pick another name.");return}
+    const obj={id:draft.id||"my-"+Date.now().toString(36),cat:draft.cat,name,base:name,desc:draft.desc.trim(),tasks,custom:true};
+    if(draft.id){S.custom=S.custom.map(x=>x.id===draft.id?obj:x);toast("Tracker updated")}
+    else{S.custom.push(obj);if(draft.addNow&&S.active.length<MAX_ACTIVE){S.active.push(obj.id);toast("<b>"+esc(name)+"</b> added to Today")}else toast("Saved to My trackers")}
+    save();closeModal();render();return}
+  if(e.target.closest("#cbDel")){syncDraft();const n=draft.name||"this tracker";openModal('<h3 style="font-size:22px">Delete '+esc(n)+'?</h3><p class="muted">It will be removed from My trackers and Today. XP you already earned stays.</p><div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn ghost" id="cbBack">Go back</button><button class="btn" data-cb-del-confirm style="background:var(--danger)">Delete</button></div>',"sm");return}
+  if(e.target.closest("#cbBack")){drawBuilder();return}
+  if(e.target.closest("[data-cb-del-confirm]")){S.custom=S.custom.filter(x=>x.id!==draft.id);S.active=S.active.filter(x=>x!==draft.id);save();closeModal();render();toast("Tracker deleted");return}
+});
+
+let aiLast="";
+const AI_EXAMPLES=["Prepare for my bank exam in 60 days","Lose 5 kg in 3 months with home workouts","Learn guitar, 20 minutes a day","Grow my Instagram page for my saree shop","Save ₹50,000 for a Goa trip by December","Wake up at 5 am and build a morning routine"];
+const SYN={exam:"study revise practice questions notes",study:"review notes practice",revise:"review notes",upsc:"study revise",neet:"study revise",jee:"study revise",bank:"study practice test",weight:"workout meal protein water walk",lose:"workout meal walk sugar",fat:"workout meal walk",gym:"workout lift protein",muscle:"lift protein strength",run:"running jog distance",marathon:"running distance",diet:"meal protein sugar veg",save:"savings money budget",money:"budget savings spend",trip:"travel plan book budget",goa:"travel trip",guitar:"music practice",sing:"music practice",piano:"music practice",instagram:"content post engage brand",youtube:"content script shoot post",shop:"sales customer stock",business:"sales leads marketing",customers:"sales leads",wake:"morning routine sleep",sleep:"sleep bed screens",morning:"morning routine",stress:"meditation breathing journal",anxiety:"meditation breathing",read:"reading pages book",english:"speaking phrases vocabulary",code:"coding problem",coding:"coding problem",job:"apply resume interview",phone:"screen time detox",kids:"parenting read play",water:"water glasses drink",smoke:"habit replace craving",clean:"tidy declutter",house:"tidy chores"};
+const STOP=new Set("i a an the to for of in on my me and with by at is am be want wanna need help please make create tracker planner daily every day days week weeks month months year a's learn".split(" "));
+const NOISE=new Set("kg km minutes minute mins min hours hour hrs hr pages page glasses litres litre l by before till until lose grow prepare save get build start improve become do from into per am pm january february march april may june july august september october november december".split(" "));
+const words=s=>s.toLowerCase().replace(/[^a-z0-9₹\s]/g," ").split(/\s+/).filter(w=>w&&!STOP.has(w));
+const titleCase=s=>s.replace(/\b\w/g,c=>c.toUpperCase());
+function localTracker(prompt){
+  const ws=words(prompt),bag=ws.concat(...ws.map(w=>(SYN[w]||"").split(" "))).filter(Boolean),stems=new Set(bag.map(w=>w.slice(0,5)));
+  let best=null,score=0;
+  Object.entries(CATS).forEach(([cat,list])=>list.forEach(([name,...tasks])=>{
+    const tw=words(name+" "+tasks.join(" ")+" "+cat);let sc=0;
+    tw.forEach(w=>{if(stems.has(w.slice(0,5)))sc+=1});
+    words(name).forEach(w=>{if(stems.has(w.slice(0,5)))sc+=2});
+    if(sc>score){score=sc;best={cat,name,tasks}}
+  }));
+  const subj=ws.filter(w=>!/^[\d₹]/.test(w)&&!NOISE.has(w));
+  const goal=subj.slice(0,2).join(" ")||"my goal";
+  const nums=prompt.match(/(\d+)\s*(minutes?|mins?|hours?|hrs?|pages?|km|kg|days?|glasses|l\b|litres?)/i);
+  const amt=nums?nums[0]:null;
+  let name,cat,tasks;
+  if(best&&score>=3){
+    name=titleCase(subj.length?goal:best.name)+" Tracker";cat=best.cat;
+    tasks=best.tasks.map((t,i)=>({t,xp:[10,15,20][i]}));
+    if(amt&&/min|hour|hr/i.test(amt))tasks.unshift({t:"Practice "+goal+" for "+amt,xp:30});
+    tasks.push({t:"Note today's progress",xp:5});
+  }else{
+    name=titleCase(goal)+" Tracker";cat="Personal";
+    tasks=[{t:"Work on "+goal+(amt&&/min|hour|hr/i.test(amt)?" for "+amt:" for 30 min"),xp:30},{t:"Learn one new thing about "+goal,xp:15},{t:"Write down today's progress",xp:10},{t:"Plan tomorrow's step",xp:10}];
+  }
+  return{name:name.slice(0,40),cat,desc:prompt.slice(0,80),tasks:tasks.slice(0,8)};
+}
+function openAi(text){
+  openModal(
+  '<div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><div style="display:grid;gap:6px"><span class="eyebrow">✨ AI tracker builder</span><h2 style="font-size:26px">Describe what you want to track</h2></div><button class="iconbtn" data-close aria-label="Close">'+ICONS.x+'</button></div>'+
+  '<p class="muted">Write your goal in one or two lines, in English or Telugu. You can edit everything before saving.</p>'+
+  '<div class="field"><label for="aiPrompt">Your goal</label><textarea class="input" id="aiPrompt" maxlength="400" placeholder="e.g. I want to prepare for my group 2 exam in 90 days while working full time">'+esc(text??aiLast)+'</textarea></div>'+
+  '<div style="display:grid;gap:8px"><span class="muted" style="font-size:13px;font-weight:600">Try one</span><div class="chips" style="flex-wrap:wrap">'+AI_EXAMPLES.map(x=>'<button type="button" class="chip" data-ai-ex="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div></div>'+
+  '<p class="ai-status" id="aiStatus" role="status"></p>'+
+  '<div class="cb-foot"><span class="muted" style="font-size:12px">Uses the built-in generator</span><div style="display:flex;gap:10px"><button type="button" class="btn ghost" data-close id="aiCancel">Cancel</button><button type="button" class="btn xp" id="aiGo">✨ Generate tracker</button></div></div>');
+  const ta=document.getElementById("aiPrompt");ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);
+  ta.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.metaKey||e.ctrlKey))document.getElementById("aiGo").click()});
+}
+function toBuilder(t,prompt,note){
+  draft={id:null,name:t.name,cat:t.cat,desc:t.desc,tasks:t.tasks,addNow:S.active.length<MAX_ACTIVE,note,prompt};
+  drawBuilder();
+}
+function runAi(){
+  const ta=document.getElementById("aiPrompt"),st=document.getElementById("aiStatus");
+  const prompt=ta.value.trim();aiLast=prompt;
+  if(prompt.length<3){st.className="ai-status bad";st.textContent="Write a few words about your goal first.";ta.focus();return}
+  toBuilder(localTracker(prompt),prompt,"Made from your prompt. Review the tasks, then create it.");
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("[data-ai]")){openAi();return}
+  const ex=e.target.closest("[data-ai-ex]");if(ex){const ta=document.getElementById("aiPrompt");ta.value=ex.dataset.aiEx;ta.focus();return}
+  if(e.target.closest("#aiGo")){runAi();return}
+  if(e.target.closest("#cbReprompt")){openAi(draft.prompt);return}
+});
+
+function applyTheme(){const r=document.documentElement;if(S.theme)r.setAttribute("data-theme",S.theme);else r.removeAttribute("data-theme")}
+
+document.getElementById("loginForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const name=document.getElementById("lgName").value.trim(),email=document.getElementById("lgEmail").value.trim(),code=document.getElementById("lgCode").value.trim().toUpperCase();
+  const err=document.getElementById("lgErr");
+  if(!name){err.textContent="Enter your name.";return}
+  if(!/^\S+@\S+\.\S+$/.test(email)){err.textContent="Enter a valid email address.";return}
+  if(!/^LVL-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)){err.textContent="Access code looks like LVL-XXXX-XXXX. Check your welcome message.";return}
+  err.textContent="";S.user={name,email};save();boot();toast("Welcome to Levelora, <b>"+esc(name.split(" ")[0])+"</b>");
+});
+
+function boot(){applyTheme();const on=!!S.user;document.getElementById("login").hidden=on;document.getElementById("app").hidden=!on;if(on)render()}
+boot();
+</script>
+</body>
+</html>
