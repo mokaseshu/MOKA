@@ -36,13 +36,21 @@ radial-gradient(45vw 45vw at 70% 95%,rgba(255,61,203,.10),transparent 70%),var(-
 .glass{position:relative;background:linear-gradient(140deg,rgba(255,255,255,.11),rgba(255,255,255,.025) 45%,rgba(255,255,255,.04));border:1px solid var(--line);border-radius:var(--r);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(255,255,255,.03),0 40px 80px -40px rgba(0,0,0,.9);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%)}
 .neon::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;pointer-events:none;transition:opacity .4s}
 
-#loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .7s var(--ease),visibility .7s}
-#loader.done{opacity:0;visibility:hidden}
-#loader .lm{width:96px;animation:pulse 1.4s ease-in-out infinite}
-#loader .bar{width:180px;height:2px;background:var(--line);margin:26px auto 0;border-radius:2px;overflow:hidden}
-#loader .bar i{display:block;height:100%;width:0;background:var(--grad);transition:width .3s}
-#loader .pc{text-align:center;margin-top:12px;color:var(--dim)}
-@keyframes pulse{50%{filter:drop-shadow(0 0 22px rgba(123,108,255,.7));transform:scale(1.04)}}
+#loader{position:fixed;inset:0;z-index:200;background:radial-gradient(70vmax 70vmax at 50% 45%,rgba(123,108,255,.14),transparent 60%),var(--bg);display:flex;align-items:center;justify-content:center;padding:24px;clip-path:inset(0 0 0 0);transition:clip-path 1s cubic-bezier(.76,0,.24,1),visibility 0s linear 1s}
+#loader.done{clip-path:inset(0 0 100% 0);visibility:hidden}
+#loader .lw{display:flex;flex-direction:column;align-items:center;width:min(230px,62vw);transition:opacity .45s var(--ease),transform .8s var(--ease)}
+#loader.done .lw{opacity:0;transform:translateY(-36px)}
+#loader .lm{display:block;width:clamp(76px,22vw,104px);height:auto;margin:0 auto;overflow:visible;animation:pulse 2.4s 1.4s ease-in-out infinite}
+#loader .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.1s var(--ease) forwards}
+#loader .d2{animation-delay:.3s}#loader .d3{animation-delay:.5s}
+#loader .fi{opacity:0;animation:fadein .8s .7s var(--ease) forwards}
+#loader .bar{width:100%;height:2px;background:var(--line);margin-top:30px;border-radius:2px;overflow:hidden}
+#loader .bar i{display:block;height:100%;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:0 50%;transition:transform .35s var(--ease)}
+#loader .lrow{display:flex;justify-content:space-between;width:100%;margin-top:12px;color:var(--dim);font-size:11px}
+#loader .lrow b{font-weight:500;color:var(--text)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadein{to{opacity:1}}
+@keyframes pulse{50%{filter:drop-shadow(0 0 22px rgba(123,108,255,.7))}}
 
 header{position:fixed;top:14px;left:0;right:0;z-index:50;transition:transform .45s var(--ease)}
 header.hide{transform:translateY(-130%)}
@@ -132,23 +140,46 @@ section{position:relative}
 h2{font:800 clamp(34px,5.2vw,78px)/1 Unbounded,sans-serif;letter-spacing:-.03em;margin:0;max-width:900px}
 .shead p{max-width:420px;color:var(--dim);margin:0}
 
-.feature{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(20px,3vw,44px);align-items:center;padding:clamp(14px,1.6vw,22px);margin-bottom:28px}
-.feature:nth-child(even){grid-template-columns:1fr 1.35fr}
-.feature:nth-child(even) .fmedia{order:2}
-.fmedia{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:#0b0d18;cursor:pointer}
-.fmedia img,.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
-.fmedia:hover img,.fmedia:hover video{transform:scale(1.035)}
-.play{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;font-size:13px;background:rgba(5,6,10,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line2)}
-.fbody{padding:clamp(6px,2vw,26px)}
+/* ---------- Selected work (featured showcase) ---------- */
+.feats{display:grid;gap:clamp(22px,3vw,40px)}
+.feat{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,4vw,64px);align-items:center;padding:clamp(12px,1.4vw,18px);border-radius:28px;--ac:#7B6CFF}
+.feat:nth-child(even){grid-template-columns:1fr 1.3fr}
+.feat:nth-child(even) .stage{order:2}
+.stage{position:relative;aspect-ratio:16/11.5;border-radius:20px;overflow:hidden;cursor:pointer;isolation:isolate;
+background:radial-gradient(80% 90% at 15% 0%,color-mix(in srgb,var(--ac) 38%,transparent),transparent 60%),radial-gradient(70% 80% at 100% 100%,rgba(123,108,255,.28),transparent 60%),linear-gradient(160deg,#0f1222,#07080f)}
+.stage::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse at 40% 30%,#000,transparent 75%)}
+.browser{position:absolute;left:7%;top:9%;width:80%;border-radius:12px;overflow:hidden;background:#0b0d18;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.4);transition:transform .9s var(--ease)}
+.bbar{display:flex;align-items:center;gap:6px;height:28px;padding:0 12px;background:linear-gradient(#1a1d2e,#131624);border-bottom:1px solid rgba(255,255,255,.06)}
+.bbar>i{width:8px;height:8px;border-radius:50%;background:#FF5F57;flex:none}.bbar>i:nth-child(2){background:#FEBC2E}.bbar>i:nth-child(3){background:#28C840}
+.bbar .url{flex:1;margin-left:10px;max-width:60%;height:17px;border-radius:6px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:9.5px;letter-spacing:.04em;text-transform:none;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 8px}
+.bshot{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0b0d18}
+.bshot img,.bshot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.bshot video{opacity:0;transition:opacity .5s}.bshot.playing video{opacity:1}
+.phone{position:absolute;right:6%;bottom:-7%;width:23%;aspect-ratio:420/880;border-radius:22px;padding:5px;background:#0d0f1a;border:1px solid rgba(255,255,255,.2);box-shadow:0 30px 60px -18px rgba(0,0,0,.95),inset 0 0 0 1px rgba(255,255,255,.05);transition:transform .9s var(--ease)}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:17px;overflow:hidden;background:#000}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone .scr::before{content:"";position:absolute;top:6px;left:50%;width:30%;height:9px;margin-left:-15%;border-radius:9px;background:#000;z-index:1}
+.stage .open{position:absolute;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;font-size:13px;background:rgba(5,6,10,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line2);z-index:3}
+.stage .open svg{width:14px;height:14px}
+@media (hover:hover){.feat:hover .browser{transform:translateY(-6px) scale(1.012)}.feat:hover .phone{transform:translateY(-14px) rotate(-1.5deg)}}
+.fbody{padding:clamp(4px,1.6vw,20px)}
+.fnum{display:flex;align-items:center;gap:12px;color:var(--faint);margin-bottom:22px}
+.fnum b{font-weight:500;color:var(--text)}
+.fnum::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
 .ftags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.pb{display:grid;gap:16px;margin:0 0 22px}
+.pb div{padding-left:16px;border-left:2px solid var(--line2)}
+.pb div:last-child{border-left-color:var(--ac)}
+.pb dt{color:var(--faint);font-size:10.5px;margin-bottom:4px}
+.pb dd{margin:0;color:var(--dim);font-size:15.5px;line-height:1.55}
+.pb div:last-child dd{color:var(--text)}
+.stack{display:flex;flex-wrap:wrap;gap:6px}
 .tag{padding:6px 12px;border-radius:999px;font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line2);color:var(--dim)}
 .tag.hot{border-color:rgba(61,255,162,.4);color:var(--ok)}
 .tag.own{border-color:rgba(34,230,255,.4);color:var(--cyan)}
 .tag.con{border-color:rgba(255,61,203,.35);color:#FF8BE0}
-.fbody h3{font:700 clamp(26px,3vw,44px)/1.05 Unbounded,sans-serif;letter-spacing:-.02em;margin:0 0 16px}
-.fbody p{color:var(--dim);margin:0 0 12px}
-.fbody .where{font-size:14px;color:var(--faint)}
-.links2{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.fbody h3{font:700 clamp(28px,3.2vw,48px)/1.02 Unbounded,sans-serif;letter-spacing:-.025em;margin:0 0 22px}
+.links2{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
 
 
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}
@@ -157,22 +188,33 @@ h2{font:800 clamp(34px,5.2vw,78px)/1 Unbounded,sans-serif;letter-spacing:-.03em;
 .filters button.on{color:#05060A;background:#EDF1FF;border-color:#EDF1FF}
 .filters button.on sup{color:#05060A}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{border-radius:18px;padding:10px;background:linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.015));border:1px solid var(--line);position:relative;transition:border-color .4s,transform .5s var(--ease),opacity .4s}
-.card:hover{border-color:rgba(123,108,255,.5)}
+.card{display:flex;flex-direction:column;border-radius:20px;padding:10px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.012) 60%);border:1px solid var(--line);position:relative;transition:border-color .4s,transform .5s var(--ease),box-shadow .5s,opacity .4s}
+.card::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .45s;pointer-events:none}
+@media (hover:hover){.card:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(123,108,255,.55)}.card:hover::after{opacity:.8}.card:hover .cm img{transform:scale(1.04)}}
 .card.out,.card.cut{display:none}
-.more{display:flex;justify-content:center;margin-top:36px}
+.more{display:flex;justify-content:center;margin-top:40px}
 .more.hide{display:none}
-.card .cm{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0b0d18;cursor:pointer}
-.card .cm img,.card .cm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.card .cm{position:relative;border-radius:12px;overflow:hidden;background:#0b0d18;cursor:pointer;border:1px solid rgba(255,255,255,.08)}
+.card .cm .bbar{height:22px;padding:0 10px;gap:5px}.card .cm .bbar>i{width:6px;height:6px}
+.card .cm .shot{position:relative;aspect-ratio:16/10;overflow:hidden}
+.card .cm img,.card .cm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.1s var(--ease)}
 .card .cm video{opacity:0;transition:opacity .4s}
 .card .cm.playing video{opacity:1}
-.card .cm .tag{position:absolute;top:10px;left:10px;background:rgba(5,6,10,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.card .cb{padding:16px 8px 8px}
-.card .cat{color:var(--faint);font-size:11px}
-.card h3{font:700 18px/1.2 Unbounded,sans-serif;margin:8px 0 8px}
-.card p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.5}
-.card .cl{display:flex;gap:18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:14px}
-.card .cl a.sub{color:var(--dim)}
+.card .cm .tag{position:absolute;top:32px;left:10px;background:rgba(5,6,10,.66);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.card .cm .pv{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(5,6,10,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line2);transition:transform .4s var(--ease),background .3s}
+.card .cm .pv svg{width:13px;height:13px}
+@media (hover:hover){.card:hover .cm .pv{transform:scale(1.12);background:var(--text);color:#05060A}}
+.card .cb{display:flex;flex-direction:column;flex:1;padding:16px 8px 6px}
+.card .meta{display:flex;justify-content:space-between;align-items:center;color:var(--faint);font-size:10.5px}
+.card .meta .cat{color:var(--cyan)}
+.card h3{font:700 18px/1.25 Unbounded,sans-serif;letter-spacing:-.01em;margin:10px 0 8px}
+.card p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.55}
+.card .cl{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:18px}
+.card .cl a{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid var(--line2);background:rgba(255,255,255,.04);transition:background .3s,color .3s,border-color .3s}
+.card .cl a.pri{background:var(--text);color:#05060A;border-color:var(--text)}
+.card .cl a.sub{color:var(--dim);font-weight:500}
+.card .cl a:hover{border-color:rgba(255,255,255,.4)}
+.card .cl a svg{width:12px;height:12px}
 
 .svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .svc{padding:30px 28px 32px;overflow:hidden}
@@ -215,10 +257,17 @@ textarea{min-height:110px;resize:vertical}
 .needs input:focus-visible+label{outline:2px solid var(--cyan)}
 form .btn{justify-content:center;margin-top:6px}
 
-footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80px,10vw,140px)}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--dim);font-size:14px}
+footer{padding:60px 0 calc(40px + env(safe-area-inset-bottom));border-top:1px solid var(--line);margin-top:clamp(80px,10vw,140px)}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:56px}
+.fcols p{color:var(--dim);margin:16px 0 0;max-width:340px;font-size:15px}
+.fcols h4{margin:0 0 14px;color:var(--faint);font:500 11px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.fcols ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fcols ul a{color:var(--dim);font-size:15px;transition:color .3s}
+.fcols ul a:hover{color:#fff}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:14px 20px;flex-wrap:wrap;color:var(--faint);font-size:13px;padding-top:24px;border-top:1px solid var(--line)}
 .foot a:hover{color:#fff}
-.bigname{font:800 clamp(56px,15.5vw,250px)/.85 Unbounded,sans-serif;letter-spacing:-.05em;text-align:center;margin:0 0 50px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+.bigname{font:800 clamp(30px,10.6vw,190px)/.9 Unbounded,sans-serif;letter-spacing:-.05em;text-align:center;white-space:nowrap;margin:0 0 50px;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none}
+@media (max-width:640px){.fcols{grid-template-columns:1fr 1fr;gap:28px 20px;margin-bottom:40px}.fcols>div:first-child{grid-column:1/-1}}
 
 #lb{position:fixed;inset:0;z-index:150;display:none;place-items:center;background:rgba(3,4,8,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:20px}
 #lb.on{display:grid}
@@ -254,8 +303,9 @@ footer{padding:60px 0 50px;border-top:1px solid var(--line);margin-top:clamp(80p
 .links,.nav>.btn{display:none}.burger{display:block}
 body.menu-open .burger i:first-child{transform:translateY(2.75px) rotate(45deg)}body.menu-open .burger i:last-child{transform:translateY(-2.75px) rotate(-45deg)}
 header{top:10px}.nav{margin-inline:12px;padding:8px 8px 8px 12px}
-.hero-grid,.feature,.feature:nth-child(even),.about,.contact{grid-template-columns:1fr}
-.feature:nth-child(even) .fmedia{order:0}
+.hero-grid,.feat,.feat:nth-child(even),.about,.contact{grid-template-columns:1fr}
+.feat:nth-child(even) .stage{order:0}
+.feat{gap:22px}
 .idcard{max-width:420px;width:100%;margin:0 auto}
 }
 @media (max-width:900px){
@@ -273,14 +323,23 @@ header.hide~main .filters{top:0}
 .card{padding:8px;border-radius:18px}.card .cm{aspect-ratio:16/10}.card .cb{padding:14px 8px 6px}.card h3{font-size:17px}.card p{font-size:14px}.card .cl{font-size:14px}
 .sec{padding-block:80px}.shead{margin-bottom:30px}
 h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ctas .btn{justify-content:center;padding:14px 10px;font-size:14px}.hero-grid{gap:44px}
+.feat{padding:8px;border-radius:22px}.stage{aspect-ratio:1/1;border-radius:16px}
+.browser{left:5%;top:7%;width:84%;border-radius:9px}.bbar{height:22px;padding:0 9px;gap:5px}.bbar>i{width:6px;height:6px}.bbar .url{font-size:8.5px;height:14px;margin-left:6px;max-width:70%}
+.phone{width:33%;right:4%;bottom:-6%;border-radius:18px;padding:4px}.phone .scr{border-radius:14px}.phone .scr::before{height:7px;top:5px}
+.stage .open{left:10px;bottom:10px;padding:7px 11px;font-size:12px}
+.fbody{padding:6px 10px 14px}.fnum{margin-bottom:16px}.fbody h3{font-size:26px;margin-bottom:18px}.pb dd{font-size:15px}
+.links2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}.links2 .btn{justify-content:center;padding:13px 10px;font-size:14px}.links2 .btn:only-child{grid-column:1/-1}
+.card h3{margin-top:8px}.card .cl a{padding:8px 12px}
 .contact{border-radius:18px}.bigname{margin-bottom:30px}.step{border-right:0;margin-right:0;border-bottom:1px solid var(--line);padding-bottom:28px}.facts div{min-width:0;flex:1}.btn{padding:12px 18px}body{font-size:16px}}
+@media (max-width:640px){h1{font-size:clamp(34px,12.2vw,56px)}}
+@media (max-width:389px){.ctas{grid-template-columns:1fr}.links2{grid-template-columns:1fr}.facts{gap:14px}.facts b{font-size:26px}}
 @media (prefers-reduced-motion:reduce){.mq,.avatar .sweep,.dot,#loader .lm{animation:none}}
 </style>
 </head>
 <body>
 <div id="prog"></div><div class="ambient"></div><div class="gridbg"></div><div class="noise"></div><div class="cursor"></div>
 
-<div id="loader"><div><svg class="lm" viewBox="0 0 120 120">
+<div id="loader"><div class="lw"><svg class="lm" viewBox="0 0 120 124" aria-hidden="true">
 <defs>
 <linearGradient id="m1n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
 <linearGradient id="m1g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
@@ -288,17 +347,17 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 <filter id="m1glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <clipPath id="m1c"><polygon points="60,8 105,34 105,86 60,112 15,86 15,34"/></clipPath>
 </defs>
-<polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#m1d)" opacity=".9"/>
+<g class="fi"><polygon points="64,14 109,40 109,92 64,118 19,92 19,40" fill="url(#m1d)" opacity=".9"/>
 <polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="#070912" fill-opacity=".72"/>
 <polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="url(#m1g)"/>
-<g clip-path="url(#m1c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g>
-<polygon points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#m1n)" stroke-width="2.2"/>
+<g clip-path="url(#m1c)"><polygon points="15,34 60,8 105,34 105,46 15,74" fill="#fff" opacity=".07"/></g></g>
+<polygon class="draw" pathLength="1" points="60,8 105,34 105,86 60,112 15,86 15,34" fill="none" stroke="url(#m1n)" stroke-width="2.2"/>
 <g fill="none" stroke="url(#m1n)" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter" filter="url(#m1glow)">
-<path d="M31 79V41l14 18 14-18v38"/>
-<path d="M90 41H68v19h22v19H66"/>
+<path class="draw d2" pathLength="1" d="M31 79V41l14 18 14-18v38"/>
+<path class="draw d3" pathLength="1" d="M90 41H68v19h22v19H66"/>
 </g>
-<circle cx="90" cy="41" r="2.4" fill="#fff"/>
-</svg><div class="bar"><i></i></div><div class="pc mono">Loading 0%</div></div></div>
+<circle class="fi" cx="90" cy="41" r="2.4" fill="#fff"/>
+</svg><div class="bar"><i></i></div><div class="lrow mono"><span>Moka Seshu</span><b class="pc">000</b></div></div></div>
 
 <header><nav class="nav glass">
 <a href="#top" class="brand" aria-label="Moka Seshu home"><svg viewBox="0 0 120 120">
@@ -386,20 +445,25 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 
 
 <section id="work" class="sec wrap">
-<div class="shead"><div><span class="mono">01 / Every build</span><h2 class="rv">The full <span class="grad">archive.</span></h2></div><p class="rv">Every build so far — open the live demo or the case file. Concept work is marked “Concept”: built to show what I'd make for that kind of business.</p></div>
+<div class="shead"><div><span class="mono">01 / Selected work</span><h2 class="rv">Work that <span class="grad">ships.</span></h2></div><p class="rv">Live client sites first, then concept builds that show what I'd make for your kind of business. Each one starts with a real business problem.</p></div>
+<div class="feats" id="feats"></div>
+</section>
+
+<section id="archive" class="sec wrap" style="padding-top:0">
+<div class="shead"><div><span class="mono">02 / Archive</span><h2 class="rv">Every <span class="grad">build.</span></h2></div><p class="rv">Websites, web apps, AI bots, dashboards and marketing work. Open a live demo or the case study. Builds marked “Concept” show what I'd make for that kind of business.</p></div>
 <div class="filters" id="filters"></div>
 <div class="grid" id="grid"></div>
 <div class="more"><button class="btn btn-glass" id="more"></button></div>
 </section>
 
 <section id="services" class="sec wrap">
-<div class="shead"><div><span class="mono">02 / Services</span><h2 class="rv">What I can <span class="grad">build for you.</span></h2></div><p class="rv">One-time builds or full setups. Everything ends in one place: more enquiries on your WhatsApp.</p></div>
+<div class="shead"><div><span class="mono">03 / Services</span><h2 class="rv">What I can <span class="grad">build for you.</span></h2></div><p class="rv">One-time builds or full setups. Everything ends in one place: more enquiries on your WhatsApp.</p></div>
 <div class="svcs" id="svcs"></div><p class="swipe mono">Swipe →</p>
 </section>
 
 <section id="about" class="sec wrap">
 <div class="about">
-<div><span class="mono" style="color:var(--cyan);display:block;margin-bottom:18px">03 / About</span><p class="big rv">A one-person studio with <em class="grad">AI as the team</em> — so you get agency-level work at the speed of one focused builder.</p></div>
+<div><span class="mono" style="color:var(--cyan);display:block;margin-bottom:18px">04 / About</span><p class="big rv">A one-person studio with <em class="grad">AI as the team</em> — so you get agency-level work at the speed of one focused builder.</p></div>
 <div class="txt rv"><p>I'm Moka Seshu, founder of <a href="../rootfix/" style="color:var(--cyan)">RootFix</a>. I build with Claude, Figma, Shopify and GitHub, and I design every project around one question: what is stopping this business from getting customers?</p><p>No office, no layers of staff. You talk to the person who builds your site, and AI handles the heavy lifting so every project ships fast without cutting corners.</p>
 <div class="tools"><span class="chip">Claude</span><span class="chip">Figma</span><span class="chip">GitHub</span><span class="chip">Shopify</span><span class="chip">Three.js</span><span class="chip">GSAP</span><span class="chip">WhatsApp API</span><span class="chip">Google Business</span><span class="chip">Meta Ads</span><span class="chip">Canva</span></div></div>
 </div>
@@ -413,7 +477,7 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 
 <section id="contact" class="wrap">
 <div class="contact glass neon">
-<div class="side"><span class="mono" style="color:var(--cyan)">04 / Contact</span><h2 style="margin-top:18px">Let's build your <span class="grad">next level.</span></h2><p>Tell me about your business and what you need. The form opens WhatsApp with your brief ready to send — I reply personally.</p>
+<div class="side"><span class="mono" style="color:var(--cyan)">05 / Contact</span><h2 style="margin-top:18px">Let's build your <span class="grad">next level.</span></h2><p>Tell me about your business and what you need. The form opens WhatsApp with your brief ready to send — I reply personally.</p>
 <a class="wa mag" href="https://wa.me/916301521358" target="_blank" rel="noopener"><span class="wi"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg></span><span><b>+91 63015 21358</b><span>WhatsApp · replies same day</span></span></a>
 </div>
 <form id="brief">
@@ -429,7 +493,7 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 
 <footer class="wrap">
 <p class="bigname" aria-hidden="true">MOKA SESHU</p>
-<div class="foot"><a href="#top" class="brand"><svg viewBox="0 0 120 120">
+<div class="fcols"><div><a href="#top" class="brand"><svg viewBox="0 0 120 120">
 <defs>
 <linearGradient id="m4n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22E6FF"/><stop offset=".55" stop-color="#7B6CFF"/><stop offset="1" stop-color="#FF3DCB"/></linearGradient>
 <linearGradient id="m4g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/></linearGradient>
@@ -447,7 +511,10 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 <path d="M90 41H68v19h22v19H66"/>
 </g>
 <circle cx="90" cy="41" r="2.4" fill="#fff"/>
-</svg><b>MOKA<span class="grad">SESHU</span></b></a><span>© <span id="yr"></span> Moka Seshu · Founder of <a href="../rootfix/" style="color:var(--cyan)">RootFix</a></span><a href="https://wa.me/916301521358" target="_blank" rel="noopener">WhatsApp ↗</a></div>
+</svg><b>MOKA<span class="grad">SESHU</span></b></a><p>Websites, Shopify stores, web apps and AI bots for businesses in India and worldwide.</p></div>
+<div><h4>Explore</h4><ul><li><a href="#work">Selected work</a></li><li><a href="#archive">Archive</a></li><li><a href="#services">Services</a></li><li><a href="#about">About</a></li></ul></div>
+<div><h4>Connect</h4><ul><li><a href="https://wa.me/916301521358" target="_blank" rel="noopener">WhatsApp ↗</a></li><li><a href="https://github.com/mokaseshu" target="_blank" rel="noopener">GitHub ↗</a></li><li><a href="../rootfix/">RootFix ↗</a></li><li><a href="#contact">Start a project</a></li></ul></div></div>
+<div class="foot"><span>© <span id="yr"></span> Moka Seshu · Founder of <a href="../rootfix/" style="color:var(--cyan)">RootFix</a></span><a href="#top">Back to top ↑</a></div>
 </footer>
 
 <div id="lb" role="dialog" aria-modal="true" aria-label="Project preview"><div class="box glass"><div class="lbh"><b id="lbt"></b><div style="display:flex;gap:10px;align-items:center"><a id="lbl" class="btn btn-glass" target="_blank" rel="noopener">Open live ↗</a><button class="x" aria-label="Close">×</button></div></div><div id="lbm"></div></div></div>
@@ -457,7 +524,14 @@ h1{margin:20px 0}.facts{margin-top:36px}.ctas{display:grid;grid-template-columns
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 const WORKS=[{"s":"coastal-builders","c":"websites","l":"Websites","t":"Concept","n":"Coastal Builders","p":"Customers ask for a quote, then go quiet.","f":"A 15-page site built around proof: project gallery, before/after sliders and a WhatsApp quote form.","img":"../rootfix/assets/work/coastal-builders.jpg","v":"../rootfix/assets/work/coastal-builders.mp4","live":"../coastal-builders/","case":"../rootfix/work/coastal-builders.html"},{"s":"skyline-meadows","c":"stores","l":"Landing page","t":"Concept","n":"Skyline Meadows","p":"Real estate ads bring leads who never planned to buy.","f":"A lead page that asks budget, timing and plot size, then sorts serious buyers to WhatsApp.","img":"../rootfix/assets/work/skyline-meadows.jpg","v":"../rootfix/assets/work/skyline-meadows.mp4","live":"../skyline-meadows/","case":"../rootfix/work/skyline-meadows.html"},{"s":"brightsmile-dental-bot","c":"bots","l":"AI bots","t":"Concept","n":"BrightSmile Dental Bot","p":"The receptionist answers the same questions fifty times a day.","f":"A chat assistant in Telugu and English that answers, then books.","img":"../rootfix/assets/work/brightsmile-dental-bot.jpg","v":"../rootfix/assets/work/brightsmile-dental-bot.mp4","live":"../brightsmile-dental-bot/","case":"../rootfix/work/brightsmile-dental-bot.html"},{"s":"velura-salon-booking","c":"automation","l":"Automation","t":"Concept","n":"Velura Salon Booking","p":"Customers forget appointments and no-shows cost the day's revenue.","f":"Online booking with services, stylist, date and open slots, confirmed on WhatsApp.","img":"../rootfix/assets/work/velura-salon-booking.jpg","v":"../rootfix/assets/work/velura-salon-booking.mp4","live":"../velura-salon-booking/","case":"../rootfix/work/velura-salon-booking.html"},{"s":"gst-invoice-generator","c":"apps","l":"Web apps","t":"Own product","n":"GST Invoice Generator","p":"Shops write GST bills by hand.","f":"Fill the form, get the tax split, download the PDF, share it on WhatsApp.","img":"../rootfix/assets/work/gst-invoice-generator.jpg","v":"../rootfix/assets/work/gst-invoice-generator.mp4","live":"../gst-invoice-generator/","case":"../rootfix/work/gst-invoice-generator.html"},{"s":"andhra-pickles-dashboard","c":"dashboards","l":"Dashboards","t":"Concept","n":"Andhra Pickles Sales Dashboard","p":"The owner doesn't know which pickle sells most.","f":"A sales dashboard: daily orders, top products, monthly revenue and regions.","img":"../rootfix/assets/work/andhra-pickles-dashboard.jpg","v":"../rootfix/assets/work/andhra-pickles-dashboard.mp4","live":"../andhra-pickles-dashboard/","case":"../rootfix/work/andhra-pickles-dashboard.html"},{"s":"brightsmile-dental","c":"websites","l":"Websites","t":"Concept","n":"BrightSmile Dental","p":"The phone is busy during clinic hours and bookings are missed.","f":"A 14-page clinic site with online booking and one-tap WhatsApp on every page.","img":"../rootfix/assets/work/brightsmile-dental.jpg","v":"../rootfix/assets/work/brightsmile-dental.mp4","live":"../brightsmile-dental/","case":"../rootfix/work/brightsmile-dental.html"},{"s":"sri-sai-tuition","c":"websites","l":"Websites","t":"Concept","n":"Sri Sai Tuition Centre","p":"Parents keep calling to ask fees and timings.","f":"A tuition site with a fee table, batch timings, results and one-tap enquiry.","img":"../rootfix/assets/work/sri-sai-tuition.jpg","v":"../rootfix/assets/work/sri-sai-tuition.mp4","live":"../sri-sai-tuition/","case":"../rootfix/work/sri-sai-tuition.html"},{"s":"revanth-autozone","c":"websites","l":"Websites","t":"Client","n":"Revanth Autozone","p":"Gates, shutters, glass work and emergency steps, with no single place to see them.","f":"A WhatsApp-led service site on Shopify, with each service on its own section.","img":"../rootfix/assets/work/revanth-autozone.jpg","v":"../rootfix/assets/work/revanth-autozone.mp4","live":"https://revanthautozone.in","case":"../rootfix/work/revanth-autozone.html"},{"s":"slns","c":"websites","l":"Websites","t":"Client","n":"SLNS Properties","p":"Plots are hard to judge from a brochure PDF.","f":"A real estate site with a 3D aerial hero and a plot explorer.","img":"../rootfix/assets/work/slns.jpg","v":"../rootfix/assets/work/slns.mp4","live":"../slns/","case":"../rootfix/work/slns.html"},{"s":"fitzone-gym","c":"stores","l":"Landing page","t":"Concept","n":"FitZone Gym","p":"The gym gets Instagram views but no sign-ups.","f":"One offer page with a countdown, pricing and a WhatsApp lead form.","img":"../rootfix/assets/work/fitzone-gym.jpg","v":"../rootfix/assets/work/fitzone-gym.mp4","live":"../fitzone-gym/","case":"../rootfix/work/fitzone-gym.html"},{"s":"spice-route-order-bot","c":"bots","l":"AI bots","t":"Concept","n":"Spice Route Order Bot","p":"Phone orders get mixed up at peak time.","f":"An ordering bot with the menu, a live cart and one clean order summary.","img":"../rootfix/assets/work/spice-route-order-bot.jpg","v":"../rootfix/assets/work/spice-route-order-bot.mp4","live":"../spice-route-order-bot/","case":"../rootfix/work/spice-route-order-bot.html"},{"s":"skyline-plots-lead-bot","c":"bots","l":"AI bots","t":"Concept","n":"Skyline Plots Lead Bot","p":"The sales team spends its day on enquiries that go nowhere.","f":"A bot that asks three questions and scores each lead Hot, Warm or Cold.","img":"../rootfix/assets/work/skyline-plots-lead-bot.jpg","v":"../rootfix/assets/work/skyline-plots-lead-bot.mp4","live":"../skyline-plots-lead-bot/","case":"../rootfix/work/skyline-plots-lead-bot.html"},{"s":"coastal-builders-estimator","c":"apps","l":"Web apps","t":"Concept","n":"Construction Cost Estimator","p":"Every caller asks how much it will cost.","f":"An estimator by square feet and quality level, with a quote button.","img":"../rootfix/assets/work/coastal-builders-estimator.jpg","v":"../rootfix/assets/work/coastal-builders-estimator.mp4","live":"../coastal-builders-estimator/","case":"../rootfix/work/coastal-builders-estimator.html"},{"s":"exam-study-planner","c":"apps","l":"Web apps","t":"Own product","n":"Exam Study Planner","p":"Students can't see whether they are on track.","f":"Add subjects and dates, get a timetable with sessions to tick off.","img":"../rootfix/assets/work/exam-study-planner.jpg","v":"../rootfix/assets/work/exam-study-planner.mp4","live":"../exam-study-planner/","case":"../rootfix/work/exam-study-planner.html"},{"s":"countr-shop-billing","c":"apps","l":"Web apps","t":"Own product","n":"Countr Shop Billing","p":"Billing at a kirana counter is slow at rush hour.","f":"Tap products, take cash, UPI or card, send the receipt on WhatsApp.","img":"../rootfix/assets/work/countr-shop-billing.jpg","v":"../rootfix/assets/work/countr-shop-billing.mp4","live":"../countr-shop-billing/","case":"../rootfix/work/countr-shop-billing.html"},{"s":"anjaneya-quotation","c":"apps","l":"Web apps","t":"Client","n":"Quotation Maker","p":"Writing a shutter quotation takes an evening.","f":"A quotation maker with a shutter size calculator and remembered prices.","img":"../rootfix/assets/work/anjaneya-quotation.jpg","v":"../rootfix/assets/work/anjaneya-quotation.mp4","live":"../anjaneya-quotation/","case":"../rootfix/work/anjaneya-quotation.html"},{"s":"quickserve-app","c":"apps","l":"App design","t":"Concept","n":"QuickServe","p":"People can't find a trusted electrician or plumber quickly.","f":"Six mobile screens: search, profile, booking, chat and payment.","img":"../rootfix/assets/work/quickserve-app.jpg","v":"../rootfix/assets/work/quickserve-app.mp4","live":"../quickserve-app/","case":"../rootfix/work/quickserve-app.html"},{"s":"mediremind-app","c":"apps","l":"App design","t":"Concept","n":"MediRemind","p":"Elderly patients forget their medicines.","f":"Five large-text screens with reminders, refills and family alerts.","img":"../rootfix/assets/work/mediremind-app.jpg","v":"../rootfix/assets/work/mediremind-app.mp4","live":"../mediremind-app/","case":"../rootfix/work/mediremind-app.html"},{"s":"tamarind-cafe-kiosk","c":"apps","l":"App design","t":"Concept","n":"Tamarind Café Kiosk","p":"A queue forms at the café counter every rush hour.","f":"A tablet self-order screen with menu, cart and pay.","img":"../rootfix/assets/work/tamarind-cafe-kiosk.jpg","v":"../rootfix/assets/work/tamarind-cafe-kiosk.mp4","live":"../tamarind-cafe-kiosk/","case":"../rootfix/work/tamarind-cafe-kiosk.html"},{"s":"fitzone-fee-desk","c":"dashboards","l":"Dashboards","t":"Concept","n":"FitZone Fee Desk","p":"The gym doesn't know whose fees are due.","f":"A fee tracker with due and overdue lists and one-click WhatsApp reminders.","img":"../rootfix/assets/work/fitzone-fee-desk.jpg","v":"../rootfix/assets/work/fitzone-fee-desk.mp4","live":"../fitzone-fee-desk/","case":"../rootfix/work/fitzone-fee-desk.html"},{"s":"skyline-plots-crm","c":"dashboards","l":"CRM","t":"Concept","n":"Skyline Plots CRM","p":"Leads written in notebooks get forgotten.","f":"A simple CRM: lead stages, follow-up dates and notes.","img":"../rootfix/assets/work/skyline-plots-crm.jpg","v":"../rootfix/assets/work/skyline-plots-crm.mp4","live":"../skyline-plots-crm/","case":"../rootfix/work/skyline-plots-crm.html"},{"s":"andhra-pickles-price-list","c":"brand","l":"Print","t":"Concept","n":"Andhra Pickles Price List","p":"There is no price list to send on WhatsApp.","f":"A two-page A4 price list with Telugu names and a WhatsApp order QR.","img":"../rootfix/assets/work/andhra-pickles-price-list.jpg","v":"../rootfix/assets/work/andhra-pickles-price-list.mp4","live":"../andhra-pickles-price-list/","case":"../rootfix/work/andhra-pickles-price-list.html"},{"s":"brew-bite-qr-menu","c":"brand","l":"QR menu","t":"Concept","n":"Brew & Bite QR Menu","p":"Printed menus get dirty and go out of date.","f":"A mobile QR menu with search, a veg filter and a WhatsApp order cart.","img":"../rootfix/assets/work/brew-bite-qr-menu.jpg","v":"../rootfix/assets/work/brew-bite-qr-menu.mp4","live":"../brew-bite-qr-menu/","case":"../rootfix/work/brew-bite-qr-menu.html"},{"s":"coastal-builders-digital-card","c":"brand","l":"Digital card","t":"Concept","n":"Coastal Builders Digital Card","p":"The owner hands out a bare phone number.","f":"A digital visiting card with contact actions, services and recent projects.","img":"../rootfix/assets/work/coastal-builders-digital-card.jpg","v":"../rootfix/assets/work/coastal-builders-digital-card.mp4","live":"../coastal-builders-digital-card/","case":"../rootfix/work/coastal-builders-digital-card.html"},{"s":"seo-audit","c":"marketing","l":"SEO","t":"Concept","n":"BrightSmile SEO Audit","p":"The clinic doesn't appear for dentist searches nearby.","f":"A three-page audit: what is wrong, 18 keywords and five rewritten titles.","img":"../rootfix/assets/img/seo-audit-1.jpg","v":"","live":"","case":"../rootfix/work/seo-audit.html"},{"s":"google-profile","c":"marketing","l":"Google profile","t":"Concept","n":"Spice Route Google Profile","p":"The Maps listing has no photos and few reviews.","f":"A complete Google Business Profile, shown before and after, with four posts.","img":"../rootfix/assets/img/google-profile-1.jpg","v":"","live":"","case":"../rootfix/work/google-profile.html"},{"s":"meta-ads","c":"marketing","l":"Ads","t":"Concept","n":"FitZone Meta Ads Plan","p":"The gym boosts posts and gets nothing back.","f":"A 21-day campaign plan: audience, budget and three ads with copy.","img":"../rootfix/assets/img/meta-ads-1.jpg","v":"","live":"","case":"../rootfix/work/meta-ads.html"},{"s":"festival-ads","c":"marketing","l":"Ads","t":"Concept","n":"Andhra Pickles Festival Ads","p":"The shop can't reach customers outside the district.","f":"Festival sale creatives and a carousel that ends on shipping across India.","img":"../rootfix/assets/img/festival-ads-1.jpg","v":"","live":"","case":"../rootfix/work/festival-ads.html"},{"s":"ebook","c":"marketing","l":"Ebook","t":"Own product","n":"Take Your Shop Online in 7 Days","p":"Shop owners don't know where to start online.","f":"A 19-page ebook with one task per day for seven days.","img":"../rootfix/assets/img/ebook-1.jpg","v":"","live":"","case":"../rootfix/work/ebook.html"},{"s":"whatsapp-broadcasts","c":"marketing","l":"WhatsApp","t":"Concept","n":"Glow Salon WhatsApp Broadcasts","p":"Weekdays are slow at the salon.","f":"Four broadcasts, one per slow day, each with a creative and a one-tap reply.","img":"../rootfix/assets/img/whatsapp-broadcasts-1.jpg","v":"","live":"","case":"../rootfix/work/whatsapp-broadcasts.html"}].filter(w=>w.t!=='Own product');
+WORKS.splice(2,0,{"s":"kapoor-iyer-estates","c":"websites","l":"Websites","t":"Concept","n":"Kapoor & Iyer Estates","p":"Luxury buyers judge an agency by its website before they ever call.","f":"A cinematic luxury real estate site: film hero, filterable listings, neighbourhood guides and a private-viewing form.","img":"assets/work/kapoor-iyer.jpg","v":"","live":"https://mokaseshu.github.io/kapoor-iyer-estates/","case":"https://github.com/mokaseshu/kapoor-iyer-estates","caseLabel":"Source code"});
 const M='../portfolio/media/';
+// Selected work: the four builds shown large, with desktop + phone mockups.
+const FEATS=[
+{s:'revanth-autozone',url:'revanthautozone.in',m:'assets/work/revanth-autozone-m.jpg',ac:'#F5A524',kind:'Shopify website',stack:['Shopify','Custom sections','WhatsApp quotes','Local SEO']},
+{s:'slns',url:'slns · plotted ventures',m:'assets/work/slns-m.jpg',ac:'#C9A86A',kind:'Real estate website',stack:['Three.js','3D aerial flyover','Plot explorer','Site-visit booking']},
+{s:'kapoor-iyer-estates',url:'kapoor-iyer-estates',m:'assets/work/kapoor-iyer-m.jpg',ac:'#B8955A',kind:'Luxury real estate',stack:['Video hero','Listing filters','Neighbourhood guides','GSAP motion']},
+{s:'coastal-builders',url:'coastal-builders',m:'../rootfix/assets/work/coastal-builders-m.jpg',ac:'#FF7A1A',kind:'Construction website',stack:['15 pages','Before/after sliders','Project gallery','WhatsApp quote form']}];
 const SVCS=[
 ['Websites','Premium, fast business sites that turn visitors into WhatsApp enquiries.',['Business sites','Landing pages','3D & motion','SEO-ready'],'<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/>'],
 ['Shopify stores','Stores and service sites on Shopify, set up end to end with reviews and payments.',['Store setup','Custom theme','Reviews','Domain & DNS'],'<path d="M5 7h14l-1.5 12h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/>'],
@@ -481,11 +555,27 @@ $('.mq').innerHTML=[...TOOLS,...TOOLS].map(t=>`<span>${t}</span>`).join('');
 const cats=[['all','All'],['client','Client work'],['websites','Websites'],['stores','Landing pages'],['apps','Web apps'],['bots','AI bots'],['automation','Automation'],['dashboards','Dashboards'],['brand','Brand & print'],['marketing','Marketing']];
 const inCat=(w,c)=>c==='all'||(c==='client'?w.t==='Client':w.c===c);
 $('#filters').innerHTML=cats.map(([k,l],i)=>`<button class="${i?'':'on'}" data-f="${k}">${l}<sup>${WORKS.filter(w=>inCat(w,k)).length}</sup></button>`).join('');
+const bbar=u=>`<div class="bbar"><i></i><i></i><i></i>${u?`<span class="url mono">${esc(u)}</span>`:''}</div>`;
+const caseLbl=w=>w.caseLabel||'Case study';
+const ext=u=>/^https?:/.test(u)?' target="_blank" rel="noopener"':'';
 $('#grid').innerHTML=WORKS.map((w,i)=>`<article class="card" data-i="${i}">
-<div class="cm" data-lb="${i}" data-kind="w"><img src="${w.img}" alt="${esc(w.n)}" loading="lazy">${w.v?`<video data-src="${w.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}<span class="tag ${tagCls(w.t)}">${w.t}</span></div>
-<div class="cb"><span class="cat mono">${w.l}</span><h3>${esc(w.n)}</h3><p>${esc(w.f)}</p>
-<div class="cl">${w.live?`<a href="${w.live}" target="_blank" rel="noopener">Live demo ${arrow}</a>`:''}<a href="${w.case}" class="sub">Case file ${arrow}</a></div></div></article>`).join('');
-let cur='all',open=false;const LIM=()=>innerWidth<640?5:9;
+<div class="cm" data-lb="${i}" data-kind="w" role="button" tabindex="0" aria-label="Preview ${esc(w.n)}">${bbar('')}<div class="shot"><img src="${w.img}" alt="${esc(w.n)} — screenshot" loading="lazy" decoding="async">${w.v?`<video data-src="${w.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}</div><span class="tag ${tagCls(w.t)}">${w.t}</span><span class="pv" aria-hidden="true">${w.v?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12h16M12 4v16"/></svg>'}</span></div>
+<div class="cb"><div class="meta mono"><span class="cat">${w.l}</span><span>${String(i+1).padStart(2,'0')}</span></div><h3>${esc(w.n)}</h3><p>${esc(w.f)}</p>
+<div class="cl">${w.live?`<a class="pri" href="${w.live}"${ext(w.live)}>Live demo ${arrow}</a>`:''}${w.case?`<a href="${w.case}"${ext(w.case)} class="sub">${caseLbl(w)} ${arrow}</a>`:''}</div></div></article>`).join('');
+const play='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+$('#feats').innerHTML=FEATS.map((f,k)=>{const i=WORKS.findIndex(w=>w.s===f.s);if(i<0)return'';const w=WORKS[i];
+return `<article class="feat glass" style="--ac:${f.ac}">
+<div class="stage" data-lb="${i}" role="button" tabindex="0" aria-label="Preview ${esc(w.n)}">
+<div class="browser">${bbar(f.url)}<div class="bshot"><img src="${w.img}" alt="${esc(w.n)} — desktop" loading="lazy" decoding="async">${w.v?`<video data-src="${w.v}" muted loop playsinline preload="none" aria-hidden="true"></video>`:''}</div></div>
+<div class="phone"><div class="scr"><img src="${f.m}" alt="${esc(w.n)} — mobile" loading="lazy" decoding="async"></div></div>
+<span class="open">${w.v?play+'Watch preview':'View larger'}</span></div>
+<div class="fbody"><div class="fnum mono"><b>${String(k+1).padStart(2,'0')}</b>/ ${String(FEATS.length).padStart(2,'0')}</div>
+<div class="ftags"><span class="tag ${tagCls(w.t)}">${w.t==='Client'?'Client · Live':w.t}</span><span class="tag">${f.kind}</span></div>
+<h3>${esc(w.n)}</h3>
+<dl class="pb"><div><dt class="mono">The problem</dt><dd>${esc(w.p)}</dd></div><div><dt class="mono">What I built</dt><dd>${esc(w.f)}</dd></div></dl>
+<div class="stack">${f.stack.map(s=>`<span class="chip">${s}</span>`).join('')}</div>
+<div class="links2">${w.live?`<a class="btn btn-neon" href="${w.live}"${ext(w.live)}>Visit site ${arrow}</a>`:''}${w.case?`<a class="btn btn-glass" href="${w.case}"${ext(w.case)}>${caseLbl(w)}</a>`:''}</div></div></article>`}).join('');
+let cur='all',open=false;const LIM=()=>innerWidth<640?6:9;
 function applyF(){let n=0,tot=0;$$('#grid .card').forEach(c=>{const ok=inCat(WORKS[c.dataset.i],cur);c.classList.toggle('out',!ok);if(ok){tot++;c.classList.toggle('cut',!open&&++n>LIM())}else c.classList.remove('cut')});
 const m=$('#more');m.parentElement.classList.toggle('hide',open||tot<=LIM());m.textContent=`Show all ${tot} builds`;window.ScrollTrigger&&ScrollTrigger.refresh()}
 $('#filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('#filters button').forEach(x=>x.classList.toggle('on',x===b));cur=b.dataset.f;open=false;applyF();b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})});
@@ -517,6 +607,11 @@ function hoverVideo(sel){$$(sel).forEach(m=>{const v=m.querySelector('video');if
 const on=()=>{if(v.dataset.src&&!v.src)v.src=v.dataset.src;v.play().then(()=>m.classList.add('playing')).catch(()=>{})},off=()=>{v.pause();m.classList.remove('playing')};
 if(fine){m.addEventListener('mouseenter',on);m.addEventListener('mouseleave',off)}})}
 hoverVideo('.card .cm');
+// Featured previews play only while on screen (all devices), one at a time.
+if(!reduce&&'IntersectionObserver' in window){const fio=new IntersectionObserver(es=>es.forEach(en=>{const b=en.target,v=b.querySelector('video');if(!v)return;
+if(en.isIntersecting){if(v.dataset.src&&!v.src)v.src=v.dataset.src;v.play().then(()=>b.classList.add('playing')).catch(()=>{})}else{v.pause();b.classList.remove('playing')}}),{threshold:.45});
+$$('.bshot').forEach(b=>fio.observe(b))}
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-lb][role=button]')){e.preventDefault();openLB('w',+e.target.dataset.lb)}});
 if(!fine&&!reduce){
 let curV=null;const io=new IntersectionObserver(es=>{es.forEach(en=>{const c=en.target,v=c.querySelector('video');if(en.isIntersecting&&en.intersectionRatio>.75){$$('.card.live').forEach(x=>x!==c&&x.classList.remove('live'));c.classList.add('live');if(v){if(curV&&curV!==v){curV.pause();curV.parentElement.classList.remove('playing')}if(v.dataset.src&&!v.src)v.src=v.dataset.src;v.play().then(()=>{v.parentElement.classList.add('playing');curV=v}).catch(()=>{})}}else if(v&&!en.isIntersecting){v.pause();v.parentElement.classList.remove('playing');c.classList.remove('live')}})},{threshold:[0,.75]});
 $$('#grid .card').forEach(c=>io.observe(c));
@@ -538,7 +633,8 @@ function setMenu(o){document.body.classList.toggle('menu-open',o);bg.setAttribut
 bg.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
 $$('#mmenu a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 const pill=$('.links .pill'),secs=['work','services','about','contact'].map(id=>$('#'+id));
-function spy(){const y=innerHeight*.4;let act=null;secs.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<y&&r.bottom>y)act=s.id});
+secs.splice(1,0,$('#archive'));
+function spy(){const y=innerHeight*.4;let act=null;secs.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<y&&r.bottom>y)act=s.id});if(act==='archive')act='work';
 $$('.links a,.mlinks a').forEach(a=>a.classList.toggle('on',act&&a.getAttribute('href')==='#'+act));
 const a=act&&$(`.links a[href="#${act}"]`);if(a){pill.style.opacity=1;pill.style.left=a.offsetLeft+'px';pill.style.width=a.offsetWidth+'px'}else pill.style.opacity=0}
 addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);
@@ -555,6 +651,8 @@ tl.from('h1 .ln>span',{yPercent:110,duration:1.3,stagger:.1}).from('.eyebrow,.le
 $$('.rv').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}}));
 ScrollTrigger.batch('.card',{start:'top 92%',once:true,onEnter:b=>{gsap.from(b,{y:60,opacity:0,duration:1.1,stagger:.1,ease:'expo.out'});b.forEach((c,k)=>{gsap.fromTo(c.querySelector('.cm'),{clipPath:'inset(18% 8% 18% 8% round 12px)'},{clipPath:'inset(0% 0% 0% 0% round 12px)',duration:1.3,delay:k*.1,ease:'expo.out'});gsap.fromTo(c.querySelector('.cm img'),{scale:1.25},{scale:1,duration:1.6,delay:k*.1,ease:'expo.out'})})}});
 gsap.to('#prog',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:.3}});
+$$('.feat').forEach(f=>{const t=gsap.timeline({defaults:{ease:'expo.out'},scrollTrigger:{trigger:f,start:'top 82%',once:true}});
+t.from(f,{y:70,opacity:0,duration:1.2}).from(f.querySelector('.browser'),{y:50,opacity:0,duration:1.3},'-=.95').from(f.querySelector('.phone'),{y:120,rotate:6,opacity:0,duration:1.4},'-=1.1').from(f.querySelectorAll('.fbody>*'),{y:26,opacity:0,duration:1,stagger:.07},'-=1.2')});
 $$('h2').forEach(h=>{const w=[];h.childNodes.forEach(n=>{if(n.nodeType===3){n.textContent.split(/(\s+)/).forEach(s=>w.push(/^\s+$/.test(s)||!s?document.createTextNode(s):Object.assign(document.createElement('span'),{className:'wd',innerHTML:'<i>'+s+'</i>'})))}else{const s=document.createElement('span');s.className='wd';n.classList.add('wdi');const i=document.createElement('i');i.appendChild(n.cloneNode(true));s.appendChild(i);w.push(s)}});h.textContent='';w.forEach(x=>h.appendChild(x));h.classList.remove('rv');h.style.opacity=1;h.style.transform='none';
 gsap.from(h.querySelectorAll('.wd>i'),{yPercent:115,rotate:4,duration:1.1,stagger:.07,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 88%',once:true}})});
 $$('.step').forEach(s=>gsap.to(s,{'--p':1,ease:'none',scrollTrigger:{trigger:s,start:'top 90%',end:'top 55%',scrub:true}}));
@@ -562,10 +660,13 @@ gsap.to('.idcard .avatar',{yPercent:-4,ease:'none',scrollTrigger:{trigger:'#hero
 gsap.to('.bigname',{backgroundPosition:'0 0',yPercent:-10,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
 let last=0;ScrollTrigger.create({onUpdate:s=>{const y=s.scroll();$('header').classList.toggle('hide',y>last&&y>400&&!document.body.classList.contains('menu-open'));last=y;spy()}});
 }
-const bar=$('#loader .bar i'),pc=$('#loader .pc');let prog=0;const tick=setInterval(()=>{prog=Math.min(prog+Math.random()*18,92);bar.style.width=prog+'%';pc.textContent='Loading '+Math.round(prog)+'%'},120);
-function done(){clearInterval(tick);bar.style.width='100%';pc.textContent='Loading 100%';setTimeout(()=>{$('#loader').classList.add('done');intro()},350)}
+const bar=$('#loader .bar i'),pc=$('#loader .pc'),pad3=n=>String(Math.round(n)).padStart(3,'0');let prog=0;
+const setP=p=>{bar.style.transform=`scaleX(${p/100})`;pc.textContent=pad3(p)};
+const tick=setInterval(()=>{prog=Math.min(prog+Math.random()*14,90);setP(prog)},110);
+const t0=performance.now(),MINT=reduce?0:1300;
+function done(){clearInterval(tick);setP(100);setTimeout(()=>{$('#loader').classList.add('done');setTimeout(intro,120)},Math.max(380,MINT-(performance.now()-t0)))}
 let finished=false;const fin=()=>{if(!finished){finished=true;done()}};
-Promise.all([document.fonts.ready,new Promise(r=>addEventListener('load',r))]).then(fin);setTimeout(fin,3500);
+Promise.all([document.fonts.ready,new Promise(r=>document.readyState==='complete'?r():addEventListener('load',r))]).then(fin);setTimeout(fin,4000);
 </script>
 
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
@@ -595,14 +696,14 @@ const bg=new THREE.Mesh(new THREE.PlaneGeometry(34,20),bgMat);bg.position.z=-6;s
 const glass=new THREE.MeshPhysicalMaterial({color:0xffffff,metalness:0,roughness:.03,transmission:1,thickness:1.1,ior:1.5,clearcoat:1,clearcoatRoughness:.04,iridescence:.85,iridescenceIOR:1.35,attenuationColor:new THREE.Color(0x8F7BFF),attenuationDistance:2.2,transparent:true,opacity:.92});
 const group=new THREE.Group();scene.add(group);
 const hex=new THREE.Mesh(new THREE.CylinderGeometry(1.9,1.9,.7,6,1),glass);hex.rotation.x=Math.PI/2;
-const hexW=new THREE.Group();if(mobile)hexW.scale.setScalar(.6);
+const hexW=new THREE.Group();
 const shape=new THREE.Shape();[[-.95,-.75],[-.95,.75],[-.48,.15],[0,.75],[0,-.75]];
 const neon=(col)=>new THREE.MeshBasicMaterial({color:col,toneMapped:false});
 const tube=(pts,col)=>new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(p[0],p[1],0)),false,'catmullrom',0),64,.075,8,false),neon(col));
 const P=(a)=>{const o=[];for(let i=0;i<a.length-1;i++){const [x1,y1]=a[i],[x2,y2]=a[i+1];for(let s=0;s<=10;s++){o.push([x1+(x2-x1)*s/10,y1+(y2-y1)*s/10])}}return o};
 const mM=tube(P([[-1.15,-.72],[-1.15,.72],[-.62,.05],[-.1,.72],[-.1,-.72]]),0x22E6FF);
 const mS=tube(P([[1.15,.72],[.28,.72],[.28,0],[1.15,0],[1.15,-.72],[.2,-.72]]),0xFF3DCB);
-hexW.position.set(mobile?2.2:4.1,mobile?4.6:.2,-1.5);group.add(hexW);
+group.add(hexW);
 
 const items=[];
 const add=(geo,pos,s,sp)=>{const m=new THREE.Mesh(geo,glass);m.position.set(...pos);m.scale.setScalar(s);m.userData={sp,base:pos[1],ph:Math.random()*6};group.add(m);items.push(m)};
@@ -617,8 +718,19 @@ pts.setAttribute('position',new THREE.BufferAttribute(arr,3));const dust=new THR
 
 const l1=new THREE.PointLight(0x22E6FF,40,30);l1.position.set(-4,3,4);const l2=new THREE.PointLight(0xFF3DCB,40,30);l2.position.set(5,-3,4);scene.add(l1,l2,new THREE.AmbientLight(0xffffff,.2));
 
-function size(){const w=hero.clientWidth,h=hero.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.position.z=mobile?15:12;cam.updateProjectionMatrix()}
-size();addEventListener('resize',size);
+// Anchor the rings + floating glass to the ID card so they never sit on top of the headline (esp. on phones).
+const idc=document.querySelector('.idcard'),tmp=new THREE.Vector3();
+const worldAt=(px,py,z)=>{const w=hero.clientWidth,h=hero.clientHeight;tmp.set(px/w*2-1,-(py/h)*2+1,.5).unproject(cam).sub(cam.position).normalize();return cam.position.clone().add(tmp.multiplyScalar((z-cam.position.z)/tmp.z))};
+let upp=.01;
+const offIn=(el,root)=>{let x=0,y=0;while(el&&el!==root){x+=el.offsetLeft;y+=el.offsetTop;el=el.offsetParent}return{x,y}};
+function place(){if(!idc)return;const {x,y}=offIn(idc,hero),w=idc.offsetWidth,h=idc.offsetHeight;
+const c=worldAt(x+w/2,y+h*.4,-1.5),e=worldAt(x+w,y+h*.4,-1.5),half=e.x-c.x;upp=half/(w/2);
+hexW.position.copy(c);hexW.scale.setScalar(half*1.22/2.55);
+const ico=worldAt(x+w*(mobile?.04:-.02),y+h*.93,-1.5),sph=worldAt(x+w*(mobile?.94:1.04),y+h*.06,-1.5);
+items[0].position.x=ico.x;items[0].userData.base=ico.y;items[0].scale.setScalar(half*(mobile?.22:.3));
+items[1].position.x=sph.x;items[1].userData.base=sph.y;items[1].scale.setScalar(half*(mobile?.28:.36))}
+function size(){const w=hero.clientWidth,h=hero.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.position.z=mobile?15:12;cam.updateProjectionMatrix();cam.updateMatrixWorld();place()}
+size();addEventListener('resize',size);addEventListener('load',size);setTimeout(size,1500);if(window.ResizeObserver)new ResizeObserver(size).observe(hero);
 let mx=0,my=0,visible=true,sy=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});addEventListener('scroll',()=>sy=scrollY,{passive:true});
 new IntersectionObserver(([e])=>visible=e.isIntersecting).observe(hero);
 const clock=new THREE.Clock();
@@ -627,7 +739,7 @@ bgMat.uniforms.t.value=t*k;
 hexW.rotation.y+=((mx*.7+Math.sin(t*.5)*.25*k)-hexW.rotation.y)*.05;hexW.rotation.x+=((my*.4)-hexW.rotation.x)*.05;
 ring.rotation.z=t*.3*k;ring2.rotation.z=-t*.2*k;
 items.forEach(m=>{m.rotation.x+=.003*m.userData.sp*k;m.rotation.y+=.004*m.userData.sp*k;m.position.y=m.userData.base+Math.sin(t*m.userData.sp+m.userData.ph)*.25*k});
-group.position.y=sy*.0035;group.rotation.y+=((mx*.15)-group.rotation.y)*.03;dust.rotation.y=t*.01*k;
+group.position.y=sy*upp*.12;group.rotation.y+=((mx*.15)-group.rotation.y)*.03;dust.rotation.y=t*.01*k;
 l1.position.x=-4+Math.sin(t*.6)*2*k;l2.position.y=-3+Math.cos(t*.5)*2*k;
 renderer.render(scene,cam)});
 }
