@@ -6,6 +6,7 @@ Portfolio builds by RootFix. Concept projects unless noted.
 |---|---|---|
 | | **Moka Seshu portfolio (3D glass)** | https://mokaseshu.github.io/MOKA/seshu/ |
 | | **RootFix website** | https://mokaseshu.github.io/MOKA/rootfix/ |
+| | Kapoor & Iyer Estates (luxury real estate) | https://mokaseshu.github.io/kapoor-iyer-estates/ |
 | 1 | BrightSmile Dental website | https://mokaseshu.github.io/MOKA/brightsmile-dental/ |
 | 2 | Coastal Builders website | https://mokaseshu.github.io/MOKA/coastal-builders/ |
 | 3 | Sri Sai Tuition Centre website | https://mokaseshu.github.io/MOKA/sri-sai-tuition/ |
